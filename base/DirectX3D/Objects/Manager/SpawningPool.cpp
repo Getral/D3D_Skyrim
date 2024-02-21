@@ -1,15 +1,8 @@
 #include "Framework.h"
 
-SpawningPool::SpawningPool(Vector3 centerPos, float spawnRange, float spawnTime, UINT SIZE)
-	: centerPos(centerPos), spawnRange(spawnRange), spawnTime(spawnTime), SIZE(SIZE)
+SpawningPool::SpawningPool(ModelAnimatorInstancing* monsterInstancing, Vector3 centerPos, float spawnRange, float spawnTime, UINT SIZE)
+	: monsterInstancing(monsterInstancing), centerPos(centerPos), spawnRange(spawnRange), spawnTime(spawnTime), SIZE(SIZE)
 {
-	monsterInstancing = new ModelAnimatorInstancing("Robot");
-	monsterInstancing->ReadClip("StandUp");
-	monsterInstancing->ReadClip("Walk");
-	monsterInstancing->ReadClip("Run");
-	monsterInstancing->ReadClip("Hit");
-	monsterInstancing->ReadClip("Dying");
-
 	FOR(SIZE)
 	{
 		Transform* transform = monsterInstancing->Add();

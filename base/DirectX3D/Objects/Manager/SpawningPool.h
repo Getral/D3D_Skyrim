@@ -3,7 +3,7 @@
 class SpawningPool
 {
 public:
-	SpawningPool(Vector3 centerPos, float spawnRange = 100.0f, float spawnTime = 3.0f, UINT SIZE = 10);
+	SpawningPool(ModelAnimatorInstancing* monsterInstancing, Vector3 centerPos, float spawnRange = 100.0f, float spawnTime = 3.0f, UINT SIZE = 10);
 	~SpawningPool();
 
 	void Update();
