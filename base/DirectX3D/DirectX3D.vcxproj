@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -142,6 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Manager\SpawningPool.h" />
+    <ClInclude Include="Objects\Character\Monster.h" />
+    <ClInclude Include="Objects\Character\Character.h" />
     <ClInclude Include="Framework\Shader\DomainShader.h" />
     <ClInclude Include="Framework\Shader\HullShader.h" />
     <ClInclude Include="Objects\Particle\ParticleSystem.h" />
@@ -238,6 +241,7 @@
     <ClInclude Include="Framework\Environment\Shadow.h" />
     <ClInclude Include="Objects\Particle\Spark.h" />
     <ClInclude Include="Objects\Particle\Sprite.h" />
+    <ClInclude Include="Scenes\TestScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Objects\Particle\Trail.h" />
     <ClInclude Include="Objects\Landscape\TerrainData.h" />
@@ -245,8 +249,11 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Manager\SpawningPool.cpp" />
+    <ClCompile Include="Objects\Character\Character.cpp" />
     <ClCompile Include="Framework\Shader\DomainShader.cpp" />
     <ClCompile Include="Framework\Shader\HullShader.cpp" />
+    <ClCompile Include="Objects\Character\Monster.cpp" />
     <ClCompile Include="Objects\Particle\ParticleSystem.cpp" />
     <ClCompile Include="Objects\Landscape\QuadTreeTerrain.cpp" />
     <ClCompile Include="Framework\Environment\Reflection.cpp" />
@@ -338,6 +345,7 @@
     <ClCompile Include="Objects\Landscape\TerrainData.cpp" />
     <ClCompile Include="Objects\Landscape\TerrainLOD.cpp" />
     <ClCompile Include="Objects\Landscape\Water.cpp" />
+    <ClCompile Include="Scenes\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX3D.rc" />

@@ -1,14 +1,14 @@
 #include "Framework.h"
 
-Terrain::Terrain()
-    : GameObject(L"Landscape/Terrain.hlsl"), width(10), height(10)
+Terrain::Terrain(Vector2 size)
+    : GameObject(L"Landscape/Terrain.hlsl"), width(size.x), height(size.y)
 {    
     material->SetDiffuseMap(L"Textures/Landscape/Dirt2.png");
     //material->SetSpecularMap(L"Textures/Landscape/Fieldstone_SM.tga");
     //material->SetNormalMap(L"Textures/Landscape/Fieldstone_NM.tga");
       
-    heightMap = Texture::Add(L"Textures/HeightMaps/TestMap.png");
-    //heightMap = Texture::Add(L"Textures/Color/Black.png"); // <- 가장 낮은 평지(높이 0)
+    //heightMap = Texture::Add(L"Textures/HeightMaps/TestMap.png");
+    heightMap = Texture::Add(L"Textures/Color/Black.png"); // <- 가장 낮은 평지(높이 0)
     alphaMap = Texture::Add(L"Textures/AlphaMaps/TestAlphaMap.png");
     secondMap = Texture::Add(L"Textures/Landscape/Dirt.png");
     thirdMap = Texture::Add(L"Textures/Landscape/Dirt3.png");
