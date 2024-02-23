@@ -14,8 +14,8 @@ TestScene::TestScene()
 
 	alduin = new ModelAnimator("alduin");
 	alduin->Scale() *= 0.001;
-	alduin->ReadClip("alduin_fly",0);
-	alduin->ReadClip("alduin_bite",1);
+	alduin->ReadClip("alduin_fly");
+	alduin->ReadClip("alduin_bite");
 
 	alduin->PlayClip(1);
 
@@ -35,6 +35,7 @@ void TestScene::Update()
 	//spawningPool->Update();
 	//monsterInstancing->Update();
 	alduin->Update();
+
 }
 
 void TestScene::PreRender()

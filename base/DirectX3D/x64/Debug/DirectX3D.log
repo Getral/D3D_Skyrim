@@ -1,1 +1,3 @@
-﻿  DirectX3D.vcxproj -> C:\Users\user\Desktop\D3D_W3\base\x64\Debug\DirectX3D.exe
+﻿  TestScene.cpp
+C:\Users\user\Documents\GitHub\D3D_W3\base\DirectX3D\Scenes\TestScene.cpp(16,26): warning C4305: '인수': 'double'에서 'const float'(으)로 잘립니다.
+  DirectX3D.vcxproj -> C:\Users\user\Documents\GitHub\D3D_W3\base\x64\Debug\DirectX3D.exe
