@@ -24,7 +24,6 @@ public:
 
 protected:
 	Transform* transform;
-
 	Status status;
 	CapsuleCollider* collider;
 };
