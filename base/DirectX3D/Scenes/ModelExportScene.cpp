@@ -3,29 +3,29 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "Robot";
+    string name = "alduin";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
 
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportMaterial();
-    //exporter->ExportMesh();
-    //delete exporter;    
+    exporter = new ModelExporter(name, file);
+    exporter->ExportMaterial();
+    exporter->ExportMesh();
+    delete exporter;    
     
-    clipName = "Dying";
+    clipName = "alduin_fly";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);    
     delete exporter;
     
-    clipName = "Run";
+    clipName = "alduin_bite";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
     
-    clipName = "Walk";
+   /* clipName = "Walk";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
@@ -41,7 +41,7 @@ ModelExportScene::ModelExportScene()
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
-    delete exporter;
+    delete exporter;*/
 }
 
 ModelExportScene::~ModelExportScene()

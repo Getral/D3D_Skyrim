@@ -1,3 +1,1 @@
-﻿  SpawningPool.cpp
-C:\Github\D3D_W3\base\DirectX3D\Objects\Manager\SpawningPool.cpp(6,2): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  DirectX3D.vcxproj -> C:\Github\D3D_W3\base\x64\Debug\DirectX3D.exe
+﻿  DirectX3D.vcxproj -> C:\Users\user\Desktop\D3D_W3\base\x64\Debug\DirectX3D.exe

@@ -15,6 +15,7 @@ public:
 private:
 	Terrain* terrain;
 	ModelAnimatorInstancing* monsterInstancing;
+	ModelAnimator* alduin;
 	SpawningPool* spawningPool;
 };
 

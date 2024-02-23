@@ -1,7 +1,7 @@
 #include "Framework.h"
 
-SpawningPool::SpawningPool(ModelAnimatorInstancing* monsterInstancing, Vector3 centerPos, float spawnRange, float spawnTime, UINT SIZE)
-	: monsterInstancing(monsterInstancing), centerPos(centerPos), spawnRange(spawnRange), spawnTime(spawnTime), SIZE(SIZE)
+SpawningPool::SpawningPool(ModelAnimatorInstancing* monsterInstancing, Vector3 centerPos, UINT SIZE, float spawnRange, float spawnTime)
+	: monsterInstancing(monsterInstancing), centerPos(centerPos), SIZE(SIZE), spawnRange(spawnRange), spawnTime(spawnTime)
 {
 	FOR(SIZE)
 	{

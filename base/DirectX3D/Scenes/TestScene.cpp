@@ -7,14 +7,19 @@ TestScene::TestScene()
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
 	terrain->UpdateWorld();
 
-	monsterInstancing = new ModelAnimatorInstancing("Robot");
-	monsterInstancing->ReadClip("StandUp");
-	monsterInstancing->ReadClip("Walk");
-	monsterInstancing->ReadClip("Run");
-	monsterInstancing->ReadClip("Hit");
-	monsterInstancing->ReadClip("Dying");
+	/*monsterInstancing = new ModelAnimatorInstancing("alduin");
+	monsterInstancing->Scale() *= 0.001;
+	monsterInstancing->ReadClip("alduin_fly");
+	monsterInstancing->ReadClip("alduin_bite");*/
 
-	spawningPool = new SpawningPool(monsterInstancing, Vector3(0, 0, 0));
+	alduin = new ModelAnimator("alduin");
+	alduin->Scale() *= 0.001;
+	alduin->ReadClip("alduin_fly",0);
+	alduin->ReadClip("alduin_bite",1);
+
+	alduin->PlayClip(1);
+
+	//spawningPool = new SpawningPool(monsterInstancing, Vector3(0, 0, 0));
 }
 
 TestScene::~TestScene()
@@ -22,11 +27,14 @@ TestScene::~TestScene()
 	delete terrain;
 	delete monsterInstancing;
 	delete spawningPool;
+	delete alduin;
 }
 
 void TestScene::Update()
 {
-	spawningPool->Update();
+	//spawningPool->Update();
+	//monsterInstancing->Update();
+	alduin->Update();
 }
 
 void TestScene::PreRender()
@@ -36,7 +44,9 @@ void TestScene::PreRender()
 void TestScene::Render()
 {
 	terrain->Render();
-	spawningPool->Render();
+	//spawningPool->Render();
+	alduin->Render();
+
 }
 
 void TestScene::PostRender()
@@ -45,5 +55,7 @@ void TestScene::PostRender()
 
 void TestScene::GUIRender()
 {
-	spawningPool->GUIRender();
+	//spawningPool->GUIRender();
+	//monsterInstancing->GUIRender();
+	alduin->GUIRender();
 }
