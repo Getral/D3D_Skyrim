@@ -5,3 +5,6 @@
 
 /.vs
 .vs/
+
+**/*.vcxproj
+**/*.vcxproj.*
