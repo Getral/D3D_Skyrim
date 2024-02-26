@@ -15,7 +15,9 @@ public:
 private:
 	Terrain* terrain;
 	ModelAnimatorInstancing* monsterInstancing;
+	vector<Enemy*> enemies;
+	vector<vector<Vector3>> spawnPoses;
+	EnemySpawnManager* monsterSpawnManager;
 	ModelAnimator* alduin;
-	SpawningPool* spawningPool;
 };
 

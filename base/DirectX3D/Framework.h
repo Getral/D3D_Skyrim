@@ -189,12 +189,12 @@ using namespace GameMath;
 #include "Objects/Character/FoxD.h"
 #include "Objects/Character/Fox.h"
 #include "Objects/Character/Character.h"
-#include "Objects/Character/Monster.h"
+#include "Objects/Character/Enemy.h"
 
 #include "Objects/Manager/BlockManager.h"
 #include "Objects/Manager/KunaiManager.h"
 #include "Objects/Manager/RobotManager.h"
-#include "Objects/Manager/SpawningPool.h"
+#include "Objects/Manager/EnemySpawnManager.h"
 
 //Scene Header
 #include "Scenes/Scene.h"
