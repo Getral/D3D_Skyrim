@@ -3,7 +3,7 @@
 class EnemySpawnManager
 {
 public:
-	EnemySpawnManager(ModelAnimatorInstancing* instancing, Enemy* enemy, vector<Vector3> enemySpawnPos);
+	EnemySpawnManager(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* enemy, vector<Vector3> enemySpawnPos);
 	~EnemySpawnManager();
 
 	void Update();

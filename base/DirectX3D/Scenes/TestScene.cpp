@@ -7,32 +7,45 @@ TestScene::TestScene()
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
 	terrain->UpdateWorld();
 
-	monsterInstancing = new ModelAnimatorInstancing("alduin");
-	monsterInstancing->Scale() *= 0.001f;
-	monsterInstancing->ReadClip("alduin_bite");
+	monsterName.push_back("Bear");
+	
+	clipName[BEAR] = { "bear_idle", "bear_attack", "bear_hit" };
+
+	FOR(monsterName.size())
+	{
+		monsterInstancing.push_back(new ModelAnimatorInstancing("Bear"));
+		for (int j = 0; j < clipName[i].size(); j++)
+			monsterInstancing[i]->ReadClip(clipName[i][j]);
+	}
 
 	vector<Vector3> poses1;
 	poses1.push_back(Vector3(50, 0, 50));
 	spawnPoses.push_back(poses1);
 
-	Enemy* monster = new Enemy("alduin");
-	monster->SetStatus(100, 1000, 1000, 50, 10);
+	enemies.push_back(new Enemy("bear"));
+	enemies[0]->SetStatus(100, 1000, 1000, 50, 10);
 	
-	monsterSpawnManager = new EnemySpawnManager(monsterInstancing, monster, spawnPoses[0]);
-	monsterSpawnManager->Spawn();
+	FOR(2)
+	{
+		monsterSpawnManager.push_back(new EnemySpawnManager(monsterInstancing[i], enemies[i], spawnPoses[i]));
+		monsterSpawnManager[i]->Spawn();
+	}
 }
 
 TestScene::~TestScene()
 {
 	delete terrain;
-	delete monsterInstancing;
 	delete alduin;
-	delete monsterSpawnManager;
+	for (ModelAnimatorInstancing* mi : monsterInstancing)
+		delete mi;
+	for (EnemySpawnManager* msm : monsterSpawnManager)
+		delete msm;
 }
 
 void TestScene::Update()
 {
-	monsterSpawnManager->Update();
+	for (EnemySpawnManager* msm : monsterSpawnManager)
+		msm->Update();
 	//alduin->Update();
 }
 
@@ -43,7 +56,8 @@ void TestScene::PreRender()
 void TestScene::Render()
 {
 	terrain->Render();
-	monsterSpawnManager->Render();
+	for (EnemySpawnManager* msm : monsterSpawnManager)
+		msm->Render();
 	//alduin->Render();
 }
 
@@ -53,6 +67,7 @@ void TestScene::PostRender()
 
 void TestScene::GUIRender()
 {
-	monsterSpawnManager->GUIRender();
+	for (EnemySpawnManager* msm : monsterSpawnManager)
+		msm->GUIRender();
 	//alduin->GUIRender();
 }

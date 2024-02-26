@@ -1,12 +1,13 @@
 #include "Framework.h"
 
-EnemySpawnManager::EnemySpawnManager(ModelAnimatorInstancing* instancing, Enemy* enemy, vector<Vector3> enemySpawnPos)
-	: instancing(instancing), spawnPos(enemySpawnPos)
+EnemySpawnManager::EnemySpawnManager(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* enemy, vector<Vector3> enemySpawnPos)
+	: instancing(modelAnimatorInstancing), spawnPos(enemySpawnPos)
 {
 	FOR(spawnPos.size())
 	{
 		Transform* transform = instancing->Add();
-		Enemy* tmp = new Enemy(enemy->GetName(), transform, spawnPos[i], 100.0f);
+		transform->Scale() *= 0.001f;
+		Enemy* tmp = new Enemy(enemy->GetName(), transform, spawnPos[i]);
 		tmp->SetStatus(enemy->GetStatus());
 		enemies.push_back(tmp);
 	}

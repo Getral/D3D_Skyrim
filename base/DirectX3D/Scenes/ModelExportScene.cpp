@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "alduin";
+    string name = "Bear";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
@@ -13,13 +13,19 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;    
     
-    clipName = "alduin_fly";
+    clipName = "bear_idle";
+    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    exporter = new ModelExporter(name, file);
+    exporter->ExportClip(clipName);
+    delete exporter;
+
+    clipName = "bear_attack";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);    
     delete exporter;
     
-    clipName = "alduin_bite";
+    clipName = "bear_hit";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
