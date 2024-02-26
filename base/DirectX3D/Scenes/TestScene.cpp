@@ -7,35 +7,33 @@ TestScene::TestScene()
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
 	terrain->UpdateWorld();
 
-	/*monsterInstancing = new ModelAnimatorInstancing("alduin");
-	monsterInstancing->Scale() *= 0.001;
-	monsterInstancing->ReadClip("alduin_fly");
-	monsterInstancing->ReadClip("alduin_bite");*/
+	monsterInstancing = new ModelAnimatorInstancing("alduin");
+	monsterInstancing->Scale() *= 0.001f;
+	monsterInstancing->ReadClip("alduin_bite");
 
-	alduin = new ModelAnimator("alduin");
-	alduin->Scale() *= 0.001;
-	alduin->ReadClip("alduin_fly");
-	alduin->ReadClip("alduin_bite");
+	vector<Vector3> poses1;
+	poses1.push_back(Vector3(50, 0, 50));
+	spawnPoses.push_back(poses1);
 
-	alduin->PlayClip(1);
-
-	//spawningPool = new SpawningPool(monsterInstancing, Vector3(0, 0, 0));
+	Enemy* monster = new Enemy("alduin");
+	monster->SetStatus(100, 1000, 1000, 50, 10);
+	
+	monsterSpawnManager = new EnemySpawnManager(monsterInstancing, monster, spawnPoses[0]);
+	monsterSpawnManager->Spawn();
 }
 
 TestScene::~TestScene()
 {
 	delete terrain;
 	delete monsterInstancing;
-	delete spawningPool;
 	delete alduin;
+	delete monsterSpawnManager;
 }
 
 void TestScene::Update()
 {
-	//spawningPool->Update();
-	//monsterInstancing->Update();
-	alduin->Update();
-
+	monsterSpawnManager->Update();
+	//alduin->Update();
 }
 
 void TestScene::PreRender()
@@ -45,9 +43,8 @@ void TestScene::PreRender()
 void TestScene::Render()
 {
 	terrain->Render();
-	//spawningPool->Render();
-	alduin->Render();
-
+	monsterSpawnManager->Render();
+	//alduin->Render();
 }
 
 void TestScene::PostRender()
@@ -56,7 +53,6 @@ void TestScene::PostRender()
 
 void TestScene::GUIRender()
 {
-	//spawningPool->GUIRender();
-	//monsterInstancing->GUIRender();
-	alduin->GUIRender();
+	monsterSpawnManager->GUIRender();
+	//alduin->GUIRender();
 }
