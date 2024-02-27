@@ -152,6 +152,7 @@
     <ClInclude Include="Objects\Landscape\QuadTreeTerrain.h" />
     <ClInclude Include="Framework\Environment\Reflection.h" />
     <ClInclude Include="Framework\Environment\Refraction.h" />
+    <ClInclude Include="Scenes\PlayerScene.h" />
     <ClInclude Include="Scenes\ParticleConfigScene.h" />
     <ClInclude Include="Objects\Items\Weapons\Crowbar.h" />
     <ClInclude Include="Objects\Particle\Particle.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="Objects\Landscape\QuadTreeTerrain.cpp" />
     <ClCompile Include="Framework\Environment\Reflection.cpp" />
     <ClCompile Include="Framework\Environment\Refraction.cpp" />
+    <ClCompile Include="Scenes\PlayerScene.cpp" />
     <ClCompile Include="Scenes\ParticleConfigScene.cpp" />
     <ClCompile Include="Objects\Items\Weapons\Crowbar.cpp" />
     <ClCompile Include="Objects\Particle\Particle.cpp" />
@@ -349,7 +351,7 @@
     <ClCompile Include="Objects\Landscape\TerrainLOD.cpp" />
     <ClCompile Include="Objects\Landscape\Water.cpp" />
     <ClCompile Include="Scenes\MonsterScene.cpp" />
-    <ClCompile Include="SpawnManager.cpp" />
+    <ClCompile Include="Objects\Manager\SpawnManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX3D.rc" />

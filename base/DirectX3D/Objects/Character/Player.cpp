@@ -3,22 +3,22 @@
 Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
-	ReadClip("male_idle");
-	ReadClip("male_idle");
-	ReadClip("male_idle");
-	ReadClip("male_idle");
-	ReadClip("male_block_hit");
+	ReadClip("idle");
+	//ReadClip("male_idle");
+	//ReadClip("male_idle");
+	//ReadClip("male_idle");
+	//ReadClip("male_block_hit");
 	ReadClip("male_walk_forward");
 	ReadClip("male_walk_forward_l");
 	ReadClip("male_walk_forward_r");
-	ReadClip("male_walk_forward");
+	ReadClip("male_walk_backward");
 	ReadClip("male_walk_backward_l");
 	ReadClip("male_walk_backward_r");
 	ReadClip("male_walk_left");
 	ReadClip("male_walk_right");
 	ReadClip("male_run_forward");
 	ReadClip("male_run_forward_l");
-	ReadClip("male_run_foward_r");
+	ReadClip("male_run_forward_r");
 	ReadClip("male_run_backward");
 	ReadClip("male_run_backward_l");
 	ReadClip("male_run_backward_r");

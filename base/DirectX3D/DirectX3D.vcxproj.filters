@@ -336,6 +336,9 @@
     <ClInclude Include="Objects\Character\Player.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\PlayerScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX3D.cpp">
@@ -623,10 +626,13 @@
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SpawnManager.cpp">
+    <ClCompile Include="Objects\Manager\SpawnManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Character\Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\PlayerScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
