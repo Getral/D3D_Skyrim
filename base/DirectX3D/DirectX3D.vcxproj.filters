@@ -318,7 +318,7 @@
     <ClInclude Include="Objects\Landscape\Water.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\TestScene.h">
+    <ClInclude Include="Scenes\MonsterScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Character\Character.h">
@@ -608,7 +608,7 @@
     <ClCompile Include="Objects\Landscape\Water.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\TestScene.cpp">
+    <ClCompile Include="Scenes\MonsterScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Character\Character.cpp">

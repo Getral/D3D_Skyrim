@@ -1,7 +1,7 @@
 #include "Framework.h"
-#include "TestScene.h"
+#include "MonsterScene.h"
 
-TestScene::TestScene()
+MonsterScene::MonsterScene()
 {
 	terrain = new Terrain();
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
@@ -10,34 +10,34 @@ TestScene::TestScene()
 	SpawnManager::Get();
 }
 
-TestScene::~TestScene()
+MonsterScene::~MonsterScene()
 {
 	delete terrain;
 	delete alduin;
 }
 
-void TestScene::Update()
+void MonsterScene::Update()
 {
 	SpawnManager::Get()->Update();
 	//alduin->Update();
 }
 
-void TestScene::PreRender()
+void MonsterScene::PreRender()
 {
 }
 
-void TestScene::Render()
+void MonsterScene::Render()
 {
 	terrain->Render();
 	SpawnManager::Get()->Render();
 	//alduin->Render();
 }
 
-void TestScene::PostRender()
+void MonsterScene::PostRender()
 {
 }
 
-void TestScene::GUIRender()
+void MonsterScene::GUIRender()
 {
 	SpawnManager::Get()->GUIRender();
 	//alduin->GUIRender();
