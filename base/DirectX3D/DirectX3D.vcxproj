@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Character\Player.h" />
     <ClInclude Include="Objects\Manager\EnemySpawn.h" />
     <ClInclude Include="Objects\Character\Enemy.h" />
     <ClInclude Include="Objects\Character\Character.h" />
@@ -250,6 +251,7 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Character\Player.cpp" />
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp" />
     <ClCompile Include="Objects\Character\Character.cpp" />
     <ClCompile Include="Framework\Shader\DomainShader.cpp" />

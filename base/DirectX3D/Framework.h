@@ -188,6 +188,7 @@ using namespace GameMath;
 #include "Objects/Character/Naruto.h"
 #include "Objects/Character/FoxD.h"
 #include "Objects/Character/Fox.h"
+#include "Objects/Character/Player.h"
 #include "Objects/Character/Character.h"
 #include "Objects/Character/Enemy.h"
 
