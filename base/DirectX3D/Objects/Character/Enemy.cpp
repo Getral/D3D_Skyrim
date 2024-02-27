@@ -22,9 +22,9 @@ void Enemy::Update()
 void Enemy::Render()
 {
 	Character::Render();
-	trackCollider->Render();
 }
 
 void Enemy::GUIRender()
 {
+	Character::GUIRender();
 }

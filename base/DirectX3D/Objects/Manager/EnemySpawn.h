@@ -1,10 +1,10 @@
 #pragma once
 
-class EnemySpawnManager
+class EnemySpawn
 {
 public:
-	EnemySpawnManager(ModelAnimatorInstancing* instancing, Enemy* enemy, vector<Vector3> enemySpawnPos);
-	~EnemySpawnManager();
+	EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* enemy, vector<Vector3> enemySpawnPos);
+	~EnemySpawn();
 
 	void Update();
 	void Render();

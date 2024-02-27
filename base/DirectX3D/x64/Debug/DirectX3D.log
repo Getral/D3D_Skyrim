@@ -1,2 +1,127 @@
-﻿  TestScene.cpp
+﻿  Character.cpp
+  Crowbar.cpp
+  AStar.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Algorithm\AStar.cpp(70,56): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Algorithm\AStar.cpp(121,58): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Algorithm\AStar.cpp(209,45): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Algorithm\AStar.cpp(233,45): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Dijkstra.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Algorithm\Dijkstra.cpp(197,31): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  DNode.cpp
+  DepthStencil.cpp
+  DirectX3D.cpp
+  ConstBuffer.cpp
+  BoxCollider.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(76,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(72): message : 클래스 템플릿 멤버 함수 'void Mesh<Vertex>::CreateMesh(void)'을(를) 컴파일하는 중입니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Collision\BoxCollider.cpp(8): message : 컴파일되는 함수 템플릿 인스턴스화 'void Mesh<Vertex>::CreateMesh(void)'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Collision\BoxCollider.cpp(8): message : 컴파일되는 클래스 템플릿 인스턴스화 'Mesh<Vertex>'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(81,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CapsuleCollider.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Collision\CapsuleCollider.cpp(115,20): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(76,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(72): message : 클래스 템플릿 멤버 함수 'void Mesh<Vertex>::CreateMesh(void)'을(를) 컴파일하는 중입니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Collision\CapsuleCollider.cpp(8): message : 컴파일되는 함수 템플릿 인스턴스화 'void Mesh<Vertex>::CreateMesh(void)'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Collision\CapsuleCollider.cpp(8): message : 컴파일되는 클래스 템플릿 인스턴스화 'Mesh<Vertex>'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(81,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Collider.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(46,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(40): message : 클래스 템플릿 멤버 함수 'void Mesh<Vertex>::Draw(D3D11_PRIMITIVE_TOPOLOGY)'을(를) 컴파일하는 중입니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Collision\Collider.cpp(24): message : 컴파일되는 함수 템플릿 인스턴스화 'void Mesh<Vertex>::Draw(D3D11_PRIMITIVE_TOPOLOGY)'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Collision\Collider.cpp(7): message : 컴파일되는 클래스 템플릿 인스턴스화 'Mesh<Vertex>'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(50,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera.cpp
+  ComputeShader.cpp
+  BlendState.cpp
+  DepthStencilState.cpp
+  Device.cpp
+  Audio.cpp
+  BinaryReader.cpp
+  BinaryWriter.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Utilities\BinaryWriter.cpp(37,21): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Utilities\BinaryWriter.cpp(40,68): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Utilities\BinaryWriter.cpp(45,21): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Utilities\BinaryWriter.cpp(48,69): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GameManager.cpp
+  코드를 생성하고 있습니다...
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Math\Vector3.h(93): warning C4715: 'Vector3::operator[]': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Math\Vector3.h(93): warning C4715: 'Vector3::operator[]': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  ActorUI.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Actor\ActorUI.cpp(78,21): warning C4244: '인수': 'int'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Actor\ActorUI.cpp(125,38): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cube.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(46,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(40): message : 클래스 템플릿 멤버 함수 'void Mesh<Quad::VertexType>::Draw(D3D11_PRIMITIVE_TOPOLOGY)'을(를) 컴파일하는 중입니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cube.cpp(36): message : 컴파일되는 함수 템플릿 인스턴스화 'void Mesh<Quad::VertexType>::Draw(D3D11_PRIMITIVE_TOPOLOGY)'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cube.cpp(8): message : 컴파일되는 클래스 템플릿 인스턴스화 'Mesh<Quad::VertexType>'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(50,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(76,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(72): message : 클래스 템플릿 멤버 함수 'void Mesh<Quad::VertexType>::CreateMesh(void)'을(를) 컴파일하는 중입니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cube.cpp(10): message : 컴파일되는 함수 템플릿 인스턴스화 'void Mesh<Quad::VertexType>::CreateMesh(void)'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(81,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(714,68): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=int
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(721): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float,float,float,int,int>(_Alloc &,_Objty *const ,float &&,float &&,float &&,int &&,int &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Alloc=std::allocator<VertexUV>,
+              _Ty=VertexUV,
+              _Objty=VertexUV
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(726): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float,float,float,int,int>(_Alloc &,_Objty *const ,float &&,float &&,float &&,int &&,int &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Alloc=std::allocator<VertexUV>,
+              _Ty=VertexUV,
+              _Objty=VertexUV
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector(739): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::vector<VertexUV,std::allocator<VertexUV>>::_Emplace_back_with_unused_capacity<_Ty,_Ty,_Ty,int,int>(_Ty &&,_Ty &&,_Ty &&,int &&,int &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cube.cpp(47): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::vector<VertexUV,std::allocator<VertexUV>>::emplace_back<float,float,float,int,int>(float &&,float &&,float &&,int &&,int &&)'에 대한 참조를 확인하세요.
+  Cylinder.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cylinder.cpp(40,23): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cylinder.cpp(60,23): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cylinder.cpp(75,23): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(46,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(40): message : 클래스 템플릿 멤버 함수 'void Mesh<Sphere::VertexType>::Draw(D3D11_PRIMITIVE_TOPOLOGY)'을(를) 컴파일하는 중입니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cylinder.cpp(24): message : 컴파일되는 함수 템플릿 인스턴스화 'void Mesh<Sphere::VertexType>::Draw(D3D11_PRIMITIVE_TOPOLOGY)'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cylinder.cpp(8): message : 컴파일되는 클래스 템플릿 인스턴스화 'Mesh<Sphere::VertexType>'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(50,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(76,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(72): message : 클래스 템플릿 멤버 함수 'void Mesh<Sphere::VertexType>::CreateMesh(void)'을(를) 컴파일하는 중입니다.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Basic\Cylinder.cpp(12): message : 컴파일되는 함수 템플릿 인스턴스화 'void Mesh<Sphere::VertexType>::CreateMesh(void)'에 대한 참조를 확인하세요.
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Render\Mesh.h(81,1): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  BlockManager.cpp
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Manager\BlockManager.cpp(39,62): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MonsterScene.cpp
+  코드를 생성하고 있습니다...
+C:\Users\user\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Framework\Math\Vector3.h(93): warning C4715: 'Vector3::operator[]': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  LINK : C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectX3D.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+     C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectX3D.lib 라이브러리 및 C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectX3D.exp 개체를 생성하고 있습니다.
+DirectXTex.lib(BC.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(BC.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(BC4BC5.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(BC4BC5.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(BC6HBC7.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(BC6HBC7.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexCompress.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexCompress.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexConvert.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexConvert.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexD3D11.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexD3D11.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexDDS.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexDDS.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexImage.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexImage.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexMipMaps.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexMipMaps.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexTGA.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexTGA.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexUtil.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexUtil.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex.lib(DirectXTexWIC.obj) : warning LNK4099: 'DirectXTex.pdb' PDB를 'DirectXTex.lib(DirectXTexWIC.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectXTex.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+ImGui.lib(imgui.obj) : warning LNK4099: 'ImGui.pdb' PDB를 'ImGui.lib(imgui.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\ImGui.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+ImGui.lib(ImGuiFileDialog.obj) : warning LNK4099: 'ImGui.pdb' PDB를 'ImGui.lib(ImGuiFileDialog.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\ImGui.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+ImGui.lib(imgui_draw.obj) : warning LNK4099: 'ImGui.pdb' PDB를 'ImGui.lib(imgui_draw.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\ImGui.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+ImGui.lib(imgui_impl_dx11.obj) : warning LNK4099: 'ImGui.pdb' PDB를 'ImGui.lib(imgui_impl_dx11.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\ImGui.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+ImGui.lib(imgui_impl_win32.obj) : warning LNK4099: 'ImGui.pdb' PDB를 'ImGui.lib(imgui_impl_win32.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\ImGui.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+ImGui.lib(imgui_tables.obj) : warning LNK4099: 'ImGui.pdb' PDB를 'ImGui.lib(imgui_tables.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\ImGui.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+ImGui.lib(imgui_widgets.obj) : warning LNK4099: 'ImGui.pdb' PDB를 'ImGui.lib(imgui_widgets.obj)' 또는 'C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\ImGui.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
   DirectX3D.vcxproj -> C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectX3D.exe
