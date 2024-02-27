@@ -1,10 +1,10 @@
 #pragma once
 
-class TestScene : public Scene
+class MonsterScene : public Scene
 {
 public:
-	TestScene();
-	~TestScene();
+	MonsterScene();
+	~MonsterScene();
 
 	virtual void Update() override;
 	virtual void PreRender() override;
