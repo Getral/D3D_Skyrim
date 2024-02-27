@@ -1,3 +1,3 @@
 ﻿  Player.cpp
-C:\Users\User\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Character\Player.cpp(7,33): warning C4305: '인수': 'double'에서 'const float'(으)로 잘립니다.
+C:\Users\User\Documents\GitHub\D3D_Skyrim\base\DirectX3D\Objects\Character\Player.cpp(6,33): warning C4305: '인수': 'double'에서 'const float'(으)로 잘립니다.
   DirectX3D.vcxproj -> C:\Users\User\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectX3D.exe

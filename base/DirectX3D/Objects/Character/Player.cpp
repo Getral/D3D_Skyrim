@@ -3,7 +3,6 @@
 Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
-
 	ModelAnimator::Scale() *= 0.001;
 	
 	ReadClip("idle");
@@ -99,22 +98,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA;
+			velocity.z += DELTA * 2.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA;
+			velocity.z -= DELTA * 2.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA;
+			velocity.x -= DELTA * 2.0f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA;
+			velocity.x += DELTA * 2.0f;
 			isMoveX = true;
 		}
 	}
@@ -123,22 +122,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 0.5f;
+			velocity.z += DELTA * 1.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 0.5f;
+			velocity.z -= DELTA * 1.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 0.5f;
+			velocity.x -= DELTA * 1.0f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 0.5f;
+			velocity.x += DELTA * 1.0f;
 			isMoveX = true;
 		}
 	}
@@ -147,29 +146,40 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 0.7f;
+			velocity.z += DELTA * 1.4f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 0.7f;
+			velocity.z -= DELTA * 1.4f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 0.7f;
+			velocity.x -= DELTA * 1.4f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 0.7f;
+			velocity.x += DELTA * 1.4f;
 			isMoveX = true;
 		}
 	}
 	
 
 	//방향을 구하고 정규화
-	if (velocity.Length() > 10) velocity.Normalize();
+	if (KEY_PRESS(VK_SHIFT))
+	{
+		if (velocity.Length() > 2) velocity.Normalize();
+	}
+	else if (KEY_PRESS(VK_CONTROL))
+	{
+		if (velocity.Length() > 1) velocity.Normalize();
+	}
+	else
+	{
+		if (velocity.Length() > 1.4f) velocity.Normalize();
+	}
 
 	if (!isMoveZ)
 		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA);
@@ -180,8 +190,19 @@ void Player::Move()
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
-
-	Pos() += direction * moveSpeed * DELTA * -1;
+			
+	if (KEY_PRESS(VK_SHIFT))
+	{
+		Pos() += direction * runSpeed * DELTA * -1;
+	}
+	else if (KEY_PRESS(VK_CONTROL))
+	{
+		Pos() += direction * coruchSpeed * DELTA * -1;
+	}
+	else
+	{
+		Pos() += direction * moveSpeed * DELTA * -1;
+	}
 }
 
 void Player::Rotate()
