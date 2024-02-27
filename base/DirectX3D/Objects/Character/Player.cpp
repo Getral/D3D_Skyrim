@@ -16,7 +16,7 @@ Player::Player()
 	ReadClip("male_walk_backward_r");
 	ReadClip("male_walk_left");
 	ReadClip("male_walk_right");
-	ReadClip("male_run_forward");
+	/*ReadClip("male_run_forward");
 	ReadClip("male_run_forward_l");
 	ReadClip("male_run_forward_r");
 	ReadClip("male_run_backward");
@@ -36,14 +36,14 @@ Player::Player()
 	ReadClip("attack_right");
 	ReadClip("attack_left");
 	ReadClip("attack_power");
-	ReadClip("male_block");
+	ReadClip("male_block");*/
 
 	collider = new CapsuleCollider();
 	collider->SetParent(transform);
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
-
+	
 
 }
 
