@@ -14,6 +14,5 @@ public:
 
 private:
 	Terrain* terrain;
-	ModelAnimator* alduin;
 };
 

@@ -13,13 +13,11 @@ MonsterScene::MonsterScene()
 MonsterScene::~MonsterScene()
 {
 	delete terrain;
-	delete alduin;
 }
 
 void MonsterScene::Update()
 {
 	SpawnManager::Get()->Update();
-	//alduin->Update();
 }
 
 void MonsterScene::PreRender()
@@ -30,7 +28,6 @@ void MonsterScene::Render()
 {
 	terrain->Render();
 	SpawnManager::Get()->Render();
-	//alduin->Render();
 }
 
 void MonsterScene::PostRender()
@@ -40,5 +37,4 @@ void MonsterScene::PostRender()
 void MonsterScene::GUIRender()
 {
 	SpawnManager::Get()->GUIRender();
-	//alduin->GUIRender();
 }
