@@ -1,25 +1,27 @@
 #include "Framework.h"
 
-EnemySpawnManager::EnemySpawnManager(ModelAnimatorInstancing* instancing, Enemy* enemy, vector<Vector3> enemySpawnPos)
-	: instancing(instancing), spawnPos(enemySpawnPos)
+EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* enemy, vector<Vector3> enemySpawnPos)
+	: instancing(modelAnimatorInstancing), spawnPos(enemySpawnPos)
 {
 	FOR(spawnPos.size())
 	{
 		Transform* transform = instancing->Add();
-		Enemy* tmp = new Enemy(enemy->GetName(), transform, spawnPos[i], 100.0f);
+		transform->Scale() *= 0.001f;
+		Enemy* tmp = new Enemy(enemy->GetName(), transform, spawnPos[i], 100000);
 		tmp->SetStatus(enemy->GetStatus());
+		tmp->GetCollier()->Scale() *= 1000.0f;
 		enemies.push_back(tmp);
 	}
 }
 
-EnemySpawnManager::~EnemySpawnManager()
+EnemySpawn::~EnemySpawn()
 {
 	delete instancing;
 	for (Enemy* enemy : enemies)
 		delete enemy;
 }
 
-void EnemySpawnManager::Update()
+void EnemySpawn::Update()
 {
 	instancing->Update();
 
@@ -27,19 +29,19 @@ void EnemySpawnManager::Update()
 		enemy->Update();
 }
 
-void EnemySpawnManager::Render()
+void EnemySpawn::Render()
 {
 	instancing->Render();
 	for (Enemy* enemy : enemies) enemy->Render();
 }
 
-void EnemySpawnManager::GUIRender()
+void EnemySpawn::GUIRender()
 {
 	instancing->GUIRender();
 	for (Enemy* enemy : enemies) enemy->GUIRender();
 }
 
-void EnemySpawnManager::Spawn()
+void EnemySpawn::Spawn()
 {
 	for (Enemy* enemy : enemies)
 		enemy->Spawn();

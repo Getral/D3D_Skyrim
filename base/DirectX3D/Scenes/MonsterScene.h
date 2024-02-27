@@ -1,10 +1,10 @@
 #pragma once
 
-class TestScene : public Scene
+class MonsterScene : public Scene
 {
 public:
-	TestScene();
-	~TestScene();
+	MonsterScene();
+	~MonsterScene();
 
 	virtual void Update() override;
 	virtual void PreRender() override;
@@ -14,10 +14,6 @@ public:
 
 private:
 	Terrain* terrain;
-	ModelAnimatorInstancing* monsterInstancing;
-	vector<Enemy*> enemies;
-	vector<vector<Vector3>> spawnPoses;
-	EnemySpawnManager* monsterSpawnManager;
 	ModelAnimator* alduin;
 };
 
