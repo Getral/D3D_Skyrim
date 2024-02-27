@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "male_dragonbone";
+    string name = "BladeSword";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
@@ -12,7 +12,8 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMaterial();
     exporter->ExportMesh();
     delete exporter;    
-    
+
+    /*
     clipName = "idle";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
@@ -197,7 +198,7 @@ ModelExportScene::ModelExportScene()
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
-    delete exporter;
+    delete exporter;*/
 
     
    /* clipName = "Walk";

@@ -45,11 +45,16 @@ Player::Player()
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
+	bladeSword = new BladeSword();
+	bladeSword->Load();
+
 	rightHand = new Transform();
+	bladeSword->SetParent(rightHand);
 }
 
 Player::~Player()
 {
+	delete bladeSword;
 	delete transform;
 	delete collider;
 	delete rightHand;
@@ -63,12 +68,17 @@ void Player::Update()
 	ModelAnimator::Update();
 
 	collider->UpdateWorld();
+
+	rightHand->SetWorld(GetTransformByNode(79));
+	bladeSword->Update();
+
 }
 
 void Player::Render()
 {
 	ModelAnimator::Render();
 	collider->Render();
+	bladeSword->Render();
 }
 
 void Player::PostRender()
@@ -77,6 +87,9 @@ void Player::PostRender()
 
 void Player::GUIRender()
 {
+	bladeSword->GUIRender();
+
+	ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 0, 100);
 }
 
 void Player::Control()

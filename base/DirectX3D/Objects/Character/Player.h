@@ -52,6 +52,9 @@ private:
 	void EndAttack();
 
 protected:
+
+	BladeSword* bladeSword;
+
 	Transform* transform;
 	Transform* rightHand;
 
@@ -68,6 +71,8 @@ protected:
 	float coruchSpeed = 10;
 	float rotSpeed = 1;
 	float deceleration = 20;
+
+	UINT nodeIndex = 0;
 
 	Vector3 velocity;
 
