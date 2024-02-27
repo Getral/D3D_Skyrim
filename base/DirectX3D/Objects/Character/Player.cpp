@@ -3,11 +3,14 @@
 Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
+
+	ModelAnimator::Scale() *= 0.001;
+	
 	ReadClip("idle");
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
-	//ReadClip("male_block_hit");
+	ReadClip("male_block_hit");
 	ReadClip("male_walk_forward");
 	ReadClip("male_walk_forward_l");
 	ReadClip("male_walk_forward_r");
@@ -16,7 +19,7 @@ Player::Player()
 	ReadClip("male_walk_backward_r");
 	ReadClip("male_walk_left");
 	ReadClip("male_walk_right");
-	/*ReadClip("male_run_forward");
+	ReadClip("male_run_forward");
 	ReadClip("male_run_forward_l");
 	ReadClip("male_run_forward_r");
 	ReadClip("male_run_backward");
@@ -36,7 +39,7 @@ Player::Player()
 	ReadClip("attack_right");
 	ReadClip("attack_left");
 	ReadClip("attack_power");
-	ReadClip("male_block");*/
+	ReadClip("male_block");
 
 	collider = new CapsuleCollider();
 	collider->SetParent(transform);
@@ -166,7 +169,7 @@ void Player::Move()
 	
 
 	//방향을 구하고 정규화
-	if (velocity.Length() > 1) velocity.Normalize();
+	if (velocity.Length() > 10) velocity.Normalize();
 
 	if (!isMoveZ)
 		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA);
@@ -215,14 +218,14 @@ void Player::SetAnimation()
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BL);
 		else SetAction(WALK_BL);
 	}
-			
+
 	else if (velocity.z < -0.1f && velocity.x > 0.1f)
 	{
 		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_BR);
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BR);
 		else SetAction(WALK_BR);
 	}
-		
+
 	else if (velocity.z > 0.1f)
 	{
 		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_F);
@@ -230,26 +233,28 @@ void Player::SetAnimation()
 		else SetAction(WALK_F);
 	}
 
-	else if (velocity.z < -0.1f && velocity.x == 0)
+	else if (velocity.z < -0.1f)
 	{
 		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_B);
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_B);
 		else SetAction(WALK_B);
 	}
 
-	else if (velocity.x < -0.1f && velocity.z == 0)
+	else if (velocity.x < -0.1f)
 	{
 		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_L);
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_L);
 		else SetAction(WALK_L);
 	}
 
-	else if (velocity.x > 0.1f && velocity.z == 0)
+	else if (velocity.x > 0.1f)
 	{
 		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_R);
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_R);
 		else SetAction(WALK_R);
-	}			
+	}
+	else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
+
 	else SetAction(IDLE);
 }
 
