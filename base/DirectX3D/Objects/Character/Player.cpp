@@ -45,14 +45,14 @@ Player::Player()
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
-	
-
+	rightHand = new Transform();
 }
 
 Player::~Player()
 {
 	delete transform;
 	delete collider;
+	delete rightHand;
 }
 
 void Player::Update()

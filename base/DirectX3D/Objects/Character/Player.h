@@ -53,6 +53,7 @@ private:
 
 protected:
 	Transform* transform;
+	Transform* rightHand;
 
 	Status status;
 
