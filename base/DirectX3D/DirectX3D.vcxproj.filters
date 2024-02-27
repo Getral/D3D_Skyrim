@@ -327,7 +327,10 @@
     <ClInclude Include="Objects\Character\Enemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Manager\EnemySpawnManager.h">
+    <ClInclude Include="Objects\Manager\EnemySpawn.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Manager\SpawnManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -614,7 +617,10 @@
     <ClCompile Include="Objects\Character\Enemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Manager\EnemySpawnManager.cpp">
+    <ClCompile Include="Objects\Manager\EnemySpawn.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

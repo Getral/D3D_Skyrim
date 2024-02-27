@@ -2,9 +2,13 @@
 
 class Character
 {
-protected:
+public:
 	struct Status
 	{
+		Status() {}
+		Status(int level, float hp, float stam, float atk, float speed)
+			: level(level), curHp(hp), maxHp(hp), curStam(stam), maxStam(stam), atk(atk), speed(speed) {}
+
 		int level;
 		float curHp;
 		float maxHp;
@@ -20,6 +24,7 @@ public:
 
 	void Update();
 	void Render();
+	void GUIRender();
 
 	void SetStatus(int level, float hp, float stam, float atk, float speed);
 	void SetStatus(Status status) { status = status; }
@@ -28,7 +33,7 @@ public:
 
 	Transform* GetTransform() { return transform; }
 	Status GetStatus() { return status; }
-	CapsuleCollider* GetCollier() { return collider; }
+	SphereCollider* GetCollier() { return collider; }
 	string GetName() { return name; }
 
 	void Spawn();
@@ -37,7 +42,7 @@ protected:
 	Status status;
 	string name;
 	Transform* transform;
-	CapsuleCollider* collider;
+	SphereCollider* collider;
 	Vector3 spawnPos;
 };
 
