@@ -42,8 +42,7 @@ Player::Player()
 	
 	collider = new CapsuleCollider(5, 10);
 	collider->SetParent(this);
-	//collider->SetActive(true);
-
+	
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	bladeSword = new BladeSword();
@@ -79,7 +78,7 @@ void Player::Update()
 
 	ModelAnimator::Update();
 
-	collider->UpdateWorld();
+	collider->SetWorld(GetTransformByNode(1));
 	rightHand->SetWorld(GetTransformByNode(79));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
