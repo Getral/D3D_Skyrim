@@ -51,18 +51,18 @@ Player::Player()
 	rightHand = new Transform();
 	bladeSword->SetParent(rightHand);
 
-	shield = new Shield();
-	shield->Load();
+	//shield = new Shield();
+	//shield->Load();
 
 	leftHand = new Transform();
-	shield->SetParent(leftHand);
+	//shield->SetParent(leftHand);
 
 }
 
 Player::~Player()
 {
 	delete bladeSword;
-	delete shield;
+	//delete shield;
 	delete transform;
 	delete collider;
 	delete rightHand;
@@ -81,7 +81,7 @@ void Player::Update()
 	rightHand->SetWorld(GetTransformByNode(79));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
-	shield->Update();
+	//shield->Update();
 }
 
 void Player::Render()
@@ -89,7 +89,7 @@ void Player::Render()
 	ModelAnimator::Render();
 	collider->Render();
 	bladeSword->Render();
-	shield->Render();
+	//shield->Render();
 	
 }
 
