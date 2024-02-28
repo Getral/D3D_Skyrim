@@ -149,6 +149,7 @@
     <ClInclude Include="Objects\Character\Character.h" />
     <ClInclude Include="Framework\Shader\DomainShader.h" />
     <ClInclude Include="Framework\Shader\HullShader.h" />
+    <ClInclude Include="Objects\Manager\UIManager.h" />
     <ClInclude Include="Objects\Particle\ParticleSystem.h" />
     <ClInclude Include="Objects\Landscape\QuadTreeTerrain.h" />
     <ClInclude Include="Framework\Environment\Reflection.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="Framework\Shader\DomainShader.cpp" />
     <ClCompile Include="Framework\Shader\HullShader.cpp" />
     <ClCompile Include="Objects\Character\Enemy.cpp" />
+    <ClCompile Include="Objects\Manager\UIManager.cpp" />
     <ClCompile Include="Objects\Particle\ParticleSystem.cpp" />
     <ClCompile Include="Objects\Landscape\QuadTreeTerrain.cpp" />
     <ClCompile Include="Framework\Environment\Reflection.cpp" />

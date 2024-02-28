@@ -94,24 +94,11 @@ void UIManager::PostRender()
 
 void UIManager::GUIRender()
 {
-    //ImGui::Text("enemy_dot : %f", cal_dot);
-    //ImGui::Text("enemy_dot : %f", cal_dot);
-    ImGui::Text("enemy_dot : %f", cal_dot);
-    //ImGui::Text("enemy_angle : %f", angle);
     ImGui::Text("enemy_angle : %f", final_angle);
-    //ImGui::Text("enemy_angle : %f", XMConvertToDegrees(angle));
 }
 
 float UIManager::TargetCompassEnemy(Naruto* naruto, Model* model)
 {
-    //Vector2 temp = Vector2(naruto->Forward().x, -naruto->Forward().z);
-    //Vector2 temp2 = Vector2(model->GlobalPos().x, model->GlobalPos().z) - Vector2(naruto->GlobalPos().x, naruto->GlobalPos().z);
-
-    //cal_dot = temp.x * temp2.x + temp.y * temp2.y;
-
-    //float temp_value  = sqrt(temp.x * temp.x + temp.y * temp.y);
-    //float temp2_value = sqrt(temp2.x * temp2.x + temp2.y * temp2.y);
-
     Vector3 temp = -naruto->Forward();
     Vector3 temp2 = model->GlobalPos() - naruto->GlobalPos();
 

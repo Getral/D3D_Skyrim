@@ -345,6 +345,9 @@
     <ClInclude Include="Objects\Items\Weapons\Shield.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\Manager\UIManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX3D.cpp">
@@ -645,6 +648,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\Shield.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Manager\UIManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
