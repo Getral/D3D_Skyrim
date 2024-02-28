@@ -9,6 +9,8 @@
 **/*.vcxproj
 **/*.vcxproj.*
 
+**/*.log
+
 Debug/
 x64/
 **/Debug/
