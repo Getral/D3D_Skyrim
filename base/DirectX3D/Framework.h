@@ -161,6 +161,8 @@ using namespace GameMath;
 
 #include "Objects/Items/Weapons/Kunai.h"
 #include "Objects/Items/Weapons/Crowbar.h"
+#include "Objects/Items/Weapons/BladeSword.h"
+#include "Objects/Items/Weapons/Shield.h"
 
 #include "Objects/Landscape/Terrain.h"
 #include "Objects/Landscape/TerrainEditor.h"
@@ -188,6 +190,7 @@ using namespace GameMath;
 #include "Objects/Character/Naruto.h"
 #include "Objects/Character/FoxD.h"
 #include "Objects/Character/Fox.h"
+#include "Objects/Character/Player.h"
 #include "Objects/Character/Character.h"
 #include "Objects/Character/Enemy.h"
 
