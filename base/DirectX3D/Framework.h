@@ -196,6 +196,7 @@ using namespace GameMath;
 #include "Objects/Manager/RobotManager.h"
 #include "Objects/Manager/EnemySpawn.h"
 #include "Objects/Manager/SpawnManager.h"
+#include "Objects/Manager/UIManager.h"
 
 //Scene Header
 #include "Scenes/Scene.h"
