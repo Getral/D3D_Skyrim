@@ -57,7 +57,7 @@ private:
 protected:
 
 	BladeSword* bladeSword;
-	//Shield* shield;
+	Shield* shield;
 
 	Transform* transform;
 	Transform* rightHand;
