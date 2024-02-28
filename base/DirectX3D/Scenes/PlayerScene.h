@@ -2,7 +2,8 @@
 
 class PlayerScene : public Scene
 {
-
+private:
+	friend class MonsterScene;
 public:
 	PlayerScene();
 	~PlayerScene();

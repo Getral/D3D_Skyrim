@@ -39,9 +39,10 @@ Player::Player()
 	ReadClip("attack_left");
 	ReadClip("attack_power");
 	ReadClip("male_block");
-
-	collider = new CapsuleCollider();
-	collider->SetParent(transform);
+	
+	collider = new CapsuleCollider(5, 10);
+	collider->SetParent(this);
+	//collider->SetActive(true);
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
@@ -57,13 +58,15 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
+	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 }
 
 Player::~Player()
 {
 	delete bladeSword;
 	delete shield;
-	delete transform;
 	delete collider;
 	delete rightHand;
 	delete leftHand;
@@ -77,7 +80,6 @@ void Player::Update()
 	ModelAnimator::Update();
 
 	collider->UpdateWorld();
-
 	rightHand->SetWorld(GetTransformByNode(79));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
@@ -100,8 +102,9 @@ void Player::PostRender()
 void Player::GUIRender()
 {
 	bladeSword->GUIRender();
-
-	//ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 0, 500);
+	collider->GUIRender();
+	ModelAnimator::GUIRender();
+	ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 1, 500);
 }
 
 void Player::Control()
@@ -236,6 +239,13 @@ void Player::Rotate()
 
 void Player::Attack()
 {
+	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
+	
+	//if (KEY_PRESS(VK_LBUTTON)) 
+	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_RIGHT);
+	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_LEFT);
+	if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_HEAVY);
+
 }
 
 void Player::SetAnimation()

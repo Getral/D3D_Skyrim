@@ -8,6 +8,10 @@ PlayerScene::PlayerScene()
 	terrain->UpdateWorld();
 
 	player = new Player();
+
+	CAM->SetTarget(player); 
+	CAM->TargetOptionLoad("Skyrim");
+	CAM->LookAtTarget(); 
 }
 
 PlayerScene::~PlayerScene()
