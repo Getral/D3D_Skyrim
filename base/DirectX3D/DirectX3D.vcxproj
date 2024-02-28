@@ -248,7 +248,6 @@
     <ClInclude Include="Objects\Landscape\TerrainData.h" />
     <ClInclude Include="Objects\Landscape\TerrainLOD.h" />
     <ClInclude Include="Objects\Landscape\Water.h" />
-    <ClInclude Include="Objects\Manager\UIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp" />
@@ -349,7 +348,6 @@
     <ClCompile Include="Objects\Landscape\Water.cpp" />
     <ClCompile Include="Scenes\MonsterScene.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
-    <ClCompile Include="Objects\Manager\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX3D.rc" />
