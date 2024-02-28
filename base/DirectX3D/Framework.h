@@ -162,6 +162,7 @@ using namespace GameMath;
 #include "Objects/Items/Weapons/Kunai.h"
 #include "Objects/Items/Weapons/Crowbar.h"
 #include "Objects/Items/Weapons/BladeSword.h"
+#include "Objects/Items/Weapons/Shield.h"
 
 #include "Objects/Landscape/Terrain.h"
 #include "Objects/Landscape/TerrainEditor.h"
