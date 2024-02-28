@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scenes\alduinScene.h" />
+    <ClInclude Include="Objects\Character\alduin.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
     <ClInclude Include="Objects\Character\Player.h" />
     <ClInclude Include="Objects\Manager\EnemySpawn.h" />
@@ -255,6 +257,8 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scenes\alduinScene.cpp" />
+    <ClCompile Include="Objects\Character\alduin.cpp" />
     <ClCompile Include="Objects\Items\Weapons\BladeSword.cpp" />
     <ClCompile Include="Objects\Character\Player.cpp" />
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp" />

@@ -193,6 +193,7 @@ using namespace GameMath;
 #include "Objects/Character/Player.h"
 #include "Objects/Character/Character.h"
 #include "Objects/Character/Enemy.h"
+#include "Objects/Character/alduin.h"
 
 #include "Objects/Manager/BlockManager.h"
 #include "Objects/Manager/KunaiManager.h"

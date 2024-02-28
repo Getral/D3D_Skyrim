@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "Shield";
+    string name = "alduin";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
@@ -13,211 +13,144 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;    
 
-    /*
-    clipName = "idle";
+    clipName = "alduin_idle";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_block_hit";
+    clipName = "alduin_bleedidle";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_walk_forward";
+    clipName = "alduin_takeoff";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_walk_forward_l";
+    clipName = "alduin_fly";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_walk_forward_r";
+    clipName = "alduin_hover";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_walk_backward";
+    clipName = "alduin_flight_forward";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_walk_backward_l";
+    clipName = "alduin_flight_hit";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_walk_backward_r";
+    clipName = "alduin_ascend";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_walk_left";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-    
-    clipName = "male_walk_right";
+    clipName = "alduin_climb";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_forward";
+    clipName = "alduin_aproach";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_forward_l";
+    clipName = "alduin_descend";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_forward_r";
+    clipName = "alduin_backward";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_backward";
+    clipName = "alduin_injured";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_backward_l";
+    clipName = "alduin_inhale";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_backward_r";
+    clipName = "alduin_exhale_breath";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_left";
+    clipName = "alduin_exhale_fireball";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_run_right";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-    
-    clipName = "male_crouch_idle";
+    clipName = "alduin_wingswip_left";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_crouch_forward";
+    clipName = "alduin_wingswip_right";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_crouch_forward_l";
+    clipName = "alduin_bite";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_crouch_forward_r";
+    clipName = "alduin_pain";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_crouch_backward";
+    clipName = "alduin_pain2";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_crouch_backward_l";
+    clipName = "alduin_tailwhip";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_crouch_backward_r";
+    clipName = "alduin_timetravel";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "male_crouch_left";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-
-    clipName = "male_crouch_right";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-    
-    clipName = "attack_right";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-
-    clipName = "attack_left";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-
-    clipName = "attack_power";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-
-    clipName = "male_block";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;*/
-
-    
-   /* clipName = "Walk";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-
-    clipName = "Hit";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-
-    clipName = "StandUp";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;*/
 }
 
 ModelExportScene::~ModelExportScene()

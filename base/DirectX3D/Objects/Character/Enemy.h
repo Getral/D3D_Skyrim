@@ -2,6 +2,10 @@
 
 class Enemy : public Character
 {
+private:
+	
+
+
 public:
 	Enemy(string name, Transform* transform = new Transform(), Vector3 spawnPos = { 0, 0, 0 }, float trackRange = 1000.0f);
 	~Enemy();
