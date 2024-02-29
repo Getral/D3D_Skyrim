@@ -7,6 +7,7 @@ private:
 		IDLE,
 		TAKEOFF,
 		HOVER,
+		HOVER_HIT,
 		WALK,
 		RUN,
 		RUN_L,
@@ -15,6 +16,7 @@ private:
 		ATTACK_L, //³¯°³ ÈÖµÎ¸£±â ¿ÞÂÊ
 		ATTACK_R, //³¯°³ ÈÖµÎ¸£±â ¿À¸¥ÂÊ
 		ATTACK_B, // ²¿¸® ÈÖµÎ¸£±â
+		INHALE,
 		BREATH, //inhale -> exhale_breath
 		FIREBALL, //inhale -> exhale_fireball
 		PAIN, // pain,pain2  ·£´ý Àç»ý
@@ -30,30 +32,50 @@ public:
 	void Render();
 	void GUIRender();
 
-	void SetTarget(Transform* target);
-
+	void SetTarget(Player* target);
 
 private:
 
 	void SetAnimation();
 	void SetState(State state);
-	void Pattern1();
-	void Pattern2();
+	void SetEvent(int clip, Event event, float timeRatio);
+	void Move();
+
+
+	void FireAttack();
+
+	void EndTakeoff();
+	void EndHit();
+	void EndAttack();
+	void EndBreath();
+
+	void Patterns();
+
+
 
 	State curState = IDLE;
 	CapsuleCollider* alduinCollider;
-	Transform transform;
-	Transform* target;
+	SphereCollider* collider_F;
+	SphereCollider* collider_R;
+	SphereCollider* collider_L;
+	SphereCollider* collider_B;
+	Transform* transform;
+	Player* target;
 
 	float moveSpeed = 500;
-	float rotSpeed = 1;
+	float rotSpeed = 0.5;
 	float deceleration = 5; //°¨¼Ó
 
 	Vector3 velocity;
 	Vector3 targetPos;
 
+	vector<map<float, Event>> totalEvent;
+	vector<map<float, Event>::iterator> eventIters;
+
 	float maxHp = 3000.0f;
 	float curHp = 3000.0f;
+
+
 
 
 };
