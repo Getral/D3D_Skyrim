@@ -7,9 +7,8 @@ public:
 	{
 		float curHp = 100;
 		float maxHp = 100;
-		float maxstamina = 100;
 		float curstamina = 100;
-
+		float maxstamina = 100;
 		float atk = 10;
 		float speed = 10;
 	};

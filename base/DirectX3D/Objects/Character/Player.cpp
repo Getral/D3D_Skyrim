@@ -129,22 +129,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 2.0f;
+			velocity.z += DELTA * status.speed * 1.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 2.0f;
+			velocity.z -= DELTA * status.speed * 1.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 2.0f;
+			velocity.x -= DELTA * status.speed * 1.0f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 2.0f;
+			velocity.x += DELTA * status.speed * 1.0f;
 			isMoveX = true;
 		}
 	}
@@ -153,22 +153,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 1.0f;
+			velocity.z += DELTA * status.speed * 0.5f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 1.0f;
+			velocity.z -= DELTA * status.speed * 0.5f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 1.0f;
+			velocity.x -= DELTA * status.speed * 0.5f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 1.0f;
+			velocity.x += DELTA * status.speed * 0.5f;
 			isMoveX = true;
 		}
 	}
@@ -177,22 +177,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 1.4f;
+			velocity.z += DELTA * status.speed * 0.7f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 1.4f;
+			velocity.z -= DELTA * status.speed * 0.7f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 1.4f;
+			velocity.x -= DELTA * status.speed * 0.7f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 1.4f;
+			velocity.x += DELTA * status.speed * 0.7f;
 			isMoveX = true;
 		}
 	}
@@ -201,22 +201,22 @@ void Player::Move()
 	//방향을 구하고 정규화
 	if (KEY_PRESS(VK_SHIFT))
 	{
-		if (velocity.Length() > 2) velocity.Normalize();
+		if (velocity.Length() > status.speed * 1.0f) velocity.Normalize();
 	}
 	else if (KEY_PRESS(VK_CONTROL))
 	{
-		if (velocity.Length() > 1) velocity.Normalize();
+		if (velocity.Length() > status.speed * 0.5f) velocity.Normalize();
 	}
 	else
 	{
-		if (velocity.Length() > 1.4f) velocity.Normalize();
+		if (velocity.Length() > status.speed * 0.7f) velocity.Normalize();
 	}
 
 	if (!isMoveZ)
-		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA);
+		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA * status.speed);
 
 	if (!isMoveX)
-		velocity.x = Lerp(velocity.x, 0, deceleration * DELTA);
+		velocity.x = Lerp(velocity.x, 0, deceleration * DELTA * status.speed);
 
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 
@@ -224,15 +224,15 @@ void Player::Move()
 			
 	if (KEY_PRESS(VK_SHIFT))
 	{
-		Pos() += direction * runSpeed * DELTA * -1;
+		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
 	else if (KEY_PRESS(VK_CONTROL))
 	{
-		Pos() += direction * coruchSpeed * DELTA * -1;
+		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
 	else
 	{
-		Pos() += direction * moveSpeed * DELTA * -1;
+		Pos() += direction * status.speed * 0.7f * DELTA * -1;
 	}
 }
 
