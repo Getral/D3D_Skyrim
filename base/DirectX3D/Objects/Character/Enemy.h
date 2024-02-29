@@ -20,7 +20,7 @@ public:
 	void Render();
 	void GUIRender();
 
-	void SetTarget(Transform* target) { this->target = target; }
+	void SetTarget(Transform* target) { if(this->target != target) this->target = target; }
 	void SetState(State state);
 
 	SphereCollider* GetTrackCollider() { return trackCollider; }
@@ -36,9 +36,12 @@ private:
 	float speed = 10.0f;
 
 	UINT index;
+	UINT node;
 	State curState = IDLE;
 
 	SphereCollider* trackCollider;
+	CapsuleCollider* torsoCollider;
+	CapsuleCollider* headCollider;
 
 	Transform* target;
 	Vector3 velocity;

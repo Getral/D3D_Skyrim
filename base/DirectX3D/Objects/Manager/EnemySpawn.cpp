@@ -34,6 +34,10 @@ void EnemySpawn::Update()
 		{
 			enemy->SetTarget(playerData);
 		}
+		else
+		{
+			enemy->SetTarget(nullptr);
+		}
 	}
 }
 
