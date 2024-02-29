@@ -42,9 +42,9 @@ Player::Player()
 	
 	ModelAnimator::Rot().y = XM_PI;
 
-
-
-	collider = new CapsuleCollider(5, 10);
+	collider = new CapsuleCollider(3, 5);
+	collider->Scale() *= 1000;
+	collider->Pos().y = 6000;
 	collider->SetParent(this);
 	
 	action = (ACTION)frameBuffer->Get().cur.clip;
@@ -82,7 +82,7 @@ void Player::Update()
 
 	ModelAnimator::Update();
 
-	collider->SetWorld(GetTransformByNode(1));
+	collider->UpdateWorld();
 	rightHand->SetWorld(GetTransformByNode(79));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
