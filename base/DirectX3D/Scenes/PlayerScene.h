@@ -2,7 +2,6 @@
 
 class PlayerScene : public Scene
 {
-
 public:
 	PlayerScene();
 	~PlayerScene();
@@ -16,6 +15,5 @@ public:
 private:
 	Terrain* terrain;
 	Player* player;
-
 };
 

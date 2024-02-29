@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
     <ClInclude Include="Objects\Character\Player.h" />
     <ClInclude Include="Objects\Manager\EnemySpawn.h" />
@@ -170,7 +171,6 @@
     <ClInclude Include="Framework\Render\DepthStencil.h" />
     <ClInclude Include="Framework\Render\RenderTarget.h" />
     <ClInclude Include="DirectX3D.h" />
-    <ClInclude Include="Framework.h" />
     <ClInclude Include="Framework\Buffer\ConstBuffer.h" />
     <ClInclude Include="Framework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="Framework\Buffer\IndexBuffer.h" />

@@ -35,7 +35,6 @@ public:
 	void PostRender();
 	void GUIRender();
 
-	Transform* GetTransform() { return transform; }
 	Status GetStatus() { return status; }
 	CapsuleCollider* GetCollier() { return collider; }
 
@@ -59,7 +58,6 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
-	Transform* transform;
 	Transform* rightHand;
 	Transform* leftHand;
 
