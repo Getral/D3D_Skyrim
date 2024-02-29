@@ -41,7 +41,7 @@ Player::Player()
 	ReadClip("male_block");
 
 	collider = new CapsuleCollider();
-	collider->SetParent(transform);
+	collider->SetParent(this);
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
@@ -57,13 +57,13 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
+	SpawnManager::Get()->SetPlayerData(this);
 }
 
 Player::~Player()
 {
 	delete bladeSword;
 	delete shield;
-	delete transform;
 	delete collider;
 	delete rightHand;
 	delete leftHand;

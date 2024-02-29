@@ -10,9 +10,14 @@ public:
 	void Render();
 	void GUIRender();
 
+	void SetPlayerData(Player* player) { playerData = player; }
+
+	vector<Enemy*>& GetEnemies() { return enemies; }
 	void Spawn();
 
 private:
+	Player* playerData;
+
 	ModelAnimatorInstancing* instancing;
 	vector<Enemy*> enemies;
 	vector<Vector3> spawnPos;
