@@ -54,13 +54,25 @@ private:
 
 
 	State curState = IDLE;
-	CapsuleCollider* alduinCollider;
+	CapsuleCollider* alduinCollider2;
+
+	CapsuleCollider* HeadCollider;
+	CapsuleCollider* LWingCollider;
+	CapsuleCollider* RWingCollider;
+	CapsuleCollider* BodyCollider;
+	CapsuleCollider* RLegCollider;
+	CapsuleCollider* LLegCollider;
+
+	CapsuleCollider* TailCollider;
+
 	SphereCollider* collider_F;
 	SphereCollider* collider_R;
 	SphereCollider* collider_L;
 	SphereCollider* collider_B;
 	Transform* transform;
 	Player* target;
+
+	UINT nodeIndex = 0;
 
 	float moveSpeed = 500;
 	float rotSpeed = 0.5;

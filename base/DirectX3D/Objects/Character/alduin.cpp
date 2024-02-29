@@ -4,7 +4,21 @@
 alduin::alduin() :  ModelAnimator("alduin")
 {
 	transform = new Transform();
-	alduinCollider = new CapsuleCollider();
+	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
+	alduinCollider2->SetParent(transform);
+
+	HeadCollider = new CapsuleCollider(90.0f,0.1f);
+	LWingCollider = new CapsuleCollider(100.0f, 30.0f);
+	RWingCollider = new CapsuleCollider(100.0f, 30.0f);
+	BodyCollider = new CapsuleCollider(70.0f, 260.0f);
+
+	LLegCollider = new CapsuleCollider(80.0f,0.5f);
+	RLegCollider = new CapsuleCollider(30.0f, 20.0f);
+
+	TailCollider = new CapsuleCollider(70.0f, 1.0f);
+
+
+	//alduinCollider3 = new CapsuleCollider();
 
 	collider_F = new SphereCollider();
 	collider_F->Pos().SetZ(-30);
@@ -72,7 +86,6 @@ void alduin::Update()
 {
 	ModelAnimator::Update(); 
 
-	alduinCollider->UpdateWorld();
 	collider_F->UpdateWorld();
 	collider_R->UpdateWorld();
 	collider_L->UpdateWorld();
@@ -80,6 +93,22 @@ void alduin::Update()
 	transform->UpdateWorld();
 
 	transform->Pos() = this->Pos();
+
+	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
+
+	HeadCollider->SetWorld(GetTransformByNode(45));
+	LWingCollider->SetWorld(GetTransformByNode(81));
+	RWingCollider->SetWorld(GetTransformByNode(103));
+
+	BodyCollider->SetWorld(GetTransformByNode(84));
+
+	RLegCollider->SetWorld(GetTransformByNode(119));
+
+	LLegCollider->SetWorld(GetTransformByNode(23));
+
+	TailCollider->SetWorld(GetTransformByNode(110));
+
+	//alduinCollider3->SetWorld(GetTransformByNode(79));
 
 
 	//velocity = target->GlobalPos() - transform->GlobalPos();
@@ -91,7 +120,15 @@ void alduin::Update()
 void alduin::Render()
 {
 	ModelAnimator::Render();
-	alduinCollider->Render();
+	alduinCollider2->Render();
+	HeadCollider->Render();
+	LWingCollider->Render();
+	RWingCollider->Render();
+	BodyCollider->Render();
+	RLegCollider->Render();
+	LLegCollider->Render();
+	TailCollider->Render();
+
 	collider_F->Render();
 	collider_R->Render();
 	collider_L->Render();
@@ -101,6 +138,8 @@ void alduin::Render()
 void alduin::GUIRender()
 {
 	Model::GUIRender();
+
+	ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 0, 500);
 }
 
 void alduin::SetTarget(Player* target)
@@ -124,14 +163,14 @@ void alduin::Move()
 		//isMoveZ = true; //전후 이동 중임
 	}
 
-	if (KEY_PRESS('J'))
+	if (KEY_PRESS('K'))
 	{
 		velocity.z -= DELTA;
 		SetState(WALK);
 		//isMoveZ = true;
 	}
 
-	if (KEY_PRESS('K'))
+	if (KEY_PRESS('J'))
 	{
 		velocity.x -= DELTA;
 		SetState(RUN_L);

@@ -9,7 +9,7 @@ Player::Player()
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
-	ReadClip("male_block_hit");
+	/*ReadClip("male_block_hit");
 	ReadClip("male_walk_forward");
 	ReadClip("male_walk_forward_l");
 	ReadClip("male_walk_forward_r");
@@ -38,7 +38,7 @@ Player::Player()
 	ReadClip("attack_right");
 	ReadClip("attack_left");
 	ReadClip("attack_power");
-	ReadClip("male_block");
+	ReadClip("male_block");*/
 
 	collider = new CapsuleCollider();
 	collider->SetParent(transform);

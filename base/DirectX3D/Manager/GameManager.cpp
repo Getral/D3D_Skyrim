@@ -25,6 +25,7 @@ GameManager::GameManager()
     //SceneManager::Get()->Add("ModelExport");     
     //SceneManager::Get()->Add("ParticleConfig");
     //SceneManager::Get()->Add("Monster");
+    //SceneManager::Get()->Add("Player");
     SceneManager::Get()->Add("alduin");
 }
 
