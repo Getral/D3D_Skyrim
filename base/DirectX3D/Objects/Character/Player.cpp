@@ -40,6 +40,10 @@ Player::Player()
 	ReadClip("attack_power");
 	ReadClip("male_block");
 	
+	ModelAnimator::Rot().y = XM_PI;
+
+
+
 	collider = new CapsuleCollider(5, 10);
 	collider->SetParent(this);
 	
