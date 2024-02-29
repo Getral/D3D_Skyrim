@@ -10,10 +10,3 @@
 **/*.vcxproj.*
 
 **/*.log
-
-Debug/
-x64/
-**/Debug/
-**/x64/
-
-**/*.obj
