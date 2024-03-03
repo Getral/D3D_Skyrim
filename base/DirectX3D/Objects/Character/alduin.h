@@ -20,6 +20,7 @@ private:
 		BREATH, //inhale -> exhale_breath
 		FIREBALL, //inhale -> exhale_fireball
 		PAIN, // pain,pain2  랜덤 재생
+		PAIN2,
 		DEATH
 	};
 
@@ -52,7 +53,6 @@ private:
 	void Patterns();
 
 
-
 	State curState = IDLE;
 	CapsuleCollider* alduinCollider2;
 
@@ -79,7 +79,6 @@ private:
 	float deceleration = 5; //감속
 
 	Vector3 velocity;
-	Vector3 targetPos;
 
 	vector<map<float, Event>> totalEvent;
 	vector<map<float, Event>::iterator> eventIters;

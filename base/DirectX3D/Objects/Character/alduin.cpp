@@ -5,18 +5,15 @@ alduin::alduin() :  ModelAnimator("alduin")
 {
 	transform = new Transform();
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
-	alduinCollider2->SetParent(transform);
+	alduinCollider2->SetParent(this->transform);
 
 	HeadCollider = new CapsuleCollider(90.0f,0.1f);
 	LWingCollider = new CapsuleCollider(100.0f, 30.0f);
 	RWingCollider = new CapsuleCollider(100.0f, 30.0f);
 	BodyCollider = new CapsuleCollider(70.0f, 260.0f);
-
 	LLegCollider = new CapsuleCollider(80.0f,0.5f);
 	RLegCollider = new CapsuleCollider(30.0f, 20.0f);
-
 	TailCollider = new CapsuleCollider(70.0f, 1.0f);
-
 
 	//alduinCollider3 = new CapsuleCollider();
 
@@ -41,27 +38,27 @@ alduin::alduin() :  ModelAnimator("alduin")
 	collider_B->Scale() *= 30;
 
 	ReadClip("alduin_idle");
-	ReadClip("alduin_bleedidle");
 	ReadClip("alduin_takeoff");
-	ReadClip("alduin_fly");
 	ReadClip("alduin_hover");
-	ReadClip("alduin_flight_forward");
 	ReadClip("alduin_flight_hit");
+	ReadClip("alduin_backward");
+	ReadClip("alduin_bleedidle");
+	ReadClip("alduin_fly");
+	ReadClip("alduin_flight_forward");
 	ReadClip("alduin_ascend");
 	ReadClip("alduin_climb");
 	ReadClip("alduin_aproach");
 	ReadClip("alduin_descend");
-	ReadClip("alduin_backward");
 	ReadClip("alduin_injured");
+	ReadClip("alduin_bite");
+	ReadClip("alduin_wingswip_left");
+	ReadClip("alduin_wingswip_right");
+	ReadClip("alduin_tailwhip");
 	ReadClip("alduin_inhale");
 	ReadClip("alduin_exhale_breath");
 	ReadClip("alduin_exhale_fireball");
-	ReadClip("alduin_wingswip_left");
-	ReadClip("alduin_wingswip_right");
-	ReadClip("alduin_bite");
 	ReadClip("alduin_pain");
 	ReadClip("alduin_pain2");
-	ReadClip("alduin_tailwhip");
 	ReadClip("alduin_timetravel");
 	Scale() *= 0.001;
 
@@ -80,6 +77,20 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 alduin::~alduin()
 {
+	delete collider_B;
+	delete collider_L;
+	delete collider_R;
+	delete collider_F;
+	delete transform;
+
+	delete	HeadCollider;
+	delete	LWingCollider;
+	delete	RWingCollider;
+	delete	BodyCollider;
+	delete	LLegCollider;
+	delete	RLegCollider;
+	delete	TailCollider;
+
 }
 
 void alduin::Update()
@@ -92,12 +103,13 @@ void alduin::Update()
 	collider_B->UpdateWorld();
 	transform->UpdateWorld();
 
-	transform->Pos() = this->Pos();
+	velocity = target->GlobalPos() - this->GlobalPos();
 
 	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
 
 	HeadCollider->SetWorld(GetTransformByNode(45));
 	LWingCollider->SetWorld(GetTransformByNode(81));
+
 	RWingCollider->SetWorld(GetTransformByNode(103));
 
 	BodyCollider->SetWorld(GetTransformByNode(84));
@@ -110,8 +122,7 @@ void alduin::Update()
 
 	//alduinCollider3->SetWorld(GetTransformByNode(79));
 
-
-	//velocity = target->GlobalPos() - transform->GlobalPos();
+	//Patterns();
 
 	SetAnimation();
 	Move();
@@ -197,19 +208,19 @@ void alduin::Move()
 	//if (velocity.Length() < 10) return; 
 
 
-	//if (velocity.Length() < 1000) // 표적과 거리가 가까울 때는
-	//{
-	//	moveSpeed = 100; //두 배로 빨라진다
-	//	SetState(RUN);
-	//}
-	//else
-	//{
-	//	moveSpeed = 50;
-	//	SetState(WALK);
-	//}
+	if (velocity.Length() < 1000) // 표적과 거리가 가까울 때는
+	{
+		moveSpeed = 100; //두 배로 빨라진다
+		SetState(RUN);
+	}
+	else
+	{
+		moveSpeed = 50;
+		SetState(WALK);
+	}
 
-	//transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
-	//transform->Rot().y = atan2(velocity.x, velocity.z) * rotSpeed + XM_PI; // XY좌표 방향 + 전후반전(문워크 방지)
+	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
+	transform->Rot().y = atan2(velocity.x, velocity.z) * rotSpeed + XM_PI;
 }
 
 
@@ -296,7 +307,5 @@ void alduin::Patterns()
 		SetState(ATTACK_B);
 
 	}
-
-	
 
 }
