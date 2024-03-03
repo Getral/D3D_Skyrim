@@ -6,10 +6,11 @@ Player::Player()
 	ModelAnimator::Scale() *= 0.001;
 	
 	ReadClip("male_idle");
-	//ReadClip("male_idle");
-	//ReadClip("male_idle");
-	//ReadClip("male_idle");
-	//ReadClip("male_block_hit");
+	ReadClip("male_jump");
+	ReadClip("male_stagger");
+	ReadClip("male_stagger_medium");
+	ReadClip("male_stagger_large");
+	ReadClip("male_block_hit_shield");
 	ReadClip("male_walk_forward");
 	ReadClip("male_walk_forward_l");
 	ReadClip("male_walk_forward_r");
@@ -38,7 +39,9 @@ Player::Player()
 	ReadClip("male_attack_right");
 	ReadClip("male_attack_left");
 	ReadClip("male_attack_power");
-	//ReadClip("male_block");
+	ReadClip("male_block_shield");
+	ReadClip("male_block_bash_intro_shield");
+	ReadClip("male_block_bash_shield");
 	
 	ModelAnimator::Rot().y = XM_PI;
 
@@ -234,6 +237,10 @@ void Player::Move()
 	{
 		Pos() += direction * status.speed * 0.7f * DELTA * -1;
 	}
+}
+
+void Player::Jump()
+{
 }
 
 void Player::Rotate()

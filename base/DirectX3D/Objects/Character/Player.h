@@ -16,12 +16,12 @@ public:
 private:
 	enum ACTION
 	{
-		IDLE, /*JUMP, HIT_LIGHT, HIT_HEAVY,*/ //HIT_BLOCK,
+		IDLE, JUMP, HIT_LIGHT, HIT_MEDIUM, HIT_HEAVY, HIT_BLOCK,
 		WALK_F, WALK_FL, WALK_FR, WALK_B, WALK_BL, WALK_BR, WALK_L, WALK_R,
 		RUN_F, RUN_FL, RUN_FR, RUN_B, RUN_BL, RUN_BR, RUN_L, RUN_R,
 		CIDLE, CMOVE_F, CMOVE_FL, CMOVE_FR, CMOVE_B, CMOVE_BL, CMOVE_BR, CMOVE_L, CMOVE_R,
 		ATTACK_RIGHT, ATTACK_LEFT, ATTACK_HEAVY,
-		//BLOCK
+		BLOCK, PARRY_START, PARRY
 	};
 
 public:
@@ -40,6 +40,7 @@ public:
 private:
 	void Control();
 	void Move();
+	void Jump();
 	void Rotate();
 	void Attack();
 	void SetAnimation();
