@@ -20,22 +20,22 @@ alduin::alduin() :  ModelAnimator("alduin")
 	collider_F = new SphereCollider();
 	collider_F->Pos().SetZ(-30);
 	collider_F->SetParent(transform);
-	collider_F->Scale() *= 30;
+	collider_F->Scale() *= 20;
 
 	collider_R = new SphereCollider();
 	collider_R->Pos().SetX(-30);
 	collider_R->SetParent(transform);
-	collider_R->Scale() *= 30;
+	collider_R->Scale() *= 20;
 
 	collider_L = new SphereCollider();
 	collider_L->Pos().SetX(30);
 	collider_L->SetParent(transform);
-	collider_L->Scale() *= 30;
+	collider_L->Scale() *= 20;
 
 	collider_B = new SphereCollider();
 	collider_B->Pos().SetZ(30);
 	collider_B->SetParent(transform);
-	collider_B->Scale() *= 30;
+	collider_B->Scale() *= 20;
 
 	ReadClip("alduin_idle");
 	ReadClip("alduin_takeoff");
@@ -66,12 +66,12 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	//SetEvent(TAKEOFF, bind(&alduin::EndTakeoff, this), 0.7f);
 	//SetEvent(PAIN, bind(&alduin::EndHit, this), 0.9f);
-	//SetEvent(INHALE, bind(&alduin::FireAttack, this), 0.9f);
 
-	//for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
-	//{
-	//	SetEvent(clipIndex, bind(&alduin::EndAttack, this), 0.9f);
-	//}
+	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
+	{
+		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.7f);
+	}
+
 	
 }
 
@@ -103,26 +103,20 @@ void alduin::Update()
 	collider_B->UpdateWorld();
 	transform->UpdateWorld();
 
-	velocity = target->GlobalPos() - this->GlobalPos();
+
+	//velocity = target->GlobalPos() - this->GlobalPos();
 
 	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
-
 	HeadCollider->SetWorld(GetTransformByNode(45));
 	LWingCollider->SetWorld(GetTransformByNode(81));
-
 	RWingCollider->SetWorld(GetTransformByNode(103));
-
 	BodyCollider->SetWorld(GetTransformByNode(84));
-
 	RLegCollider->SetWorld(GetTransformByNode(119));
-
 	LLegCollider->SetWorld(GetTransformByNode(23));
-
 	TailCollider->SetWorld(GetTransformByNode(110));
 
-	//alduinCollider3->SetWorld(GetTransformByNode(79));
 
-	//Patterns();
+	Patterns();
 
 	SetAnimation();
 	Move();
@@ -163,6 +157,20 @@ void alduin::SetEvent(int clip, Event event, float timeRatio)
 	if (totalEvent[clip].count(timeRatio) > 0) return; // 선행 예약된 이벤트가 있으면 종료
 	totalEvent[clip][timeRatio] = event;
 }
+
+//void alduin::ExecuteEvent()
+//{
+//	int index = curState; //현재 상태 받아오기
+//	if (totalEvent[index].empty()) return;
+//	if (eventIters[index] == totalEvent[index].end()) return;
+//
+//	float ratio = motion->runningTime / motion->duration; //진행된 시간 나누기 전체 진행시간
+//
+//	if (eventIters[index]->first > ratio) return; // 진행 시간이 정해진 기준에 못 미치면 종료(재시작)
+//
+//	eventIters[index]->second(); //등록된 이벤트 수행
+//	eventIters[index]++;
+//}
 
 void alduin::Move()
 {
@@ -208,19 +216,19 @@ void alduin::Move()
 	//if (velocity.Length() < 10) return; 
 
 
-	if (velocity.Length() < 1000) // 표적과 거리가 가까울 때는
-	{
-		moveSpeed = 100; //두 배로 빨라진다
-		SetState(RUN);
-	}
-	else
-	{
-		moveSpeed = 50;
-		SetState(WALK);
-	}
+	//if (velocity.Length() < 1000) // 표적과 거리가 가까울 때는
+	//{
+	//	moveSpeed = 100; //두 배로 빨라진다
+	//	SetState(RUN);
+	//}
+	//else
+	//{
+	//	moveSpeed = 50;
+	//	SetState(WALK);
+	//}
 
-	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
-	transform->Rot().y = atan2(velocity.x, velocity.z) * rotSpeed + XM_PI;
+	//transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
+	//transform->Rot().y = atan2(velocity.x, velocity.z) * rotSpeed + XM_PI;
 }
 
 
@@ -249,17 +257,16 @@ void alduin::EndTakeoff()
 
 void alduin::EndHit()
 {
-	SetState(WALK);
+	SetState(IDLE);
 }
 
 void alduin::EndAttack()
 {
-	SetState(WALK);
+	SetState(IDLE);
 }
 
 void alduin::EndBreath()
 {
-
 
 }
 
