@@ -5,11 +5,11 @@ Player::Player()
 {
 	ModelAnimator::Scale() *= 0.001;
 	
-	ReadClip("idle");
+	ReadClip("male_idle");
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
-	ReadClip("male_block_hit");
+	//ReadClip("male_block_hit");
 	ReadClip("male_walk_forward");
 	ReadClip("male_walk_forward_l");
 	ReadClip("male_walk_forward_r");
@@ -27,18 +27,18 @@ Player::Player()
 	ReadClip("male_run_left");
 	ReadClip("male_run_right");
 	ReadClip("male_crouch_idle");
-	ReadClip("male_crouch_forward");
-	ReadClip("male_crouch_forward_l");
-	ReadClip("male_crouch_forward_r");
-	ReadClip("male_crouch_backward");
-	ReadClip("male_crouch_backward_l");
-	ReadClip("male_crouch_backward_r");
-	ReadClip("male_crouch_left");
-	ReadClip("male_crouch_right");
-	ReadClip("attack_right");
-	ReadClip("attack_left");
-	ReadClip("attack_power");
-	ReadClip("male_block");
+	ReadClip("male_crouch_walk_forward");
+	ReadClip("male_crouch_walk_forward_l");
+	ReadClip("male_crouch_walk_forward_r");
+	ReadClip("male_crouch_walk_backward");
+	ReadClip("male_crouch_walk_backward_l");
+	ReadClip("male_crouch_walk_backward_r");
+	ReadClip("male_crouch_walk_left");
+	ReadClip("male_crouch_walk_right");
+	ReadClip("male_attack_right");
+	ReadClip("male_attack_left");
+	ReadClip("male_attack_power");
+	//ReadClip("male_block");
 	
 	ModelAnimator::Rot().y = XM_PI;
 
