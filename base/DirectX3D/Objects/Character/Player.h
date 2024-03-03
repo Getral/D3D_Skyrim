@@ -7,9 +7,8 @@ public:
 	{
 		float curHp = 100;
 		float maxHp = 100;
-		float maxstamina = 100;
 		float curstamina = 100;
-
+		float maxstamina = 100;
 		float atk = 10;
 		float speed = 10;
 	};
@@ -35,7 +34,6 @@ public:
 	void PostRender();
 	void GUIRender();
 
-	Transform* GetTransform() { return transform; }
 	Status GetStatus() { return status; }
 	CapsuleCollider* GetCollier() { return collider; }
 
@@ -51,7 +49,6 @@ private:
 	void Attack1hm();
 	void Attack2hm();
 	void Attackh2h();
-
 	void EndAttack();
 
 protected:
@@ -59,7 +56,6 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
-	Transform* transform;
 	Transform* rightHand;
 	Transform* leftHand;
 
@@ -77,7 +73,7 @@ protected:
 	float rotSpeed = 1;
 	float deceleration = 20;
 
-	UINT nodeIndex = 0;
+	UINT nodeIndex = 1;
 
 	Vector3 velocity;
 

@@ -9,7 +9,7 @@ Player::Player()
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
 	//ReadClip("male_idle");
-	/*ReadClip("male_block_hit");
+	ReadClip("male_block_hit");
 	ReadClip("male_walk_forward");
 	ReadClip("male_walk_forward_l");
 	ReadClip("male_walk_forward_r");
@@ -38,11 +38,15 @@ Player::Player()
 	ReadClip("attack_right");
 	ReadClip("attack_left");
 	ReadClip("attack_power");
-	ReadClip("male_block");*/
+	ReadClip("male_block");
+	
+	ModelAnimator::Rot().y = XM_PI;
 
-	collider = new CapsuleCollider();
-	collider->SetParent(transform);
-
+	collider = new CapsuleCollider(3, 5);
+	collider->Scale() *= 1000;
+	collider->Pos().y = 6000;
+	collider->SetParent(this);
+	
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	bladeSword = new BladeSword();
@@ -57,13 +61,15 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
+	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 }
 
 Player::~Player()
 {
 	delete bladeSword;
 	delete shield;
-	delete transform;
 	delete collider;
 	delete rightHand;
 	delete leftHand;
@@ -77,7 +83,6 @@ void Player::Update()
 	ModelAnimator::Update();
 
 	collider->UpdateWorld();
-
 	rightHand->SetWorld(GetTransformByNode(79));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
@@ -100,8 +105,9 @@ void Player::PostRender()
 void Player::GUIRender()
 {
 	bladeSword->GUIRender();
-
-	//ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 0, 500);
+	collider->GUIRender();
+	ModelAnimator::GUIRender();
+	ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 1, 500);
 }
 
 void Player::Control()
@@ -123,22 +129,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 2.0f;
+			velocity.z += DELTA * status.speed * 1.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 2.0f;
+			velocity.z -= DELTA * status.speed * 1.0f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 2.0f;
+			velocity.x -= DELTA * status.speed * 1.0f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 2.0f;
+			velocity.x += DELTA * status.speed * 1.0f;
 			isMoveX = true;
 		}
 	}
@@ -147,22 +153,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 1.0f;
+			velocity.z += DELTA * status.speed * 0.5f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 1.0f;
+			velocity.z -= DELTA * status.speed * 0.5f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 1.0f;
+			velocity.x -= DELTA * status.speed * 0.5f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 1.0f;
+			velocity.x += DELTA * status.speed * 0.5f;
 			isMoveX = true;
 		}
 	}
@@ -171,22 +177,22 @@ void Player::Move()
 	{
 		if (KEY_PRESS('W'))
 		{
-			velocity.z += DELTA * 1.4f;
+			velocity.z += DELTA * status.speed * 0.7f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('S'))
 		{
-			velocity.z -= DELTA * 1.4f;
+			velocity.z -= DELTA * status.speed * 0.7f;
 			isMoveZ = true;
 		}
 		if (KEY_PRESS('A'))
 		{
-			velocity.x -= DELTA * 1.4f;
+			velocity.x -= DELTA * status.speed * 0.7f;
 			isMoveX = true;
 		}
 		if (KEY_PRESS('D'))
 		{
-			velocity.x += DELTA * 1.4f;
+			velocity.x += DELTA * status.speed * 0.7f;
 			isMoveX = true;
 		}
 	}
@@ -195,22 +201,22 @@ void Player::Move()
 	//방향을 구하고 정규화
 	if (KEY_PRESS(VK_SHIFT))
 	{
-		if (velocity.Length() > 2) velocity.Normalize();
+		if (velocity.Length() > status.speed * 1.0f) velocity.Normalize();
 	}
 	else if (KEY_PRESS(VK_CONTROL))
 	{
-		if (velocity.Length() > 1) velocity.Normalize();
+		if (velocity.Length() > status.speed * 0.5f) velocity.Normalize();
 	}
 	else
 	{
-		if (velocity.Length() > 1.4f) velocity.Normalize();
+		if (velocity.Length() > status.speed * 0.7f) velocity.Normalize();
 	}
 
 	if (!isMoveZ)
-		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA);
+		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA * status.speed);
 
 	if (!isMoveX)
-		velocity.x = Lerp(velocity.x, 0, deceleration * DELTA);
+		velocity.x = Lerp(velocity.x, 0, deceleration * DELTA * status.speed);
 
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 
@@ -218,15 +224,15 @@ void Player::Move()
 			
 	if (KEY_PRESS(VK_SHIFT))
 	{
-		Pos() += direction * runSpeed * DELTA * -1;
+		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
 	else if (KEY_PRESS(VK_CONTROL))
 	{
-		Pos() += direction * coruchSpeed * DELTA * -1;
+		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
 	else
 	{
-		Pos() += direction * moveSpeed * DELTA * -1;
+		Pos() += direction * status.speed * 0.7f * DELTA * -1;
 	}
 }
 
@@ -236,6 +242,13 @@ void Player::Rotate()
 
 void Player::Attack()
 {
+	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
+	
+	//if (KEY_PRESS(VK_LBUTTON)) 
+	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_RIGHT);
+	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_LEFT);
+	if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_HEAVY);
+
 }
 
 void Player::SetAnimation()
