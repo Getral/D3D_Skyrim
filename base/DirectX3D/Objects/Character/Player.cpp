@@ -118,12 +118,14 @@ void Player::Control()
 	Rotate();
 	Move();
 	Attack();
+	Block();
 }
 
 void Player::Move()
 {
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY)
 		return;
+	if (isBlock) return;
 
 	bool isMoveZ = false;
 	bool isMoveX = false;
@@ -258,6 +260,22 @@ void Player::Attack()
 
 }
 
+void Player::Block()
+{
+	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
+
+	if (KEY_PRESS(VK_RBUTTON))
+	{
+		SetAction(BLOCK);
+		isBlock = true;
+	}
+
+	if (KEY_UP(VK_RBUTTON))
+	{
+		EndBlock();
+	}
+}
+
 void Player::SetAnimation()
 {
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY)
@@ -347,4 +365,10 @@ void Player::Attackh2h()
 void Player::EndAttack()
 {
 	SetAction(IDLE);
+}
+
+void Player::EndBlock()
+{
+	SetAction(IDLE);
+	isBlock = false;
 }

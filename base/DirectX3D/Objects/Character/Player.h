@@ -43,6 +43,7 @@ private:
 	void Jump();
 	void Rotate();
 	void Attack();
+	void Block();
 	void SetAnimation();
 
 	void SetAction(ACTION action);
@@ -51,6 +52,7 @@ private:
 	void Attack2hm();
 	void Attackh2h();
 	void EndAttack();
+	void EndBlock();
 
 protected:
 
@@ -82,6 +84,7 @@ protected:
 	float jumpForce = 0.5f;
 	float gravityMult = 0.5f;
 	bool isJump = false;
+	bool isBlock = false;
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
 };
