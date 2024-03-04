@@ -261,6 +261,16 @@ void Player::Jump()
 
 void Player::Rotate()
 {
+	if (KEY_PRESS('Q'))
+	{
+		Rot().y -= DELTA * rotSpeed;
+	}
+
+	if (KEY_PRESS('E'))
+	{
+		Rot().y += DELTA * rotSpeed;
+	}
+
 }
 
 void Player::Attack()
