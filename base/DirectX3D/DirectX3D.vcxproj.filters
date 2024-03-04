@@ -345,16 +345,10 @@
     <ClInclude Include="Objects\Items\Armors\IronArmor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronArmorSet.h">
+    <ClInclude Include="Objects\Items\Armors\DragonBoneArmor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonArmor.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonArmorSet.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\DragonWeapon.h">
+    <ClInclude Include="Objects\Items\Weapons\DragonBoneWeapon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Armors\Armor.h">
@@ -662,19 +656,13 @@
     <ClCompile Include="Objects\Items\Armors\IronArmor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronArmorSet.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonArmor.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonArmorSet.cpp">
+    <ClCompile Include="Objects\Items\Armors\DragonBoneArmor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\IronWeapon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\DragonWeapon.cpp">
+    <ClCompile Include="Objects\Items\Weapons\DragonBoneWeapon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Armors\Armor.cpp">

@@ -1,10 +1,10 @@
 #pragma once
 
-class DragonWeapon
+class DragonBoneWeapon
 {
 public:
 
-	struct DragonWeaponAbility
+	struct DragonBoneWeaponAbility
 	{
 		float power;
 		float atkSpeed;

@@ -8,5 +8,15 @@ class Armor : public Inventory
 
 		// 마법부여는 필요하면 추가
 	};
+
+	struct ArmorType
+	{
+		float hamet;
+		float cuirass;
+		float gauntlets;
+		float boots;
+		
+		float shield;
+	};
 };
 
