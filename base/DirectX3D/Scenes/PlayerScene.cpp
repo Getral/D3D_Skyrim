@@ -9,6 +9,9 @@ PlayerScene::PlayerScene()
 
 	player = new Player();
 
+	aldu = new alduin();
+	aldu->SetTarget(player);
+
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim");
 	CAM->LookAtTarget(); 
@@ -16,6 +19,7 @@ PlayerScene::PlayerScene()
 
 PlayerScene::~PlayerScene()
 {
+	delete aldu;
 	delete terrain;
 	delete player;
 }
@@ -23,6 +27,7 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
+	aldu->Update();
 }
 
 void PlayerScene::PreRender()
@@ -32,6 +37,7 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
+	aldu->Render();
 }
 
 void PlayerScene::PostRender()
@@ -42,4 +48,5 @@ void PlayerScene::PostRender()
 void PlayerScene::GUIRender()
 {
 	player->GUIRender();
+	aldu->GUIRender();
 }
