@@ -10,8 +10,3 @@
 **/*.vcxproj.*
 
 **/*.log
-
-**/Debug/
-Debug/
-base/x64/Debug/DirectX3D.pdb
-*.pdb
