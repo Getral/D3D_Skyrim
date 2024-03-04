@@ -4,7 +4,7 @@ Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
 	ModelAnimator::Scale() *= 0.001;
-	
+
 	ReadClip("male_idle");
 	ReadClip("male_jump");
 	ReadClip("male_stagger");
@@ -28,24 +28,28 @@ Player::Player()
 	ReadClip("male_run_left");
 	ReadClip("male_run_right");
 	ReadClip("male_crouch_idle");
-	ReadClip("male_crouch_forward");
-	ReadClip("male_crouch_forward_l");
-	ReadClip("male_crouch_forward_r");
-	ReadClip("male_crouch_backward");
-	ReadClip("male_crouch_backward_l");
-	ReadClip("male_crouch_backward_r");
-	ReadClip("male_crouch_left");
-	ReadClip("male_crouch_right");
-	ReadClip("attack_right");
-	ReadClip("attack_left");
-	ReadClip("attack_power");
-	ReadClip("male_block");
+	ReadClip("male_crouch_walk_forward");
+	ReadClip("male_crouch_walk_forward_l");
+	ReadClip("male_crouch_walk_forward_r");
+	ReadClip("male_crouch_walk_backward");
+	ReadClip("male_crouch_walk_backward_l");
+	ReadClip("male_crouch_walk_backward_r");
+	ReadClip("male_crouch_walk_left");
+	ReadClip("male_crouch_walk_right");
+	ReadClip("male_attack_right");
+	ReadClip("male_attack_left");
+	ReadClip("male_attack_power");
+	ReadClip("male_block_shield");
+	ReadClip("male_block_bash_intro_shield");
+	ReadClip("male_block_bash_shield");
+
+	ModelAnimator::Rot().y = XM_PI;
 
 	collider = new CapsuleCollider(3, 5);
 	collider->Scale() *= 1000;
 	collider->Pos().y = 6000;
 	collider->SetParent(this);
-	
+
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	bladeSword = new BladeSword();
@@ -99,7 +103,7 @@ void Player::Render()
 	collider->Render();
 	bladeSword->Render();
 	shield->Render();
-	
+
 }
 
 void Player::PostRender()
@@ -155,7 +159,7 @@ void Player::Move()
 			isMoveX = true;
 		}
 	}
-	
+
 	else if (KEY_PRESS(VK_CONTROL)) //앉아서 이동
 	{
 		if (KEY_PRESS('W'))
@@ -179,7 +183,7 @@ void Player::Move()
 			isMoveX = true;
 		}
 	}
-	
+
 	else //걷기
 	{
 		if (KEY_PRESS('W'))
@@ -203,7 +207,7 @@ void Player::Move()
 			isMoveX = true;
 		}
 	}
-	
+
 
 	//방향을 구하고 정규화
 	if (KEY_PRESS(VK_SHIFT))
@@ -228,7 +232,7 @@ void Player::Move()
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
-			
+
 	if (KEY_PRESS(VK_SHIFT))
 	{
 		Pos() += direction * status.speed * 1.0f * DELTA * -1;
@@ -255,7 +259,7 @@ void Player::Attack()
 {
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
 	if (isHit) return;
-	
+
 	//if (KEY_PRESS(VK_LBUTTON)) 
 	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_RIGHT);
 	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_LEFT);
@@ -299,7 +303,7 @@ void Player::GetHit()
 			SetAction(HIT_BLOCK);
 			isHit = true;
 		}
-	}	
+	}
 	else
 	{
 		if (KEY_DOWN('Z'))
@@ -317,12 +321,12 @@ void Player::GetHit()
 			SetAction(HIT_HEAVY);
 			isHit = true;
 		}
-	}	
+	}
 }
 
 void Player::SetAnimation()
 {
-	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY 
+	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY
 		|| curAction == BLOCK || curAction == HIT_LIGHT || curAction == HIT_MEDIUM ||
 		curAction == HIT_HEAVY || curAction == HIT_BLOCK)
 		return;
