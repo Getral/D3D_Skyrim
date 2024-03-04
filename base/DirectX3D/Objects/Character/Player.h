@@ -78,7 +78,7 @@ protected:
 	float runSpeed = 20;
 	float coruchSpeed = 10;
 	float rotSpeed = 1;
-	float deceleration = 20;
+	float deceleration = 10;
 
 	UINT nodeIndex = 1;
 
