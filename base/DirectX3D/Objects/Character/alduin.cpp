@@ -67,10 +67,11 @@ alduin::alduin() :  ModelAnimator("alduin")
 	//SetEvent(TAKEOFF, bind(&alduin::EndTakeoff, this), 0.7f);
 	//SetEvent(PAIN, bind(&alduin::EndHit, this), 0.9f);
 
-	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
-	{
-		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.7f);
-	}
+	//for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
+	//{
+	//	GetClip(clipIndex)->SetEvent(bind(&alduin::Patterns, this), 0.7f);
+	//	GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+	//}
 
 	
 }
@@ -115,9 +116,7 @@ void alduin::Update()
 	LLegCollider->SetWorld(GetTransformByNode(23));
 	TailCollider->SetWorld(GetTransformByNode(110));
 
-
 	Patterns();
-
 	SetAnimation();
 	Move();
 }
@@ -263,6 +262,7 @@ void alduin::EndHit()
 void alduin::EndAttack()
 {
 	SetState(IDLE);
+
 }
 
 void alduin::EndBreath()
@@ -294,9 +294,12 @@ void alduin::SetState(State state)
 void alduin::Patterns()
 {
 
+	if (curState == ATTACK_F || curState == ATTACK_R || curState == ATTACK_L || curState == ATTACK_B) return;
+
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_F);
+
 
 	}
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
