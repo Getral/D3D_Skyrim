@@ -5,6 +5,13 @@ BladeSword::BladeSword() : Model("BladeSword")
 	SetTag("BladeSword");
 
 	collider = new BoxCollider();
+	collider->Scale().x *= 2;
+	collider->Scale().y *= 83;
+	collider->Scale().z *= 2;
+	collider->Pos().x = 0;
+	collider->Pos().y += 40;
+	collider->Pos().z = 0;
+
 	collider->SetTag("BladeSwordCollider");
 	collider->SetParent(this);
 	collider->Load();
