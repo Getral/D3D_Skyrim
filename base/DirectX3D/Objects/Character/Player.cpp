@@ -50,6 +50,8 @@ Player::Player()
 	collider->Pos().y = 6000;
 	collider->SetParent(this);
 
+	SpawnManager::Get()->SetPlayerData(this);
+
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	bladeSword = new BladeSword();
