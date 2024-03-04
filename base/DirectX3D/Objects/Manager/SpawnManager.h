@@ -11,7 +11,7 @@ private:
 
 	vector<vector<string>> clipNameTable =
 	{
-		{ "bear_idle", "bear_attack", "bear_hit" }
+		{ "bear_idle", "bear_run_forward", "bear_attack", "bear_hit"}
 	};
 
 	vector<vector<Vector3>> posTable =
@@ -34,7 +34,17 @@ public:
 	void Render();
 	void GUIRender();
 
+	void SetPlayerData(Player* player);
+
+	ModelAnimatorInstancing* GetMonsterInstancingWithIndex(int index) { return monsterInstancing[index]; }
+	Enemy* GetEnemyWithIndex(int index) { return enemies[index]; }
+
+	vector<ModelAnimatorInstancing*> &GetMonsterInstancing() { return monsterInstancing; }
+	vector<Enemy*> &GetEnemies() { return enemies; }
+
 private:
+	Player* playerData;
+
 	vector<string> monsterName;
 	vector<ModelAnimatorInstancing*> monsterInstancing;
 	vector<Enemy*> enemies;

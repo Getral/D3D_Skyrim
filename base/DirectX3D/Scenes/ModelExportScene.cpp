@@ -8,10 +8,16 @@ ModelExportScene::ModelExportScene()
     ModelExporter* exporter;
     string clipName;
 
-    exporter = new ModelExporter(name, file);
+    /*exporter = new ModelExporter(name, file);
     exporter->ExportMaterial();
     exporter->ExportMesh();
-    delete exporter;    
+    delete exporter;*/
+
+    clipName = "bear_run_forward";
+    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    exporter = new ModelExporter(name, file);
+    exporter->ExportClip(clipName);
+    delete exporter;
 
 
     //clipName = "male_idle";

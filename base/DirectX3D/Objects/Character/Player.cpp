@@ -28,22 +28,18 @@ Player::Player()
 	ReadClip("male_run_left");
 	ReadClip("male_run_right");
 	ReadClip("male_crouch_idle");
-	ReadClip("male_crouch_walk_forward");
-	ReadClip("male_crouch_walk_forward_l");
-	ReadClip("male_crouch_walk_forward_r");
-	ReadClip("male_crouch_walk_backward");
-	ReadClip("male_crouch_walk_backward_l");
-	ReadClip("male_crouch_walk_backward_r");
-	ReadClip("male_crouch_walk_left");
-	ReadClip("male_crouch_walk_right");
-	ReadClip("male_attack_right");
-	ReadClip("male_attack_left");
-	ReadClip("male_attack_power");
-	ReadClip("male_block_shield");
-	ReadClip("male_block_bash_intro_shield");
-	ReadClip("male_block_bash_shield");
-	
-	ModelAnimator::Rot().y = XM_PI;
+	ReadClip("male_crouch_forward");
+	ReadClip("male_crouch_forward_l");
+	ReadClip("male_crouch_forward_r");
+	ReadClip("male_crouch_backward");
+	ReadClip("male_crouch_backward_l");
+	ReadClip("male_crouch_backward_r");
+	ReadClip("male_crouch_left");
+	ReadClip("male_crouch_right");
+	ReadClip("attack_right");
+	ReadClip("attack_left");
+	ReadClip("attack_power");
+	ReadClip("male_block");
 
 	collider = new CapsuleCollider(3, 5);
 	collider->Scale() *= 1000;

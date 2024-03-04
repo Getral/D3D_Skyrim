@@ -11,13 +11,15 @@ SpawnManager::SpawnManager()
 		for (int j = 0; j < clipNameTable[i].size(); j++)
 			monsterInstancing[i]->ReadClip(clipNameTable[i][j]);
 
-		enemies.push_back(new Enemy(monsterName[i]));
+		enemies.push_back(new Enemy(monsterName[i], i, monsterInstancing[i]));
 		enemies[i]->SetStatus(statusTable[i]);
 
 		EnemySpawn* tmp = new EnemySpawn(monsterInstancing[i], enemies[i], posTable[i]);
 		tmp->Spawn();
 		monsterSpawnManager.push_back(tmp);
 	}
+
+
 }
 
 SpawnManager::~SpawnManager()
@@ -34,6 +36,8 @@ void SpawnManager::Update()
 		mi->Update();
 	for (EnemySpawn* msm : monsterSpawnManager)
 		msm->Update();
+
+	
 }
 
 void SpawnManager::Render()
@@ -50,4 +54,11 @@ void SpawnManager::GUIRender()
 		mi->GUIRender();
 	for (EnemySpawn* msm : monsterSpawnManager)
 		msm->GUIRender();
+}
+
+void SpawnManager::SetPlayerData(Player* player)
+{
+	playerData = player;
+	for (EnemySpawn* msm : monsterSpawnManager)
+		msm->SetPlayerData(playerData);
 }

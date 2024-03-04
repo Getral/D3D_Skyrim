@@ -16,13 +16,13 @@ GameManager::GameManager()
     //SceneManager::Get()->Create("ModelExport", new ModelExportScene());
     //SceneManager::Get()->Create("ParticleConfig", new ParticleConfigScene());
     //SceneManager::Get()->Create("Particle", new ParticleScene());
-    //SceneManager::Get()->Create("Monster", new MonsterScene());
+    SceneManager::Get()->Create("Monster", new MonsterScene());
     SceneManager::Get()->Create("Player", new PlayerScene());
 
     SceneManager::Get()->Add("Grid");
     //SceneManager::Get()->Add("ModelExport");     
     //SceneManager::Get()->Add("ParticleConfig");
-    //SceneManager::Get()->Add("Particle");
+    SceneManager::Get()->Add("Monster");
     SceneManager::Get()->Add("Player");
 }
 
