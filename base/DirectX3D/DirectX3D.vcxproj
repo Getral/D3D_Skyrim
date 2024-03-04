@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -144,8 +144,15 @@
   <ItemGroup>
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Character\alduin.h" />
+    <ClInclude Include="Objects\Inventory\Inventory.h" />
+    <ClInclude Include="Objects\Items\Armors\Armor.h" />
+    <ClInclude Include="Objects\Items\Armors\DragonBoneArmor.h" />
+    <ClInclude Include="Objects\Items\Armors\IronArmor.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
     <ClInclude Include="Objects\Character\Player.h" />
+    <ClInclude Include="Objects\Items\Weapons\DragonBoneWeapon.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapon.h" />
+    <ClInclude Include="Objects\Items\Weapons\Weapon.h" />
     <ClInclude Include="Objects\Manager\EnemySpawn.h" />
     <ClInclude Include="Objects\Character\Enemy.h" />
     <ClInclude Include="Objects\Character\Character.h" />
@@ -257,8 +264,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\Character\alduin.cpp" />
+    <ClCompile Include="Objects\Inventory\Inventory.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Armor.cpp" />
+    <ClCompile Include="Objects\Items\Armors\DragonBoneArmor.cpp" />
+    <ClCompile Include="Objects\Items\Armors\IronArmor.cpp" />
     <ClCompile Include="Objects\Items\Weapons\BladeSword.cpp" />
     <ClCompile Include="Objects\Character\Player.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\DragonBoneWeapon.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapon.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\Weapon.cpp" />
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp" />
     <ClCompile Include="Objects\Character\Character.cpp" />
     <ClCompile Include="Framework\Shader\DomainShader.cpp" />
