@@ -163,6 +163,8 @@ using namespace GameMath;
 
 #include "Objects/Items/Weapons/Kunai.h"
 #include "Objects/Items/Weapons/Crowbar.h"
+#include "Objects/Items/Weapons/BladeSword.h"
+#include "Objects/Items/Weapons/Shield.h"
 
 #include "Objects/Items/Weapons/Weapon.h"
 #include "Objects/Items/Weapons/IronWeapon.h"
@@ -206,13 +208,16 @@ using namespace GameMath;
 #include "Objects/Character/Naruto.h"
 #include "Objects/Character/FoxD.h"
 #include "Objects/Character/Fox.h"
+#include "Objects/Character/Player.h"
 #include "Objects/Character/Character.h"
-#include "Objects/Character/Monster.h"
+#include "Objects/Character/Enemy.h"
 
 #include "Objects/Manager/BlockManager.h"
 #include "Objects/Manager/KunaiManager.h"
 #include "Objects/Manager/RobotManager.h"
-#include "Objects/Manager/SpawningPool.h"
+#include "Objects/Manager/EnemySpawn.h"
+#include "Objects/Manager/SpawnManager.h"
+#include "Objects/Manager/UIManager.h"
 
 //Scene Header
 #include "Scenes/Scene.h"

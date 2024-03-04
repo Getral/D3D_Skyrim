@@ -7,7 +7,6 @@ private:
     float SPAWN_TIME = 2; // 로봇의 생성, 혹은 재생성에 필요한 시간
 
 public:
-
     RobotManager();
     ~RobotManager();
 

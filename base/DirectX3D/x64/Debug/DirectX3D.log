@@ -1,19 +1,2 @@
-﻿  Framework.cpp
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Math\Vector2.h(10,29): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 'Framework.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Math\Vector2.h(10,41): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 'Framework.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Render\Texture.h(15,70): warning C4244: '인수': 'const size_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 'Framework.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Render\Texture.h(15,43): warning C4244: '인수': 'const size_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 'Framework.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Model\ModelAnimatorInstancing.h(60,43): warning C4267: 'return': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 'Framework.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework.h(161,10): error C1083: 포함 파일을 열 수 없습니다. 'Objects/Inventory/Inventory.h': No such file or directory
-  (소스 파일 'Framework.cpp'을(를) 컴파일하는 중)
-  
+﻿  PlayerScene.cpp
+  DirectX3D.vcxproj -> C:\Users\user\Documents\GitHub\D3D_Skyrim\base\x64\Debug\DirectX3D.exe
