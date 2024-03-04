@@ -158,9 +158,27 @@ using namespace GameMath;
 
 #include "Objects/Actor/ActorUI.h"
 #include "Objects/UI/ProgressBar.h"
+#include "Objects/Inventory/Inventory.h"
 
+#include "Objects/Items/Weapons/Weapon.h"
+#include "Objects/Items/Weapons/IronWeapon.h"
+#include "Objects/Items/Weapons/DragonWeapon.h"
 #include "Objects/Items/Weapons/Kunai.h"
 #include "Objects/Items/Weapons/Crowbar.h"
+
+#include "Objects/Items/Armors/Armor.h"
+#include "Objects/Items/Armors/IronArmor.h"
+#include "Objects/Items/Armors/IronArmorSet.h"
+#include "Objects/Items/Armors/DragonArmor.h"
+#include "Objects/Items/Armors/DragonArmorSet.h"
+
+#include "Objects/Items/Expendables/Expendables.h"		// 소모품
+#include "Objects/Items/Miscellaneous/Miscellaneous.h"	// 잡탬
+
+
+#include "Objects/Items/Expendables/Expendables.h"
+#include "Objects/Items/Miscellaneous/Miscellaneous.h"
+
 
 #include "Objects/Landscape/Terrain.h"
 #include "Objects/Landscape/TerrainEditor.h"

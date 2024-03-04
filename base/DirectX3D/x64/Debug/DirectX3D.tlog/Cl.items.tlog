@@ -1,15 +1,12 @@
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Items\Weapons\BladeSword.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\BladeSword.obj
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Character\Player.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Player.obj
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Manager\EnemySpawn.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\EnemySpawn.obj
+C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Manager\SpawningPool.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\SpawningPool.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Character\Character.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Character.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Shader\DomainShader.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\DomainShader.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Shader\HullShader.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\HullShader.obj
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Character\Enemy.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Enemy.obj
+C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Character\Monster.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Monster.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Particle\ParticleSystem.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\ParticleSystem.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Landscape\QuadTreeTerrain.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\QuadTreeTerrain.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Environment\Reflection.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Reflection.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Framework\Environment\Refraction.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Refraction.obj
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Scenes\PlayerScene.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\PlayerScene.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Scenes\ParticleConfigScene.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\ParticleConfigScene.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Items\Weapons\Crowbar.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Crowbar.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Particle\Particle.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Particle.obj
@@ -95,6 +92,4 @@ C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Landscape\TerrainData.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\TerrainData.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Landscape\TerrainLOD.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\TerrainLOD.obj
 C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Landscape\Water.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Water.obj
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Scenes\MonsterScene.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\MonsterScene.obj
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Manager\SpawnManager.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\SpawnManager.obj
-C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Objects\Items\Weapons\Shield.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\Shield.obj
+C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\Scenes\TestScene.cpp;C:\Users\shy97\OneDrive\바탕 화면\project\code\D3D_Skyrim\base\DirectX3D\x64\Debug\TestScene.obj
