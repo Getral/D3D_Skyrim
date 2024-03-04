@@ -5,7 +5,7 @@ class ProgressBar : public Quad
     //                         생김새의 특성상 (색깔이 채워지는 막대기) 체력바 등에도 응용 가능
 
 public:
-    ProgressBar(wstring frontImageFile, wstring backImageFile);
+    ProgressBar(wstring frontImageFile, wstring backImageFile, bool rev = false);
     ~ProgressBar();
 
     void Render();
@@ -24,5 +24,5 @@ private:
     FloatValueBuffer* valueBuffer; // 소수 연산용 버퍼 : 무엇이든지 버퍼로 만들 수 있다!
                                    // 버퍼가 많을수록 해당 데이터는 연산이 빨라지고,
                                    // 전체 앱은 느려지고, 메모리 부담은 커진다.
-};
 
+};

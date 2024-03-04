@@ -15,5 +15,6 @@ public:
 private:
 	Terrain* terrain;
 	Player* player;
+	Model* fox;
 };
 

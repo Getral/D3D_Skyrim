@@ -25,9 +25,41 @@ UIManager::UIManager()
     compass_dir.back()->Scale() *= 15;
 #pragma endregion
 
+#pragma region enemy_dir
     enemy_dir = new Quad(L"Textures/UI/enemy_dir.png");
     enemy_dir->SetParent(compass);
     enemy_dir->Scale() *= 0.5f;
+#pragma endregion
+
+#pragma region status_bar
+    HP_bar_background = new Quad(L"Textures/UI/status_bar.png");
+    HP_bar_background->Pos() = { CENTER_X,WIN_HEIGHT * 0.05,0 };
+    HP_bar_background->Scale() *= 0.1f;
+    HP_bar_background->Scale().x *= 1.5f;
+    HP_bar_background->UpdateWorld();
+
+    HP_bar = new Quad(L"Textures/UI/hp_bar.png");
+    HP_bar->SetParent(HP_bar_background);
+    HP_bar->Scale() *= 5.0f;
+    HP_bar->Scale().x *= 2.3f;
+
+    maxHpBar = HP_bar->Scale().x;
+
+    SP_bar_background = new Quad(L"Textures/UI/status_bar.png");
+    SP_bar_background->Pos() = { WIN_WIDTH * 0.85, WIN_HEIGHT * 0.05,0 };
+    SP_bar_background->Scale() *= 0.1f;
+    SP_bar_background->Scale().x *= 1.5f;
+    SP_bar_background->UpdateWorld();
+
+    SP_bar = new ProgressBar(
+        L"Textures/UI/sp_bar.png",
+        L"Textures/UI/none.png",
+        true
+    );
+    SP_bar->Pos() = { WIN_WIDTH * 0.85, WIN_HEIGHT * 0.05,0 };
+    SP_bar->Scale() *= 0.7f;
+    SP_bar->Scale().x *= 2.0f;
+#pragma endregion
 }
 
 UIManager::~UIManager()
@@ -37,11 +69,11 @@ UIManager::~UIManager()
         delete dir;
 }
 
-void UIManager::Update(Naruto* naruto, Model* enemy)
+void UIManager::Update(Player* player, Model* enemy)
 {
     // 나침반 동서남북
 #pragma region compass_dir
-    tmp_N = XMConvertToDegrees(naruto->Rot().y);
+    tmp_N = XMConvertToDegrees(player->Rot().y);
     tmp_S = tmp_N + 180;
     tmp_W = tmp_N + 90;
     tmp_E = tmp_N - 90;
@@ -61,23 +93,33 @@ void UIManager::Update(Naruto* naruto, Model* enemy)
 
     FOR(4)
     {
-        compass_dir[i]->Pos().x = dirX_tmp[i] * compass->GetSize().x / 140;
+        compass_dir[i]->Pos().x = -dirX_tmp[i] * compass->GetSize().x / 140;
     }
 
     for (Quad* dir : compass_dir)
         dir->UpdateWorld();
 #pragma endregion
 
-    TargetCompassEnemy(naruto, enemy);
+#pragma region enemy_dir
+    TargetCompassEnemy(player, enemy);
 
     enemy_dir->Pos().x = final_angle * compass->GetSize().x / 140;
 
     enemy_dir->UpdateWorld();
+#pragma endregion
+    HP_ratio = player->GetStatus().curHp / player->GetStatus().maxHp;
+    HP_bar->Scale().x = maxHpBar * HP_ratio;
+    HP_bar->UpdateWorld();
+
+    SP_bar->SetAmount(player->GetStatus().curstamina / player->GetStatus().maxstamina);
+    SP_bar->UpdateWorld();
+
+
 }
 
 void UIManager::Render()
 {
-   
+
 }
 
 void UIManager::PostRender()
@@ -86,10 +128,16 @@ void UIManager::PostRender()
     FOR(4)
     {
         if (compass_dir[i]->Pos().x >= -60 * compass->GetSize().x / 140 && compass_dir[i]->Pos().x <= +60 * compass->GetSize().x / 140)
-        compass_dir[i]->Render();
+            compass_dir[i]->Render();
     }
+    if (enemy_dir->Pos().x >= -60 * compass->GetSize().x / 140 && enemy_dir->Pos().x <= +60 * compass->GetSize().x / 140)
+        enemy_dir->Render();
 
-    enemy_dir->Render();
+    HP_bar_background->Render();
+    HP_bar->Render();
+
+    SP_bar_background->Render();
+    SP_bar->Render();
 }
 
 void UIManager::GUIRender()
@@ -97,10 +145,10 @@ void UIManager::GUIRender()
     ImGui::Text("enemy_angle : %f", final_angle);
 }
 
-float UIManager::TargetCompassEnemy(Naruto* naruto, Model* model)
+float UIManager::TargetCompassEnemy(Player* player, Model* model)
 {
-    Vector3 temp = -naruto->Forward();
-    Vector3 temp2 = model->GlobalPos() - naruto->GlobalPos();
+    Vector3 temp = player->Forward();
+    Vector3 temp2 = model->GlobalPos() - player->GlobalPos();
 
     float temp_value = sqrt(temp.x * temp.x + temp.y * temp.y + temp.z * temp.z);
     float temp2_value = sqrt(temp2.x * temp2.x + temp2.y * temp2.y + temp2.z * temp2.z);
@@ -119,5 +167,5 @@ float UIManager::TargetCompassEnemy(Naruto* naruto, Model* model)
     }
 
     return final_angle;
-      
+
 }
