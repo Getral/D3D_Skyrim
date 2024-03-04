@@ -56,6 +56,7 @@ private:
 	void EndAttack();
 	void EndBlock();
 	void EndHit();
+	void EndBlockHit();
 
 protected:
 
@@ -88,6 +89,7 @@ protected:
 	float gravityMult = 0.5f;
 	bool isJump = false;
 	bool isBlock = false;
+	bool isHit = false;
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
 };

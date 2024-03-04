@@ -67,6 +67,10 @@ Player::Player()
 	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(HIT_HEAVY)->SetEvent(bind(&Player::EndHit, this), 0.8f);
+	GetClip(HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
 }
 
 Player::~Player()
@@ -81,6 +85,7 @@ Player::~Player()
 void Player::Update()
 {
 	Control();
+	GetHit();
 	SetAnimation();
 
 	ModelAnimator::Update();
@@ -126,6 +131,7 @@ void Player::Move()
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY)
 		return;
 	if (isBlock) return;
+	if (isHit) return;
 
 	bool isMoveZ = false;
 	bool isMoveX = false;
@@ -252,6 +258,7 @@ void Player::Rotate()
 void Player::Attack()
 {
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
+	if (isHit) return;
 	
 	//if (KEY_PRESS(VK_LBUTTON)) 
 	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_RIGHT);
@@ -263,6 +270,7 @@ void Player::Attack()
 void Player::Block()
 {
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
+	if (isHit) return;
 
 	if (KEY_DOWN(VK_RBUTTON))
 	{
@@ -278,12 +286,49 @@ void Player::Block()
 
 void Player::GetHit()
 {
-
+	if (isBlock)
+	{
+		if (KEY_DOWN('Z'))
+		{
+			SetAction(HIT_BLOCK);
+			isHit = true;
+		}
+		if (KEY_DOWN('X'))
+		{
+			SetAction(HIT_BLOCK);
+			isHit = true;
+		}
+		if (KEY_DOWN('C'))
+		{
+			SetAction(HIT_BLOCK);
+			isHit = true;
+		}
+	}	
+	else
+	{
+		if (KEY_DOWN('Z'))
+		{
+			SetAction(HIT_LIGHT);
+			isHit = true;
+		}
+		if (KEY_DOWN('X'))
+		{
+			SetAction(HIT_MEDIUM);
+			isHit = true;
+		}
+		if (KEY_DOWN('C'))
+		{
+			SetAction(HIT_HEAVY);
+			isHit = true;
+		}
+	}	
 }
 
 void Player::SetAnimation()
 {
-	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY || curAction == BLOCK)
+	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY 
+		|| curAction == BLOCK || curAction == HIT_LIGHT || curAction == HIT_MEDIUM ||
+		curAction == HIT_HEAVY || curAction == HIT_BLOCK)
 		return;
 
 
@@ -380,4 +425,12 @@ void Player::EndBlock()
 
 void Player::EndHit()
 {
+	SetAction(IDLE);
+	isHit = false;
+}
+
+void Player::EndBlockHit()
+{
+	SetAction(BLOCK);
+	isHit = false;
 }
