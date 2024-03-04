@@ -3,11 +3,12 @@
 SpawnManager::SpawnManager()
 {
 	monsterName.push_back("Bear");
+	//monsterName.push_back("Wolf");
 
 
 	FOR(MONSTER_SIZE)
 	{
-		monsterInstancing.push_back(new ModelAnimatorInstancing("Bear"));
+		monsterInstancing.push_back(new ModelAnimatorInstancing(monsterName[i]));
 		for (int j = 0; j < clipNameTable[i].size(); j++)
 			monsterInstancing[i]->ReadClip(clipNameTable[i][j]);
 
@@ -36,8 +37,6 @@ void SpawnManager::Update()
 		mi->Update();
 	for (EnemySpawn* msm : monsterSpawnManager)
 		msm->Update();
-
-	
 }
 
 void SpawnManager::Render()
