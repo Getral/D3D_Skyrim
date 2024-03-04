@@ -44,6 +44,8 @@ private:
 	void Rotate();
 	void Attack();
 	void Block();
+	void GetHit();
+
 	void SetAnimation();
 
 	void SetAction(ACTION action);
@@ -53,6 +55,7 @@ private:
 	void Attackh2h();
 	void EndAttack();
 	void EndBlock();
+	void EndHit();
 
 protected:
 

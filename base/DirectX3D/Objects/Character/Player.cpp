@@ -264,7 +264,7 @@ void Player::Block()
 {
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
 
-	if (KEY_PRESS(VK_RBUTTON))
+	if (KEY_DOWN(VK_RBUTTON))
 	{
 		SetAction(BLOCK);
 		isBlock = true;
@@ -276,9 +276,14 @@ void Player::Block()
 	}
 }
 
+void Player::GetHit()
+{
+
+}
+
 void Player::SetAnimation()
 {
-	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY)
+	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY || curAction == BLOCK)
 		return;
 
 
@@ -371,4 +376,8 @@ void Player::EndBlock()
 {
 	SetAction(IDLE);
 	isBlock = false;
+}
+
+void Player::EndHit()
+{
 }
