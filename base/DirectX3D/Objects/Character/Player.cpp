@@ -209,27 +209,27 @@ void Player::Move()
 			isMoveX = true;
 		}
 	}
-
+		
 
 	//방향을 구하고 정규화
 	if (KEY_PRESS(VK_SHIFT))
 	{
-		if (velocity.Length() > status.speed * 1.0f) velocity.Normalize();
+		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 10;
 	}
 	else if (KEY_PRESS(VK_CONTROL))
 	{
-		if (velocity.Length() > status.speed * 0.5f) velocity.Normalize();
+		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 5;
 	}
 	else
 	{
-		if (velocity.Length() > status.speed * 0.7f) velocity.Normalize();
+		if (velocity.Length() > status.speed * 0.7f) velocity = velocity.GetNormalized() * 7;
 	}
 
 	if (!isMoveZ)
-		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA * status.speed);
+		velocity.z = Lerp(velocity.z, 0, deceleration * DELTA);
 
 	if (!isMoveX)
-		velocity.x = Lerp(velocity.x, 0, deceleration * DELTA * status.speed);
+		velocity.x = Lerp(velocity.x, 0, deceleration * DELTA);
 
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 
