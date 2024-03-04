@@ -148,7 +148,7 @@ void UIManager::GUIRender()
 float UIManager::TargetCompassEnemy(Player* player, Model* model)
 {
     Vector3 temp = player->Forward();
-    Vector3 temp2 = model->GlobalPos() - player->GlobalPos();
+    Vector3 temp2 = player->GlobalPos() - model->GlobalPos();
 
     float temp_value = sqrt(temp.x * temp.x + temp.y * temp.y + temp.z * temp.z);
     float temp2_value = sqrt(temp2.x * temp2.x + temp2.y * temp2.y + temp2.z * temp2.z);

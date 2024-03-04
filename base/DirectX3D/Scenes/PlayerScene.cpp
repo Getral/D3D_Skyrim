@@ -13,6 +13,9 @@ PlayerScene::PlayerScene()
 	aldu->SetTarget(player);
 
 	fox = new Model("Fox");
+	fox->Pos() = { 100,0,100 };
+	fox->Rot().x = XM_PI / 2;
+	fox->Scale() *= 1.0f;
 	fox->UpdateWorld();
 
 	CAM->SetTarget(player); 
@@ -42,7 +45,8 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
-	aldu->Render();
+	//aldu->Render();
+	fox->Render();
 }
 
 void PlayerScene::PostRender()

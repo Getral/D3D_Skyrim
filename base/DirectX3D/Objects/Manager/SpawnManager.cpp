@@ -41,10 +41,10 @@ void SpawnManager::Update()
 
 void SpawnManager::Render()
 {
-	for (ModelAnimatorInstancing* mi : monsterInstancing)
-		mi->Render();
-	for (EnemySpawn* msm : monsterSpawnManager)
-		msm->Render();
+	//for (ModelAnimatorInstancing* mi : monsterInstancing)
+	//	mi->Render();
+	//for (EnemySpawn* msm : monsterSpawnManager)
+	//	msm->Render();
 }
 
 void SpawnManager::GUIRender()
