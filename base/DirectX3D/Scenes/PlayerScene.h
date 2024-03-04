@@ -2,8 +2,6 @@
 
 class PlayerScene : public Scene
 {
-private:
-	friend class MonsterScene;
 public:
 	PlayerScene();
 	~PlayerScene();
@@ -18,6 +16,6 @@ private:
 	Terrain* terrain;
 	Player* player;
 	alduin* aldu;
-
+	Model* fox;
 };
 

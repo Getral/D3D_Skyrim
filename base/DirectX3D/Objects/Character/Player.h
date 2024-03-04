@@ -5,23 +5,23 @@ class Player : public ModelAnimator
 public:
 	struct Status
 	{
-		float curHp = 100;
+		float curHp = 50;
 		float maxHp = 100;
 		float curstamina = 100;
 		float maxstamina = 100;
 		float atk = 10;
-		float speed = 10;
+		float speed = 50;
 	};
 
 private:
 	enum ACTION
 	{
-		IDLE, /*JUMP, HIT_LIGHT, HIT_HEAVY,*/ HIT_BLOCK,
+		IDLE, JUMP, HIT_LIGHT, HIT_MEDIUM, HIT_HEAVY, HIT_BLOCK,
 		WALK_F, WALK_FL, WALK_FR, WALK_B, WALK_BL, WALK_BR, WALK_L, WALK_R,
 		RUN_F, RUN_FL, RUN_FR, RUN_B, RUN_BL, RUN_BR, RUN_L, RUN_R,
 		CIDLE, CMOVE_F, CMOVE_FL, CMOVE_FR, CMOVE_B, CMOVE_BL, CMOVE_BR, CMOVE_L, CMOVE_R,
 		ATTACK_RIGHT, ATTACK_LEFT, ATTACK_HEAVY,
-		BLOCK
+		BLOCK, PARRY_START, PARRY
 	};
 
 public:
@@ -40,8 +40,12 @@ public:
 private:
 	void Control();
 	void Move();
+	void Jump();
 	void Rotate();
 	void Attack();
+	void Block();
+	void GetHit();
+
 	void SetAnimation();
 
 	void SetAction(ACTION action);
@@ -50,6 +54,9 @@ private:
 	void Attack2hm();
 	void Attackh2h();
 	void EndAttack();
+	void EndBlock();
+	void EndHit();
+	void EndBlockHit();
 
 protected:
 
@@ -81,6 +88,8 @@ protected:
 	float jumpForce = 0.5f;
 	float gravityMult = 0.5f;
 	bool isJump = false;
+	bool isBlock = false;
+	bool isHit = false;
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
 };

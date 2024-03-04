@@ -6,7 +6,6 @@
 #include "Scenes/ParticleConfigScene.h"
 #include "Scenes/MonsterScene.h"
 #include "Scenes/PlayerScene.h"
-#include "Scenes/alduinScene.h"
 
 
 GameManager::GameManager()
@@ -17,16 +16,14 @@ GameManager::GameManager()
     //SceneManager::Get()->Create("ModelExport", new ModelExportScene());
     //SceneManager::Get()->Create("ParticleConfig", new ParticleConfigScene());
     //SceneManager::Get()->Create("Particle", new ParticleScene());
-    //SceneManager::Get()->Create("Monster", new MonsterScene());
     SceneManager::Get()->Create("Player", new PlayerScene());
-    //SceneManager::Get()->Create("alduin", new alduinScene());
+    SceneManager::Get()->Create("Monster", new MonsterScene());
 
     SceneManager::Get()->Add("Grid");
     //SceneManager::Get()->Add("ModelExport");     
     //SceneManager::Get()->Add("ParticleConfig");
-    //SceneManager::Get()->Add("Monster");
     SceneManager::Get()->Add("Player");
-    //SceneManager::Get()->Add("alduin");
+    SceneManager::Get()->Add("Monster");
 }
 
 GameManager::~GameManager()

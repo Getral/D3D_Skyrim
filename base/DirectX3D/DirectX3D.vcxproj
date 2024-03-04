@@ -142,8 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Scenes\alduinScene.h" />
-    <ClInclude Include="Objects\Character\alduin.h" />
+    <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
     <ClInclude Include="Objects\Character\Player.h" />
     <ClInclude Include="Objects\Manager\EnemySpawn.h" />
@@ -172,7 +171,6 @@
     <ClInclude Include="Framework\Render\DepthStencil.h" />
     <ClInclude Include="Framework\Render\RenderTarget.h" />
     <ClInclude Include="DirectX3D.h" />
-    <ClInclude Include="Framework.h" />
     <ClInclude Include="Framework\Buffer\ConstBuffer.h" />
     <ClInclude Include="Framework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="Framework\Buffer\IndexBuffer.h" />
@@ -257,8 +255,6 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Scenes\alduinScene.cpp" />
-    <ClCompile Include="Objects\Character\alduin.cpp" />
     <ClCompile Include="Objects\Items\Weapons\BladeSword.cpp" />
     <ClCompile Include="Objects\Character\Player.cpp" />
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp" />
@@ -558,6 +554,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shaders\UI\RevProgressBar.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

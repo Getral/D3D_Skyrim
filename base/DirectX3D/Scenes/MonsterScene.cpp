@@ -1,5 +1,6 @@
 #include "Framework.h"
 #include "MonsterScene.h"
+#include "PlayerScene.h"
 
 MonsterScene::MonsterScene()
 {

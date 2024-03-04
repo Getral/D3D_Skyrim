@@ -7,7 +7,7 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 	{
 		Transform* transform = instancing->Add();
 		transform->Scale() *= 0.001f;
-		Enemy* tmp = new Enemy(enemy->GetName(), transform, spawnPos[i], 100000);
+		Enemy* tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
 		tmp->SetStatus(enemy->GetStatus());
 		tmp->GetCollier()->Scale() *= 1000.0f;
 		enemies.push_back(tmp);
@@ -27,6 +27,18 @@ void EnemySpawn::Update()
 
 	for (Enemy* enemy : enemies)
 		enemy->Update();
+
+	for (Enemy* enemy : enemies)
+	{
+		if (playerData->GetCollier()->IsCollision(enemy->GetTrackCollider()))
+		{
+			enemy->SetTarget(playerData);
+		}
+		else
+		{
+			enemy->SetTarget(nullptr);
+		}
+	}
 }
 
 void EnemySpawn::Render()

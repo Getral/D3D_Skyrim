@@ -5,12 +5,12 @@ public:
 	UIManager();
 	~UIManager();
 
-	void Update(Naruto* naruto, Model* enemy);
+	void Update(Player* player, Model* enemy);
 	void Render();
 	void PostRender();
 	void GUIRender();
 
-	float TargetCompassEnemy(Naruto* naruto, Model* model);
+	float TargetCompassEnemy(Player* player, Model* model);
 
 	float GetEnemyDegree() { return final_angle; }
 
@@ -19,6 +19,14 @@ private:
 	vector<Quad*> compass_dir;
 	Quad* enemy_dir;
 
+	Quad* HP_bar_background;
+	Quad* HP_bar;
+	float maxHpBar;
+	float HP_ratio;
+
+	Quad* SP_bar_background;
+	ProgressBar* SP_bar;
+
 	float tmp_N;
 	float tmp_S;
 	float tmp_W;
@@ -26,7 +34,7 @@ private:
 
 	float dirX_tmp[4];
 
-	
+
 	float cal_dot;
 	float angle;
 
