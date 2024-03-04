@@ -67,11 +67,11 @@ alduin::alduin() :  ModelAnimator("alduin")
 	//SetEvent(TAKEOFF, bind(&alduin::EndTakeoff, this), 0.7f);
 	//SetEvent(PAIN, bind(&alduin::EndHit, this), 0.9f);
 
-	//for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
-	//{
-	//	GetClip(clipIndex)->SetEvent(bind(&alduin::Patterns, this), 0.7f);
-	//	GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
-	//}
+	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
+	{
+		GetClip(clipIndex)->SetEvent(bind(&alduin::Patterns, this), 0.7f);
+		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+	}
 
 	
 }
@@ -234,7 +234,6 @@ void alduin::Move()
 void alduin::FireAttack()
 {
 
-
 	if (velocity.Length() < 1000)
 	{
 		SetState(BREATH);
@@ -244,7 +243,6 @@ void alduin::FireAttack()
 	{
 		SetState(FIREBALL);
 	}
-
 
 }
 
@@ -298,24 +296,22 @@ void alduin::Patterns()
 
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_F);
-
-
+		SetState(ATTACK_F);	
 	}
+
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_R);
-
+		SetState(ATTACK_R);	
 	}
+
 	else if (collider_L->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_L);
-
+		SetState(ATTACK_L);	
 	}
+
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_B);
-
+		SetState(ATTACK_B);	
 	}
 
 }
