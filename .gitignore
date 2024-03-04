@@ -14,8 +14,8 @@
 **/Debug/
 Debug/
 **/.pdb
-.pdb
+*.pdb
 **/.obj
-.obj
-
-base\DirectX3D\x64\Debug\
+*.obj
+*.log
+*.tlog
