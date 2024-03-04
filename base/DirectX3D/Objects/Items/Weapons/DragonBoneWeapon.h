@@ -14,8 +14,8 @@ public:
 
 
 public:
-	DragonWeapon();
-	~DragonWeapon();
+	DragonBoneWeapon();
+	~DragonBoneWeapon();
 
 	void Update();
 	void Render();
