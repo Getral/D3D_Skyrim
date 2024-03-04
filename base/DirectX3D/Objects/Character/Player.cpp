@@ -418,18 +418,6 @@ void Player::SetAction(ACTION action)
 	PlayClip((int)action);
 }
 
-void Player::Attack1hm()
-{
-}
-
-void Player::Attack2hm()
-{
-}
-
-void Player::Attackh2h()
-{
-}
-
 void Player::EndAttack()
 {
 	SetAction(IDLE);

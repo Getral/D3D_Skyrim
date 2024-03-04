@@ -50,9 +50,6 @@ private:
 
 	void SetAction(ACTION action);
 
-	void Attack1hm();
-	void Attack2hm();
-	void Attackh2h();
 	void EndAttack();
 	void EndBlock();
 	void EndHit();
