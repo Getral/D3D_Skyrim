@@ -8,6 +8,14 @@ PlayerScene::PlayerScene()
 	terrain->UpdateWorld();
 
 	player = new Player();
+
+	fox = new Model("Fox");
+	fox->Pos() = { -300,0,-300 };
+	fox->Rot().x += XM_PI / 2;
+	fox->Rot().y += -XM_PI / 4 * 3;
+
+	fox->Scale() *= 10.0f;
+
 }
 
 PlayerScene::~PlayerScene()
@@ -19,6 +27,9 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
+
+	UIManager::Get()->Update(player, fox);
+	fox->UpdateWorld();
 }
 
 void PlayerScene::PreRender()
@@ -28,10 +39,13 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
+	fox->Render();
 }
 
 void PlayerScene::PostRender()
 {
+	UIManager::Get()->PostRender();
+	player->PostRender();
 }
 
 void PlayerScene::GUIRender()

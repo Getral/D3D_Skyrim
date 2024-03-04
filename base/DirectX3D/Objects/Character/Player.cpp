@@ -82,6 +82,12 @@ void Player::Update()
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
 	shield->Update();
+
+	if (KEY_PRESS('Q'))
+		this->Rot().y -= 1 * DELTA;
+	if (KEY_PRESS('E'))
+		this->Rot().y += 1 * DELTA;
+
 }
 
 void Player::Render()
