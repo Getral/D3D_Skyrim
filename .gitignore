@@ -10,3 +10,12 @@
 **/*.vcxproj.*
 
 **/*.log
+
+**/Debug/
+Debug/
+**/.pdb
+.pdb
+**/.obj
+.obj
+
+base\DirectX3D\x64\Debug\
