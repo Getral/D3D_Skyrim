@@ -10,7 +10,7 @@ public:
 		float curstamina = 100;
 		float maxstamina = 100;
 		float atk = 10;
-		float speed = 10;
+		float speed = 50;
 	};
 
 private:
