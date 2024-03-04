@@ -36,6 +36,7 @@ void PlayerScene::Render()
 
 void PlayerScene::PostRender()
 {
+	UIManager::Get()->PostRender();
 }
 
 void PlayerScene::GUIRender()
