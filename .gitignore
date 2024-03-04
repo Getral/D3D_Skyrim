@@ -6,10 +6,5 @@
 /.vs
 .vs/
 
-**/*.vcxproj
-**/*.vcxproj.*
-
-**/*.log
-
 **/Debug/
 Debug/
