@@ -261,6 +261,16 @@ void Player::Jump()
 
 void Player::Rotate()
 {
+	if (KEY_PRESS('Q'))
+	{
+		Rot().y -= DELTA * rotSpeed;
+	}
+
+	if (KEY_PRESS('E'))
+	{
+		Rot().y += DELTA * rotSpeed;
+	}
+
 }
 
 void Player::Attack()
@@ -268,11 +278,31 @@ void Player::Attack()
 	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
 	if (isHit) return;
 
-	//if (KEY_PRESS(VK_LBUTTON)) 
-	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_RIGHT);
-	//if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_LEFT);
-	if (KEY_DOWN(VK_LBUTTON)) SetAction(ATTACK_HEAVY);
-
+	if (KEY_PRESS(VK_LBUTTON))
+	{
+		attackCharge += DELTA;
+	}
+	if (KEY_UP(VK_LBUTTON))
+	{
+		if (attackCharge > 1.0f)
+		{
+			SetAction(ATTACK_HEAVY);
+		}
+		else
+		{
+			if (!isCombo)
+			{
+				SetAction(ATTACK_RIGHT);
+				isCombo = true;
+			}
+			else
+			{
+				SetAction(ATTACK_LEFT);
+				isCombo = false;
+			}
+		}
+		attackCharge = 0.0f;
+	}
 }
 
 void Player::Block()
@@ -406,18 +436,6 @@ void Player::SetAction(ACTION action)
 
 	curAction = action;
 	PlayClip((int)action);
-}
-
-void Player::Attack1hm()
-{
-}
-
-void Player::Attack2hm()
-{
-}
-
-void Player::Attackh2h()
-{
 }
 
 void Player::EndAttack()
