@@ -13,7 +13,6 @@ public:
 		float speed = 10;
 	};
 
-private:
 	enum ACTION
 	{
 		IDLE, JUMP, HIT_LIGHT, HIT_MEDIUM, HIT_HEAVY, HIT_BLOCK,
@@ -36,6 +35,10 @@ public:
 
 	Status GetStatus() { return status; }
 	CapsuleCollider* GetCollier() { return collider; }
+	bool GetIsHit() { return isHit; }
+
+	void SetAction(ACTION action);
+	void SetIsHit(bool value) { isHit = value; }
 
 private:
 	void Control();
@@ -48,8 +51,9 @@ private:
 
 	void SetAnimation();
 
-	void SetAction(ACTION action);
-
+	void Attack1hm();
+	void Attack2hm();
+	void Attackh2h();
 	void EndAttack();
 	void EndBlock();
 	void EndHit();
