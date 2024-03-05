@@ -27,7 +27,7 @@ public:
 	void GUIRender();
 
 	void SetStatus(int level, float hp, float stam, float atk, float speed);
-	void SetStatus(Status status) { status = status; }
+	void SetStatus(Status status) { this->status = status; }
 	void SetName(string val) { name = val; }
 	void SetSpawnPos(Vector3 pos) { spawnPos = pos; }
 
