@@ -10,6 +10,7 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 		Enemy* tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
 		tmp->SetStatus(enemy->GetStatus());
 		tmp->GetCollier()->Scale() *= 1000.0f;
+		tmp->SetPlayerData(playerData);
 		enemies.push_back(tmp);
 	}
 }
@@ -27,18 +28,6 @@ void EnemySpawn::Update()
 
 	for (Enemy* enemy : enemies)
 		enemy->Update();
-
-	for (Enemy* enemy : enemies)
-	{
-		if (playerData->GetCollier()->IsCollision(enemy->GetTrackCollider()))
-		{
-			enemy->SetTarget(playerData);
-		}
-		else
-		{
-			enemy->SetTarget(nullptr);
-		}
-	}
 }
 
 void EnemySpawn::Render()
@@ -51,6 +40,12 @@ void EnemySpawn::GUIRender()
 {
 	instancing->GUIRender();
 	for (Enemy* enemy : enemies) enemy->GUIRender();
+}
+
+void EnemySpawn::SetPlayerData(Player* player)
+{
+	playerData = player;
+	for (Enemy* enemy : enemies) enemy->SetPlayerData(player);
 }
 
 void EnemySpawn::Spawn()

@@ -10,7 +10,7 @@ public:
 	void Render();
 	void GUIRender();
 
-	void SetPlayerData(Player* player) { playerData = player; }
+	void SetPlayerData(Player* player);
 
 	vector<Enemy*>& GetEnemies() { return enemies; }
 	void Spawn();

@@ -7,6 +7,12 @@ Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInst
 	trackCollider->Scale() *= trackRange;
 	trackCollider->SetParent(transform);
 
+	attackRange = trackRange * 0.3f;
+	attackCollider = new SphereCollider();
+	attackCollider->Scale() *= attackRange;
+	attackCollider->Pos().SetY(attackRange * 0.5f);
+	attackCollider->SetParent(transform);
+
 
 	colliders.push_back(new CapsuleCollider(35.0f)); // HIP
 
@@ -45,6 +51,7 @@ Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInst
 Enemy::~Enemy()
 {
 	delete trackCollider;
+	delete attackCollider;
 	for (CapsuleCollider* collider : colliders)
 		delete collider;
 }
@@ -53,24 +60,49 @@ void Enemy::Update()
 {
 	Character::Update();
 	trackCollider->UpdateWorld();
+	attackCollider->UpdateWorld();
 	for (CapsuleCollider* collider : colliders)
 		collider->UpdateWorld();
 
-	SetColliderByNode();
-
-	if (target)
+	//for (CapsuleCollider* collider : colliders)
+	//{
+	//	if (playerData->GetCollier()->IsCollision(collider))
+	//	{
+	//		playerData->SetAction(Player::HIT_MEDIUM);
+	//		playerData->SetIsHit(true);
+	//	}
+	//	else
+	//	{
+	//		playerData->SetIsHit(false);
+	//	}
+	//}
+	if (playerData->GetCollier()->IsCollision(attackCollider))
+	{
+		SetState(ATTACK);
+	}
+	else if (playerData->GetCollier()->IsCollision(trackCollider))
 	{
 		SetState(RUN);
-		velocity = target->GlobalPos() - transform->GlobalPos();
+		SetTarget(playerData);
 	}
+	else
+	{
+		SetState(IDLE);
+		SetTarget(nullptr);
+	}
+	
+
+	SetColliderByNode();
 
 	Track();
+	Attack();
 }
 
 void Enemy::Render()
 {
-	//Character::Render();
+	Character::Render();
 	//trackCollider->Render();
+	//attackCollider->Render();
 	for (CapsuleCollider* collider : colliders)
 		collider->Render();
 }
@@ -78,27 +110,33 @@ void Enemy::Render()
 void Enemy::GUIRender()
 {
 	Character::GUIRender();
-	ImGui::SliderInt("Node Number : %d", (int*)&node, 1, 130);
+	ImGui::Text("Cur State : %d", test);
 }
 
 void Enemy::SetState(State state)
 {
 	if (state == curState) return;
-
+	test = 0;
 	curState = state;
 	instancing->PlayClip(index, (int)state, 0.5f);
 }
 
 void Enemy::Track()
 {
+	if (curState == ATTACK) return;
 	if (target)
 	{
-		transform->Pos() += velocity.GetNormalized() * speed * DELTA;
+		velocity = target->GlobalPos() - transform->GlobalPos();
+		transform->Pos() += velocity.GetNormalized() * this->status.speed * DELTA;
 		transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
 	}
-	else
+}
+
+void Enemy::Attack()
+{
+	if (curState == ATTACK)
 	{
-		SetState(IDLE);
+
 	}
 }
 
