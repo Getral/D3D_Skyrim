@@ -5,18 +5,20 @@ public:
 	UIManager();
 	~UIManager();
 
-	void Update(Player* player, Model* enemy);
+	void Update(Player* player, vector<EnemySpawn*> enemies);
 	void Render();
 	void PostRender();
 	void GUIRender();
 
-	float TargetCompassEnemy(Player* player, Model* model);
+	void TargetCompassEnemy(Player* player, Enemy* enemy);
 
-	float GetEnemyDegree() { return final_angle; }
+	//float GetEnemyDegree() { return final_angle; }
 
 private:
 	Quad* compass;
 	vector<Quad*> compass_dir;
+	vector<Quad*> enemies_dir;
+
 	Quad* enemy_dir;
 
 	Quad* HP_bar_background;
@@ -39,5 +41,6 @@ private:
 	float angle;
 
 	float final_angle;
+	vector<float> final_angles;
 };
 

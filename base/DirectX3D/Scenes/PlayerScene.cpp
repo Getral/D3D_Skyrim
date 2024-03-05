@@ -9,8 +9,8 @@ PlayerScene::PlayerScene()
 
 	player = new Player();
 
-	aldu = new alduin();
-	aldu->SetTarget(player);
+	//aldu = new alduin();
+	//aldu->SetTarget(player);
 
 	fox = new Model("Fox");
 	fox->Pos() = { 100,0,100 };
@@ -25,7 +25,7 @@ PlayerScene::PlayerScene()
 
 PlayerScene::~PlayerScene()
 {
-	delete aldu;
+	//delete aldu;
 	delete terrain;
 	delete player;
 	delete fox;
@@ -34,8 +34,8 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
-	aldu->Update();
-	UIManager::Get()->Update(player, fox);
+	//aldu->Update();
+	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager());
 }
 
 void PlayerScene::PreRender()
@@ -57,5 +57,6 @@ void PlayerScene::PostRender()
 void PlayerScene::GUIRender()
 {
 	player->GUIRender();
-	aldu->GUIRender();
+	//aldu->GUIRender();
+	UIManager::Get()->GUIRender();
 }

@@ -25,10 +25,19 @@ UIManager::UIManager()
     compass_dir.back()->Scale() *= 15;
 #pragma endregion
 
-#pragma region enemy_dir
-    enemy_dir = new Quad(L"Textures/UI/enemy_dir.png");
-    enemy_dir->SetParent(compass);
-    enemy_dir->Scale() *= 0.5f;
+#pragma region enemy_dirquad
+    FOR(SpawnManager::Get()->GetMonsterSpawnManager().size())
+    {
+        enemies_dir.push_back(new Quad(L"Textures/UI/enemy_dir.png"));
+        enemies_dir.back()->SetParent(compass);
+        enemies_dir.back()->Scale() *= 0.5f;
+        final_angles.push_back(0.0f);
+    }
+
+    
+    //enemy_dir = new Quad(L"Textures/UI/enemy_dir.png");
+    //enemy_dir->SetParent(compass);
+    //enemy_dir->Scale() *= 0.5f;
 #pragma endregion
 
 #pragma region status_bar
@@ -67,9 +76,16 @@ UIManager::~UIManager()
     delete compass;
     for (Quad* dir : compass_dir)
         delete dir;
+    delete enemy_dir;
+
+    delete HP_bar_background;
+    delete HP_bar;
+
+    delete SP_bar_background;
+    delete SP_bar;
 }
 
-void UIManager::Update(Player* player, Model* enemy)
+void UIManager::Update(Player* player, vector<EnemySpawn*> enemies)
 {
     // 나침반 동서남북
 #pragma region compass_dir
@@ -101,11 +117,19 @@ void UIManager::Update(Player* player, Model* enemy)
 #pragma endregion
 
 #pragma region enemy_dir
-    TargetCompassEnemy(player, enemy);
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        for (int j = 0; j < enemies[i]->GetEnemies().size(); j++)
+        {
+            TargetCompassEnemy(player, enemies[i]->GetEnemies()[j]);
 
-    enemy_dir->Pos().x = final_angle * compass->GetSize().x / 140;
+            enemies_dir[i]->Pos().x = final_angles[i] * compass->GetSize().x / 140;
 
-    enemy_dir->UpdateWorld();
+            enemies_dir[i]->UpdateWorld();
+        }
+    }
+
+    
 #pragma endregion
     HP_ratio = player->GetStatus().curHp / player->GetStatus().maxHp;
     HP_bar->Scale().x = maxHpBar * HP_ratio;
@@ -130,8 +154,15 @@ void UIManager::PostRender()
         if (compass_dir[i]->Pos().x >= -60 * compass->GetSize().x / 140 && compass_dir[i]->Pos().x <= +60 * compass->GetSize().x / 140)
             compass_dir[i]->Render();
     }
-    if (enemy_dir->Pos().x >= -60 * compass->GetSize().x / 140 && enemy_dir->Pos().x <= +60 * compass->GetSize().x / 140)
-        enemy_dir->Render();
+
+    for (int i = 0; i < SpawnManager::Get()->GetMonsterSpawnManager().size(); i++)
+    {
+        if (enemies_dir[i]->Pos().x >= -60 * compass->GetSize().x / 140 && enemies_dir[i]->Pos().x <= +60 * compass->GetSize().x / 140)
+            enemies_dir[i]->Render();
+    }
+
+
+    
 
     HP_bar_background->Render();
     HP_bar->Render();
@@ -143,12 +174,14 @@ void UIManager::PostRender()
 void UIManager::GUIRender()
 {
     ImGui::Text("enemy_angle : %f", final_angle);
+    ImGui::Text("enemy_angle : %f", final_angle);
+    ImGui::Text("enemy_angle : %f", final_angle);
 }
 
-float UIManager::TargetCompassEnemy(Player* player, Model* model)
+void UIManager::TargetCompassEnemy(Player* player, Enemy* enemy)
 {
     Vector3 temp = player->Forward();
-    Vector3 temp2 = player->GlobalPos() - model->GlobalPos();
+    Vector3 temp2 = player->GlobalPos() - enemy->GetTransform()->GlobalPos();
 
     float temp_value = sqrt(temp.x * temp.x + temp.y * temp.y + temp.z * temp.z);
     float temp2_value = sqrt(temp2.x * temp2.x + temp2.y * temp2.y + temp2.z * temp2.z);
@@ -166,6 +199,5 @@ float UIManager::TargetCompassEnemy(Player* player, Model* model)
         final_angle = -XMConvertToDegrees(angle);
     }
 
-    return final_angle;
-
+    final_angles.push_back(final_angle);
 }
