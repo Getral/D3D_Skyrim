@@ -39,19 +39,16 @@ private:
 
 	void SetAnimation();
 	void SetState(State state);
-	void SetEvent(int clip, Event event, float timeRatio);
 	void Move();
 
-
+	void beginAttack();
 	void FireAttack();
 
 	void EndTakeoff();
 	void EndHit();
 	void EndAttack();
-	void EndBreath();
 
 	void Patterns();
-
 
 	State curState = IDLE;
 	CapsuleCollider* alduinCollider2;
@@ -65,10 +62,10 @@ private:
 
 	CapsuleCollider* TailCollider;
 
-	SphereCollider* collider_F;
-	SphereCollider* collider_R;
-	SphereCollider* collider_L;
-	SphereCollider* collider_B;
+	CapsuleCollider* collider_F;
+	CapsuleCollider* collider_R;
+	CapsuleCollider* collider_L;
+	CapsuleCollider* collider_B;
 	Transform* transform;
 	Player* target;
 
@@ -85,8 +82,6 @@ private:
 
 	float maxHp = 3000.0f;
 	float curHp = 3000.0f;
-
-
 
 
 };

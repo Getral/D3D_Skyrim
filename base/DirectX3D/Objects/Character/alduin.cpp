@@ -17,49 +17,49 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	//alduinCollider3 = new CapsuleCollider();
 
-	collider_F = new SphereCollider();
+	collider_F = new CapsuleCollider(90.0f, 0.1f);
 	collider_F->Pos().SetZ(-30);
 	collider_F->SetParent(transform);
-	collider_F->Scale() *= 20;
+	collider_F->Scale() *= 0.2;
 
-	collider_R = new SphereCollider();
+	collider_R = new CapsuleCollider(90.0f, 0.1f);
 	collider_R->Pos().SetX(-30);
 	collider_R->SetParent(transform);
-	collider_R->Scale() *= 20;
+	collider_R->Scale() *= 0.2;
 
-	collider_L = new SphereCollider();
+	collider_L = new CapsuleCollider(90.0f, 0.1f);
 	collider_L->Pos().SetX(30);
 	collider_L->SetParent(transform);
-	collider_L->Scale() *= 20;
+	collider_L->Scale() *= 0.2;
 
-	collider_B = new SphereCollider();
+	collider_B = new CapsuleCollider(90.0f, 0.1f);
 	collider_B->Pos().SetZ(30);
 	collider_B->SetParent(transform);
-	collider_B->Scale() *= 20;
+	collider_B->Scale() *= 0.2;
 
-	ReadClip("alduin_idle");
-	ReadClip("alduin_takeoff");
-	ReadClip("alduin_hover");
-	ReadClip("alduin_flight_hit");
-	ReadClip("alduin_backward");
-	ReadClip("alduin_bleedidle");
-	ReadClip("alduin_fly");
-	ReadClip("alduin_flight_forward");
-	ReadClip("alduin_ascend");
-	ReadClip("alduin_climb");
-	ReadClip("alduin_aproach");
-	ReadClip("alduin_descend");
-	ReadClip("alduin_injured");
-	ReadClip("alduin_bite");
-	ReadClip("alduin_wingswip_left");
-	ReadClip("alduin_wingswip_right");
-	ReadClip("alduin_tailwhip");
-	ReadClip("alduin_inhale");
-	ReadClip("alduin_exhale_breath");
-	ReadClip("alduin_exhale_fireball");
-	ReadClip("alduin_pain");
-	ReadClip("alduin_pain2");
-	ReadClip("alduin_timetravel");
+	this->ReadClip("alduin_idle");
+	this->ReadClip("alduin_takeoff");
+	this->ReadClip("alduin_hover");
+	this->ReadClip("alduin_flight_hit");
+	this->ReadClip("alduin_backward");
+	this->ReadClip("alduin_bleedidle");
+	this->ReadClip("alduin_fly");
+	this->ReadClip("alduin_flight_forward");
+	this->ReadClip("alduin_bite");
+	this->ReadClip("alduin_wingswip_left");
+	this->ReadClip("alduin_wingswip_right");
+	this->ReadClip("alduin_tailwhip");
+	this->ReadClip("alduin_climb");
+	this->ReadClip("alduin_aproach");
+	this->ReadClip("alduin_descend");
+	this->ReadClip("alduin_injured");
+	this->ReadClip("alduin_ascend");
+	this->ReadClip("alduin_inhale");
+	this->ReadClip("alduin_exhale_breath");
+	this->ReadClip("alduin_exhale_fireball");
+	this->ReadClip("alduin_pain");
+	this->ReadClip("alduin_pain2");
+	this->ReadClip("alduin_timetravel");
 	Scale() *= 0.001;
 
 	moveSpeed = 150.0f;
@@ -67,11 +67,11 @@ alduin::alduin() :  ModelAnimator("alduin")
 	//SetEvent(TAKEOFF, bind(&alduin::EndTakeoff, this), 0.7f);
 	//SetEvent(PAIN, bind(&alduin::EndHit, this), 0.9f);
 
-	//for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
-	//{
-	//	GetClip(clipIndex)->SetEvent(bind(&alduin::Patterns, this), 0.7f);
-	//	GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
-	//}
+	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
+	{
+		this->GetClip(clipIndex)->SetEvent(bind(&alduin::beginAttack, this), 0.0f);
+		this->GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+	}
 
 	
 }
@@ -96,6 +96,7 @@ alduin::~alduin()
 
 void alduin::Update()
 {
+	
 	ModelAnimator::Update(); 
 
 	collider_F->UpdateWorld();
@@ -104,7 +105,7 @@ void alduin::Update()
 	collider_B->UpdateWorld();
 	transform->UpdateWorld();
 
-
+	Patterns();
 	//velocity = target->GlobalPos() - this->GlobalPos();
 
 	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
@@ -116,9 +117,9 @@ void alduin::Update()
 	LLegCollider->SetWorld(GetTransformByNode(23));
 	TailCollider->SetWorld(GetTransformByNode(110));
 
-	Patterns();
-	SetAnimation();
-	Move();
+	
+	//SetAnimation();
+	//Move();
 }
 
 void alduin::Render()
@@ -151,11 +152,7 @@ void alduin::SetTarget(Player* target)
 	this->target = target;
 }
 
-void alduin::SetEvent(int clip, Event event, float timeRatio)
-{
-	if (totalEvent[clip].count(timeRatio) > 0) return; // 선행 예약된 이벤트가 있으면 종료
-	totalEvent[clip][timeRatio] = event;
-}
+
 
 //void alduin::ExecuteEvent()
 //{
@@ -231,9 +228,17 @@ void alduin::Move()
 }
 
 
+void alduin::beginAttack()
+{
+	collider_F->SetActive(false);
+	collider_R->SetActive(false);
+	collider_L->SetActive(false);
+	collider_B->SetActive(false);
+
+}
+
 void alduin::FireAttack()
 {
-
 
 	if (velocity.Length() < 1000)
 	{
@@ -261,14 +266,14 @@ void alduin::EndHit()
 
 void alduin::EndAttack()
 {
+	collider_F->SetActive(true);
+	collider_R->SetActive(true);
+	collider_L->SetActive(true);
+	collider_B->SetActive(true);
+
 	SetState(IDLE);
-
 }
 
-void alduin::EndBreath()
-{
-
-}
 
 void alduin::SetAnimation()
 {
@@ -285,10 +290,10 @@ void alduin::SetAnimation()
 
 void alduin::SetState(State state)
 {
-	if (state == curState) return;
+	if (curState == state) return;
 
 	curState = state;
-	PlayClip((int)state);
+	this->PlayClip((int)state);
 }
 
 void alduin::Patterns()
@@ -299,23 +304,18 @@ void alduin::Patterns()
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_F);
-
-
 	}
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_R);
-
 	}
 	else if (collider_L->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_L);
-
 	}
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_B);
-
 	}
 
 }
