@@ -84,9 +84,11 @@ protected:
 	float jumpVelocity = 0;
 	float jumpForce = 0.5f;
 	float gravityMult = 0.5f;
+	float attackCharge = 0.0f;
 	bool isJump = false;
 	bool isBlock = false;
 	bool isHit = false;
+	bool isCombo = false;
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
 };
