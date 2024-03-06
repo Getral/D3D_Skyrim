@@ -62,17 +62,17 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
-	/*Dragonboneboots* dragonboneboots;
-	Dragonbonecuirassplate* dragonbonecuirassplate;
-	Dragonbonegauntlets* dragonbonegauntlets;
-	Dragonbonehelmet* dragonbonehelmet;
-	Dragonboneshield* dragonboneshield;*/
-	IronArmor* armor;
+	//Dragonboneboots* dragonboneboots;
+	//Dragonbonecuirassplate* dragonbonecuirassplate;
+	//Dragonbonegauntlets* dragonbonegauntlets;
+	//Dragonbonehelmet* dragonbonehelmet;
+	//Dragonboneshield* dragonboneshield;
+	//IronArmor* armor;
 
 	Transform* rightHand;
 	Transform* leftHand;
 	//Transform* head;
-	Transform* body;
+	//Transform* body;
 	//Transform* foot;
 	//Transform* hands;
 
@@ -93,9 +93,6 @@ protected:
 
 	UINT nodeIndex1 = 1;
 	UINT nodeIndex2 = 1;
-	UINT nodeIndex3 = 1;
-	UINT nodeIndex4 = 1;
-	UINT nodeIndex5 = 1;
 
 	Vector3 velocity;
 

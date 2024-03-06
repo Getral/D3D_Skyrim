@@ -1,4 +1,4 @@
-<Material Name="_Cuirass_1.Mat.001">
+<Material Name="_Cuirass_1.Mat">
     <Shader Vertex="" Pixel=""/>
     <Texture Diffuse="Textures/Color/White.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
     <Property Shininess="36" HasNormalMap="0">

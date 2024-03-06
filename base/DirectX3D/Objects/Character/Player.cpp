@@ -56,34 +56,24 @@ Player::Player()
 
 	//dragonbonehelmet = new Dragonbonehelmet();
 	//dragonbonehelmet->Load();
-
 	//head = new Transform();
 	//dragonbonehelmet->SetParent(head);
-
 	//dragonbonecuirassplate = new Dragonbonecuirassplate();
 	//dragonbonecuirassplate->Load();
-
 	//armor = new IronArmor();
 	//armor->Load();
-
 	//body = new Transform();
 	//armor->SetParent(body);
-
 	//dragonbonegauntlets = new Dragonbonegauntlets();
 	//dragonbonegauntlets->Load();
-
 	//hands = new Transform();
 	//dragonbonegauntlets->SetParent(hands);
-
 	//dragonboneboots = new Dragonboneboots();
 	//dragonboneboots->Load();
-
 	//foot = new Transform();
 	//dragonboneboots->SetParent(foot);
-
 	//dragonboneshield = new Dragonboneshield();
 	//dragonboneshield->Load();
-
 	//leftHand = new Transform();
 	//dragonboneshield->SetParent(leftHand);
 
