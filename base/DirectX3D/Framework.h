@@ -167,12 +167,17 @@ using namespace GameMath;
 #include "Objects/Items/Weapons/Shield.h"
 
 #include "Objects/Items/Weapons/Weapon.h"
-#include "Objects/Items/Weapons/IronWeapon.h"
-#include "Objects/Items/Weapons/DragonBoneWeapon.h"
+
+//#include "Objects/Items/Weapons/IronWeapons/Iron.h"
+
+//#include "Objects/Items/Weapons/EbonyWeapons/Ebony.h"
+
 
 #include "Objects/Items/Armors/Armor.h"
-#include "Objects/Items/Armors/IronArmor.h"
-#include "Objects/Items/Armors/DragonBoneArmor.h"
+
+//#include "Objects/Items/Armors/IronArmors/Iron.h"
+
+//#include "Objects/Items/Armors/DragonboneArmors/Dragonbone.h"
 
 #include "Objects/Items/Expendables/Expendables.h"		// 소모품
 #include "Objects/Items/Miscellaneous/Miscellaneous.h"	// 잡탬
