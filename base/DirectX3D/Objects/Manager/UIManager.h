@@ -10,7 +10,7 @@ public:
 	void PostRender();
 	void GUIRender();
 
-	void TargetCompassEnemy(Player* player, Enemy* enemy);
+	void TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies);
 
 	//float GetEnemyDegree() { return final_angle; }
 
@@ -29,6 +29,12 @@ private:
 	Quad* SP_bar_background;
 	ProgressBar* SP_bar;
 
+	Quad* enemy_HP_bar_background;
+	Quad* enemy_HP_bar;
+	float enemy_maxHpBar;
+	float enemy_HP_ratio;
+
+
 	float tmp_N;
 	float tmp_S;
 	float tmp_W;
@@ -42,5 +48,7 @@ private:
 
 	float final_angle;
 	vector<float> final_angles;
+
+	int monsterCount = 4;
 };
 

@@ -26,11 +26,11 @@ UIManager::UIManager()
 #pragma endregion
 
 #pragma region enemy_dirquad
-    FOR(SpawnManager::Get()->GetMonsterSpawnManager().size())
+    FOR(monsterCount)
     {
         enemies_dir.push_back(new Quad(L"Textures/UI/enemy_dir.png"));
         enemies_dir.back()->SetParent(compass);
-        enemies_dir.back()->Scale() *= 0.5f;
+        enemies_dir.back()->Scale() *= 0.4f;
         final_angles.push_back(0.0f);
     }
 
@@ -69,6 +69,23 @@ UIManager::UIManager()
     SP_bar->Scale() *= 0.7f;
     SP_bar->Scale().x *= 2.0f;
 #pragma endregion
+
+#pragma region enemy_status_bar
+    enemy_HP_bar_background = new Quad(L"Textures/UI/enemy_hp_bar.png");
+    enemy_HP_bar_background->Pos() = { CENTER_X,WIN_HEIGHT * 0.925f,0 };
+    enemy_HP_bar_background->Scale().y *= 1.2f;
+    enemy_HP_bar_background->UpdateWorld();
+
+    enemy_HP_bar = new Quad(L"Textures/UI/hp_bar.png");
+    enemy_HP_bar->SetParent(enemy_HP_bar_background);
+    enemy_HP_bar->Scale() *= 0.35f;
+    enemy_HP_bar->Scale().x *= 1.0f;
+
+    enemy_maxHpBar = enemy_HP_bar->Scale().x;
+
+
+#pragma endregion
+
 }
 
 UIManager::~UIManager()
@@ -117,19 +134,15 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies)
 #pragma endregion
 
 #pragma region enemy_dir
-    for (int i = 0; i < enemies.size(); i++)
+
+    TargetCompassEnemy(player, enemies);
+
+    FOR(monsterCount)
     {
-        for (int j = 0; j < enemies[i]->GetEnemies().size(); j++)
-        {
-            TargetCompassEnemy(player, enemies[i]->GetEnemies()[j]);
+        enemies_dir[i]->Pos().x = final_angles[i] * compass->GetSize().x / 140;
 
-            enemies_dir[i]->Pos().x = final_angles[i] * compass->GetSize().x / 140;
-
-            enemies_dir[i]->UpdateWorld();
-        }
+        enemies_dir[i]->UpdateWorld();
     }
-
-    
 #pragma endregion
     HP_ratio = player->GetStatus().curHp / player->GetStatus().maxHp;
     HP_bar->Scale().x = maxHpBar * HP_ratio;
@@ -138,7 +151,11 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies)
     SP_bar->SetAmount(player->GetStatus().curstamina / player->GetStatus().maxstamina);
     SP_bar->UpdateWorld();
 
+    enemy_HP_ratio = enemies[0]->GetEnemies()[0]->GetStatus().curHp / enemies[0]->GetEnemies()[0]->GetStatus().maxHp;
+    enemy_HP_bar->Scale().x = enemy_maxHpBar * enemy_HP_ratio;
+    enemy_HP_bar->UpdateWorld();
 
+    enemies[0]->GetEnemies()[0]->GetStatus().curHp = enemies[0]->GetEnemies()[0]->GetStatus().maxHp;
 }
 
 void UIManager::Render()
@@ -155,13 +172,11 @@ void UIManager::PostRender()
             compass_dir[i]->Render();
     }
 
-    for (int i = 0; i < SpawnManager::Get()->GetMonsterSpawnManager().size(); i++)
+    FOR(monsterCount)
     {
         if (enemies_dir[i]->Pos().x >= -60 * compass->GetSize().x / 140 && enemies_dir[i]->Pos().x <= +60 * compass->GetSize().x / 140)
             enemies_dir[i]->Render();
     }
-
-
     
 
     HP_bar_background->Render();
@@ -169,35 +184,73 @@ void UIManager::PostRender()
 
     SP_bar_background->Render();
     SP_bar->Render();
+
+    enemy_HP_bar_background->Render();
+    enemy_HP_bar->Render();
 }
 
 void UIManager::GUIRender()
 {
-    ImGui::Text("enemy_angle : %f", final_angle);
-    ImGui::Text("enemy_angle : %f", final_angle);
-    ImGui::Text("enemy_angle : %f", final_angle);
+    //ImGui::Text("enemy_angle : %f", final_angle);
+    ImGui::Text("enemy_angle : %f", final_angles[0]);
+    ImGui::Text("enemy_angle : %f", final_angles[1]);
+
+    ImGui::Text("enemy_angle : %f", enemies_dir[0]->Pos().x);
+    ImGui::Text("enemy_angle : %f", enemies_dir[1]->Pos().x);
 }
 
-void UIManager::TargetCompassEnemy(Player* player, Enemy* enemy)
+
+
+
+void UIManager::TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies)
 {
-    Vector3 temp = player->Forward();
-    Vector3 temp2 = player->GlobalPos() - enemy->GetTransform()->GlobalPos();
-
-    float temp_value = sqrt(temp.x * temp.x + temp.y * temp.y + temp.z * temp.z);
-    float temp2_value = sqrt(temp2.x * temp2.x + temp2.y * temp2.y + temp2.z * temp2.z);
-
-    cal_dot = Dot(temp, temp2);
-
-    angle = acos(cal_dot / (temp_value * temp2_value));
-
-    if (Cross(temp, temp2).y > 0)
+    
+    int tmp = 0;
+    for (int i = 0; i < enemies.size(); i++)
     {
-        final_angle = XMConvertToDegrees(angle);
-    }
-    else
-    {
-        final_angle = -XMConvertToDegrees(angle);
-    }
+        for (int j = 0; j < enemies[i]->GetEnemies().size(); j++)
+        {
+            Vector3 temp = player->Forward();
+            Vector3 temp2 = player->GlobalPos() - enemies[i]->GetEnemies()[j]->GetTransform()->GlobalPos();
 
-    final_angles.push_back(final_angle);
+            float temp_value = sqrt(temp.x * temp.x + temp.y * temp.y + temp.z * temp.z);
+            float temp2_value = sqrt(temp2.x * temp2.x + temp2.y * temp2.y + temp2.z * temp2.z);
+
+            cal_dot = Dot(temp, temp2);
+
+            angle = acos(cal_dot / (temp_value * temp2_value));
+
+            if (Cross(temp, temp2).y > 0)
+            {
+                final_angles[tmp] = XMConvertToDegrees(angle);
+            }
+            else
+            {
+                final_angles[tmp] = -XMConvertToDegrees(angle);
+            }
+            tmp++;
+        }
+    }
+    //Vector3 temp = player->Forward();
+    //Vector3 temp2 = player->GlobalPos() - enemy->get;
+    //
+    //float temp_value = sqrt(temp.x * temp.x + temp.y * temp.y + temp.z * temp.z);
+    //float temp2_value = sqrt(temp2.x * temp2.x + temp2.y * temp2.y + temp2.z * temp2.z);
+    //
+    //cal_dot = Dot(temp, temp2);
+    //
+    //angle = acos(cal_dot / (temp_value * temp2_value));
+    //
+    //if (Cross(temp, temp2).y > 0)
+    //{
+    //    final_angle = XMConvertToDegrees(angle);
+    //}
+    //else
+    //{
+    //    final_angle = -XMConvertToDegrees(angle);
+    //}
+    //
+    //final_angles.push_back(final_angle);
+    
+    
 }
