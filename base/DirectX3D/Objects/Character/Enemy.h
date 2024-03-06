@@ -67,6 +67,7 @@ private:
 	ModelAnimatorInstancing* instancing;
 
 	float trackTime = 0.0f;
+	float hitDelay = 0.0f;
 	float trackRange = 0.0f;
 	float attackRange = 0.0f;
 
@@ -74,11 +75,14 @@ private:
 	UINT node;
 	State curState = IDLE;
 
+	bool isAttacked = false;
+
 	int test = 0;
 
 	SphereCollider* trackCollider;
 	SphereCollider* attackCollider;
 	vector<CapsuleCollider*> colliders;
+	vector<Transform*> colliderTransforms;
 
 	Transform* target;
 	Vector3 velocity;

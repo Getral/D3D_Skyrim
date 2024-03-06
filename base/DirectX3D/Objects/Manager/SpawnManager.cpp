@@ -1,4 +1,5 @@
 #include "Framework.h"
+#include "SpawnManager.h"
 
 SpawnManager::SpawnManager()
 {
@@ -60,4 +61,20 @@ void SpawnManager::SetPlayerData(Player* player)
 	playerData = player;
 	for (EnemySpawn* msm : monsterSpawnManager)
 		msm->SetPlayerData(playerData);
+}
+
+UINT SpawnManager::GetActivatedMonsterCount()
+{
+	MONSTER_COUNT = 0;
+	for (int i = 0; i < monsterSpawnManager.size(); i++)
+	{
+		for (int j = 0; j < monsterSpawnManager[i]->GetEnemies().size(); j++)
+		{
+			if (monsterSpawnManager[i]->GetEnemies()[j]->GetTransform()->Active())
+			{
+				MONSTER_COUNT++;
+			}
+		}
+	}
+	return MONSTER_COUNT;
 }

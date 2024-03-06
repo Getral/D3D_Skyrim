@@ -29,6 +29,8 @@ private:
 
 	UINT MONSTER_SIZE = 1;
 
+	UINT MONSTER_COUNT = 0;
+
 public:
 	SpawnManager();
 	~SpawnManager();
@@ -44,6 +46,8 @@ public:
 
 	vector<ModelAnimatorInstancing*> &GetMonsterInstancing() { return monsterInstancing; }
 	vector<Enemy*> &GetEnemies() { return enemies; }
+
+	UINT GetActivatedMonsterCount();
 
 private:
 	Player* playerData;

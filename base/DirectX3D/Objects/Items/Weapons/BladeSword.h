@@ -10,6 +10,8 @@ public:
     void Render();
     void GUIRender();
 
+    BoxCollider* GetCollider() { return collider; }
+
 private:
     BoxCollider* collider;
 
