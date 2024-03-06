@@ -96,6 +96,11 @@ Player::Player()
 	GetClip(HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
 	GetClip(HIT_HEAVY)->SetEvent(bind(&Player::EndHit, this), 0.8f);
 	GetClip(HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	
+	GetClip(HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(HIT_HEAVY)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 }
 
 Player::~Player()
@@ -129,7 +134,13 @@ void Player::Update()
 	rightHand->SetWorld(GetTransformByNode(79));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
-	shield->Update();
+	shield->Update();	
+
+	if (isInvincible)
+	{
+		invincibleCount += DELTA;
+		if (invincibleCount > 2.0f) EndInvincible();
+	}
 
 	//body->SetWorld(GetTransformByNode(nodeIndex1));
 	//armor->Update();
@@ -188,6 +199,7 @@ void Player::Move()
 		return;
 	if (isBlock) return;
 	if (isHit) return;
+	if (!KEY_PRESS('W') && !KEY_PRESS('S') && !KEY_PRESS('A') && !KEY_PRESS('D')) return;
 
 	bool isMoveZ = false;
 	bool isMoveX = false;
@@ -372,6 +384,8 @@ void Player::Block()
 
 void Player::GetHit()
 {
+	if (isInvincible) return;
+
 	if (isBlock)
 	{
 		if (KEY_DOWN('Z'))
@@ -507,4 +521,15 @@ void Player::EndBlockHit()
 {
 	SetAction(BLOCK);
 	isHit = false;
+}
+
+void Player::SetInvincible()
+{
+	isInvincible = true;	
+}
+
+void Player::EndInvincible()
+{
+	isInvincible = false;
+	invincibleCount = 0.0f;
 }

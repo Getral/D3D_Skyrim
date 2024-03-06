@@ -10,7 +10,7 @@ public:
 		float curstamina = 100;
 		float maxstamina = 100;
 		float atk = 10;
-		float speed = 10;
+		float speed = 5;
 	};
 
 	enum ACTION
@@ -56,6 +56,8 @@ private:
 	void EndBlock();
 	void EndHit();
 	void EndBlockHit();
+	void SetInvincible();
+	void EndInvincible();
 
 protected:
 
@@ -85,9 +87,6 @@ protected:
 
 	ACTION curAction = IDLE;
 
-	float moveSpeed = 14;
-	float runSpeed = 20;
-	float coruchSpeed = 10;
 	float rotSpeed = 1;
 	float deceleration = 10;
 
@@ -100,6 +99,9 @@ protected:
 	float jumpForce = 0.5f;
 	float gravityMult = 0.5f;
 	float attackCharge = 0.0f;
+	float invincibleCount = 0.0f; // 무적시간 재는 변수
+
+	bool isInvincible = false; //무적인가?
 	bool isJump = false;
 	bool isBlock = false;
 	bool isHit = false;
