@@ -366,6 +366,9 @@
     <ClInclude Include="Objects\Items\Armors\Dragonboneshield.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\IronArmor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX3D.cpp">
@@ -687,6 +690,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Armors\Dragonboneshield.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\IronArmor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

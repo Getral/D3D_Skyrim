@@ -5,8 +5,6 @@ Player::Player()
 {
 	ModelAnimator::Scale() *= 0.001;
 
-
-
 	ReadClip("male_idle");
 	ReadClip("male_jump");
 	ReadClip("male_stagger");
@@ -56,35 +54,38 @@ Player::Player()
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
-	dragonbonehelmet = new Dragonbonehelmet();
-	dragonbonehelmet->Load();
+	//dragonbonehelmet = new Dragonbonehelmet();
+	//dragonbonehelmet->Load();
 
-	head = new Transform();
-	dragonbonehelmet->SetParent(head);
+	//head = new Transform();
+	//dragonbonehelmet->SetParent(head);
 
-	dragonbonecuirassplate = new Dragonbonecuirassplate();
-	dragonbonecuirassplate->Load();
+	//dragonbonecuirassplate = new Dragonbonecuirassplate();
+	//dragonbonecuirassplate->Load();
 
-	body = new Transform();
-	dragonbonecuirassplate->SetParent(body);
+	//armor = new IronArmor();
+	//armor->Load();
 
-	dragonbonegauntlets = new Dragonbonegauntlets();
-	dragonbonegauntlets->Load();
+	//body = new Transform();
+	//armor->SetParent(body);
 
-	hands = new Transform();
-	dragonbonegauntlets->SetParent(hands);
+	//dragonbonegauntlets = new Dragonbonegauntlets();
+	//dragonbonegauntlets->Load();
 
-	dragonboneboots = new Dragonboneboots();
-	dragonboneboots->Load();
+	//hands = new Transform();
+	//dragonbonegauntlets->SetParent(hands);
 
-	foot = new Transform();
-	dragonboneboots->SetParent(foot);
+	//dragonboneboots = new Dragonboneboots();
+	//dragonboneboots->Load();
 
-	dragonboneshield = new Dragonboneshield();
-	dragonboneshield->Load();
+	//foot = new Transform();
+	//dragonboneboots->SetParent(foot);
 
-	leftHand = new Transform();
-	dragonboneshield->SetParent(leftHand);
+	//dragonboneshield = new Dragonboneshield();
+	//dragonboneshield->Load();
+
+	//leftHand = new Transform();
+	//dragonboneshield->SetParent(leftHand);
 
 	bladeSword = new BladeSword();
 	bladeSword->Load();
@@ -111,18 +112,19 @@ Player::~Player()
 {
 	delete bladeSword;
 	delete shield;
-	delete dragonboneboots;
-	delete dragonbonecuirassplate;
-	delete dragonbonegauntlets;
-	delete dragonbonehelmet;
-	delete dragonboneshield;
+	//delete armor;
+	//delete dragonboneboots;
+	//delete dragonbonecuirassplate;
+	//delete dragonbonegauntlets;
+	//delete dragonbonehelmet;
+	//delete dragonboneshield;
 	delete collider;
 	delete rightHand;
 	delete leftHand;
-	delete head;
-	delete body;
-	delete foot;
-	delete hands;
+	//delete head;
+	//delete body;
+	//delete foot;
+	//delete hands;
 }
 
 void Player::Update()
@@ -139,16 +141,18 @@ void Player::Update()
 	leftHand->SetWorld(GetTransformByNode(119));
 	shield->Update();
 
-	leftHand->SetWorld(GetTransformByNode(119));
-	dragonboneshield->Update();
-	head->SetWorld(GetTransformByNode(nodeIndex1));
-	dragonbonehelmet->Update();
-	body->SetWorld(GetTransformByNode(nodeIndex2));
-	dragonbonecuirassplate->Update();
-	foot->SetWorld(GetTransformByNode(nodeIndex3));
-	dragonboneboots->Update();
-	hands->SetWorld(GetTransformByNode(nodeIndex4));
-	dragonbonegauntlets->Update();
+	//body->SetWorld(GetTransformByNode(nodeIndex1));
+	//armor->Update();
+	//leftHand->SetWorld(GetTransformByNode(119));
+	//dragonboneshield->Update();
+	//head->SetWorld(GetTransformByNode(nodeIndex1));
+	//dragonbonehelmet->Update();
+	//body->SetWorld(GetTransformByNode(nodeIndex2));
+	//dragonbonecuirassplate->Update();
+	//foot->SetWorld(GetTransformByNode(nodeIndex3));
+	//dragonboneboots->Update();
+	//hands->SetWorld(GetTransformByNode(nodeIndex4));
+	//dragonbonegauntlets->Update();
 
 }
 
@@ -158,11 +162,12 @@ void Player::Render()
 	collider->Render();
 	bladeSword->Render();
 	shield->Render();
-	dragonboneboots->Render();
-	dragonbonecuirassplate->Render();
-	dragonbonegauntlets->Render();
-	dragonbonehelmet->Render();
-	dragonboneshield->Render();
+	//armor->Render();
+	//dragonboneboots->Render();
+	//dragonbonecuirassplate->Render();
+	//dragonbonegauntlets->Render();
+	//dragonbonehelmet->Render();
+	//dragonboneshield->Render();
 
 }
 
@@ -177,9 +182,6 @@ void Player::GUIRender()
 	ModelAnimator::GUIRender();
 	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);
 	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
-	ImGui::SliderInt("nodeIndex3", (int*)&nodeIndex3, 1, 200);
-	ImGui::SliderInt("nodeIndex4", (int*)&nodeIndex4, 1, 200);
-	ImGui::SliderInt("nodeIndex5", (int*)&nodeIndex5, 1, 200);
 }
 
 void Player::Control()

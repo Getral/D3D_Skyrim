@@ -62,18 +62,19 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
-	Dragonboneboots* dragonboneboots;
+	/*Dragonboneboots* dragonboneboots;
 	Dragonbonecuirassplate* dragonbonecuirassplate;
 	Dragonbonegauntlets* dragonbonegauntlets;
 	Dragonbonehelmet* dragonbonehelmet;
-	Dragonboneshield* dragonboneshield;
+	Dragonboneshield* dragonboneshield;*/
+	IronArmor* armor;
 
 	Transform* rightHand;
 	Transform* leftHand;
-	Transform* head;
+	//Transform* head;
 	Transform* body;
-	Transform* foot;
-	Transform* hands;
+	//Transform* foot;
+	//Transform* hands;
 
 
 	Status status;

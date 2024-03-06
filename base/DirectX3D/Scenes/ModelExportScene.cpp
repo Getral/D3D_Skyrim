@@ -43,7 +43,7 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;*/
 
-    string name = "dragonboneboots";
+    string name = "armor";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
