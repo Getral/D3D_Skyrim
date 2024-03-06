@@ -5,6 +5,8 @@ Player::Player()
 {
 	ModelAnimator::Scale() *= 0.001;
 
+
+
 	ReadClip("male_idle");
 	ReadClip("male_jump");
 	ReadClip("male_stagger");
@@ -54,6 +56,36 @@ Player::Player()
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
+	dragonbonehelmet = new Dragonbonehelmet();
+	dragonbonehelmet->Load();
+
+	head = new Transform();
+	dragonbonehelmet->SetParent(head);
+
+	dragonbonecuirassplate = new Dragonbonecuirassplate();
+	dragonbonecuirassplate->Load();
+
+	body = new Transform();
+	dragonbonecuirassplate->SetParent(body);
+
+	dragonbonegauntlets = new Dragonbonegauntlets();
+	dragonbonegauntlets->Load();
+
+	hands = new Transform();
+	dragonbonegauntlets->SetParent(hands);
+
+	dragonboneboots = new Dragonboneboots();
+	dragonboneboots->Load();
+
+	foot = new Transform();
+	dragonboneboots->SetParent(foot);
+
+	dragonboneshield = new Dragonboneshield();
+	dragonboneshield->Load();
+
+	leftHand = new Transform();
+	dragonboneshield->SetParent(leftHand);
+
 	bladeSword = new BladeSword();
 	bladeSword->Load();
 
@@ -79,9 +111,18 @@ Player::~Player()
 {
 	delete bladeSword;
 	delete shield;
+	delete dragonboneboots;
+	delete dragonbonecuirassplate;
+	delete dragonbonegauntlets;
+	delete dragonbonehelmet;
+	delete dragonboneshield;
 	delete collider;
 	delete rightHand;
 	delete leftHand;
+	delete head;
+	delete body;
+	delete foot;
+	delete hands;
 }
 
 void Player::Update()
@@ -98,10 +139,16 @@ void Player::Update()
 	leftHand->SetWorld(GetTransformByNode(119));
 	shield->Update();
 
-	if (KEY_PRESS('Q'))
-		this->Rot().y -= 1 * DELTA;
-	if (KEY_PRESS('E'))
-		this->Rot().y += 1 * DELTA;
+	leftHand->SetWorld(GetTransformByNode(119));
+	dragonboneshield->Update();
+	head->SetWorld(GetTransformByNode(nodeIndex1));
+	dragonbonehelmet->Update();
+	body->SetWorld(GetTransformByNode(nodeIndex2));
+	dragonbonecuirassplate->Update();
+	foot->SetWorld(GetTransformByNode(nodeIndex3));
+	dragonboneboots->Update();
+	hands->SetWorld(GetTransformByNode(nodeIndex4));
+	dragonbonegauntlets->Update();
 
 }
 
@@ -111,6 +158,11 @@ void Player::Render()
 	collider->Render();
 	bladeSword->Render();
 	shield->Render();
+	dragonboneboots->Render();
+	dragonbonecuirassplate->Render();
+	dragonbonegauntlets->Render();
+	dragonbonehelmet->Render();
+	dragonboneshield->Render();
 
 }
 
@@ -123,7 +175,11 @@ void Player::GUIRender()
 	bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
-	ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 1, 500);
+	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);
+	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
+	ImGui::SliderInt("nodeIndex3", (int*)&nodeIndex3, 1, 200);
+	ImGui::SliderInt("nodeIndex4", (int*)&nodeIndex4, 1, 200);
+	ImGui::SliderInt("nodeIndex5", (int*)&nodeIndex5, 1, 200);
 }
 
 void Player::Control()

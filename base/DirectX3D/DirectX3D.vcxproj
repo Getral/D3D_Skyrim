@@ -142,6 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Items\Armors\Dragonboneboots.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonbonecuirassplate.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonbonegauntlets.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonbonehelmet.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonboneshield.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Character\alduin.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
@@ -256,6 +261,11 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Items\Armors\Dragonboneboots.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonbonecuirassplate.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonbonegauntlets.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonbonehelmet.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonboneshield.cpp" />
     <ClCompile Include="Objects\Character\alduin.cpp" />
     <ClCompile Include="Objects\Items\Weapons\BladeSword.cpp" />
     <ClCompile Include="Objects\Character\Player.cpp" />

@@ -37,6 +37,7 @@ public:
 	CapsuleCollider* GetCollier() { return collider; }
 	bool GetIsHit() { return isHit; }
 
+
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }
 
@@ -51,9 +52,6 @@ private:
 
 	void SetAnimation();
 
-	void Attack1hm();
-	void Attack2hm();
-	void Attackh2h();
 	void EndAttack();
 	void EndBlock();
 	void EndHit();
@@ -64,8 +62,19 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
+	Dragonboneboots* dragonboneboots;
+	Dragonbonecuirassplate* dragonbonecuirassplate;
+	Dragonbonegauntlets* dragonbonegauntlets;
+	Dragonbonehelmet* dragonbonehelmet;
+	Dragonboneshield* dragonboneshield;
+
 	Transform* rightHand;
 	Transform* leftHand;
+	Transform* head;
+	Transform* body;
+	Transform* foot;
+	Transform* hands;
+
 
 	Status status;
 
@@ -81,7 +90,11 @@ protected:
 	float rotSpeed = 1;
 	float deceleration = 10;
 
-	UINT nodeIndex = 1;
+	UINT nodeIndex1 = 1;
+	UINT nodeIndex2 = 1;
+	UINT nodeIndex3 = 1;
+	UINT nodeIndex4 = 1;
+	UINT nodeIndex5 = 1;
 
 	Vector3 velocity;
 

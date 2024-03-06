@@ -3,7 +3,47 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "alduin";
+    /*string name = "dragonbonehelmet";
+    string file = "Models/FBX/" + name + ".fbx";
+    ModelExporter* exporter;
+    string clipName;
+
+    exporter = new ModelExporter(name, file);
+    exporter->ExportMaterial();
+    exporter->ExportMesh();
+    delete exporter;
+
+    string name = "dragonboneshield";
+    string file = "Models/FBX/" + name + ".fbx";
+    ModelExporter* exporter;
+    string clipName;
+
+    exporter = new ModelExporter(name, file);
+    exporter->ExportMaterial();
+    exporter->ExportMesh();
+    delete exporter;
+
+    string name = "dragonbonegauntlets";
+    string file = "Models/FBX/" + name + ".fbx";
+    ModelExporter* exporter;
+    string clipName;
+
+    exporter = new ModelExporter(name, file);
+    exporter->ExportMaterial();
+    exporter->ExportMesh();
+    delete exporter;
+
+    string name = "dragonbonecuirassplate";
+    string file = "Models/FBX/" + name + ".fbx";
+    ModelExporter* exporter;
+    string clipName;
+
+    exporter = new ModelExporter(name, file);
+    exporter->ExportMaterial();
+    exporter->ExportMesh();
+    delete exporter;*/
+
+    string name = "dragonboneboots";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
