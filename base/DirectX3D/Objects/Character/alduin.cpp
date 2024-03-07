@@ -62,16 +62,23 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_timetravel");
 	Scale() *= 0.001;
 
-	moveSpeed = 150.0f;
+	moveSpeed = 15.0f;
 
 	//SetEvent(TAKEOFF, bind(&alduin::EndTakeoff, this), 0.7f);
 	//SetEvent(PAIN, bind(&alduin::EndHit, this), 0.9f);
 
 	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
 	{
-		this->GetClip(clipIndex)->SetEvent(bind(&alduin::beginAttack, this), 0.0f);
-		this->GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+		GetClip(clipIndex)->SetEvent(bind(&alduin::beginAttack, this), 0.0f);
+		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
 	}
+
+	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
+	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.2f);
+
+	GetClip(BREATH)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+	GetClip(FIREBALL)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+
 
 	
 }
@@ -105,8 +112,12 @@ void alduin::Update()
 	collider_B->UpdateWorld();
 	transform->UpdateWorld();
 
-	Patterns();
-	//velocity = target->GlobalPos() - this->GlobalPos();
+	
+	if (target)
+	{
+		velocity = this->target->GlobalPos() - transform->GlobalPos();
+		Move();
+	}
 
 	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
 	HeadCollider->SetWorld(GetTransformByNode(45));
@@ -117,9 +128,9 @@ void alduin::Update()
 	LLegCollider->SetWorld(GetTransformByNode(23));
 	TailCollider->SetWorld(GetTransformByNode(110));
 
-	
+	Patterns();
 	//SetAnimation();
-	//Move();
+	
 }
 
 void alduin::Render()
@@ -154,77 +165,19 @@ void alduin::SetTarget(Player* target)
 
 
 
-//void alduin::ExecuteEvent()
-//{
-//	int index = curState; //현재 상태 받아오기
-//	if (totalEvent[index].empty()) return;
-//	if (eventIters[index] == totalEvent[index].end()) return;
-//
-//	float ratio = motion->runningTime / motion->duration; //진행된 시간 나누기 전체 진행시간
-//
-//	if (eventIters[index]->first > ratio) return; // 진행 시간이 정해진 기준에 못 미치면 종료(재시작)
-//
-//	eventIters[index]->second(); //등록된 이벤트 수행
-//	eventIters[index]++;
-//}
-
 void alduin::Move()
 {
-
-	if (KEY_PRESS('I'))
-	{
-		velocity.z += DELTA; //속력 기준에 시간 경과만큼 누적값 주기
-		SetState(RUN);
-		//isMoveZ = true; //전후 이동 중임
-	}
-
-	if (KEY_PRESS('K'))
-	{
-		velocity.z -= DELTA;
-		SetState(WALK);
-		//isMoveZ = true;
-	}
-
-	if (KEY_PRESS('J'))
-	{
-		velocity.x -= DELTA;
-		SetState(RUN_L);
-		//isMoveX = true;
-	}
-
-	if (KEY_PRESS('L'))
-	{
-		velocity.x += DELTA;
-		SetState(RUN_R);
-		//isMoveX = true;
-	}
+	if (velocity.Length() < 100) return;
 
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
-	Pos() += direction * moveSpeed * DELTA * -1;
+	Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
+	Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
 
-	//for (int i = ATTACK_F; i <= ATTACK_B; i++)
-	//{
-	//	if (curState == i) return;
-	//}
-	//if (curState == PAIN) return; 
-	//if (curState == DEATH) return; 
-	//if (velocity.Length() < 10) return; 
+	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
+	transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
 
-
-	//if (velocity.Length() < 1000) // 표적과 거리가 가까울 때는
-	//{
-	//	moveSpeed = 100; //두 배로 빨라진다
-	//	SetState(RUN);
-	//}
-	//else
-	//{
-	//	moveSpeed = 50;
-	//	SetState(WALK);
-	//}
-
-	//transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
-	//transform->Rot().y = atan2(velocity.x, velocity.z) * rotSpeed + XM_PI;
+	
 }
 
 
@@ -237,7 +190,7 @@ void alduin::beginAttack()
 
 }
 
-void alduin::FireAttack()
+void alduin::Inhale()
 {
 
 	if (velocity.Length() < 1000)
@@ -252,6 +205,21 @@ void alduin::FireAttack()
 
 
 }
+
+
+void alduin::FireBallAttack()
+{
+	//파이어볼이 나가는 시점일 때 실행할 내용들 ( 파티클, 투사체 생성...)
+
+
+}
+
+void alduin::BreathAttack()
+{
+	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
+
+}
+
 
 void alduin::EndTakeoff()
 {

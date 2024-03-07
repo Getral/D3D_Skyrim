@@ -42,7 +42,10 @@ private:
 	void Move();
 
 	void beginAttack();
-	void FireAttack();
+	void Inhale();
+	void FireBallAttack();
+	void BreathAttack();
+
 
 	void EndTakeoff();
 	void EndHit();
