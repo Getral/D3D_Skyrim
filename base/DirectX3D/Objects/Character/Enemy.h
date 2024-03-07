@@ -52,15 +52,11 @@ public:
 
 	void SetTarget(Transform* target) { if(this->target != target) this->target = target; }
 	void SetState(State state);
-	void SetPlayerData(Player* player) { if (this->playerData != player) playerData = player; }
 
 	SphereCollider* GetTrackCollider() { return trackCollider; }
-	SphereCollider* GetAttackCollider() { return attackCollider; }
-	vector<CapsuleCollider*> GetColliders() { return colliders; }
 
 private:
 	void Track();
-	void Attack();
 	void SetColliderByNode();
 
 private:
@@ -68,21 +64,16 @@ private:
 
 	float trackTime = 0.0f;
 	float trackRange = 0.0f;
-	float attackRange = 0.0f;
+	float speed = 10.0f;
 
 	UINT index;
 	UINT node;
 	State curState = IDLE;
 
-	int test = 0;
-
 	SphereCollider* trackCollider;
-	SphereCollider* attackCollider;
 	vector<CapsuleCollider*> colliders;
 
 	Transform* target;
 	Vector3 velocity;
-
-	Player* playerData;
 };
 
