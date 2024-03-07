@@ -2,48 +2,35 @@
 
 class Weapon : public Inventory
 {
+public:
+
 	struct WeaponAbility
 	{
 		float power = 0;
 		float atkSpeed = 0;
 	};
 
-	struct ArmorType
+	struct WeaponType
 	{
-		// 1hd
-		float dagger;		// 단검
-		float claymore;		// 한손검
-		float waraxe;		// 한손도끼
-		float mace;			// 한손둔기
+		float dagger;	 // 단검
 
-		// 2hd
-		float longsword;	// 양손검
-		float battleaxe;	// 양손도끼
-		float warhammer;	// 양손둔기
+		float claymore;	 // 한손검
 
-		// 
-		float bow;			// 활
+		float longsword; // 양손검
+
+		float mace;		 // 한손둔기
+
+		float warhammer; // 양손둔기
+
+		float waraxe;	 // 한손도끼
+
+		float battleaxe; // 양손도끼
+
+		float bow;		 // 활		// 화살통이랑 같이 모델출력해야할듯
+		float arrow;	 // 화살
+		float quiver;	 // 화살통
 	};
+
+
 };
 
-/*
-IronWeapon
-irondagger		// 단검
-ironclaymore	// 한손검
-ironwaraxe   	// 한손도끼
-ironmace	    // 한손둔기
-ironlongsword	// 양손검
-ironbattleaxe	// 양손도끼
-ironwarhammer	// 양손둔기
-ironbow			// 활 
-
-EbonyWeapon
-ebonydageer     // 단검
-ebonysword   	// 한손검
-ebonymace	    // 한손둔기
-ebonywaraxe		// 한손도끼?
-ebonygreatsword	// 양손검
-ebonybattleaxe  // 양손도끼
-ebonywarhammer   // 양손둔기
-ebonybow		// 활
-*/
