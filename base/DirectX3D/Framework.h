@@ -173,6 +173,11 @@ using namespace GameMath;
 #include "Objects/Items/Armors/Armor.h"
 #include "Objects/Items/Armors/IronArmor.h"
 #include "Objects/Items/Armors/DragonBoneArmor.h"
+#include "Objects/Items/Armors/Dragonboneboots.h"
+#include "Objects/Items/Armors/Dragonbonecuirassplate.h"
+#include "Objects/Items/Armors/Dragonbonegauntlets.h"
+#include "Objects/Items/Armors/Dragonbonehelmet.h"
+#include "Objects/Items/Armors/Dragonboneshield.h"
 
 #include "Objects/Items/Expendables/Expendables.h"		// 소모품
 #include "Objects/Items/Miscellaneous/Miscellaneous.h"	// 잡탬

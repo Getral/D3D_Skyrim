@@ -1,12 +1,13 @@
 #pragma once
 
-class IronArmor
+class IronArmor : public Model
 {
 public:
-	
+    IronArmor();
+    ~IronArmor();
 
-private:
-
-
+    void Update();
+    void Render();
+    void GUIRender();
 };
 
