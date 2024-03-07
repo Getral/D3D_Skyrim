@@ -32,7 +32,7 @@ void PlayerScene::Update()
 {
 	player->Update();
 	aldu->Update();
-	//UIManager::Get()->Update(player, fox);
+	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager());
 }
 
 void PlayerScene::PreRender()
