@@ -351,31 +351,22 @@
     <ClInclude Include="Objects\Character\alduin.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Inventory\Inventory.h">
+    <ClInclude Include="Objects\Items\Armors\Dragonboneboots.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\Armor.h">
+    <ClInclude Include="Objects\Items\Armors\Dragonbonecuirassplate.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonBoneArmor.h">
+    <ClInclude Include="Objects\Items\Armors\Dragonbonegauntlets.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\Dragonbonehelmet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\Dragonboneshield.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Armors\IronArmor.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Expendables\Expendables.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Miscellaneous\Miscellaneous.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\DragonBoneWeapon.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapon.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\Weapon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -686,31 +677,22 @@
     <ClCompile Include="Objects\Character\alduin.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Inventory\Inventory.cpp">
+    <ClCompile Include="Objects\Items\Armors\Dragonboneboots.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\Armor.cpp">
+    <ClCompile Include="Objects\Items\Armors\Dragonbonecuirassplate.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonBoneArmor.cpp">
+    <ClCompile Include="Objects\Items\Armors\Dragonbonegauntlets.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\Dragonbonehelmet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\Dragonboneshield.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Armors\IronArmor.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Expendables\Expendables.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Miscellaneous\Miscellaneous.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\DragonBoneWeapon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\Weapon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -761,7 +743,6 @@
     <FxCompile Include="Shaders\Effect\Fog.hlsl" />
     <FxCompile Include="Shaders\Effect\Particle.hlsl" />
     <FxCompile Include="Shaders\UI\RevProgressBar.hlsl" />
-    <FxCompile Include="Shaders\UI\CenterEndProgressBar.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexHeader.hlsli" />

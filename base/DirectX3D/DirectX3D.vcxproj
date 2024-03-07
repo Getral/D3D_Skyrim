@@ -142,19 +142,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Items\Armors\Dragonboneboots.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonbonecuirassplate.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonbonegauntlets.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonbonehelmet.h" />
+    <ClInclude Include="Objects\Items\Armors\Dragonboneshield.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Character\alduin.h" />
-    <ClInclude Include="Objects\Inventory\Inventory.h" />
-    <ClInclude Include="Objects\Items\Armors\Armor.h" />
-    <ClInclude Include="Objects\Items\Armors\DragonBoneArmor.h" />
     <ClInclude Include="Objects\Items\Armors\IronArmor.h" />
-    <ClInclude Include="Objects\Items\Expendables\Expendables.h" />
-    <ClInclude Include="Objects\Items\Miscellaneous\Miscellaneous.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
     <ClInclude Include="Objects\Character\Player.h" />
-    <ClInclude Include="Objects\Items\Weapons\DragonBoneWeapon.h" />
-    <ClInclude Include="Objects\Items\Weapons\IronWeapon.h" />
-    <ClInclude Include="Objects\Items\Weapons\Weapon.h" />
     <ClInclude Include="Objects\Manager\EnemySpawn.h" />
     <ClInclude Include="Objects\Character\Enemy.h" />
     <ClInclude Include="Objects\Character\Character.h" />
@@ -265,18 +262,15 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Items\Armors\Dragonboneboots.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonbonecuirassplate.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonbonegauntlets.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonbonehelmet.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Dragonboneshield.cpp" />
     <ClCompile Include="Objects\Character\alduin.cpp" />
-    <ClCompile Include="Objects\Inventory\Inventory.cpp" />
-    <ClCompile Include="Objects\Items\Armors\Armor.cpp" />
-    <ClCompile Include="Objects\Items\Armors\DragonBoneArmor.cpp" />
     <ClCompile Include="Objects\Items\Armors\IronArmor.cpp" />
-    <ClCompile Include="Objects\Items\Expendables\Expendables.cpp" />
-    <ClCompile Include="Objects\Items\Miscellaneous\Miscellaneous.cpp" />
     <ClCompile Include="Objects\Items\Weapons\BladeSword.cpp" />
     <ClCompile Include="Objects\Character\Player.cpp" />
-    <ClCompile Include="Objects\Items\Weapons\DragonBoneWeapon.cpp" />
-    <ClCompile Include="Objects\Items\Weapons\IronWeapon.cpp" />
-    <ClCompile Include="Objects\Items\Weapons\Weapon.cpp" />
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp" />
     <ClCompile Include="Objects\Character\Character.cpp" />
     <ClCompile Include="Framework\Shader\DomainShader.cpp" />
@@ -568,9 +562,6 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-    </FxCompile>
-    <FxCompile Include="Shaders\UI\CenterEndProgressBar.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\UI\ProgressBar.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
