@@ -71,19 +71,20 @@ UIManager::UIManager()
 #pragma endregion
 
 #pragma region enemy_status_bar
-    enemy_HP_bar_background = new Quad(L"Textures/UI/enemy_hp_bar.png");
+    enemy_HP_bar_background = new Quad(L"Textures/UI/enemyHP_background.png");
     enemy_HP_bar_background->Pos() = { CENTER_X,WIN_HEIGHT * 0.925f,0 };
     enemy_HP_bar_background->Scale().y *= 1.2f;
     enemy_HP_bar_background->UpdateWorld();
 
-    enemy_HP_bar = new Quad(L"Textures/UI/hp_bar.png");
+    enemy_HP_bar = new ProgressBar(
+        L"Textures/UI/enemyHP_bar.png",
+        L"Textures/UI/none.png",
+        false,
+        true
+    );
+
     enemy_HP_bar->SetParent(enemy_HP_bar_background);
-    enemy_HP_bar->Scale() *= 0.35f;
-    enemy_HP_bar->Scale().x *= 1.0f;
-
     enemy_maxHpBar = enemy_HP_bar->Scale().x;
-
-
 #pragma endregion
 
 }
@@ -151,11 +152,13 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies)
     SP_bar->SetAmount(player->GetStatus().curstamina / player->GetStatus().maxstamina);
     SP_bar->UpdateWorld();
 
-    enemy_HP_ratio = enemies[0]->GetEnemies()[0]->GetStatus().curHp / enemies[0]->GetEnemies()[0]->GetStatus().maxHp;
-    enemy_HP_bar->Scale().x = enemy_maxHpBar * enemy_HP_ratio;
+    enemy_HP_bar->SetAmount(enemies[0]->GetEnemies()[0]->GetStatus().curHp / enemies[0]->GetEnemies()[0]->GetStatus().maxHp);
     enemy_HP_bar->UpdateWorld();
 
-    enemies[0]->GetEnemies()[0]->GetStatus().curHp = enemies[0]->GetEnemies()[0]->GetStatus().maxHp;
+    if (KEY_PRESS('H'))
+    {
+        enemies[0]->GetEnemies()[0]->GetStatus().curHp -= 50 * DELTA;
+    }
 }
 
 void UIManager::Render()
@@ -187,6 +190,8 @@ void UIManager::PostRender()
 
     enemy_HP_bar_background->Render();
     enemy_HP_bar->Render();
+
+    Font::Get()->RenderText("Bear", { CENTER_X + 20 ,WIN_HEIGHT * 0.91f }, { 0,0 });
 }
 
 void UIManager::GUIRender()

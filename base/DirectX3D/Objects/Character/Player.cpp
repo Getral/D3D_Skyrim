@@ -103,6 +103,8 @@ void Player::Update()
 	if (KEY_PRESS('E'))
 		this->Rot().y += 1 * DELTA;
 
+	if (KEY_PRESS('H'))
+		this->status.curstamina -= 10 * DELTA;
 }
 
 void Player::Render()

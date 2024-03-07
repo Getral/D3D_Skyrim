@@ -707,6 +707,7 @@
     <FxCompile Include="Shaders\Effect\Fog.hlsl" />
     <FxCompile Include="Shaders\Effect\Particle.hlsl" />
     <FxCompile Include="Shaders\UI\RevProgressBar.hlsl" />
+    <FxCompile Include="Shaders\UI\CenterEndProgressBar.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexHeader.hlsli" />

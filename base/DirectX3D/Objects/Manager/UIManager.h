@@ -30,7 +30,7 @@ private:
 	ProgressBar* SP_bar;
 
 	Quad* enemy_HP_bar_background;
-	Quad* enemy_HP_bar;
+	ProgressBar* enemy_HP_bar;
 	float enemy_maxHpBar;
 	float enemy_HP_ratio;
 
@@ -50,5 +50,7 @@ private:
 	vector<float> final_angles;
 
 	int monsterCount = 4;
+
+	
 };
 
