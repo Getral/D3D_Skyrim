@@ -16,7 +16,6 @@ private:
 	Terrain* terrain;
 	Player* player;
 	alduin* aldu;
-	//Model* fox;
-	Model* test3;
+	Model* fox;
 };
 
