@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -142,16 +142,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Objects\Items\Armors\Dragonboneboots.h" />
-    <ClInclude Include="Objects\Items\Armors\Dragonbonecuirassplate.h" />
-    <ClInclude Include="Objects\Items\Armors\Dragonbonegauntlets.h" />
-    <ClInclude Include="Objects\Items\Armors\Dragonbonehelmet.h" />
-    <ClInclude Include="Objects\Items\Armors\Dragonboneshield.h" />
+    <ClInclude Include="Objects\Items\Armors\Armor.h" />
+    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonboneboots.h" />
+    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonbonecuirassplate.h" />
+    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonbonegauntlets.h" />
+    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonbonehelmet.h" />
+    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonboneshield.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Character\alduin.h" />
     <ClInclude Include="Objects\Items\Armors\IronArmor.h" />
+    <ClInclude Include="Objects\Items\Armors\IronArmors\ironboots.h" />
+    <ClInclude Include="Objects\Items\Armors\IronArmors\ironcuirassplate.h" />
+    <ClInclude Include="Objects\Items\Armors\IronArmors\irongauntlets.h" />
+    <ClInclude Include="Objects\Items\Armors\IronArmors\ironhelmet.h" />
+    <ClInclude Include="Objects\Items\Armors\IronArmors\ironshield.h" />
+    <ClInclude Include="Objects\Items\Expendables\EbonyArrow.h" />
+    <ClInclude Include="Objects\Items\Expendables\Expendables.h" />
+    <ClInclude Include="Objects\Items\Expendables\IronArrow.h" />
+    <ClInclude Include="Objects\Items\Expendables\Potion.h" />
+    <ClInclude Include="Objects\Items\Miscellaneous\Miscellaneous.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
     <ClInclude Include="Objects\Character\Player.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyClaymore.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyDagger.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyMace.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyWarAxe.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyBattleAxe.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyLongSword.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyWarHamer.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronBow.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronClaymore.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronDagger.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronMace.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronWaraxe.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\2hd\IronBattleAxe.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\2hd\IronLongSword.h" />
+    <ClInclude Include="Objects\Items\Weapons\IronWeapons\2hd\IronWarHammer.h" />
+    <ClInclude Include="Objects\Items\Weapons\Weapon.h" />
     <ClInclude Include="Objects\Manager\EnemySpawn.h" />
     <ClInclude Include="Objects\Character\Enemy.h" />
     <ClInclude Include="Objects\Character\Character.h" />
@@ -263,15 +291,43 @@
     <ClInclude Include="tsert123.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Objects\Items\Armors\Dragonboneboots.cpp" />
-    <ClCompile Include="Objects\Items\Armors\Dragonbonecuirassplate.cpp" />
-    <ClCompile Include="Objects\Items\Armors\Dragonbonegauntlets.cpp" />
-    <ClCompile Include="Objects\Items\Armors\Dragonbonehelmet.cpp" />
-    <ClCompile Include="Objects\Items\Armors\Dragonboneshield.cpp" />
+    <ClCompile Include="Objects\Items\Armors\Armor.cpp" />
+    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonboneboots.cpp" />
+    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonecuirassplate.cpp" />
+    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonegauntlets.cpp" />
+    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonehelmet.cpp" />
+    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonboneshield.cpp" />
     <ClCompile Include="Objects\Character\alduin.cpp" />
     <ClCompile Include="Objects\Items\Armors\IronArmor.cpp" />
+    <ClCompile Include="Objects\Items\Armors\IronArmors\ironboots.cpp" />
+    <ClCompile Include="Objects\Items\Armors\IronArmors\ironcuirassplate.cpp" />
+    <ClCompile Include="Objects\Items\Armors\IronArmors\irongauntlets.cpp" />
+    <ClCompile Include="Objects\Items\Armors\IronArmors\ironhelmet.cpp" />
+    <ClCompile Include="Objects\Items\Armors\IronArmors\ironshield.cpp" />
+    <ClCompile Include="Objects\Items\Expendables\EbonyArrow.cpp" />
+    <ClCompile Include="Objects\Items\Expendables\Expendables.cpp" />
+    <ClCompile Include="Objects\Items\Expendables\IronArrow.cpp" />
+    <ClCompile Include="Objects\Items\Expendables\Potion.cpp" />
+    <ClCompile Include="Objects\Items\Miscellaneous\Miscellaneous.cpp" />
     <ClCompile Include="Objects\Items\Weapons\BladeSword.cpp" />
     <ClCompile Include="Objects\Character\Player.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyClaymore.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyDagger.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyMace.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyWarAxe.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyBattleAxe.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyLongSword.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyWarHamer.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronBow.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronClaymore.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronDagger.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronMace.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronWaraxe.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\2hd\IronBattleAxe.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\2hd\IronLongSword.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\IronWeapons\2hd\IronWarHammer.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\Weapon.cpp" />
     <ClCompile Include="Objects\Manager\EnemySpawn.cpp" />
     <ClCompile Include="Objects\Character\Character.cpp" />
     <ClCompile Include="Framework\Shader\DomainShader.cpp" />

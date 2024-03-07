@@ -14,9 +14,6 @@ PlayerScene::PlayerScene()
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
-	//fox = new Model("Fox");
-	//fox->UpdateWorld();
-
 	CAM->SetTarget(player);
 	CAM->TargetOptionLoad("Skyrim");
 	CAM->LookAtTarget();
