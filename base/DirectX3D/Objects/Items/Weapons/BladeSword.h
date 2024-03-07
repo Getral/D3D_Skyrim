@@ -20,4 +20,3 @@ private:
     bool isWeapon = false;
 
 };
-
