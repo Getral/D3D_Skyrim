@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "alduin.h"
 
-alduin::alduin() :  ModelAnimator("alduin")
+alduin::alduin() : ModelAnimator("alduin")
 {
 	transform = new Transform();
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
@@ -73,7 +73,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
 	}
 
-	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
+	//GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
 	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.2f);
 
 	GetClip(BREATH)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
@@ -221,7 +221,7 @@ void alduin::FireBallAttack()
 	{
 		SetState(FIREBALL);
 	}
-
+}
 
 void alduin::EndTakeoff()
 {

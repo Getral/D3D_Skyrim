@@ -44,7 +44,7 @@ private:
 	void beginAttack();
 	void Inhale();
 	void FireBallAttack();
-	void BreathAttack();
+	//void BreathAttack();
 
 
 	void EndTakeoff();
