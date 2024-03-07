@@ -19,8 +19,6 @@ SpawnManager::SpawnManager()
 		tmp->Spawn();
 		monsterSpawnManager.push_back(tmp);
 	}
-
-
 }
 
 SpawnManager::~SpawnManager()

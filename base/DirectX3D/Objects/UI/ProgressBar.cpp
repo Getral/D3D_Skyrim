@@ -1,13 +1,15 @@
 #include "Framework.h"
 
-ProgressBar::ProgressBar(wstring frontImageFile, wstring backImageFile, bool rev)
+ProgressBar::ProgressBar(wstring frontImageFile, wstring backImageFile, bool rev, bool centerEnd)
     : Quad(frontImageFile)
 {
     // 쿼드 설정 진행
-    if (rev)
+    if (rev&& !centerEnd)
         material->SetShader(L"UI/RevProgressBar.hlsl"); // 2D만 계산하는 셰이더
-    else
+    else if(!rev && !centerEnd)
         material->SetShader(L"UI/ProgressBar.hlsl"); // 2D만 계산하는 셰이더
+    else if (!rev && centerEnd)
+        material->SetShader(L"UI/CenterEndProgressBar.hlsl");
 
     // 후면 이미지 생성
     backImage = Texture::Add(backImageFile);

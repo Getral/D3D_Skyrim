@@ -43,7 +43,7 @@ Player::Player()
 	ReadClip("male_block_bash_intro_shield");
 	ReadClip("male_block_bash_shield");
 
-	ModelAnimator::Rot().y = XM_PI;
+	//ModelAnimator::Rot().y = XM_PI;
 
 	collider = new CapsuleCollider(3, 5);
 	collider->Scale() *= 1000;
@@ -103,6 +103,8 @@ void Player::Update()
 	if (KEY_PRESS('E'))
 		this->Rot().y += 1 * DELTA;
 
+	if (KEY_PRESS('H'))
+		this->status.curstamina -= 10 * DELTA;
 }
 
 void Player::Render()
