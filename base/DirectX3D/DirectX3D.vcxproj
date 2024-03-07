@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -260,6 +260,7 @@
     <ClInclude Include="Objects\Landscape\TerrainData.h" />
     <ClInclude Include="Objects\Landscape\TerrainLOD.h" />
     <ClInclude Include="Objects\Landscape\Water.h" />
+    <ClInclude Include="tsert123.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\Items\Armors\Dragonboneboots.cpp" />
@@ -372,6 +373,7 @@
     <ClCompile Include="Scenes\MonsterScene.cpp" />
     <ClCompile Include="Objects\Manager\SpawnManager.cpp" />
     <ClCompile Include="Objects\Items\Weapons\Shield.cpp" />
+    <ClCompile Include="tsert123.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX3D.rc" />
