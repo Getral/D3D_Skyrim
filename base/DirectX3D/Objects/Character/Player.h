@@ -20,7 +20,7 @@ public:
 		RUN_F, RUN_FL, RUN_FR, RUN_B, RUN_BL, RUN_BR, RUN_L, RUN_R,
 		CIDLE, CMOVE_F, CMOVE_FL, CMOVE_FR, CMOVE_B, CMOVE_BL, CMOVE_BR, CMOVE_L, CMOVE_R,
 		ATTACK_RIGHT, ATTACK_LEFT, ATTACK_HEAVY,
-		BLOCK, PARRY_START, PARRY
+		BLOCK, PARRY_START, PARRY, THM_IDLE
 	};
 
 public:
@@ -107,6 +107,10 @@ protected:
 	bool isBlock = false;
 	bool isHit = false;
 	bool isCombo = false;
+	bool is1hm = false;
+	bool is2hm = true;
+	bool isbow = false;
+
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
 };

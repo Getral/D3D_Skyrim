@@ -42,6 +42,7 @@ Player::Player()
 	ReadClip("male_block_shield");
 	ReadClip("male_block_bash_intro_shield");
 	ReadClip("male_block_bash_shield");
+	ReadClip("male_2hm_idle");
 
 	ModelAnimator::Rot().y = XM_PI;
 
