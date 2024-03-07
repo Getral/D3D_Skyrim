@@ -1,2 +1,2 @@
 #include "Framework.h"
-#include "dragonbonehelmet.h"
+#include "DragonBoneHelmet.h"

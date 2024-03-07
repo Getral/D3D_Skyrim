@@ -1,5 +1,5 @@
 #pragma once
-class ironcuirassplate
+class IronCuirassplate
 {
 };
 

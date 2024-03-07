@@ -1,2 +1,2 @@
 #include "Framework.h"
-#include "dragonbonecuirassplate.h"
+#include "DragonBoneCuirassplate.h"
