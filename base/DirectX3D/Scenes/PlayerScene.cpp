@@ -7,20 +7,24 @@ PlayerScene::PlayerScene()
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
 	terrain->UpdateWorld();
 
-	player = new Player();
-
+	//player = new Player();
+	//
 	//aldu = new alduin();
 	//aldu->SetTarget(player);
+	//
+	//fox = new Model("Fox");
+	//fox->UpdateWorld();
+	//
+	//CAM->SetTarget(player); 
+	//CAM->TargetOptionLoad("Skyrim");
+	//CAM->LookAtTarget(); 
 
-	fox = new Model("Fox");
-	fox->Pos() = { 100,0,100 };
-	fox->Rot().x = XM_PI / 2;
-	fox->Scale() *= 1.0f;
-	fox->UpdateWorld();
+	test3 = new Model("test3");
 
-	CAM->SetTarget(player); 
+
+	CAM->SetTarget(player);
 	CAM->TargetOptionLoad("Skyrim");
-	CAM->LookAtTarget(); 
+	CAM->LookAtTarget();
 }
 
 PlayerScene::~PlayerScene()
@@ -28,14 +32,15 @@ PlayerScene::~PlayerScene()
 	//delete aldu;
 	delete terrain;
 	delete player;
-	delete fox;
+	delete test3;
 }
 
 void PlayerScene::Update()
 {
-	player->Update();
+	//player->Update();
 	//aldu->Update();
-	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager());
+	test3->UpdateWorld();
+	//UIManager::Get()->Update(player, fox);
 }
 
 void PlayerScene::PreRender()
@@ -44,9 +49,9 @@ void PlayerScene::PreRender()
 
 void PlayerScene::Render()
 {
-	player->Render();
+	//player->Render();
 	//aldu->Render();
-	fox->Render();
+	test3->Render();
 }
 
 void PlayerScene::PostRender()
@@ -56,7 +61,7 @@ void PlayerScene::PostRender()
 
 void PlayerScene::GUIRender()
 {
-	player->GUIRender();
+	//player->GUIRender();
 	//aldu->GUIRender();
-	UIManager::Get()->GUIRender();
+	test3->GUIRender();
 }

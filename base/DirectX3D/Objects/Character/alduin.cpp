@@ -302,6 +302,7 @@ void alduin::Patterns()
 
 
 	}
+
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_R);
