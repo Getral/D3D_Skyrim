@@ -1,13 +1,13 @@
 #pragma once
-
-class IronArmor : public Model
+class Dragonboneshield : public Model
 {
 public:
-    IronArmor();
-    ~IronArmor();
+    Dragonboneshield();
+    ~Dragonboneshield();
 
     void Update();
     void Render();
     void GUIRender();
+
 };
 

@@ -54,6 +54,29 @@ Player::Player()
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
+	//dragonbonehelmet = new Dragonbonehelmet();
+	//dragonbonehelmet->Load();
+	//head = new Transform();
+	//dragonbonehelmet->SetParent(head);
+	//dragonbonecuirassplate = new Dragonbonecuirassplate();
+	//dragonbonecuirassplate->Load();
+	//armor = new IronArmor();
+	//armor->Load();
+	//body = new Transform();
+	//armor->SetParent(body);
+	//dragonbonegauntlets = new Dragonbonegauntlets();
+	//dragonbonegauntlets->Load();
+	//hands = new Transform();
+	//dragonbonegauntlets->SetParent(hands);
+	//dragonboneboots = new Dragonboneboots();
+	//dragonboneboots->Load();
+	//foot = new Transform();
+	//dragonboneboots->SetParent(foot);
+	//dragonboneshield = new Dragonboneshield();
+	//dragonboneshield->Load();
+	//leftHand = new Transform();
+	//dragonboneshield->SetParent(leftHand);
+
 	bladeSword = new BladeSword();
 	bladeSword->Load();
 
@@ -66,6 +89,9 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
+	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
@@ -73,15 +99,30 @@ Player::Player()
 	GetClip(HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
 	GetClip(HIT_HEAVY)->SetEvent(bind(&Player::EndHit, this), 0.8f);
 	GetClip(HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	
+	GetClip(HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(HIT_HEAVY)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 }
 
 Player::~Player()
 {
 	delete bladeSword;
 	delete shield;
+	//delete armor;
+	//delete dragonboneboots;
+	//delete dragonbonecuirassplate;
+	//delete dragonbonegauntlets;
+	//delete dragonbonehelmet;
+	//delete dragonboneshield;
 	delete collider;
 	delete rightHand;
 	delete leftHand;
+	//delete head;
+	//delete body;
+	//delete foot;
+	//delete hands;
 }
 
 void Player::Update()
@@ -96,12 +137,26 @@ void Player::Update()
 	rightHand->SetWorld(GetTransformByNode(79));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
-	shield->Update();
+	shield->Update();	
 
-	if (KEY_PRESS('Q'))
-		this->Rot().y -= 1 * DELTA;
-	if (KEY_PRESS('E'))
-		this->Rot().y += 1 * DELTA;
+	if (isInvincible)
+	{
+		invincibleCount += DELTA;
+		if (invincibleCount > 2.0f) EndInvincible();
+	}
+
+	//body->SetWorld(GetTransformByNode(nodeIndex1));
+	//armor->Update();
+	//leftHand->SetWorld(GetTransformByNode(119));
+	//dragonboneshield->Update();
+	//head->SetWorld(GetTransformByNode(nodeIndex1));
+	//dragonbonehelmet->Update();
+	//body->SetWorld(GetTransformByNode(nodeIndex2));
+	//dragonbonecuirassplate->Update();
+	//foot->SetWorld(GetTransformByNode(nodeIndex3));
+	//dragonboneboots->Update();
+	//hands->SetWorld(GetTransformByNode(nodeIndex4));
+	//dragonbonegauntlets->Update();
 
 }
 
@@ -111,6 +166,12 @@ void Player::Render()
 	collider->Render();
 	bladeSword->Render();
 	shield->Render();
+	//armor->Render();
+	//dragonboneboots->Render();
+	//dragonbonecuirassplate->Render();
+	//dragonbonegauntlets->Render();
+	//dragonbonehelmet->Render();
+	//dragonboneshield->Render();
 
 }
 
@@ -123,7 +184,8 @@ void Player::GUIRender()
 	bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
-	ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 1, 500);
+	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);
+	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
 }
 
 void Player::Control()
@@ -140,6 +202,7 @@ void Player::Move()
 		return;
 	if (isBlock) return;
 	if (isHit) return;
+	if (!KEY_PRESS('W') && !KEY_PRESS('S') && !KEY_PRESS('A') && !KEY_PRESS('D')) velocity.z = 0.0f, velocity.x = 0.0f;
 
 	bool isMoveZ = false;
 	bool isMoveX = false;
@@ -324,6 +387,8 @@ void Player::Block()
 
 void Player::GetHit()
 {
+	if (isInvincible) return;
+
 	if (isBlock)
 	{
 		if (KEY_DOWN('Z'))
@@ -438,8 +503,20 @@ void Player::SetAction(ACTION action)
 	PlayClip((int)action);
 }
 
+void Player::WeaponCollider()
+{
+	if (!bladeSword->GetIsWeapon())
+	{
+		bladeSword->SetIsCollider(true);
+	}
+}
+
 void Player::EndAttack()
 {
+	if (bladeSword->GetIsWeapon())
+	{
+	bladeSword->SetIsCollider(false);
+	}
 	SetAction(IDLE);
 }
 
@@ -459,4 +536,15 @@ void Player::EndBlockHit()
 {
 	SetAction(BLOCK);
 	isHit = false;
+}
+
+void Player::SetInvincible()
+{
+	isInvincible = true;	
+}
+
+void Player::EndInvincible()
+{
+	isInvincible = false;
+	invincibleCount = 0.0f;
 }
