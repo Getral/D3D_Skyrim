@@ -190,6 +190,7 @@
     <ClInclude Include="Objects\Landscape\QuadTreeTerrain.h" />
     <ClInclude Include="Framework\Environment\Reflection.h" />
     <ClInclude Include="Framework\Environment\Refraction.h" />
+    <ClInclude Include="Scenes\alduinScene.h" />
     <ClInclude Include="Scenes\PlayerScene.h" />
     <ClInclude Include="Scenes\ParticleConfigScene.h" />
     <ClInclude Include="Objects\Items\Weapons\Crowbar.h" />
@@ -338,6 +339,7 @@
     <ClCompile Include="Objects\Landscape\QuadTreeTerrain.cpp" />
     <ClCompile Include="Framework\Environment\Reflection.cpp" />
     <ClCompile Include="Framework\Environment\Refraction.cpp" />
+    <ClCompile Include="Scenes\alduinScene.cpp" />
     <ClCompile Include="Scenes\PlayerScene.cpp" />
     <ClCompile Include="Scenes\ParticleConfigScene.cpp" />
     <ClCompile Include="Objects\Items\Weapons\Crowbar.cpp" />
