@@ -37,7 +37,7 @@ public:
 	CapsuleCollider* GetCollier() { return collider; }
 	BladeSword* GetSword() { return bladeSword; }
 	bool GetIsHit() { return isHit; }
-	ACTION GetAction() { return action; }
+	ACTION GetAction() { return curAction; }
 
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }

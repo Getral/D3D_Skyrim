@@ -3,25 +3,23 @@
 
 SpawnManager::SpawnManager()
 {
-	monsterName.push_back("Bear");
-	//monsterName.push_back("Wolf");
-
-
+	MONSTER_SIZE = (UINT)monsterName.size();
 	FOR(MONSTER_SIZE)
 	{
 		monsterInstancing.push_back(new ModelAnimatorInstancing(monsterName[i]));
 		for (int j = 0; j < clipNameTable[i].size(); j++)
 			monsterInstancing[i]->ReadClip(clipNameTable[i][j]);
 
-		enemies.push_back(new Enemy(monsterName[i], i, monsterInstancing[i]));
+		if (monsterName[i] == "Bear")
+			enemies.push_back(new Bear(monsterName[i], i, monsterInstancing[i]));
+		else if (monsterName[i] == "Wolf")
+			enemies.push_back(new Wolf(monsterName[i], i, monsterInstancing[i]));
 		enemies[i]->SetStatus(statusTable[i]);
 
 		EnemySpawn* tmp = new EnemySpawn(monsterInstancing[i], enemies[i], posTable[i]);
 		tmp->Spawn();
 		monsterSpawnManager.push_back(tmp);
 	}
-
-
 }
 
 SpawnManager::~SpawnManager()

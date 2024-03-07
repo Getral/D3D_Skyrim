@@ -9,25 +9,29 @@ private:
 		WOLF
 	};
 
+	vector<string> monsterName = {
+		"Bear", "Wolf"
+	};
+
 	vector<vector<string>> clipNameTable =
 	{
-		{ "bear_idle", "bear_run_forward", "bear_attack", "bear_hit"}
-		//{ "wolf_idle", "wolf_run_forward", "wolf_attack"}
+		{ "bear_idle", "bear_run_forward", "bear_attack", "bear_attack2", "bear_attack3", "bear_hit"},
+		{ "wolf_idle", "wolf_run_forward", "wolf_attack"}
 	};
 
 	vector<vector<Vector3>> posTable =
 	{
-		{ Vector3(50, 0, 50), Vector3(-20, 0, 30), Vector3(-10, 0, -20) }
-		//{ Vector3(10, 0, -20), Vector3(-100, 0, 50), Vector3(75, 0, 80) }
+		{ Vector3(50, 0, 50), Vector3(-20, 0, 30), Vector3(-10, 0, -20) },
+		{ Vector3(10, 0, -20), Vector3(-100, 0, 50), Vector3(75, 0, 80) }
 	};
 
 	vector<Character::Status> statusTable =
 	{
-		Character::Status(15, 300, 200, 20, 25)
-		//Character::Status(10, 150, 100, 10, 15)
+		Character::Status(15, 300, 200, 20, 25),
+		Character::Status(10, 150, 100, 10, 15)
 	};
 
-	UINT MONSTER_SIZE = 1;
+	UINT MONSTER_SIZE = 2;
 
 	UINT MONSTER_COUNT = 0;
 
@@ -52,7 +56,6 @@ public:
 private:
 	Player* playerData;
 
-	vector<string> monsterName;
 	vector<ModelAnimatorInstancing*> monsterInstancing;
 	vector<Enemy*> enemies;
 	
