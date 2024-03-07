@@ -52,6 +52,7 @@ private:
 
 	void SetAnimation();
 
+	void WeaponCollider();
 	void EndAttack();
 	void EndBlock();
 	void EndHit();

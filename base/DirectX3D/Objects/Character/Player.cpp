@@ -89,6 +89,9 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
+	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
@@ -199,7 +202,7 @@ void Player::Move()
 		return;
 	if (isBlock) return;
 	if (isHit) return;
-	if (!KEY_PRESS('W') && !KEY_PRESS('S') && !KEY_PRESS('A') && !KEY_PRESS('D')) return;
+	if (!KEY_PRESS('W') && !KEY_PRESS('S') && !KEY_PRESS('A') && !KEY_PRESS('D')) velocity.z = 0.0f, velocity.x = 0.0f;
 
 	bool isMoveZ = false;
 	bool isMoveX = false;
@@ -500,8 +503,20 @@ void Player::SetAction(ACTION action)
 	PlayClip((int)action);
 }
 
+void Player::WeaponCollider()
+{
+	if (!bladeSword->GetIsWeapon())
+	{
+		bladeSword->SetIsCollider(true);
+	}
+}
+
 void Player::EndAttack()
 {
+	if (bladeSword->GetIsWeapon())
+	{
+	bladeSword->SetIsCollider(false);
+	}
 	SetAction(IDLE);
 }
 
