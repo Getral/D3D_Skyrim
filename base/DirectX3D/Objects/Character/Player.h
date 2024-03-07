@@ -13,7 +13,6 @@ public:
 		float speed = 10;
 	};
 
-private:
 	enum ACTION
 	{
 		IDLE, JUMP, HIT_LIGHT, HIT_MEDIUM, HIT_HEAVY, HIT_BLOCK,
@@ -36,6 +35,10 @@ public:
 
 	Status GetStatus() { return status; }
 	CapsuleCollider* GetCollier() { return collider; }
+	bool GetIsHit() { return isHit; }
+
+	void SetAction(ACTION action);
+	void SetIsHit(bool value) { isHit = value; }
 
 private:
 	void Control();
@@ -47,8 +50,6 @@ private:
 	void GetHit();
 
 	void SetAnimation();
-
-	void SetAction(ACTION action);
 
 	void Attack1hm();
 	void Attack2hm();
@@ -87,9 +88,11 @@ protected:
 	float jumpVelocity = 0;
 	float jumpForce = 0.5f;
 	float gravityMult = 0.5f;
+	float attackCharge = 0.0f;
 	bool isJump = false;
 	bool isBlock = false;
 	bool isHit = false;
+	bool isCombo = false;
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
 };
