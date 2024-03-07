@@ -15,8 +15,7 @@ public:
 private:
 	Terrain* terrain;
 	Player* player;
-	alduin* aldu;
-	//Model* fox;
-	Model* test3;
+	//alduin* aldu;
+	Model* fox;
 };
 
