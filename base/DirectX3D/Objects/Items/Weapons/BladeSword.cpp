@@ -25,7 +25,6 @@ BladeSword::~BladeSword()
 void BladeSword::Update()
 {
 	UpdateWorld(); // 자기 업데이트
-	ColliderManager(isWeapon);
 	collider->UpdateWorld(); //충돌체도 업데이트
 }
 
@@ -39,17 +38,4 @@ void BladeSword::GUIRender()
 {
 	Model::GUIRender();
 	collider->GUIRender();
-}
-
-void BladeSword::ColliderManager(bool isWeaponColl)
-{
-	if (isWeaponColl)
-	{
-		collider->SetActive(true);
-	}
-	else
-	{
-		collider->SetActive(false);
-	}
-
 }

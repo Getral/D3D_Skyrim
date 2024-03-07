@@ -150,7 +150,6 @@
     <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonboneshield.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Character\alduin.h" />
-    <ClInclude Include="Objects\Items\Armors\IronArmor.h" />
     <ClInclude Include="Objects\Items\Armors\IronArmors\ironboots.h" />
     <ClInclude Include="Objects\Items\Armors\IronArmors\ironcuirassplate.h" />
     <ClInclude Include="Objects\Items\Armors\IronArmors\irongauntlets.h" />
@@ -299,7 +298,6 @@
     <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonehelmet.cpp" />
     <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonboneshield.cpp" />
     <ClCompile Include="Objects\Character\alduin.cpp" />
-    <ClCompile Include="Objects\Items\Armors\IronArmor.cpp" />
     <ClCompile Include="Objects\Items\Armors\IronArmors\ironboots.cpp" />
     <ClCompile Include="Objects\Items\Armors\IronArmors\ironcuirassplate.cpp" />
     <ClCompile Include="Objects\Items\Armors\IronArmors\irongauntlets.cpp" />

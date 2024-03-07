@@ -23,7 +23,7 @@ private:
 
 	vector<Character::Status> statusTable =
 	{
-		Character::Status(15, 300, 200, 20, 25)
+		Character::Status(15, 300, 200, 20, 5)
 		//Character::Status(10, 150, 100, 10, 15)
 	};
 

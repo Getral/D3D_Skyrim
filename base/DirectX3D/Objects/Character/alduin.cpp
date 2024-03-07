@@ -235,14 +235,18 @@ void alduin::FireAttack()
 {
 
 
-	if (velocity.Length() < 1000)
+	if (KEY_PRESS('J'))
 	{
-		SetState(BREATH);
+		velocity.x -= DELTA;
+		SetState(RUN_L);
+		//isMoveX = true;
 	}
 
-	else if (velocity.Length() > 1000)
+	if (KEY_PRESS('L'))
 	{
-		SetState(FIREBALL);
+		velocity.x += DELTA;
+		SetState(RUN_R);
+		//isMoveX = true;
 	}
 
 
@@ -308,11 +312,13 @@ void alduin::Patterns()
 		SetState(ATTACK_R);
 
 	}
+
 	else if (collider_L->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_L);
 
 	}
+
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_B);

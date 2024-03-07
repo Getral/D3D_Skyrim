@@ -22,7 +22,7 @@ void Character::Update()
 
 void Character::Render()
 {
-	//collider->Render();
+	collider->Render();
 }
 
 void Character::GUIRender()
