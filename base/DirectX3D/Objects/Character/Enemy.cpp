@@ -3,6 +3,9 @@
 Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform * transform, Vector3 spawnPos, float trackRange)
 	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing), trackRange(trackRange)
 {
+	rigidbody = new BoxCollider();
+	rigidbody->SetParent(transform);
+
 	trackCollider = new SphereCollider();
 	trackCollider->Scale() *= trackRange;
 	trackCollider->SetParent(transform);
@@ -33,6 +36,7 @@ Enemy::~Enemy()
 void Enemy::Update()
 {
 	Character::Update();
+	rigidbody->UpdateWorld();
 	trackCollider->UpdateWorld();
 	attackCollider->UpdateWorld();
 	for (Transform* t : colliderTransforms)

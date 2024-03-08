@@ -37,6 +37,7 @@ protected:
 	UINT index;
 	UINT node;
 
+	BoxCollider* rigidbody;
 	SphereCollider* trackCollider;
 	SphereCollider* attackCollider;
 	vector<CapsuleCollider*> colliders;

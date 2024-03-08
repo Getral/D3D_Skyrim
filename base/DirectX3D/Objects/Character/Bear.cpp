@@ -54,6 +54,12 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 		eventIters[i] = totalEvent[i].begin();
 
 	SetCollidersParent();
+
+	rigidbody->Scale().x *= trackRange * 0.2f;
+	rigidbody->Scale().y *= trackRange * 0.25f;
+	rigidbody->Scale().z *= trackRange * 0.38f;
+
+	rigidbody->Pos().y = rigidbody->Scale().y * 0.5f;
 }
 
 Bear::~Bear()
@@ -72,7 +78,7 @@ void Bear::Update()
 void Bear::Render()
 {
 	Enemy::Render();
-	attackCollider->Render();
+	rigidbody->Render();
 }
 
 void Bear::GUIRender()
