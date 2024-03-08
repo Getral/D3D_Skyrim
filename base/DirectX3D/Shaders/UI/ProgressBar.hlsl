@@ -32,6 +32,13 @@ float4 PS(PixelInput input) : SV_TARGET
 	//if (flippedUV < fillAmount)
 	//	return diffuseMap.Sample(samp, float2(flippedUV, input.uv.y));
 
+	//if (input.uv.x >= 0.5 - fillAmount / 2 && input.uv.x <= 0.5 + fillAmount / 2)
+	//{
+	//
+	//	return diffuseMap.Sample(samp, input.uv);
+	//}
+	//return backImage.Sample(samp, input.uv);
+
 	if (input.uv.x < fillAmount)
 		return diffuseMap.Sample(samp, input.uv);
 

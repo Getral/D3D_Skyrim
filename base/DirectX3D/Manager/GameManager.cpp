@@ -24,6 +24,12 @@ GameManager::GameManager()
     //SceneManager::Get()->Add("ParticleConfig");
     SceneManager::Get()->Add("Player");
     SceneManager::Get()->Add("Monster");
+
+    Font::Get()->AddColor("Gray", 185.0f / 255.0f, 185.0f / 255.0f, 185.0f / 255.0f);
+    Font::Get()->AddStyle("Futura", L"Futura");
+
+    Font::Get()->SetColor("Gray");
+    Font::Get()->SetStyle("Futura");
 }
 
 GameManager::~GameManager()
