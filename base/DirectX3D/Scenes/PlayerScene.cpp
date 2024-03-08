@@ -12,9 +12,6 @@ PlayerScene::PlayerScene()
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
-	//fox = new Model("Fox");
-	//fox->UpdateWorld();
-
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("skyrim2");
 	CAM->LookAtTarget(); 
@@ -25,7 +22,6 @@ PlayerScene::~PlayerScene()
 	delete aldu;
 	delete terrain;
 	delete player;
-	//delete fox;
 }
 
 void PlayerScene::Update()
@@ -42,7 +38,7 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
-	aldu->Render();
+	//aldu->Render();
 }
 
 void PlayerScene::PostRender()

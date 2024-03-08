@@ -1,17 +1,21 @@
 #include "Framework.h"
 
-Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstancing, Transform* transform, Vector3 spawnPos, float trackRange)
+Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform * transform, Vector3 spawnPos, float trackRange)
 	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing), trackRange(trackRange)
 {
 	trackCollider = new SphereCollider();
 	trackCollider->Scale() *= trackRange;
 	trackCollider->SetParent(transform);
 
-	attackRange = trackRange * 0.35f;
+	attackRange = trackRange * 0.3f;
 	attackCollider = new SphereCollider();
 	attackCollider->Scale() *= attackRange;
 	attackCollider->Pos().SetY(attackRange * 0.5f);
 	attackCollider->SetParent(transform);
+
+	motion = modelAnimatorInstancing->GetMotion(index);
+	totalEvent.resize(modelAnimatorInstancing->GetClipSize());
+	eventIters.resize(modelAnimatorInstancing->GetClipSize());
 
 	//instancing->GetClip(ATTACK)->SetEvent(bind(&Enemy::Attack, this), 0.0f);
 }
@@ -34,20 +38,6 @@ void Enemy::Update()
 	for (Transform* t : colliderTransforms)
 		t->UpdateWorld();
 
-	//for (CapsuleCollider* collider : colliders)
-	//{
-	//	if (playerData->GetCollier()->IsCollision(collider))
-	//	{
-	//		playerData->SetAction(Player::HIT_MEDIUM);
-	//		playerData->SetIsHit(true);
-	//	}
-	//	else
-	//	{
-	//		playerData->SetIsHit(false);
-	//	}
-	//}
-	Track();
-
 	for (CapsuleCollider* collider : colliders)
 		collider->UpdateWorld();
 }
@@ -55,10 +45,6 @@ void Enemy::Update()
 void Enemy::Render()
 {
 	Character::Render();
-	//trackCollider->Render();
-	//attackCollider->Render();
-	//for (CapsuleCollider* collider : colliders)
-		//collider->Render();
 }
 
 void Enemy::GUIRender()
