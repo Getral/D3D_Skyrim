@@ -5,6 +5,8 @@ Wolf::Wolf(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 {
 	colliders.push_back(new CapsuleCollider(25.0f));
 
+	curState = IDLE;
+
 	SetCollidersParent();
 }
 
@@ -63,6 +65,14 @@ void Wolf::Track()
 }
 
 void Wolf::Attack()
+{
+}
+
+void Wolf::SetEvent(int clip, Event event, float timeRatio)
+{
+}
+
+void Wolf::ExecuteEvent()
 {
 }
 

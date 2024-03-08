@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 class Wolf : public Enemy
 {
 private:
@@ -28,12 +30,16 @@ public:
 	void SetState(State state);
 
 private:
-	virtual void Track();
 	void Attack();
 
+	void SetEvent(int clip, Event event, float timeRatio);
+	void ExecuteEvent();
+
+	virtual void Track();
 	virtual void SetColliderByNode();
 private:
-	State curState = IDLE;
+	State curState;
+
 	UINT node = 1;
 };
 

@@ -55,13 +55,25 @@ public:
 	void SetState(State state);
 
 private:
+	void SetEvent();
+	void Behavior();
+
+	void StartAttack();
+	void EndAttack();
+
+	void StartHit();
+	void EndHit();
+
+	void SetEvent(int clip, Event event, float timeRatio);
+	void ExecuteEvent();
+
 	virtual void Track();
-	void Attack();
-
 	virtual void SetColliderByNode();
+
 private:
-	State curState = IDLE;
+	float rotSpeed = 4.0f;
+	bool isHit = false;
 
-	bool isAttacked = false;
+	State curState;
+	UINT attackState = 0;
 };
-
