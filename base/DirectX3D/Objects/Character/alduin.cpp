@@ -1,11 +1,13 @@
 #include "Framework.h"
 #include "alduin.h"
 
-alduin::alduin() : ModelAnimator("alduin")
+alduin::alduin() :  ModelAnimator("alduin")
 {
 	transform = new Transform();
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
 	alduinCollider2->SetParent(this->transform);
+
+	tempRot = new Vector3();
 
 	HeadCollider = new CapsuleCollider(90.0f,0.1f);
 	LWingCollider = new CapsuleCollider(100.0f, 30.0f);
@@ -64,8 +66,8 @@ alduin::alduin() : ModelAnimator("alduin")
 
 	moveSpeed = 15.0f;
 
-	//SetEvent(TAKEOFF, bind(&alduin::EndTakeoff, this), 0.7f);
-	//SetEvent(PAIN, bind(&alduin::EndHit, this), 0.9f);
+
+	//일반 공격
 
 	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
 	{
@@ -73,11 +75,20 @@ alduin::alduin() : ModelAnimator("alduin")
 		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
 	}
 
-	//GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
-	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.2f);
+	
+	//화염 공격
+	GetClip(INHALE)->SetEvent(bind(&alduin::Inhale, this), 0.9f);
+
+	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
+	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.9f);
 
 	GetClip(BREATH)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
 	GetClip(FIREBALL)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+
+
+	//공중
+	GetClip(TAKEOFF)->SetEvent(bind(&alduin::beginTakeoff, this), 0.2f);
+	GetClip(TAKEOFF)->SetEvent(bind(&alduin::EndTakeoff, this), 0.9f);
 
 
 	
@@ -118,6 +129,9 @@ void alduin::Update()
 		velocity = this->target->GlobalPos() - transform->GlobalPos();
 		Move();
 	}
+
+	if(isAscending) 
+		altitude += 35 * DELTA;
 
 	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
 	HeadCollider->SetWorld(GetTransformByNode(45));
@@ -167,15 +181,33 @@ void alduin::SetTarget(Player* target)
 
 void alduin::Move()
 {
-	if (velocity.Length() < 100) return;
+	if (velocity.Length() > 100 && curState == IDLE)
+	{
+		SetState(TAKEOFF);
+
+	}
 
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
+	Pos().y = altitude;
+	transform->Pos().y = altitude;
 	Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
-	Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
+
+	Vector3 forward = this->Forward(); //모델 기준으로 앞 따오기
+	Vector3 cross = Cross(forward, velocity); //방향차이에서 나온 법선
 
 	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
-	transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
+
+	if (cross.y < 0) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
+	{
+		Rot().y += rotSpeed * DELTA;
+		transform->Rot().y += rotSpeed * DELTA;
+	}
+	else if (cross.y > 0) //반대의 경우
+	{
+		Rot().y -= rotSpeed * DELTA;
+		transform->Rot().y -= rotSpeed * DELTA;
+	}
 
 	
 }
@@ -212,19 +244,24 @@ void alduin::FireBallAttack()
 	//파이어볼이 나가는 시점일 때 실행할 내용들 ( 파티클, 투사체 생성...)
 
 
-	if (velocity.Length() < 1000)
-	{
-		SetState(BREATH);
-	}
+}
 
-	else if (velocity.Length() > 1000)
-	{
-		SetState(FIREBALL);
-	}
+void alduin::BreathAttack()
+{
+	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
+
+}
+
+
+void alduin::beginTakeoff()
+{
+	isAscending = true;
+	
 }
 
 void alduin::EndTakeoff()
 {
+	isAscending = false;
 	SetState(HOVER);
 
 }
@@ -275,7 +312,6 @@ void alduin::Patterns()
 	{
 		SetState(ATTACK_F);
 	}
-
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_R);
