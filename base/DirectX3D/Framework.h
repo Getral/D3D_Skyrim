@@ -158,6 +158,7 @@ using namespace GameMath;
 
 #include "Objects/Actor/ActorUI.h"
 #include "Objects/UI/ProgressBar.h"
+#include "Objects/UI/InvenUI.h"
 
 #include "Objects/Inventory/Inventory.h"
 

@@ -12,9 +12,6 @@ PlayerScene::PlayerScene()
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
-	//fox = new Model("Fox");
-	//fox->UpdateWorld();
-
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim");
 	CAM->LookAtTarget(); 
@@ -25,14 +22,13 @@ PlayerScene::~PlayerScene()
 	delete aldu;
 	delete terrain;
 	delete player;
-	//delete fox;
 }
 
 void PlayerScene::Update()
 {
 	player->Update();
 	aldu->Update();
-	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager());
+	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(), aldu);
 }
 
 void PlayerScene::PreRender()
@@ -54,4 +50,5 @@ void PlayerScene::GUIRender()
 {
 	player->GUIRender();
 	aldu->GUIRender();
+	UIManager::Get()->GUIRender();
 }

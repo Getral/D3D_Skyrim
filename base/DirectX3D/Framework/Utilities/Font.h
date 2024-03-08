@@ -22,6 +22,7 @@ public:
 
     wstring ChangeWString(string value);
 
+    map<string, IDWriteTextFormat*> GetFormats() { return formats; }
 private:
     ID2D1Factory1* factory;
     IDWriteFactory* writeFactory;
