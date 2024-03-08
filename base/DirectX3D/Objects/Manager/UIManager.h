@@ -49,7 +49,7 @@ private:
 	float final_angle;
 	vector<float> final_angles;
 
-	int monsterCount = 3;
+	int monsterCount = 0;
 
 	
 };

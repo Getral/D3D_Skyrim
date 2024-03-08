@@ -32,7 +32,7 @@ private:
 	};
 
 	UINT MONSTER_SIZE = 2;
-
+	UINT MONSTER_COUNT_ACTIVATED = 0;
 	UINT MONSTER_COUNT = 0;
 
 public:
@@ -54,6 +54,7 @@ public:
 	vector<Enemy*> &GetEnemies() { return enemies; }
 
 	UINT GetActivatedMonsterCount();
+	UINT GetMonsterCount();
 
 private:
 	Player* playerData;

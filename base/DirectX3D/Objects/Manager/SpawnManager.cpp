@@ -63,15 +63,28 @@ void SpawnManager::SetPlayerData(Player* player)
 
 UINT SpawnManager::GetActivatedMonsterCount()
 {
-	MONSTER_COUNT = 0;
+	MONSTER_COUNT_ACTIVATED = 0;
 	for (int i = 0; i < monsterSpawnManager.size(); i++)
 	{
 		for (int j = 0; j < monsterSpawnManager[i]->GetEnemies().size(); j++)
 		{
 			if (monsterSpawnManager[i]->GetEnemies()[j]->GetTransform()->Active())
 			{
-				MONSTER_COUNT++;
+				MONSTER_COUNT_ACTIVATED++;
 			}
+		}
+	}
+	return MONSTER_COUNT_ACTIVATED;
+}
+
+UINT SpawnManager::GetMonsterCount()
+{
+	MONSTER_COUNT = 0;
+	for (int i = 0; i < monsterSpawnManager.size(); i++)
+	{
+		for (int j = 0; j < monsterSpawnManager[i]->GetEnemies().size(); j++)
+		{
+			MONSTER_COUNT++;
 		}
 	}
 	return MONSTER_COUNT;

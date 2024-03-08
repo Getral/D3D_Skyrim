@@ -26,6 +26,8 @@ UIManager::UIManager()
 #pragma endregion
 
 #pragma region enemy_dirquad
+    monsterCount = SpawnManager::Get()->GetMonsterCount();
+
     FOR(monsterCount)
     {
         enemies_dir.push_back(new Quad(L"Textures/UI/enemy_dir.png"));
@@ -33,7 +35,6 @@ UIManager::UIManager()
         enemies_dir.back()->Scale() *= 0.4f;
         final_angles.push_back(0.0f);
     }
-
     
     //enemy_dir = new Quad(L"Textures/UI/enemy_dir.png");
     //enemy_dir->SetParent(compass);
