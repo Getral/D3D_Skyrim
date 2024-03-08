@@ -231,17 +231,11 @@ ModelExportScene::ModelExportScene()
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "Hit";
+    clipName = "bear_attack3";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
-
-    clipName = "StandUp";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;*/
 }
 
 ModelExportScene::~ModelExportScene()

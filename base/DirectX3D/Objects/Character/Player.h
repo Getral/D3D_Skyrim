@@ -35,7 +35,9 @@ public:
 
 	Status GetStatus() { return status; }
 	CapsuleCollider* GetCollier() { return collider; }
+	BladeSword* GetSword() { return bladeSword; }
 	bool GetIsHit() { return isHit; }
+	ACTION GetAction() { return curAction; }
 
 
 	void SetAction(ACTION action);

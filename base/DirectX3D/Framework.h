@@ -250,6 +250,8 @@ using namespace GameMath;
 #include "Objects/Character/Character.h"
 #include "Objects/Character/Enemy.h"
 #include "Objects/Character/alduin.h"
+#include "Objects/Character/Bear.h"
+#include "Objects/Character/Wolf.h"
 
 #include "Objects/Manager/BlockManager.h"
 #include "Objects/Manager/KunaiManager.h"
