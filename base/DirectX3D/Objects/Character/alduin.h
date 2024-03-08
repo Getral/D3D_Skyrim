@@ -44,9 +44,9 @@ private:
 	void beginAttack();
 	void Inhale();
 	void FireBallAttack();
-	//void BreathAttack();
+	void BreathAttack();
 
-
+	void beginTakeoff();
 	void EndTakeoff();
 	void EndHit();
 	void EndAttack();
@@ -71,12 +71,16 @@ private:
 	CapsuleCollider* collider_B;
 	Transform* transform;
 	Player* target;
+	Vector3* tempRot;
 
 	UINT nodeIndex = 0;
 
 	float moveSpeed = 500;
-	float rotSpeed = 0.5;
+	float rotSpeed = 0.25;
+	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
+
+	bool isAscending = false;
 
 	Vector3 velocity;
 
