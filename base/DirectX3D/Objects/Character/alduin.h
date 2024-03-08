@@ -34,6 +34,7 @@ public:
 	void GUIRender();
 
 	void SetTarget(Player* target);
+	float GetHP() { return curHp; }
 
 private:
 

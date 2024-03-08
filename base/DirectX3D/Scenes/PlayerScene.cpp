@@ -16,7 +16,7 @@ PlayerScene::PlayerScene()
 	//fox->UpdateWorld();
 
 	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("Skyrim");
+	CAM->TargetOptionLoad("skyrim2");
 	CAM->LookAtTarget(); 
 }
 

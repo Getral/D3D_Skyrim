@@ -66,8 +66,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	moveSpeed = 15.0f;
 
-	//SetEvent(TAKEOFF, bind(&alduin::EndTakeoff, this), 0.7f);
-	//SetEvent(PAIN, bind(&alduin::EndHit, this), 0.9f);
+
+	//일반 공격
 
 	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
 	{
@@ -75,16 +75,20 @@ alduin::alduin() :  ModelAnimator("alduin")
 		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
 	}
 
+	
+	//화염 공격
+	GetClip(INHALE)->SetEvent(bind(&alduin::Inhale, this), 0.9f);
+
 	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
-	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.2f);
+	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.9f);
 
 	GetClip(BREATH)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
 	GetClip(FIREBALL)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
 
+
+	//공중
 	GetClip(TAKEOFF)->SetEvent(bind(&alduin::beginTakeoff, this), 0.2f);
 	GetClip(TAKEOFF)->SetEvent(bind(&alduin::EndTakeoff, this), 0.9f);
-
-
 
 
 	
@@ -191,18 +195,8 @@ void alduin::Move()
 
 	Vector3 forward = this->Forward(); //모델 기준으로 앞 따오기
 	Vector3 cross = Cross(forward, velocity); //방향차이에서 나온 법선
-	//Rot().y = atan2(velocity.x, velocity.z) * rotSpeed * DELTA;
-	//Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
-	////Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
-	//if(atan2(velocity.x,velocity.z) - tempRot->y < 0.0f)
-	//	Rot().y = Lerp(Rot().y, (atan2(velocity.x, velocity.z) + XM_PI), 1.0 * rotSpeed * DELTA);
-	//else if (atan2(velocity.x, velocity.z) - tempRot->y >= 0.0f)
-	//	Rot().y = Lerp(Rot().y, (atan2(velocity.x, velocity.z) + XM_PI), 1.0 * rotSpeed * DELTA);
 
 	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
-	//transform->Rot().y = atan2(velocity.x,velocity.z) * rotSpeed * DELTA;
-	//transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
-	//transform->Rot().y = Lerp(Rot().y,(atan2(velocity.x, velocity.z) + XM_PI), 1.0 * rotSpeed * DELTA);
 
 	if (cross.y < 0) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
 	{
