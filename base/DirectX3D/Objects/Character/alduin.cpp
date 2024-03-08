@@ -45,22 +45,21 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_flight_hit");
 	this->ReadClip("alduin_backward");
 	this->ReadClip("alduin_bleedidle");
-	this->ReadClip("alduin_fly");
+	this->ReadClip("alduin_aproach");
 	this->ReadClip("alduin_flight_forward");
 	this->ReadClip("alduin_bite");
 	this->ReadClip("alduin_wingswip_left");
 	this->ReadClip("alduin_wingswip_right");
 	this->ReadClip("alduin_tailwhip");
-	this->ReadClip("alduin_climb");
-	this->ReadClip("alduin_aproach");
-	this->ReadClip("alduin_descend");
-	this->ReadClip("alduin_injured");
-	this->ReadClip("alduin_ascend");
 	this->ReadClip("alduin_inhale");
 	this->ReadClip("alduin_exhale_breath");
 	this->ReadClip("alduin_exhale_fireball");
 	this->ReadClip("alduin_pain");
 	this->ReadClip("alduin_pain2");
+	//this->ReadClip("alduin_climb");
+	//this->ReadClip("alduin_descend");
+	//this->ReadClip("alduin_injured");
+	//this->ReadClip("alduin_ascend");
 	this->ReadClip("alduin_timetravel");
 	Scale() *= 0.001;
 
@@ -282,18 +281,18 @@ void alduin::EndAttack()
 }
 
 
-void alduin::SetAnimation()
-{
-	if (curState == BREATH) return;
-
-	if (velocity.z > 0.1f) // 속력 기준이 현재 앞으로 +면
-		SetState(RUN);
-	else if (velocity.x > 0.1f) // 좌우 기준 +면
-		SetState(RUN_R);
-	else if (velocity.x < -0.1f) //좌우 기준 -면
-		SetState(RUN_L);
-	else SetState(IDLE); // 가만히 있으면
-}
+//void alduin::SetAnimation()
+//{
+//	if (curState == BREATH) return;
+//
+//	if (velocity.z > 0.1f) // 속력 기준이 현재 앞으로 +면
+//		SetState(RUN);
+//	else if (velocity.x > 0.1f) // 좌우 기준 +면
+//		SetState(RUN_R);
+//	else if (velocity.x < -0.1f) //좌우 기준 -면
+//		SetState(RUN_L);
+//	else SetState(IDLE); // 가만히 있으면
+//}
 
 void alduin::SetState(State state)
 {

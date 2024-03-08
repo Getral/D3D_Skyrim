@@ -9,9 +9,9 @@ private:
 		HOVER,
 		HOVER_HIT,
 		WALK,
-		RUN,
-		RUN_L,
-		RUN_R,
+		BLEED,
+		APROACH,
+		FLIGHT_FOR,
 		ATTACK_F, //물기, (공중) 접근
 		ATTACK_L, //날개 휘두르기 왼쪽
 		ATTACK_R, //날개 휘두르기 오른쪽
