@@ -58,11 +58,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_pain2");
 	this->ReadClip("alduin_landing");
 	this->ReadClip("alduin_landing_soft");
+	this->ReadClip("alduin_landing_hard");
 	this->ReadClip("alduin_land_ground");
-	//this->ReadClip("alduin_climb");
-	//this->ReadClip("alduin_descend");
-	//this->ReadClip("alduin_injured");
-	//this->ReadClip("alduin_ascend");
+	this->ReadClip("alduin_dive");
 	this->ReadClip("alduin_timetravel");
 	Scale() *= 0.001;
 
@@ -73,8 +71,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
 	{
-		GetClip(clipIndex)->SetEvent(bind(&alduin::beginAttack, this), 0.0f);
-		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 	}
 
 	
@@ -84,8 +81,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
 	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.9f);
 
-	GetClip(BREATH)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
-	GetClip(FIREBALL)->SetEvent(bind(&alduin::EndAttack, this), 0.9f);
+	GetClip(BREATH)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
+	GetClip(FIREBALL)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 
 
 	//공중
@@ -94,10 +91,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	GetClip(APROACH)->SetEvent(bind(&alduin::beginAproach, this), 0.9f);
 	//GetClip(FLIGHT_FOR)->SetEvent(bind(&alduin::aproaching, this), 0.0f);
-	GetClip(LANDING)->SetEvent(bind(&alduin::descend, this), 0.0f);
+	GetClip(LANDING_HARD)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 
 
-	
 }
 
 alduin::~alduin()
@@ -140,13 +136,14 @@ void alduin::Update()
 
 	if (isDescending)
 	{
-		altitude -= 35 * DELTA;
+		altitude -= 70 * DELTA;
 
 		if (Pos().y < 0.0f)
 		{
 			isDescending = false;
-			SetState(LANDING);
+			SetState(LANDING_HARD);
 			moveSpeed = 15.0f;
+			Pos().y = 0.0f;
 		}
 		
 	}
@@ -163,8 +160,10 @@ void alduin::Update()
 	TailCollider->SetWorld(GetTransformByNode(110));
 
 	Patterns();
-
 	PatternsAir();
+
+
+
 	//SetAnimation();
 	
 }
@@ -203,7 +202,7 @@ void alduin::SetTarget(Player* target)
 
 void alduin::Move()
 {
-	if (velocity.Length() > 200 && curState == IDLE)
+	if (velocity.Length() > 150 && curState == IDLE)
 	{
 		SetState(TAKEOFF);
 
@@ -232,16 +231,6 @@ void alduin::Move()
 	}
 
 	
-}
-
-
-void alduin::beginAttack()
-{
-	collider_F->SetActive(false);
-	collider_R->SetActive(false);
-	collider_L->SetActive(false);
-	collider_B->SetActive(false);
-
 }
 
 void alduin::Inhale()
@@ -291,8 +280,8 @@ void alduin::EndTakeoff()
 void alduin::beginAproach()
 {
 	isDescending = true;
-	SetState(FLIGHT_FOR);
-	moveSpeed = 150;
+	SetState(DIVE);
+	moveSpeed = 300;
 }
 
 //void alduin::aproaching()
@@ -311,22 +300,7 @@ void alduin::EndAction()
 	SetState(IDLE);
 }
 
-void alduin::descend()
-{
-	isDescending = false;
 
-	EndAction();
-}
-
-void alduin::EndAttack()
-{
-	collider_F->SetActive(true);
-	collider_R->SetActive(true);
-	collider_L->SetActive(true);
-	collider_B->SetActive(true);
-
-	SetState(IDLE);
-}
 
 
 //void alduin::SetAnimation()
@@ -350,11 +324,12 @@ void alduin::SetState(State state)
 	this->PlayClip((int)state);
 }
 
-void alduin::Patterns()
+void alduin::Patterns() //지상패턴
 {
 
-	if (curState == ATTACK_F || curState == ATTACK_R || curState == ATTACK_L || curState == ATTACK_B) return;
+	if (curState == ATTACK_F || curState == ATTACK_R || curState == ATTACK_L || curState == ATTACK_B || curState == LANDING_HARD) return;
 
+	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_F);
@@ -372,7 +347,6 @@ void alduin::Patterns()
 		SetState(ATTACK_B);
 	}
 
-	
 
 }
 

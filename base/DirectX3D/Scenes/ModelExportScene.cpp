@@ -60,18 +60,18 @@ ModelExportScene::ModelExportScene()
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "alduin_landing_soft";
+    clipName = "alduin_landing_hard";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "alduin_land_ground";
+    clipName = "alduin_dive";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
-    
+
    
 }
 

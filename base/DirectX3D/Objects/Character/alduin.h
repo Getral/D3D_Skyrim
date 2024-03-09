@@ -23,7 +23,9 @@ private:
 		PAIN2,
 		LANDING,
 		LANDING_SOFT,
+		LANDING_HARD,
 		LAND,
+		DIVE,
 		TIMETRAVEL
 	};
 
@@ -45,7 +47,6 @@ private:
 	void SetState(State state);
 	void Move();
 
-	void beginAttack();
 	void Inhale();
 	void FireBallAttack();
 	void BreathAttack();
@@ -56,7 +57,6 @@ private:
 	void aproaching();
 	void EndAction();
 	void descend();
-	void EndAttack();
 
 	void Patterns();
 	void PatternsAir();
