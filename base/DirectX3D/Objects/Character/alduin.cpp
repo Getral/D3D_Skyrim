@@ -56,6 +56,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_exhale_fireball");
 	this->ReadClip("alduin_pain");
 	this->ReadClip("alduin_pain2");
+	this->ReadClip("alduin_landing");
+	this->ReadClip("alduin_landing_soft");
+	this->ReadClip("alduin_land_ground");
 	//this->ReadClip("alduin_climb");
 	//this->ReadClip("alduin_descend");
 	//this->ReadClip("alduin_injured");
@@ -88,6 +91,10 @@ alduin::alduin() :  ModelAnimator("alduin")
 	//∞¯¡ﬂ
 	GetClip(TAKEOFF)->SetEvent(bind(&alduin::beginTakeoff, this), 0.2f);
 	GetClip(TAKEOFF)->SetEvent(bind(&alduin::EndTakeoff, this), 0.9f);
+
+	GetClip(APROACH)->SetEvent(bind(&alduin::beginAproach, this), 0.9f);
+	//GetClip(FLIGHT_FOR)->SetEvent(bind(&alduin::aproaching, this), 0.0f);
+	GetClip(LANDING)->SetEvent(bind(&alduin::descend, this), 0.0f);
 
 
 	
@@ -122,7 +129,6 @@ void alduin::Update()
 	collider_B->UpdateWorld();
 	transform->UpdateWorld();
 
-	
 	if (target)
 	{
 		velocity = this->target->GlobalPos() - transform->GlobalPos();
@@ -131,6 +137,21 @@ void alduin::Update()
 
 	if(isAscending) 
 		altitude += 35 * DELTA;
+
+	if (isDescending)
+	{
+		altitude -= 35 * DELTA;
+
+		if (Pos().y < 0.0f)
+		{
+			isDescending = false;
+			SetState(LANDING);
+			moveSpeed = 15.0f;
+		}
+		
+	}
+
+		
 
 	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
 	HeadCollider->SetWorld(GetTransformByNode(45));
@@ -142,6 +163,8 @@ void alduin::Update()
 	TailCollider->SetWorld(GetTransformByNode(110));
 
 	Patterns();
+
+	PatternsAir();
 	//SetAnimation();
 	
 }
@@ -180,7 +203,7 @@ void alduin::SetTarget(Player* target)
 
 void alduin::Move()
 {
-	if (velocity.Length() > 100 && curState == IDLE)
+	if (velocity.Length() > 200 && curState == IDLE)
 	{
 		SetState(TAKEOFF);
 
@@ -265,9 +288,34 @@ void alduin::EndTakeoff()
 
 }
 
-void alduin::EndHit()
+void alduin::beginAproach()
+{
+	isDescending = true;
+	SetState(FLIGHT_FOR);
+	moveSpeed = 150;
+}
+
+//void alduin::aproaching()
+//{
+//	if (Pos().y > 0) //∂•ø° æ» ¥Í¿∫ ªÛ≈¬
+//	{
+//		SetState(FLIGHT_FOR);
+//	}
+//	else return;
+//
+//}
+
+
+void alduin::EndAction()
 {
 	SetState(IDLE);
+}
+
+void alduin::descend()
+{
+	isDescending = false;
+
+	EndAction();
 }
 
 void alduin::EndAttack()
@@ -323,5 +371,28 @@ void alduin::Patterns()
 	{
 		SetState(ATTACK_B);
 	}
+
+	
+
+}
+
+void alduin::PatternsAir()
+{
+	if (curState != HOVER) return;
+
+	SetState(APROACH);
+	//switch (Random(0,3))
+	//{
+	//case 0:
+	//	SetState(APROACH);
+	//	break;
+	//case 1:
+	//	SetState(LANDING);
+	//	break;
+	//default:
+	//	break;
+	//}
+
+
 
 }

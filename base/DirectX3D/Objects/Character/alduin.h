@@ -21,7 +21,10 @@ private:
 		FIREBALL, //inhale -> exhale_fireball
 		PAIN, // pain,pain2  랜덤 재생
 		PAIN2,
-		DEATH
+		LANDING,
+		LANDING_SOFT,
+		LAND,
+		TIMETRAVEL
 	};
 
 public:
@@ -38,7 +41,7 @@ public:
 
 private:
 
-	void SetAnimation();
+	//void SetAnimation();
 	void SetState(State state);
 	void Move();
 
@@ -49,10 +52,14 @@ private:
 
 	void beginTakeoff();
 	void EndTakeoff();
-	void EndHit();
+	void beginAproach();
+	void aproaching();
+	void EndAction();
+	void descend();
 	void EndAttack();
 
 	void Patterns();
+	void PatternsAir();
 
 	State curState = IDLE;
 	CapsuleCollider* alduinCollider2;
@@ -76,12 +83,13 @@ private:
 
 	UINT nodeIndex = 0;
 
-	float moveSpeed = 500;
+	float moveSpeed = 15.0f;
 	float rotSpeed = 0.25;
 	float altitude = 0.0f;
 	float deceleration = 5; //감속
 
 	bool isAscending = false;
+	bool isDescending = false;
 
 	Vector3 velocity;
 
