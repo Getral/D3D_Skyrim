@@ -47,6 +47,7 @@ private:
 	void SetState(State state);
 	void Move();
 
+	void attacking();
 	void Inhale();
 	void FireBallAttack();
 	void BreathAttack();
@@ -54,9 +55,7 @@ private:
 	void beginTakeoff();
 	void EndTakeoff();
 	void beginAproach();
-	void aproaching();
 	void EndAction();
-	void descend();
 
 	void Patterns();
 	void PatternsAir();

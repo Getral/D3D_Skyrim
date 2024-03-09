@@ -71,6 +71,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
 	{
+		GetClip(clipIndex)->SetEvent(bind(&alduin::attacking, this), 0.0f);
 		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 	}
 
@@ -233,6 +234,13 @@ void alduin::Move()
 	
 }
 
+void alduin::attacking()
+{
+	moveSpeed = 0;
+	rotSpeed = 0;
+
+}
+
 void alduin::Inhale()
 {
 
@@ -297,6 +305,8 @@ void alduin::beginAproach()
 
 void alduin::EndAction()
 {
+	moveSpeed = 15.0f;
+	rotSpeed = 0.25f;
 	SetState(IDLE);
 }
 
