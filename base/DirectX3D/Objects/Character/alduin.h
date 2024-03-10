@@ -26,7 +26,9 @@ private:
 		LANDING_HARD,
 		LAND,
 		DIVE,
-		TIMETRAVEL
+		DEATH,
+		TURN_L,
+		TURN_R
 	};
 
 public:
@@ -89,6 +91,7 @@ private:
 
 	bool isAscending = false;
 	bool isDescending = false;
+	bool isAttacking = false;
 
 	Vector3 velocity;
 

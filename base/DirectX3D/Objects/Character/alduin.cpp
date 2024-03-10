@@ -61,7 +61,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_landing_hard");
 	this->ReadClip("alduin_land_ground");
 	this->ReadClip("alduin_dive");
-	this->ReadClip("alduin_timetravel");
+	this->ReadClip("alduin_death");
+	this->ReadClip("alduin_turn_left");
+	this->ReadClip("alduin_turn_right");
 	Scale() *= 0.001;
 
 	moveSpeed = 15.0f;
@@ -130,6 +132,8 @@ void alduin::Update()
 	{
 		velocity = this->target->GlobalPos() - transform->GlobalPos();
 		Move();
+
+		
 	}
 
 	if(isAscending) 
@@ -144,7 +148,6 @@ void alduin::Update()
 			isDescending = false;
 			SetState(LANDING_HARD);
 			moveSpeed = 15.0f;
-			Pos().y = 0.0f;
 		}
 		
 	}
@@ -203,7 +206,7 @@ void alduin::SetTarget(Player* target)
 
 void alduin::Move()
 {
-	if (velocity.Length() > 150 && curState == IDLE)
+	if (velocity.Length() > 120 && curState == IDLE)
 	{
 		SetState(TAKEOFF);
 
@@ -220,24 +223,35 @@ void alduin::Move()
 
 	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
 
-	if (cross.y < 0) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
+	if (cross.y < -30 && !isAttacking) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
+		if(Pos().y < 1)
+			SetState(TURN_R);
 	}
-	else if (cross.y > 0) //반대의 경우
+	else if (cross.y > 30 && !isAttacking) //반대의 경우
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
+		if(Pos().y < 1)
+			SetState(TURN_L);
 	}
+	else if (cross.y >= -30 && cross.y <= 30 && Pos().y == 0 && !isAttacking) //반대의 경우
+	{
+		if(velocity.Length() <= 120)
+			SetState(IDLE);
+	}
+	
 
 	
 }
 
 void alduin::attacking()
 {
-	moveSpeed = 0;
-	rotSpeed = 0;
+	isAttacking = true;
+	//moveSpeed = 0;
+	//rotSpeed = 0;
 
 }
 
@@ -305,9 +319,11 @@ void alduin::beginAproach()
 
 void alduin::EndAction()
 {
+	isAttacking = false;
 	moveSpeed = 15.0f;
-	rotSpeed = 0.25f;
 	SetState(IDLE);
+	Pos().y = 0;
+	
 }
 
 

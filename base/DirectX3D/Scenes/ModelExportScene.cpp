@@ -54,19 +54,19 @@ ModelExportScene::ModelExportScene()
     delete exporter;
 
 
-    clipName = "alduin_landing";
+    clipName = "alduin_turn_left";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "alduin_landing_hard";
+    clipName = "alduin_turn_right";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
 
-    clipName = "alduin_dive";
+    clipName = "alduin_death";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
