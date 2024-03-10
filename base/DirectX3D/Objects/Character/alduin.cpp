@@ -237,7 +237,7 @@ void alduin::Move()
 		if(Pos().y < 1)
 			SetState(TURN_L);
 	}
-	else if (cross.y >= -30 && cross.y <= 30 && Pos().y == 0 && !isAttacking) //반대의 경우
+	else if (cross.y >= -30 && cross.y <= 30 && Pos().y < 1 && !isAttacking) //반대의 경우
 	{
 		if(velocity.Length() <= 120)
 			SetState(IDLE);
