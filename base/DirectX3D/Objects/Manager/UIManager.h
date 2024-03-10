@@ -47,5 +47,6 @@ private:
 	bool isQuest = true;
 	
 	InvenUI* invenUI;
+	bool isInven = true;
 };
 

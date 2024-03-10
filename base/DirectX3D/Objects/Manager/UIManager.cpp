@@ -90,6 +90,9 @@ UIManager::UIManager()
     enemy_HP_bar->SetParent(enemy_HP_bar_background);
 
 #pragma endregion
+
+
+
     invenUI = new InvenUI();
 }
 
@@ -174,8 +177,10 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
     {
         enemies[0]->GetEnemies()[0]->GetStatus().curHp -= 50 * DELTA;
     }
-
-    invenUI->Update();
+    if(isInven)
+        invenUI->Update();
+    if (KEY_DOWN('I'))
+        isInven = !isInven;
 }
 
 void UIManager::Render()
@@ -214,7 +219,8 @@ void UIManager::PostRender()
     enemy_HP_bar_background->Render();
     enemy_HP_bar->Render();
 
-    invenUI->Render();
+    if(isInven)
+        invenUI->Render();
 }
 
 void UIManager::GUIRender()
