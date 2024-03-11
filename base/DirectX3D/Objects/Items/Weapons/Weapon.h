@@ -1,6 +1,6 @@
 #pragma once
 
-class Weapon : public Inventory
+class Weapon : public Item
 {
 	struct WeaponAbility
 	{

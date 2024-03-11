@@ -160,7 +160,8 @@ using namespace GameMath;
 #include "Objects/UI/ProgressBar.h"
 #include "Objects/UI/InvenUI.h"
 
-#include "Objects/Inventory/Inventory.h"
+#include "Objects/Inventory/Item.h"
+#include "Objects/Inventory/ItemStatus.h"
 
 //#include "Objects/Items/Expendables/.h"
 #include "Objects/Items/Expendables/IronArrow.h"

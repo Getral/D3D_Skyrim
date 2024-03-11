@@ -453,7 +453,7 @@
     <ClInclude Include="Objects\Items\Expendables\Potion.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Inventory\Inventory.h">
+    <ClInclude Include="Objects\Inventory\Item.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Character\Bear.h">
@@ -463,6 +463,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\UI\InvenUI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Inventory\ItemStatus.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -872,7 +875,7 @@
     <ClCompile Include="Objects\Items\Expendables\Potion.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Inventory\Inventory.cpp">
+    <ClCompile Include="Objects\Inventory\Item.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Character\Bear.cpp">
@@ -882,6 +885,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\UI\InvenUI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Inventory\ItemStatus.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

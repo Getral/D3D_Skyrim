@@ -1,7 +1,8 @@
 #pragma once
 
-class Armor : public Inventory
+class Armor : public Item
 {
+public:
 	struct ArmorAbility
 	{
 		float defense = 0;
@@ -9,14 +10,22 @@ class Armor : public Inventory
 		// 마법부여는 필요하면 추가
 	};
 
-	struct ArmorType
+	enum ArmorType
 	{
-		float hamet;
-		float cuirass;
-		float gauntlets;
-		float boots;
-		
-		float shield;
+		 helmat,
+		 cuirass,
+		 gauntlets,
+		 boots,
+		 shield,
 	};
+
+public:
+	Armor(string name, int type, int weight, int value, int armortype, int def);
+
+	
+private:
+	
+	int armortype;
+	int def;
 };
 

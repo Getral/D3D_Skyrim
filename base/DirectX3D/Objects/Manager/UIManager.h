@@ -33,6 +33,8 @@ private:
 	Quad* enemy_HP_bar_background;
 	ProgressBar* enemy_HP_bar;
 
+	Quad* enemyName_bear;
+
 	float tmp_N;
 	float tmp_S;
 	float tmp_W;

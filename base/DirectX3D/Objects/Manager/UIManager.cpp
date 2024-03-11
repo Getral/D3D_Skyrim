@@ -89,9 +89,11 @@ UIManager::UIManager()
 
     enemy_HP_bar->SetParent(enemy_HP_bar_background);
 
+    enemyName_bear = new Quad(L"Textures/UI/enemyName_Bear.png");
+    enemyName_bear->Pos() = { CENTER_X,WIN_HEIGHT * 0.9f,0 };
+    enemyName_bear->Scale() *= 0.1f;
+    enemyName_bear->UpdateWorld();
 #pragma endregion
-
-
 
     invenUI = new InvenUI();
 }
@@ -218,6 +220,7 @@ void UIManager::PostRender()
 
     enemy_HP_bar_background->Render();
     enemy_HP_bar->Render();
+    enemyName_bear->Render();
 
     if(isInven)
         invenUI->Render();

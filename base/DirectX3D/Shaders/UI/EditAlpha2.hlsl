@@ -22,13 +22,13 @@ PixelInput VS(VertexUV input)
 float4 PS(PixelInput input) : SV_TARGET
 {
 	// 왼쪽에서 오른쪽으로 갈수록 투명도 증가
-	float transparency = input.uv.x * 0.5;
+	float transparency = 1 - input.uv.x;
 
 	// 텍스처 샘플링
 	float4 color = diffuseMap.Sample(samp, input.uv);
 
 	// 투명도 적용
-	color.a *= transparency;
+	color.a *= transparency * 0.5f;
 
 return color;
 }

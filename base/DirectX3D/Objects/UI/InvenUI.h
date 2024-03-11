@@ -21,6 +21,9 @@ public:
 private:
 	Quad* frame;
 	Quad* framebar;
+	Quad* framebar2;
+	Quad* framebar3;
+	Quad* selectedBar;
 
 	Quad* title_all;
 	Quad* title_weapon;
@@ -28,5 +31,6 @@ private:
 	Quad* title_clothing;
 	Quad* title_misc;
 	
+	int selectedTitleNum = 0;
 };
 

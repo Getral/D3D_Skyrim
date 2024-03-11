@@ -142,10 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Inventory\ItemStatus.h" />
     <ClInclude Include="Objects\UI\InvenUI.h" />
     <ClInclude Include="Objects\Character\Bear.h" />
     <ClInclude Include="Objects\Character\Wolf.h" />
-    <ClInclude Include="Objects\Inventory\Inventory.h" />
+    <ClInclude Include="Objects\Inventory\Item.h" />
     <ClInclude Include="Objects\Items\Armors\Armor.h" />
     <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonboneboots.h" />
     <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonbonecuirassplate.h" />
@@ -294,10 +295,11 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Inventory\ItemStatus.cpp" />
     <ClCompile Include="Objects\UI\InvenUI.cpp" />
     <ClCompile Include="Objects\Character\Bear.cpp" />
     <ClCompile Include="Objects\Character\Wolf.cpp" />
-    <ClCompile Include="Objects\Inventory\Inventory.cpp" />
+    <ClCompile Include="Objects\Inventory\Item.cpp" />
     <ClCompile Include="Objects\Items\Armors\Armor.cpp" />
     <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonboneboots.cpp" />
     <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonecuirassplate.cpp" />
