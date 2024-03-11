@@ -96,6 +96,8 @@ UIManager::UIManager()
 #pragma endregion
 
     invenUI = new InvenUI();
+
+    itemstatus = new ItemStatus();
 }
 
 UIManager::~UIManager()
@@ -235,6 +237,9 @@ void UIManager::GUIRender()
     //
     //ImGui::Text("enemy_angle : %f", enemies_dir[0]->Pos().x);
     //ImGui::Text("enemy_angle : %f", enemies_dir[1]->Pos().x);
+
+    //ImGui::Text("weight : %d", itemstatus->GetArmor("armor1")->GetStatus().weight);
+    ImGui::Text("weight : %d", itemstatus->GetItem("armor1").weight);
 }
 
 

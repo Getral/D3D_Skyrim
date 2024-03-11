@@ -21,7 +21,8 @@ public:
 
 public:
 	Armor(string name, int type, int weight, int value, int armortype, int def);
-
+	
+	int GetDef() { return def; }
 	
 private:
 	

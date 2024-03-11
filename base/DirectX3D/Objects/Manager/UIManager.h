@@ -50,5 +50,7 @@ private:
 	
 	InvenUI* invenUI;
 	bool isInven = true;
+
+	ItemStatus* itemstatus;
 };
 

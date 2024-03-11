@@ -6,10 +6,10 @@ public:
 	struct Status
 	{
 		string name;
-		float type;
-		float weaght;	// 무게
-		float gold;		// 화페
-		float value;	// 개수
+		int type;
+		int weight;	// 무게
+		//float gold;		// 화페
+		int value;	// 개수
 	};
 
 	enum Type

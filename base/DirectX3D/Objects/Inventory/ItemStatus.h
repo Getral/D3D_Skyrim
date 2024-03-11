@@ -6,14 +6,12 @@ public:
 	ItemStatus();
 	~ItemStatus();
 
-	void Update();
+	Item::Status GetItem(string inname);
 
-	
-
-	class Armor* ReturnArmor();
+	class Armor* GetArmor(string inname);
 	class Weapon* ReturnWeapon();
 private:
-	void CheckType(string inname);
+	int CheckType(string inname);
 
 
 private:

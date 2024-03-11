@@ -2,7 +2,8 @@
 
 ItemStatus::ItemStatus()
 {
-	armors.push_back(new Armor("armor1", Item::AROMOR, 10, 10, Armor::helmat, 10));
+	armors.push_back(new Armor("armor1", Item::AROMOR, 123456, 10, Armor::helmat, 30));
+	armors.push_back(new Armor("armor2", Item::AROMOR, 10, 10, Armor::helmat, 10));
 
 	
 }
@@ -11,30 +12,38 @@ ItemStatus::~ItemStatus()
 {
 }
 
-void ItemStatus::Update()
+Item::Status ItemStatus::GetItem(string inname)
 {
+	CheckType(inname);
 	switch (type)
 	{
 	case Item::AROMOR:
-			ReturnArmor();
-			break;
+		return GetArmor(inname)->GetStatus();
+		break;
 	default:
 		break;
 	}
 }
 
-Armor* ItemStatus::ReturnArmor()
+Armor* ItemStatus::GetArmor(string inname)
 {
-	return armors.back();
+	for (Armor* armor : armors)
+	{
+		if (armor->GetStatus().name == inname)
+		{
+			return armor;
+		}
+	}
 }
 
-void ItemStatus::CheckType(string inname)
+int ItemStatus::CheckType(string inname)
 {
 	for (Armor* armor : armors)
 	{
 		if (armor->GetStatus().name == inname)
 		{
 			type = armor->GetStatus().type;
+			return type;
 		}
 	}
 
@@ -43,6 +52,7 @@ void ItemStatus::CheckType(string inname)
 		if (weapon->GetStatus().name == inname)
 		{
 			type = weapon->GetStatus().type;
+			return type;
 		}
 	}
 }
