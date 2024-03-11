@@ -10,7 +10,7 @@ Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorIns
 	trackCollider->Scale() *= trackRange;
 	trackCollider->SetParent(transform);
 
-	attackRange = trackRange * 0.3f;
+	attackRange = trackRange * 0.25f;
 	attackCollider = new SphereCollider();
 	attackCollider->Scale() *= attackRange;
 	attackCollider->Pos().SetY(attackRange * 0.5f);

@@ -7,6 +7,7 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 	{
 		Transform* transform = instancing->Add();
 		transform->Scale() *= 0.001f;
+		transform->UpdateWorld();
 		Enemy* tmp;
 		if (enemy->GetName() == "Bear")
 			tmp = new Bear(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
@@ -52,6 +53,7 @@ void EnemySpawn::SetPlayerData(Player* player)
 {
 	playerData = player;
 	for (Enemy* enemy : enemies) enemy->SetPlayerData(player);
+	Spawn();
 }
 
 void EnemySpawn::Spawn()

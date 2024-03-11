@@ -38,7 +38,14 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 
 	SetCollidersParent();
 
-	curState = IDLE;
+	SetEvent(STARTSLEEP, bind(&Bear::StartStartSleep, this), 0.0f);
+	SetEvent(STARTSLEEP, bind(&Bear::EndStartSleep, this), 0.9f);
+
+	SetEvent(WAKEUP, bind(&Bear::StartWakeUp, this), 0.0f);
+	SetEvent(WAKEUP, bind(&Bear::EndWakeUp, this), 0.9f);
+
+	SetEvent(RUN, bind(&Bear::StartRun, this), 0.0f);
+	SetEvent(RUN, bind(&Bear::EndRun, this), 0.9f);
 
 	SetEvent(ATTACK, bind(&Bear::StartAttack, this), 0.0f);
 	SetEvent(ATTACK, bind(&Bear::EndAttack, this), 0.9f);
@@ -52,6 +59,8 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	SetEvent(HIT, bind(&Bear::StartHit, this), 0.0f);
 	SetEvent(HIT, bind(&Bear::EndHit, this), 0.9f);
 
+	SetEvent(HEADSHAKE, bind(&Bear::EndHeadShake, this), 0.9f);
+
 	FOR(totalEvent.size())
 		eventIters[i] = totalEvent[i].begin();
 
@@ -60,6 +69,8 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	rigidbody->Scale().z *= trackRange * 0.38f;
 
 	rigidbody->Pos().y = rigidbody->Scale().y * 0.5f;
+
+	SetState(SLEEP);
 }
 
 Bear::~Bear()
@@ -79,6 +90,8 @@ void Bear::Render()
 	Enemy::Render();
 	//for (CapsuleCollider* collider : colliders)
 		//collider->Render();
+	attackCollider->Render();
+	trackCollider->Render();
 }
 
 void Bear::GUIRender()
@@ -98,8 +111,6 @@ void Bear::SetState(State state)
 
 void Bear::Track()
 {
-	if (curState == ATTACK) return;
-	if (curState == HIT) return;
 	if (target)
 	{
 		velocity = target->GlobalPos() - transform->GlobalPos();
@@ -120,25 +131,68 @@ void Bear::Track()
 	}
 }
 
+void Bear::StartStartSleep()
+{
+	SetTarget(nullptr);
+}
+
+void Bear::EndStartSleep()
+{
+	isSleep = true;
+}
+
+void Bear::StartWakeUp()
+{
+	isWakeUp = true;
+}
+
+void Bear::EndWakeUp()
+{
+	isSleep = false;
+	SetState(RUN);
+}
+
+void Bear::StartRun()
+{
+	SetTarget(playerData);
+}
+
+void Bear::EndRun()
+{
+	SetState(IDLE);
+	SetTarget(nullptr);
+}
+
 void Bear::StartAttack()
 {
 	attackCollider->SetActive(false);
+	trackCollider->SetActive(false);
+	SetTarget(nullptr);
+	attackDelay = 3.0f;
 }
 
 void Bear::EndAttack()
 {
-	SetState(RUN);
+	SetState(IDLE);
 	attackCollider->SetActive(true);
 }
 
 void Bear::StartHit()
 {
+	//attackCollider->SetActive(false);
+	//trackCollider->SetActive(false);
 	isHit = true;
 }
 
 void Bear::EndHit()
 {
-	SetState(RUN);
+	SetState(IDLE);
+}
+
+void Bear::EndHeadShake()
+{
+	attackCollider->SetActive(true);
+	trackCollider->SetActive(true);
 	isHit = false;
 }
 
@@ -148,8 +202,11 @@ void Bear::Behavior()
 	{
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
 		{
-			SetState(HIT);
-			break;
+			if (!isHit)
+			{
+				SetState(HIT);
+				break;
+			}
 		}
 	}
 	for (CapsuleCollider* collider : colliders)
@@ -158,12 +215,22 @@ void Bear::Behavior()
 			(curState == ATTACK || curState == ATTACK2 || curState == ATTACK3))
 		{
 			playerData->SetAction(Player::HIT_MEDIUM);
+			playerData->SetIsHit(true);
 			break;
 		}
 	}
 
+	if (attackDelay > 0.0f)
+	{
+		attackDelay -= DELTA;
+		if (attackDelay <= 0.0f)
+		{
+			trackCollider->SetActive(true);
+		}
+	}
+
 	if (curState == ATTACK || curState == ATTACK2 || curState == ATTACK3 || curState == HIT) return;
-	if (playerData->GetCollier()->IsSphereCollision(attackCollider))
+	if (playerData->GetCollier()->IsSphereCollision(attackCollider) && attackDelay <= 0.0f)
 	{
 		switch (attackState)
 		{
@@ -183,15 +250,20 @@ void Bear::Behavior()
 	}
 	else if (playerData->GetCollier()->IsCollision(trackCollider))
 	{
-		SetState(RUN);
-		SetTarget(playerData);
-		Track();
+		if (!isWakeUp)
+			SetState(WAKEUP);
+		else
+			SetState(RUN);
 	}
-	else
+	else if (isSleep)
 	{
-		SetState(IDLE);
-		SetTarget(nullptr);
+		SetState(SLEEP);
 	}
+	else if (!isSleep)
+	{
+		SetState(STARTSLEEP);
+	}
+	Track();
 }
 
 void Bear::SetEvent(int clip, Event event, float timeRatio)

@@ -39,7 +39,6 @@ public:
 	bool GetIsHit() { return isHit; }
 	ACTION GetAction() { return curAction; }
 
-
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }
 
