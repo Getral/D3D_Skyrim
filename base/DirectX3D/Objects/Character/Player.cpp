@@ -50,11 +50,10 @@ Player::Player()
 	ReadClip("male_1hm_walk_backward_attack");
 	ReadClip("male_1hm_walk_left_attack");
 	ReadClip("male_1hm_walk_right_attack");
-	ReadClip("male_1hm_run_backward_attack");
 	ReadClip("male_1hm_run_forward_attack");
+	ReadClip("male_1hm_run_backward_attack");
 	ReadClip("male_1hm_run_left_attack");
 	ReadClip("male_1hm_run_right_attack");
-
 	ReadClip("male_2hm_idle");
 	ReadClip("male_2hm_block_idle");
 	ReadClip("male_2hm_attack_left");
@@ -89,7 +88,6 @@ Player::Player()
 	ReadClip("male_2hm_run_backward_attack");
 	ReadClip("male_2hm_run_left_attack");
 	ReadClip("male_2hm_run_right_attack");
-
 	ReadClip("male_bow_idle");
 	ReadClip("male_bow_draw_intro");
 	ReadClip("male_bow_draw_idle");
