@@ -49,17 +49,18 @@ private:
 	void SetState(State state);
 	void Move();
 
-	void attacking();
 	void Inhale();
 	void FireBallAttack();
 	void BreathAttack();
 
+	void Attacking();
 	void beginTakeoff();
 	void EndTakeoff();
 	void beginAproach();
 	void EndAction();
 
 	void Patterns();
+	void PatternFire();
 	void PatternsAir();
 
 	State curState = IDLE;
@@ -78,6 +79,9 @@ private:
 	CapsuleCollider* collider_R;
 	CapsuleCollider* collider_L;
 	CapsuleCollider* collider_B;
+	BoxCollider* breathCollider;
+	//SphereCollider* fBallCollider;
+
 	Transform* transform;
 	Player* target;
 	Vector3* tempRot;
@@ -88,10 +92,13 @@ private:
 	float rotSpeed = 0.25;
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
+	float CoolingTime = 0;
+	int CoolingCount = 0;
 
 	bool isAscending = false;
 	bool isDescending = false;
 	bool isAttacking = false;
+
 
 	Vector3 velocity;
 

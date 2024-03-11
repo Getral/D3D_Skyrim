@@ -17,6 +17,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 	RLegCollider = new CapsuleCollider(30.0f, 20.0f);
 	TailCollider = new CapsuleCollider(70.0f, 1.0f);
 
+	breathCollider = new BoxCollider(50.0f);
+	//fBallCollider = new SphereCollider(90.0f);
+
 	//alduinCollider3 = new CapsuleCollider();
 
 	collider_F = new CapsuleCollider(90.0f, 0.1f);
@@ -38,6 +41,13 @@ alduin::alduin() :  ModelAnimator("alduin")
 	collider_B->Pos().SetZ(30);
 	collider_B->SetParent(transform);
 	collider_B->Scale() *= 0.2;
+
+	breathCollider->SetParent(transform);
+	breathCollider->Pos().SetZ(-40);
+	breathCollider->SetActive(false);
+
+	//fBallCollider->SetParent(transform);
+	//fBallCollider->SetActive(false);
 
 	this->ReadClip("alduin_idle");
 	this->ReadClip("alduin_takeoff");
@@ -73,15 +83,17 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	for (int clipIndex = ATTACK_F; clipIndex <= ATTACK_B; clipIndex++)
 	{
-		GetClip(clipIndex)->SetEvent(bind(&alduin::attacking, this), 0.0f);
+		GetClip(clipIndex)->SetEvent(bind(&alduin::Attacking, this), 0.0f);
 		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 	}
 
 	
 	//화염 공격
+
+
 	GetClip(INHALE)->SetEvent(bind(&alduin::Inhale, this), 0.9f);
 
-	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.3f);
+	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.2f);
 	GetClip(FIREBALL)->SetEvent(bind(&alduin::FireBallAttack, this), 0.9f);
 
 	GetClip(BREATH)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
@@ -101,6 +113,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 alduin::~alduin()
 {
+	delete breathCollider;
 	delete collider_B;
 	delete collider_L;
 	delete collider_R;
@@ -126,14 +139,18 @@ void alduin::Update()
 	collider_R->UpdateWorld();
 	collider_L->UpdateWorld();
 	collider_B->UpdateWorld();
+	breathCollider->UpdateWorld();
 	transform->UpdateWorld();
+
+	CoolingTime = Timer::Get()->GetOneSec();
+
+	
+
 
 	if (target)
 	{
 		velocity = this->target->GlobalPos() - transform->GlobalPos();
 		Move();
-
-		
 	}
 
 	if(isAscending) 
@@ -152,19 +169,22 @@ void alduin::Update()
 		
 	}
 
-		
-
-	alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
-	HeadCollider->SetWorld(GetTransformByNode(45));
-	LWingCollider->SetWorld(GetTransformByNode(81));
-	RWingCollider->SetWorld(GetTransformByNode(103));
-	BodyCollider->SetWorld(GetTransformByNode(84));
-	RLegCollider->SetWorld(GetTransformByNode(119));
-	LLegCollider->SetWorld(GetTransformByNode(23));
-	TailCollider->SetWorld(GetTransformByNode(110));
 
 	Patterns();
+	PatternFire();
 	PatternsAir();
+		
+
+	//alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
+	//HeadCollider->SetWorld(GetTransformByNode(45));
+	//LWingCollider->SetWorld(GetTransformByNode(81));
+	//RWingCollider->SetWorld(GetTransformByNode(103));
+	//BodyCollider->SetWorld(GetTransformByNode(84));
+	//RLegCollider->SetWorld(GetTransformByNode(119));
+	//LLegCollider->SetWorld(GetTransformByNode(23));
+	//TailCollider->SetWorld(GetTransformByNode(110));
+
+	
 
 
 
@@ -175,19 +195,21 @@ void alduin::Update()
 void alduin::Render()
 {
 	ModelAnimator::Render();
-	alduinCollider2->Render();
-	HeadCollider->Render();
-	LWingCollider->Render();
-	RWingCollider->Render();
-	BodyCollider->Render();
-	RLegCollider->Render();
-	LLegCollider->Render();
-	TailCollider->Render();
+	//alduinCollider2->Render();
+	//HeadCollider->Render();
+	//LWingCollider->Render();
+	//RWingCollider->Render();
+	//BodyCollider->Render();
+	//RLegCollider->Render();
+	//LLegCollider->Render();
+	//TailCollider->Render();
 
 	collider_F->Render();
 	collider_R->Render();
 	collider_L->Render();
 	collider_B->Render();
+	breathCollider->Render();
+
 }
 
 void alduin::GUIRender()
@@ -206,7 +228,7 @@ void alduin::SetTarget(Player* target)
 
 void alduin::Move()
 {
-	if (velocity.Length() > 120 && curState == IDLE)
+	if (velocity.Length() > 150 && curState == IDLE)
 	{
 		SetState(TAKEOFF);
 
@@ -227,49 +249,41 @@ void alduin::Move()
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
-		if(Pos().y < 1)
+		if(Pos().y < 1 && !isAscending && !isDescending)
 			SetState(TURN_R);
 	}
 	else if (cross.y > 30 && !isAttacking) //반대의 경우
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
-		if(Pos().y < 1)
+		if(Pos().y < 1 && !isAscending && !isDescending)
 			SetState(TURN_L);
 	}
 	else if (cross.y >= -30 && cross.y <= 30 && Pos().y < 1 && !isAttacking) //반대의 경우
 	{
-		if(velocity.Length() <= 120)
+		if(velocity.Length() <= 150)
 			SetState(IDLE);
 	}
 	
-
 	
 }
 
-void alduin::attacking()
-{
-	isAttacking = true;
-	//moveSpeed = 0;
-	//rotSpeed = 0;
-
-}
 
 void alduin::Inhale()
 {
 
-	if (velocity.Length() < 1000)
+	if (velocity.Length() < 250)
 	{
 		SetState(BREATH);
 	}
 
-	else if (velocity.Length() > 1000)
+	else if (velocity.Length() > 250)
 	{
 		SetState(FIREBALL);
 	}
 
-
 }
+
 
 
 void alduin::FireBallAttack()
@@ -283,8 +297,15 @@ void alduin::BreathAttack()
 {
 	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
 
+	breathCollider->SetActive(true);
+
 }
 
+
+void alduin::Attacking()
+{
+	isAttacking = true;
+}
 
 void alduin::beginTakeoff()
 {
@@ -323,6 +344,9 @@ void alduin::EndAction()
 	moveSpeed = 15.0f;
 	SetState(IDLE);
 	Pos().y = 0;
+	CoolingTime = 0;
+
+	breathCollider->SetActive(false);
 	
 }
 
@@ -353,7 +377,8 @@ void alduin::SetState(State state)
 void alduin::Patterns() //지상패턴
 {
 
-	if (curState == ATTACK_F || curState == ATTACK_R || curState == ATTACK_L || curState == ATTACK_B || curState == LANDING_HARD) return;
+
+	if (curState != IDLE || curState != TURN_L || curState != TURN_R) return;
 
 	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
@@ -371,6 +396,23 @@ void alduin::Patterns() //지상패턴
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_B);
+	}
+
+
+}
+
+void alduin::PatternFire()
+{
+
+	if (CoolingTime < 10 || curState != IDLE) return;
+
+	
+
+	if (Pos().y < 1) //50분의 1 확률로, 지상에 있을 때
+	{
+		SetState(INHALE);
+		isAttacking = true;
+
 	}
 
 

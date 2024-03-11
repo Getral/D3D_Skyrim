@@ -39,5 +39,6 @@ void Timer::Update()
         frameRate = frameCount;
         frameCount = 0;
         oneSecCount = 0.0f;
+        
     }    
 }
