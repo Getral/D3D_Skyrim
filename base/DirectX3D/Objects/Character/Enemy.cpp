@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform * transform, Vector3 spawnPos, float trackRange)
+Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform* transform, Vector3 spawnPos, float trackRange)
 	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing), trackRange(trackRange)
 {
 	rigidbody = new BoxCollider();
@@ -42,6 +42,8 @@ void Enemy::Update()
 	for (Transform* t : colliderTransforms)
 		t->UpdateWorld();
 
+	SetColliderByNode();
+
 	for (CapsuleCollider* collider : colliders)
 		collider->UpdateWorld();
 }
@@ -68,4 +70,8 @@ void Enemy::SetCollidersParent()
 		colliderTransforms[i]->SetParent(transform);
 		colliders[i]->SetParent(colliderTransforms[i]);
 	}
+}
+
+void Enemy::SetColliderByNode()
+{
 }

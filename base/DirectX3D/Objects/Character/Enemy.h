@@ -21,6 +21,7 @@ public:
 protected:
 	virtual void Track();
 	virtual void SetCollidersParent();
+	virtual void SetColliderByNode();
 
 protected:
 	ModelAnimatorInstancing* instancing;

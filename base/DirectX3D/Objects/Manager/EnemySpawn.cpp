@@ -15,7 +15,7 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 		else
 			tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
 		tmp->SetStatus(enemy->GetStatus());
-		tmp->GetCollier()->Scale() *= 1000.0f;
+		tmp->GetCollider()->Scale() *= 1000.0f;
 		tmp->SetPlayerData(playerData);
 		enemies.push_back(tmp);
 	}

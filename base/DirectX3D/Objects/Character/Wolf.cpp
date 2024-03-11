@@ -6,8 +6,6 @@ Wolf::Wolf(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	colliders.push_back(new CapsuleCollider(25.0f));
 
 	curState = IDLE;
-
-	SetCollidersParent();
 }
 
 Wolf::~Wolf()
@@ -78,5 +76,4 @@ void Wolf::ExecuteEvent()
 
 void Wolf::SetColliderByNode()
 {
-	colliderTransforms[0]->SetWorld(instancing->GetTransformByNode(index, node));
 }

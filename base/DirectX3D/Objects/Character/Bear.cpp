@@ -36,6 +36,8 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 
 	colliders.push_back(new CapsuleCollider(25.0f)); // HEAD
 
+	SetCollidersParent();
+
 	curState = IDLE;
 
 	SetEvent(ATTACK, bind(&Bear::StartAttack, this), 0.0f);
@@ -53,8 +55,6 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	FOR(totalEvent.size())
 		eventIters[i] = totalEvent[i].begin();
 
-	SetCollidersParent();
-
 	rigidbody->Scale().x *= trackRange * 0.2f;
 	rigidbody->Scale().y *= trackRange * 0.25f;
 	rigidbody->Scale().z *= trackRange * 0.38f;
@@ -69,7 +69,6 @@ Bear::~Bear()
 void Bear::Update()
 {
 	Enemy::Update();
-	SetColliderByNode();
 
 	Behavior();
 	ExecuteEvent();
@@ -78,13 +77,14 @@ void Bear::Update()
 void Bear::Render()
 {
 	Enemy::Render();
-	rigidbody->Render();
+	//for (CapsuleCollider* collider : colliders)
+		//collider->Render();
 }
 
 void Bear::GUIRender()
 {
 	Enemy::GUIRender();
-	ImGui::Text("Test : %d", (int)totalEvent.size());
+	ImGui::Text("Test : %d", (int)curState);
 }
 
 void Bear::SetState(State state)
@@ -144,8 +144,6 @@ void Bear::EndHit()
 
 void Bear::Behavior()
 {
-	if (curState == ATTACK || curState == ATTACK2 || curState == ATTACK3) return;
-
 	for (CapsuleCollider* collider : colliders)
 	{
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
@@ -154,8 +152,17 @@ void Bear::Behavior()
 			break;
 		}
 	}
+	for (CapsuleCollider* collider : colliders)
+	{
+		if (collider->IsCollision(playerData->GetCollier()) && 
+			(curState == ATTACK || curState == ATTACK2 || curState == ATTACK3))
+		{
+			playerData->SetAction(Player::HIT_MEDIUM);
+			break;
+		}
+	}
 
-	if (isHit) return;
+	if (curState == ATTACK || curState == ATTACK2 || curState == ATTACK3 || curState == HIT) return;
 	if (playerData->GetCollier()->IsSphereCollision(attackCollider))
 	{
 		switch (attackState)
