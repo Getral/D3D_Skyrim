@@ -93,7 +93,6 @@ private:
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
 	float CoolingTime = 0;
-	int CoolingCount = 0;
 
 	bool isAscending = false;
 	bool isDescending = false;
