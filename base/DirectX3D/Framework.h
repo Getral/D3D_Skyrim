@@ -161,30 +161,63 @@ using namespace GameMath;
 
 #include "Objects/Inventory/Inventory.h"
 
+//#include "Objects/Items/Expendables/.h"
+#include "Objects/Items/Expendables/IronArrow.h"
+#include "Objects/Items/Expendables/EbonyArrow.h"
+
 #include "Objects/Items/Weapons/Kunai.h"
 #include "Objects/Items/Weapons/Crowbar.h"
 #include "Objects/Items/Weapons/BladeSword.h"
 #include "Objects/Items/Weapons/Shield.h"
 
 #include "Objects/Items/Weapons/Weapon.h"
-#include "Objects/Items/Weapons/IronWeapon.h"
-#include "Objects/Items/Weapons/DragonBoneWeapon.h"
+
+//Iron Weapon
+//1hd
+#include "Objects/Items/Weapons/IronWeapons/1hd/IronBow.h"
+#include "Objects/Items/Weapons/IronWeapons/1hd/IronDagger.h"
+#include "Objects/Items/Weapons/IronWeapons/1hd/IronClaymore.h"
+#include "Objects/Items/Weapons/IronWeapons/1hd/IronMace.h"
+#include "Objects/Items/Weapons/IronWeapons/1hd/IronWaraxe.h"
+//2hd
+#include "Objects/Items/Weapons/IronWeapons/2hd/IronLongSword.h"
+#include "Objects/Items/Weapons/IronWeapons/2hd/IronBattleAxe.h"
+#include "Objects/Items/Weapons/IronWeapons/2hd/IronWarHammer.h"
+
+//Ebony Weapon
+//1hd
+#include "Objects/Items/Weapons/EbonyWeapons/1hd/EbonyBow.h"
+#include "Objects/Items/Weapons/EbonyWeapons/1hd/EbonyDagger.h"
+#include "Objects/Items/Weapons/EbonyWeapons/1hd/EbonyClaymore.h"
+#include "Objects/Items/Weapons/EbonyWeapons/1hd/EbonyMace.h"
+#include "Objects/Items/Weapons/EbonyWeapons/1hd/EbonyWarAxe.h"
+//2hd
+#include "Objects/Items/Weapons/EbonyWeapons/2hd/EbonyLongSword.h"
+#include "Objects/Items/Weapons/EbonyWeapons/2hd/EbonybattleAxe.h"
+#include "Objects/Items/Weapons/EbonyWeapons/2hd/EbonyWarHamer.h"
+
 
 #include "Objects/Items/Armors/Armor.h"
-#include "Objects/Items/Armors/IronArmor.h"
-#include "Objects/Items/Armors/DragonBoneArmor.h"
-#include "Objects/Items/Armors/Dragonboneboots.h"
-#include "Objects/Items/Armors/Dragonbonecuirassplate.h"
-#include "Objects/Items/Armors/Dragonbonegauntlets.h"
-#include "Objects/Items/Armors/Dragonbonehelmet.h"
-#include "Objects/Items/Armors/Dragonboneshield.h"
+//Iron Armor
+#include "Objects/Items/Armors/IronArmors/IronHelmet.h"
+#include "Objects/Items/Armors/IronArmors/IronCuirassplate.h"
+#include "Objects/Items/Armors/IronArmors/IronGauntlets.h"
+#include "Objects/Items/Armors/IronArmors/IronBoots.h"
+#include "Objects/Items/Armors/IronArmors/IronShield.h"
+//DragonBone Armor
+#include "Objects/Items/Armors/DragonBoneArmors/DragonBoneHelmet.h"
+#include "Objects/Items/Armors/DragonBoneArmors/DragonBoneCuirassplate.h"
+#include "Objects/Items/Armors/DragonBoneArmors/DragonBoneGauntlets.h"
+#include "Objects/Items/Armors/DragonBoneArmors/DragonBoneBoots.h"
+#include "Objects/Items/Armors/DragonBoneArmors/DragonBoneShield.h"
+
 
 #include "Objects/Items/Expendables/Expendables.h"		// 소모품
+#include "objects/Items/Expendables/Potion.h"	
+#include "Objects/Items/Expendables/IronArrow.h"
+#include "Objects/Items/Expendables/EbonyArrow.h"
+
 #include "Objects/Items/Miscellaneous/Miscellaneous.h"	// 잡탬
-
-
-#include "Objects/Items/Expendables/Expendables.h"
-#include "Objects/Items/Miscellaneous/Miscellaneous.h"
 
 
 #include "Objects/Landscape/Terrain.h"
@@ -217,6 +250,8 @@ using namespace GameMath;
 #include "Objects/Character/Character.h"
 #include "Objects/Character/Enemy.h"
 #include "Objects/Character/alduin.h"
+#include "Objects/Character/Bear.h"
+#include "Objects/Character/Wolf.h"
 
 #include "Objects/Manager/BlockManager.h"
 #include "Objects/Manager/KunaiManager.h"

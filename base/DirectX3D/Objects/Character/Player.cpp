@@ -118,7 +118,7 @@ Player::Player()
 	ReadClip("male_bowdrawn_walk_right");
 	//ReadClip("male_death");
 
-	ModelAnimator::Rot().y = XM_PI;
+	//ModelAnimator::Rot().y = XM_PI;
 
 	collider = new CapsuleCollider(3, 5);
 	collider->Scale() *= 1000;
@@ -233,6 +233,8 @@ void Player::Update()
 	//hands->SetWorld(GetTransformByNode(nodeIndex4));
 	//dragonbonegauntlets->Update();
 
+	if (KEY_PRESS('H'))
+		this->status.curstamina -= 10 * DELTA;
 }
 
 void Player::Render()

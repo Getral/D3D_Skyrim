@@ -7,7 +7,13 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 	{
 		Transform* transform = instancing->Add();
 		transform->Scale() *= 0.001f;
-		Enemy* tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+		Enemy* tmp;
+		if (enemy->GetName() == "Bear")
+			tmp = new Bear(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+		else if (enemy->GetName() == "Wolf")
+			tmp = new Wolf(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+		else
+			tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
 		tmp->SetStatus(enemy->GetStatus());
 		tmp->GetCollier()->Scale() *= 1000.0f;
 		tmp->SetPlayerData(playerData);

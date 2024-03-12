@@ -10,6 +10,7 @@ public:
     void Render();
     void GUIRender();
 
+    BoxCollider* GetCollider() { return collider; }
     bool GetIsWeapon() { return isWeapon; }
     void SetIsCollider(bool value) { isWeapon = value; }
 
@@ -20,4 +21,3 @@ private:
     bool isWeapon = false;
 
 };
-

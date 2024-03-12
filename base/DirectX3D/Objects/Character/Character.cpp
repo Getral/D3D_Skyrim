@@ -27,6 +27,7 @@ void Character::Render()
 
 void Character::GUIRender()
 {
+	ImGui::Text("X : %f, Y : %f, Z : %f", transform->GlobalPos().x, transform->GlobalPos().y, transform->GlobalPos().z);
 }
 
 void Character::SetStatus(int level, float hp, float stam, float atk, float speed)

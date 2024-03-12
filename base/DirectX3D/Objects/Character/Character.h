@@ -32,7 +32,7 @@ public:
 	void SetSpawnPos(Vector3 pos) { spawnPos = pos; }
 
 	Transform* GetTransform() { return transform; }
-	Status GetStatus() { return status; }
+	Status& GetStatus() { return status; }
 	SphereCollider* GetCollier() { return collider; }
 	string GetName() { return name; }
 

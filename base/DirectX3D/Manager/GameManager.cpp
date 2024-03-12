@@ -13,17 +13,23 @@ GameManager::GameManager()
     Create();
 
     SceneManager::Get()->Create("Grid", new GridScene());
-    //SceneManager::Get()->Create("ModelExport", new ModelExportScene());
+    SceneManager::Get()->Create("ModelExport", new ModelExportScene());
     //SceneManager::Get()->Create("ParticleConfig", new ParticleConfigScene());
     //SceneManager::Get()->Create("Particle", new ParticleScene());
     SceneManager::Get()->Create("Player", new PlayerScene());
     //SceneManager::Get()->Create("Monster", new MonsterScene());
 
     SceneManager::Get()->Add("Grid");
-    //SceneManager::Get()->Add("ModelExport");     
+    SceneManager::Get()->Add("ModelExport");     
     //SceneManager::Get()->Add("ParticleConfig");
     SceneManager::Get()->Add("Player");
     //SceneManager::Get()->Add("Monster");
+
+    Font::Get()->AddColor("Gray", 185.0f / 255.0f, 185.0f / 255.0f, 185.0f / 255.0f);
+    Font::Get()->AddStyle("Futura", L"Futura");
+
+    Font::Get()->SetColor("Gray");
+    Font::Get()->SetStyle("Futura");
 }
 
 GameManager::~GameManager()
