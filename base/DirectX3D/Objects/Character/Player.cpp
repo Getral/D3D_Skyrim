@@ -289,20 +289,36 @@ void Player::Move()
 			velocity.z += DELTA * status.speed * 1.0f;
 			isMoveZ = true;
 		}
+		if (KEY_UP('W'))
+		{
+			velocity.z = 0.0f;
+		}
 		if (KEY_PRESS('S'))
 		{
 			velocity.z -= DELTA * status.speed * 1.0f;
 			isMoveZ = true;
+		}
+		if (KEY_UP('S'))
+		{
+			velocity.z = 0.0f;
 		}
 		if (KEY_PRESS('A'))
 		{
 			velocity.x -= DELTA * status.speed * 1.0f;
 			isMoveX = true;
 		}
+		if (KEY_UP('A'))
+		{
+			velocity.x = 0.0f;
+		}
 		if (KEY_PRESS('D'))
 		{
 			velocity.x += DELTA * status.speed * 1.0f;
 			isMoveX = true;
+		}
+		if (KEY_UP('D'))
+		{
+			velocity.x = 0.0f;
 		}
 	}
 
@@ -313,20 +329,36 @@ void Player::Move()
 			velocity.z += DELTA * status.speed * 0.5f;
 			isMoveZ = true;
 		}
+		if (KEY_UP('W'))
+		{
+			velocity.z = 0.0f;
+		}
 		if (KEY_PRESS('S'))
 		{
 			velocity.z -= DELTA * status.speed * 0.5f;
 			isMoveZ = true;
+		}
+		if (KEY_UP('S'))
+		{
+			velocity.z = 0.0f;
 		}
 		if (KEY_PRESS('A'))
 		{
 			velocity.x -= DELTA * status.speed * 0.5f;
 			isMoveX = true;
 		}
+		if (KEY_UP('A'))
+		{
+			velocity.x = 0.0f;
+		}
 		if (KEY_PRESS('D'))
 		{
 			velocity.x += DELTA * status.speed * 0.5f;
 			isMoveX = true;
+		}
+		if (KEY_UP('D'))
+		{
+			velocity.x = 0.0f;
 		}
 	}
 
@@ -337,20 +369,36 @@ void Player::Move()
 			velocity.z += DELTA * status.speed * 0.7f;
 			isMoveZ = true;
 		}
+		if (KEY_UP('W'))
+		{
+			velocity.z = 0.0f;
+		}
 		if (KEY_PRESS('S'))
 		{
 			velocity.z -= DELTA * status.speed * 0.7f;
 			isMoveZ = true;
+		}
+		if (KEY_UP('S'))
+		{
+			velocity.z = 0.0f;
 		}
 		if (KEY_PRESS('A'))
 		{
 			velocity.x -= DELTA * status.speed * 0.7f;
 			isMoveX = true;
 		}
+		if (KEY_UP('A'))
+		{
+			velocity.x = 0.0f;
+		}
 		if (KEY_PRESS('D'))
 		{
 			velocity.x += DELTA * status.speed * 0.7f;
 			isMoveX = true;
+		}
+		if (KEY_UP('D'))
+		{
+			velocity.x = 0.0f;
 		}
 	}
 		
@@ -358,15 +406,15 @@ void Player::Move()
 	//방향을 구하고 정규화
 	if (KEY_PRESS(VK_SHIFT))
 	{
-		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 10;
+		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 5.0f;
 	}
 	else if (KEY_PRESS(VK_CONTROL))
 	{
-		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 5;
+		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 2.5f;
 	}
 	else
 	{
-		if (velocity.Length() > status.speed * 0.7f) velocity = velocity.GetNormalized() * 7;
+		if (velocity.Length() > status.speed * 0.7f) velocity = velocity.GetNormalized() * 3.5f;
 	}
 
 	if (!isMoveZ)
