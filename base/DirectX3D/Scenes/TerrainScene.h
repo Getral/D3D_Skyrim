@@ -2,6 +2,9 @@
 
 class TerrainScene : public Scene
 {
+private:
+	UINT terrainSize = 10;
+
 public:
 	TerrainScene();
 	~TerrainScene();
@@ -13,6 +16,7 @@ public:
 	virtual void GUIRender() override;
 
 private:
+	//vector<vector<Terrain*>> terrain;
 	Terrain* terrain;
 };
 

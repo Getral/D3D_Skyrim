@@ -57,9 +57,9 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	SetEvent(ATTACK3, bind(&Bear::EndAttack, this), 0.9f);
 
 	SetEvent(HIT, bind(&Bear::StartHit, this), 0.0f);
-	SetEvent(HIT, bind(&Bear::EndHit, this), 0.9f);
+	SetEvent(HIT, bind(&Bear::EndHit, this), 0.7f);
 
-	SetEvent(HEADSHAKE, bind(&Bear::EndHeadShake, this), 0.9f);
+	SetEvent(HEADSHAKE, bind(&Bear::EndHeadShake, this), 0.7f);
 
 	FOR(totalEvent.size())
 		eventIters[i] = totalEvent[i].begin();
@@ -97,7 +97,9 @@ void Bear::Render()
 void Bear::GUIRender()
 {
 	Enemy::GUIRender();
-	ImGui::Text("Test : %d", (int)curState);
+	ImGui::Text("Is Wake Up : %d", (int)isWakeUp);
+	ImGui::Text("Is Sleep : %d", (int)isSleep);
+	ImGui::Text("Is Hit : %d", (int)isHit);
 }
 
 void Bear::SetState(State state)
@@ -139,6 +141,7 @@ void Bear::StartStartSleep()
 void Bear::EndStartSleep()
 {
 	isSleep = true;
+	isWakeUp = false;
 }
 
 void Bear::StartWakeUp()
@@ -159,40 +162,33 @@ void Bear::StartRun()
 
 void Bear::EndRun()
 {
-	SetState(IDLE);
-	SetTarget(nullptr);
 }
 
 void Bear::StartAttack()
 {
 	attackCollider->SetActive(false);
-	trackCollider->SetActive(false);
 	SetTarget(nullptr);
 	attackDelay = 3.0f;
 }
 
 void Bear::EndAttack()
 {
-	SetState(IDLE);
-	attackCollider->SetActive(true);
+	SetState(COMBATIDLE);
 }
 
 void Bear::StartHit()
 {
-	//attackCollider->SetActive(false);
-	//trackCollider->SetActive(false);
 	isHit = true;
 }
 
 void Bear::EndHit()
 {
-	SetState(IDLE);
+	SetState(HEADSHAKE);
+	isHit = false;
 }
 
 void Bear::EndHeadShake()
 {
-	attackCollider->SetActive(true);
-	trackCollider->SetActive(true);
 	isHit = false;
 }
 
@@ -225,7 +221,8 @@ void Bear::Behavior()
 		attackDelay -= DELTA;
 		if (attackDelay <= 0.0f)
 		{
-			trackCollider->SetActive(true);
+			attackCollider->SetActive(true);
+			SetState(RUN);
 		}
 	}
 
@@ -243,17 +240,15 @@ void Bear::Behavior()
 			attackState++;
 			break;
 		case 2:
-			SetState(ATTACK3);
+			SetState(ATTACK4);
 			attackState = 0;
 			break;
 		}
 	}
 	else if (playerData->GetCollier()->IsCollision(trackCollider))
 	{
-		if (!isWakeUp)
+		if (isSleep)
 			SetState(WAKEUP);
-		else
-			SetState(RUN);
 	}
 	else if (isSleep)
 	{

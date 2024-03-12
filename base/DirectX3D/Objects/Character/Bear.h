@@ -9,6 +9,7 @@ private:
 		STARTSLEEP,
 		WAKEUP,
 		IDLE,
+		COMBATIDLE,
 		RUN,
 		ATTACK,
 		ATTACK2,

@@ -15,7 +15,7 @@ private:
 
 	vector<vector<string>> clipNameTable =
 	{
-		{ "bear_sleep", "bear_startsleep", "bear_wakeup","bear_idle", "bear_run_forward", "bear_attack", "bear_attack2", 
+		{ "bear_sleep", "bear_startsleep", "bear_wakeup","bear_idle", "bear_combatidle","bear_run_forward", "bear_attack", "bear_attack2",
 			"bear_attack3", "bear_attack_standing", "bear_hit", "bear_headshake", "bear_death" },
 		{ "wolf_idle", "wolf_run_forward", "wolf_attack"}
 	};
