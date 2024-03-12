@@ -127,8 +127,8 @@ protected:
 	bool isBlock = false;
 	bool isHit = false;
 	bool isCombo = false;
-	bool is1hm = true;
-	bool is2hm = false;
+	bool is1hm = false;
+	bool is2hm = true;
 	bool isbow = false;
 	bool isbowdrawn = false;
 

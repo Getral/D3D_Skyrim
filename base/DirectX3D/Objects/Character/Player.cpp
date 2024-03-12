@@ -147,6 +147,13 @@ Player::Player()
 	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+
 	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
@@ -171,6 +178,23 @@ Player::Player()
 	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
+
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
 
 	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
 	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
@@ -257,7 +281,7 @@ void Player::Move()
 	bool isMoveZ = false;
 	bool isMoveX = false;
 
-	if (KEY_PRESS(VK_SHIFT)) //달리기
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn) //달리기
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -297,7 +321,7 @@ void Player::Move()
 		}
 	}
 
-	else if (KEY_PRESS(VK_CONTROL)) //앉아서 이동
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn) //앉아서 이동
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -379,11 +403,11 @@ void Player::Move()
 		
 
 	//방향을 구하고 정규화
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
 		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 5.0f;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
 		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 2.5f;
 	}
@@ -448,7 +472,8 @@ void Player::Attack()
 
 	if (is1hm)
 	{
-		if (velocity.z < -0.1f && velocity.x < -0.1f || velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f)
+		if (velocity.z < -0.1f && velocity.x < -0.1f || 
+			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
@@ -458,7 +483,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_RUN_FW_ATK);
+					SetAction(THM_RUN_FW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -470,13 +495,14 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_WALK_FW_ATK);
+					SetAction(THM_WALK_FW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
 		}
 
-		else if (velocity.z < -0.1f && velocity.x < -0.1f || velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f)
+		else if (velocity.z < -0.1f && velocity.x < -0.1f || 
+			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
@@ -486,7 +512,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_RUN_BW_ATK);
+					SetAction(THM_RUN_BW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -498,12 +524,12 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_WALK_BW_ATK);
+					SetAction(THM_WALK_BW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
 		}
-		else if (velocity.x < -0.1f)
+		else if (velocity.x < -0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
@@ -513,7 +539,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_RUN_L_ATK);
+					SetAction(THM_RUN_L_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -525,12 +551,12 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_WALK_L_ATK);
+					SetAction(THM_WALK_L_ATK);
 					attackCharge = 0.0f;
 				}
 			}
 		}
-		else if (velocity.x > 0.1f)
+		else if (velocity.x > 0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
@@ -540,7 +566,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_RUN_R_ATK);
+					SetAction(THM_RUN_R_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -552,40 +578,13 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(OHM_WALK_R_ATK);
+					SetAction(THM_WALK_R_ATK);
 					attackCharge = 0.0f;
 				}
 			}
 		}
 
-		else if (KEY_PRESS(VK_CONTROL))
-		{
-			if (KEY_PRESS(VK_LBUTTON))
-			{
-				attackCharge += DELTA;
-			}
-			if (KEY_UP(VK_LBUTTON))
-			{
-				if (attackCharge > 1.0f)
-				{
-					SetAction(OHM_CATK_P);
-				}
-				else
-				{
-					if (!isCombo)
-					{
-						SetAction(OHM_CATK_R);
-						isCombo = true;
-					}
-					else
-					{
-						SetAction(OHM_CATK_L);
-						isCombo = false;
-					}
-				}
-				attackCharge = 0.0f;
-			}
-		}
+		else if (KEY_PRESS(VK_CONTROL)) return;
 
 		else 
 		{
@@ -597,18 +596,18 @@ void Player::Attack()
 			{
 				if (attackCharge > 1.0f)
 				{
-					SetAction(OHM_ATK_P);
+					SetAction(THM_ATK_P);
 				}
 				else
 				{
 					if (!isCombo)
 					{
-						SetAction(OHM_ATK_R);
+						SetAction(THM_ATK_R);
 						isCombo = true;
 					}
 					else
 					{
-						SetAction(OHM_ATK_L);
+						SetAction(THM_ATK_L);
 						isCombo = false;
 					}
 				}
@@ -619,30 +618,145 @@ void Player::Attack()
 
 	if (is2hm)
 	{
-		if (KEY_PRESS(VK_LBUTTON))
+		if (velocity.z < -0.1f && velocity.x < -0.1f ||
+			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
 		{
-			attackCharge += DELTA;
-		}
-		if (KEY_UP(VK_LBUTTON))
-		{
-			if (attackCharge > 1.0f)
+			if (KEY_PRESS(VK_SHIFT))
 			{
-				SetAction(THM_ATK_P);
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_FW_ATK);
+					attackCharge = 0.0f;
+				}
 			}
 			else
 			{
-				if (!isCombo)
+				if (KEY_PRESS(VK_LBUTTON))
 				{
-					SetAction(THM_ATK_R);
-					isCombo = true;
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_FW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f ||
+			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_BW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_BW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+		else if (velocity.x < -0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_L_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_L_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+		else if (velocity.x > 0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_R_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_R_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+
+		else
+		{
+			if (KEY_PRESS(VK_LBUTTON))
+			{
+				attackCharge += DELTA;
+			}
+			if (KEY_UP(VK_LBUTTON))
+			{
+				if (attackCharge > 1.0f)
+				{
+					SetAction(THM_ATK_P);
 				}
 				else
 				{
-					SetAction(THM_ATK_L);
-					isCombo = false;
+					if (!isCombo)
+					{
+						SetAction(THM_ATK_R);
+						isCombo = true;
+					}
+					else
+					{
+						SetAction(THM_ATK_L);
+						isCombo = false;
+					}
 				}
+				attackCharge = 0.0f;
 			}
-			attackCharge = 0.0f;
 		}
 	}
 
@@ -651,6 +765,7 @@ void Player::Attack()
 		if (KEY_PRESS(VK_LBUTTON))
 		{
 			SetAction(BOW_DRAW_INTRO);
+			isbowdrawn = true;
 			attackCharge += DELTA;
 		}
 		if (KEY_UP(VK_LBUTTON))
@@ -662,8 +777,10 @@ void Player::Attack()
 			else if (KEY_DOWN(VK_RBUTTON))
 			{
 				SetAction(BOW_IDLE);
+				isbowdrawn = false;
 				attackCharge = 0.0f;
 			}
+			isbowdrawn = false;
 			attackCharge = 0.0f;
 		}
 	}
@@ -694,42 +811,46 @@ void Player::GetHit()
 	if (isInvincible) return;
 	if (isbow) return;
 
-	if (isBlock)
+	if (is1hm)
 	{
-		if (KEY_DOWN('Z'))
+		if (isBlock)
 		{
-			SetAction(OHM_HIT_BLOCK);
-			isHit = true;
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
 		}
-		if (KEY_DOWN('X'))
+		else
 		{
-			SetAction(OHM_HIT_BLOCK);
-			isHit = true;
-		}
-		if (KEY_DOWN('C'))
-		{
-			SetAction(OHM_HIT_BLOCK);
-			isHit = true;
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(OHM_HIT_LIGHT);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(OHM_HIT_MEDIUM);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(OHM_HIT_LARGE);
+				isHit = true;
+			}
 		}
 	}
-	else
-	{
-		if (KEY_DOWN('Z'))
-		{
-			SetAction(OHM_HIT_LIGHT);
-			isHit = true;
-		}
-		if (KEY_DOWN('X'))
-		{
-			SetAction(OHM_HIT_MEDIUM);
-			isHit = true;
-		}
-		if (KEY_DOWN('C'))
-		{
-			SetAction(OHM_HIT_LARGE);
-			isHit = true;
-		}
-	}
+	
 }
 
 void Player::SetAnimation()
@@ -936,6 +1057,48 @@ void Player::SetAnimation()
 		else SetAction(BOW_IDLE);
 	}
 
+	if (isbow && isbowdrawn)
+	{
+		if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FL);
+		}
+
+		else if (velocity.z > 0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FR);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BL);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BR);
+		}
+
+		else if (velocity.z > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_F);
+		}
+
+		else if (velocity.z < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_B);
+		}
+
+		else if (velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_L);
+		}
+
+		else if (velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_R);
+		}
+	}
 
 }
 
