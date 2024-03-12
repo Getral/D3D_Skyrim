@@ -2,10 +2,8 @@
 
 ItemStatus::ItemStatus()
 {
-	armors.push_back(new Armor("armor1", Item::AROMOR, 123456, 10, Armor::helmat, 30));
-	armors.push_back(new Armor("armor2", Item::AROMOR, 10, 10, Armor::helmat, 10));
-
-	
+	armors.push_back(new Armor("dragonboneboots", Item::AROMOR, 10, 11, Armor::helmat, 30));
+	armors.push_back(new Armor("dragonbonecuirassplate", Item::AROMOR, 10, 10, Armor::helmat, 10));
 }
 
 ItemStatus::~ItemStatus()

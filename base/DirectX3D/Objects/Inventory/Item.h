@@ -7,9 +7,9 @@ public:
 	{
 		string name;
 		int type;
-		int weight;	// 무게
-		//float gold;		// 화페
-		int value;	// 개수
+		int weight;	
+		int gold;	
+		int count;
 	};
 
 	enum Type
@@ -28,4 +28,3 @@ public:
 private:
 	Status status;	
 };
-

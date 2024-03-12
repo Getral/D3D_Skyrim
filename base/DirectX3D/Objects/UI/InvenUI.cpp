@@ -17,9 +17,16 @@ InvenUI::InvenUI()
 	framebar2 = new Quad(L"Textures/UI/frameColor.png");
 	//framebar2->SetParent(frame);
 	framebar2->Pos() = { CENTER_X - 400 ,CENTER_Y };
-	framebar2->Scale().y *= 1000.0f;
 	framebar2->Scale().x *= 2.5f;
+	framebar2->Scale().y *= 1000.0f;
 	framebar2->UpdateWorld();
+
+	framebar3 = new Quad(L"Textures/UI/frameColor.png");
+	//framebar2->SetParent(frame);
+	framebar3->Pos() = { CENTER_X - 200 ,CENTER_Y + 275 };
+	framebar3->Scale().x *= 500.0f;
+	framebar3->Scale().y *= 2.5f;
+	framebar3->UpdateWorld();
 
 	title_all = new Quad(L"Textures/UI/icon_all.png");
 	title_all->SetParent(frame);
@@ -39,6 +46,8 @@ InvenUI::InvenUI()
 	selectedBar = new Quad(Vector2(180, 40));
 	selectedBar->Pos() = { CENTER_X - 495,CENTER_Y + 250};
 	selectedBar->GetMaterial()->SetShader(L"UI/EditAlpha2.hlsl");
+
+	itemstatus = new ItemStatus();
 }
 
 InvenUI::~InvenUI()
@@ -88,17 +97,44 @@ void InvenUI::Render()
 	frame->Render();
 	framebar->Render();
 	framebar2->Render();
+	framebar3->Render();
 	title_all->Render();
 	title_weapon->Render();
 
 	selectedBar->Render();
 
-	//Font::Get()->RenderText("ALL",		{ CENTER_X,CENTER_Y });
-	//Font::Get()->RenderText("Weapons",	{ CENTER_X,CENTER_Y - 10 });
-	//Font::Get()->RenderText("Armor",	{ CENTER_X,CENTER_Y - 20 });
-	//Font::Get()->RenderText("Clothing", { CENTER_X,CENTER_Y - 30 });
+	Font::Get()->RenderText("NAME", { 275, CENTER_Y + 290 });
+	Font::Get()->RenderText("TYPE", { 480, CENTER_Y + 290 });
+	Font::Get()->RenderText("WGT", { 515, CENTER_Y + 290 });
+	Font::Get()->RenderText("VAL", { 550, CENTER_Y + 290 });
+
+	listingItem("dragonboneboots");
+
+	
+
+	//Font::Get()->RenderText("dragonbonecuirassplate", { 300, WIN_HEIGHT - 30 });
+	//Font::Get()->RenderText("dragonbonegauntlets", { 300, WIN_HEIGHT - 50 });
+	//Font::Get()->RenderText("dragonbonehelmet", { 300, WIN_HEIGHT - 70 });
+	//Font::Get()->RenderText("dragonboneshield", { 300, WIN_HEIGHT - 90 });
 }
 
 void InvenUI::GUIRender()
 {
+	
+
+}
+
+void InvenUI::AddItem(string inname)
+{
+	inven_armors.push_back(itemstatus->GetArmor(inname));
+
+	
+}
+
+void InvenUI::listingItem(string inname)
+{
+	Font::Get()->RenderText(itemstatus->GetArmor(inname)->GetStatus().name, { 275, WIN_HEIGHT - 100 });
+	Font::Get()->RenderText(to_string(itemstatus->GetArmor(inname)->GetStatus().gold), { 515, WIN_HEIGHT - 100 });
+	Font::Get()->RenderText(to_string(itemstatus->GetArmor(inname)->GetStatus().weight), { 550, WIN_HEIGHT - 100 });
+	//Font::Get()->RenderText(to_string(itemstatus->GetArmor(inname)->GetStatus().count), { 540, WIN_HEIGHT - 10 });
 }

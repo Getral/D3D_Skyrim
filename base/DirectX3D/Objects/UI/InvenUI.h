@@ -18,6 +18,10 @@ public:
 	void Render();
 	void GUIRender();
 
+	void AddItem(string inname);
+
+	void listingItem(string inname);
+	
 private:
 	Quad* frame;
 	Quad* framebar;
@@ -32,5 +36,10 @@ private:
 	Quad* title_misc;
 	
 	int selectedTitleNum = 0;
+
+	vector<class Armor*> inven_armors;
+
+	//vector<Item::Status*> inven_items;
+	class ItemStatus* itemstatus;
 };
 

@@ -239,7 +239,9 @@ void UIManager::GUIRender()
     //ImGui::Text("enemy_angle : %f", enemies_dir[1]->Pos().x);
 
     //ImGui::Text("weight : %d", itemstatus->GetArmor("armor1")->GetStatus().weight);
-    ImGui::Text("weight : %d", itemstatus->GetItem("armor1").weight);
+    //ImGui::Text("weight : %d", itemstatus->GetItem("armor1").weight);
+
+    invenUI->GUIRender();
 }
 
 

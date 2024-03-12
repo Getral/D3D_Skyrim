@@ -1,4 +1,4 @@
-item(inven)
+itemStatus
   weapon         (name, type, weight, value, armortype, attack)
   armor            (name, type, weight, value, armortype, defense)
   clothing         (name, type, weight, value, armortype, defense)
@@ -10,16 +10,12 @@ vector<weapon>
 vector<cloth>
 vector<misc>
 
-AddItem(item)
-equipItem
-
-ItemStatus
-
 itemStatus(Table)->getitem(name)->status
 
-AddItem(itemstatus)->get
-
 inven
+
+AddItem(item)
+equipItem
 name->status->type ->wepaon
 vector(w).pushback
 a
