@@ -206,6 +206,9 @@ Player::Player()
 	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+
+	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.6f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
 }
 
 Player::~Player()
@@ -762,10 +765,10 @@ void Player::Attack()
 
 	if (isbow)
 	{
-		if (KEY_PRESS(VK_LBUTTON))
+		if (KEY_PRESS(VK_LBUTTON) && !isbowdrawn)
 		{
-			SetAction(BOW_DRAW_INTRO);
 			isbowdrawn = true;
+			SetAction(BOW_DRAW_INTRO);
 			attackCharge += DELTA;
 		}
 		if (KEY_UP(VK_LBUTTON))
@@ -774,13 +777,6 @@ void Player::Attack()
 			{
 				SetAction(BOW_RELEASE);
 			}
-			else if (KEY_DOWN(VK_RBUTTON))
-			{
-				SetAction(BOW_IDLE);
-				isbowdrawn = false;
-				attackCharge = 0.0f;
-			}
-			isbowdrawn = false;
 			attackCharge = 0.0f;
 		}
 	}
@@ -1051,6 +1047,7 @@ void Player::SetAnimation()
 			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_R);
 			else SetAction(BOW_WALK_R);
 		}
+
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
 
 
@@ -1098,6 +1095,7 @@ void Player::SetAnimation()
 		{
 			SetAction(BOW_DRAWN_WALK_R);
 		}
+		else SetAction(BOW_DRAW_IDLE);
 	}
 
 }
@@ -1143,6 +1141,18 @@ void Player::EndBlockHit()
 {
 	SetAction(OHM_BLOCK);
 	isHit = false;
+}
+
+void Player::SetBowDrawn()
+{
+	SetAction(BOW_DRAW_IDLE);
+	isbowdrawn = true;
+}
+
+void Player::EndBowDrawn()
+{
+	SetAction(BOW_IDLE);
+	isbowdrawn = false;
 }
 
 void Player::SetInvincible()

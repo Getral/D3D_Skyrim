@@ -77,6 +77,9 @@ private:
 	void EndBlock();
 	void EndHit();
 	void EndBlockHit();
+
+	void SetBowDrawn();
+	void EndBowDrawn();
 	void SetInvincible();
 	void EndInvincible();
 
@@ -128,8 +131,8 @@ protected:
 	bool isHit = false;
 	bool isCombo = false;
 	bool is1hm = false;
-	bool is2hm = true;
-	bool isbow = false;
+	bool is2hm = false;
+	bool isbow = true;
 	bool isbowdrawn = false;
 
 
