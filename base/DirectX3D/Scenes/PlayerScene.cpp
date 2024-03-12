@@ -13,7 +13,7 @@ PlayerScene::PlayerScene()
 	aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("skyrim2");
+	CAM->TargetOptionLoad("Skyrim");
 	CAM->LookAtTarget(); 
 }
 
@@ -38,7 +38,7 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
-	aldu->Render();
+	//aldu->Render();
 }
 
 void PlayerScene::PostRender()
@@ -49,5 +49,5 @@ void PlayerScene::PostRender()
 void PlayerScene::GUIRender()
 {
 	player->GUIRender();
-	aldu->GUIRender();
+	//aldu->GUIRender();
 }
