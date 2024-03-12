@@ -6,8 +6,13 @@ private:
 	{
 		ALL,
 		WEAPON,
+		WEAPON_IRON,
+		WEAPON_EBONY,
 		ARMOR,
+		ARMOR_IRON,
+		ARMOR_DRAGONBONE,
 		CLOTHING,
+		EXPENDABLE,
 		MISC
 	};
 public:
@@ -18,6 +23,8 @@ public:
 	void Render();
 	void GUIRender();
 
+	void SelectedBarPosing();
+	void RenderTitle();
 	void AddItem(string inname);
 
 	void listingItem(string inname);
@@ -33,6 +40,7 @@ private:
 	Quad* title_weapon;
 	Quad* title_armor;
 	Quad* title_clothing;
+	Quad* title_expendable;
 	Quad* title_misc;
 	
 	int selectedTitleNum = 0;
