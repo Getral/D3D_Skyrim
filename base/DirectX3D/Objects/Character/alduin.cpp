@@ -344,7 +344,7 @@ void alduin::EndAction()
 	moveSpeed = 15.0f;
 	SetState(IDLE);
 	Pos().y = 0;
-	CoolingTime = 0;
+	Timer::Get()->ResetOneSec();
 
 	breathCollider->SetActive(false);
 	
@@ -378,7 +378,7 @@ void alduin::Patterns() //지상패턴
 {
 
 
-	if (curState != IDLE || curState != TURN_L || curState != TURN_R) return;
+	if (curState != IDLE) return;
 
 	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
@@ -408,7 +408,7 @@ void alduin::PatternFire()
 
 	
 
-	if (Pos().y < 1) //50분의 1 확률로, 지상에 있을 때
+	if (Pos().y < 1) //지상에 있을 때
 	{
 		SetState(INHALE);
 		isAttacking = true;
