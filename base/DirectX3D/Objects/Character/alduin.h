@@ -80,7 +80,7 @@ private:
 	CapsuleCollider* collider_L;
 	CapsuleCollider* collider_B;
 	BoxCollider* breathCollider;
-	//SphereCollider* fBallCollider;
+	SphereCollider* fBallCollider;
 
 	Transform* transform;
 	Player* target;
@@ -93,10 +93,12 @@ private:
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
 	float CoolingTime = 0;
+	float fireBallDir = 0.0f;
 
 	bool isAscending = false;
 	bool isDescending = false;
 	bool isAttacking = false;
+	bool isFireAttack = false;
 
 
 	Vector3 velocity;

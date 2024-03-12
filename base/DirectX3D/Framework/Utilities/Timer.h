@@ -30,6 +30,7 @@ private:
 	float deltaScale = 1.0f;	
 	int OneSecElapsed = 0;
 
+
 	__int64 curTime = 0;
 	__int64 lastTime = 0;
 	__int64 periodFrequency = 0;
