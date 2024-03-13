@@ -56,10 +56,11 @@ public:
 	BladeSword* GetSword() { return bladeSword; }
 	bool GetIsHit() { return isHit; }
 	ACTION GetAction() { return curAction; }
-
+	bool GetIsInvincible() { return isInvincible; }
 
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }
+	void SetIsInvincible(bool value) { isInvincible = value; }
 
 private:
 	void Control();
@@ -77,6 +78,9 @@ private:
 	void EndBlock();
 	void EndHit();
 	void EndBlockHit();
+
+	void SetBowDrawn();
+	void EndBowDrawn();
 	void SetInvincible();
 	void EndInvincible();
 
@@ -128,8 +132,9 @@ protected:
 	bool isHit = false;
 	bool isCombo = false;
 	bool is1hm = false;
-	bool is2hm = true;
-	bool isbow = false;
+	bool is2hm = false;
+	bool isbow = true;
+	bool isbowdrawn = false;
 
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
