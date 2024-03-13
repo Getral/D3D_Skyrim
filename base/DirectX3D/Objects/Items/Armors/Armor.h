@@ -3,13 +3,6 @@
 class Armor : public Item
 {
 public:
-	struct ArmorAbility
-	{
-		float defense = 0;
-
-		// 마법부여는 필요하면 추가
-	};
-
 	enum ArmorType
 	{
 		 helmat,
@@ -19,14 +12,19 @@ public:
 		 shield,
 	};
 
+	enum ArmorClass
+	{
+		IRON,
+		DRAGONBONE
+	};
 public:
-	Armor(string name, int type, int weight, int value, int armortype, int def);
+	Armor(string name, int type, int weight, int value, int armor_class, int armor_type, int def);
 	
+	int GetArmorClass() { return armor_class; }
 	int GetDef() { return def; }
 	
 private:
-	
-	int armortype;
+	int armor_class;
+	int armor_type;
 	int def;
 };
-

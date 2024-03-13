@@ -5,12 +5,12 @@ private:
 	enum Title
 	{
 		ALL,
-		WEAPON,
-		WEAPON_IRON,
-		WEAPON_EBONY,
 		ARMOR,
 		ARMOR_IRON,
 		ARMOR_DRAGONBONE,
+		WEAPON,
+		WEAPON_IRON,
+		WEAPON_EBONY,
 		CLOTHING,
 		EXPENDABLE,
 		MISC
@@ -27,13 +27,17 @@ public:
 	void RenderTitle();
 	void AddItem(string inname);
 
-	void listingItem(string inname);
+	
+	void ListingItem();
 	
 private:
 	Quad* frame;
 	Quad* framebar;
 	Quad* framebar2;
 	Quad* framebar3;
+
+	Quad* item_detail_frame;
+
 	Quad* selectedBar;
 
 	Quad* title_all;
@@ -46,8 +50,11 @@ private:
 	int selectedTitleNum = 0;
 
 	vector<class Armor*> inven_armors;
+	vector<class Weapon*> inven_weapons;
+	vector<class Arrow*> inven_arrows;
+	vector<class Potion*> inven_potions;
 
-	//vector<Item::Status*> inven_items;
+	
 	class ItemStatus* itemstatus;
 };
 

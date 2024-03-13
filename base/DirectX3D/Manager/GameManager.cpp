@@ -30,8 +30,6 @@ GameManager::GameManager()
 
     Font::Get()->SetColor("Gray");
     Font::Get()->SetStyle("Futura");
-
-    
 }
 
 GameManager::~GameManager()

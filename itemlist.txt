@@ -44,6 +44,12 @@ DragonShield
 
 Expendables (소모품)
 
+
+Potion hp/sp
+Arrow type 
+
+Food(선택)
+
 HpPothion
 MpPotion
 

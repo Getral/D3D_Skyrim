@@ -216,6 +216,7 @@ using namespace GameMath;
 
 #include "Objects/Items/Expendables/Expendables.h"		// 소모품
 #include "objects/Items/Expendables/Potion.h"	
+#include "objects/Items/Expendables/Arrow.h"	
 #include "Objects/Items/Expendables/IronArrow.h"
 #include "Objects/Items/Expendables/EbonyArrow.h"
 

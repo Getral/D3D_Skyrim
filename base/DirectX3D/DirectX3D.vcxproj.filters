@@ -468,6 +468,9 @@
     <ClInclude Include="Objects\Inventory\ItemStatus.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\Items\Expendables\Arrow.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX3D.cpp">
@@ -888,6 +891,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Inventory\ItemStatus.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Expendables\Arrow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

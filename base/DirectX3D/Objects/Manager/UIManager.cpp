@@ -249,7 +249,6 @@ void UIManager::GUIRender()
 
 void UIManager::TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies, alduin* alduin)
 {
-    
     int tmp = 0;
     for (int i = 0; i < enemies.size(); i++)
     {

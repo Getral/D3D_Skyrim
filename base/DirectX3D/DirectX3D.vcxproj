@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Items\Expendables\Arrow.h" />
     <ClInclude Include="Objects\Inventory\ItemStatus.h" />
     <ClInclude Include="Objects\UI\InvenUI.h" />
     <ClInclude Include="Objects\Character\Bear.h" />
@@ -295,6 +296,7 @@
     <ClInclude Include="Objects\Landscape\Water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Items\Expendables\Arrow.cpp" />
     <ClCompile Include="Objects\Inventory\ItemStatus.cpp" />
     <ClCompile Include="Objects\UI\InvenUI.cpp" />
     <ClCompile Include="Objects\Character\Bear.cpp" />

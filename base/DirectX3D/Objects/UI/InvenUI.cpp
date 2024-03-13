@@ -32,16 +32,15 @@ InvenUI::InvenUI()
 	title_all->Pos() = {70, 610};
 	title_all->Scale() *= 0.3f;
 
+	title_armor = new Quad(L"Textures/UI/icon_armor.png");
+	title_armor->Pos().x = title_all->Pos().x;
+	title_armor->Pos().y = title_all->Pos().y - 40.0f;
+	title_armor->Scale() *= 0.3f;
 
 	title_weapon = new Quad(L"Textures/UI/icon_weapon.png");
 	title_weapon->Pos().x = title_all->Pos().x;
-	title_weapon->Pos().y = title_all->Pos().y - 40.0f;
+	title_weapon->Pos().y = title_all->Pos().y - 160.0f;
 	title_weapon->Scale() *= 0.3f;
-
-	title_armor = new Quad(L"Textures/UI/icon_armor.png");
-	title_armor->Pos().x = title_all->Pos().x;
-	title_armor->Pos().y = title_all->Pos().y - 160.0f;
-	title_armor->Scale() *= 0.3f;
 
 	title_clothing = new Quad(L"Textures/UI/icon_clothing.png");
 	title_clothing->Pos().x = title_all->Pos().x;
@@ -64,6 +63,11 @@ InvenUI::InvenUI()
 	selectedBar->GetMaterial()->SetShader(L"UI/EditAlpha2.hlsl");
 
 	itemstatus = new ItemStatus();
+
+	item_detail_frame = new Quad(L"Textures/UI/Item_detail_frame.png");
+	item_detail_frame->GetMaterial()->SetShader(L"UI/EditAlpha.hlsl");
+	item_detail_frame->Pos() = { CENTER_X + 300 ,CENTER_Y - 200 };
+	
 }
 
 InvenUI::~InvenUI()
@@ -84,8 +88,17 @@ void InvenUI::Update()
 
 	selectedBar->UpdateWorld();
 
+	item_detail_frame->UpdateWorld();
 	SelectedBarPosing();
 	
+	if (KEY_DOWN('R'))
+		AddItem("ironhelmet");
+	if (KEY_DOWN('T'))
+		AddItem("dragonhelmet");
+	if (KEY_DOWN('Y'))
+		AddItem("irondagger");
+	if (KEY_DOWN('U'))
+		AddItem("ebonydagger");
 }
 
 void InvenUI::Render()
@@ -104,22 +117,15 @@ void InvenUI::Render()
 
 	selectedBar->Render();
 
+	item_detail_frame->Render();
+
 	RenderTitle();
 
-	listingItem("dragonboneboots");
-
-	
-
-	//Font::Get()->RenderText("dragonbonecuirassplate", { 300, WIN_HEIGHT - 30 });
-	//Font::Get()->RenderText("dragonbonegauntlets", { 300, WIN_HEIGHT - 50 });
-	//Font::Get()->RenderText("dragonbonehelmet", { 300, WIN_HEIGHT - 70 });
-	//Font::Get()->RenderText("dragonboneshield", { 300, WIN_HEIGHT - 90 });
+	ListingItem();
 }
 
 void InvenUI::GUIRender()
 {
-	ImGui::Text("pos : %f", title_all->GlobalPos().x);
-	ImGui::Text("pos : %f", title_all->GlobalPos().y);
 }
 
 void InvenUI::SelectedBarPosing()
@@ -177,13 +183,13 @@ void InvenUI::RenderTitle()
 {
 	Font::Get()->RenderText("ALL", { 100, title_all->GlobalPos().y });
 
-	Font::Get()->RenderText("WEAPON", { 100,title_weapon->GlobalPos().y });
-	Font::Get()->RenderText("Iron", { 110,title_weapon->GlobalPos().y - 40 });
-	Font::Get()->RenderText("Ebony", { 110,title_weapon->GlobalPos().y - 40 * 2 });
-
 	Font::Get()->RenderText("ARMOR", { 100,title_armor->GlobalPos().y });
 	Font::Get()->RenderText("Iron", { 110,title_armor->GlobalPos().y - 40 });
 	Font::Get()->RenderText("Dragonbone", { 110,title_armor->GlobalPos().y - 40 * 2 });
+
+	Font::Get()->RenderText("WEAPON", { 100,title_weapon->GlobalPos().y });
+	Font::Get()->RenderText("Iron", { 110,title_weapon->GlobalPos().y - 40 });
+	Font::Get()->RenderText("Ebony", { 110,title_weapon->GlobalPos().y - 40 * 2 });
 
 	Font::Get()->RenderText("CLOTHING", { 100,title_clothing->GlobalPos().y });
 
@@ -203,15 +209,6 @@ void InvenUI::RenderTitle()
 	case InvenUI::ALL:
 		Font::Get()->RenderText("ALL", { 70, CENTER_Y + 330 });
 		break;
-	case InvenUI::WEAPON:
-		Font::Get()->RenderText("WEAPON", { 70, CENTER_Y + 330 });
-		break;
-	case InvenUI::WEAPON_IRON:
-		Font::Get()->RenderText("IRON", { 70, CENTER_Y + 330 });
-		break;
-	case InvenUI::WEAPON_EBONY:
-		Font::Get()->RenderText("EBONY", { 70, CENTER_Y + 330 });
-		break;
 	case InvenUI::ARMOR:
 		Font::Get()->RenderText("ARMOR", { 70, CENTER_Y + 330 });
 		break;
@@ -220,6 +217,15 @@ void InvenUI::RenderTitle()
 		break;
 	case InvenUI::ARMOR_DRAGONBONE:
 		Font::Get()->RenderText("DRAGONBONE", { 70, CENTER_Y + 330 });
+		break;
+	case InvenUI::WEAPON:
+		Font::Get()->RenderText("WEAPON", { 70, CENTER_Y + 330 });
+		break;
+	case InvenUI::WEAPON_IRON:
+		Font::Get()->RenderText("IRON", { 70, CENTER_Y + 330 });
+		break;
+	case InvenUI::WEAPON_EBONY:
+		Font::Get()->RenderText("EBONY", { 70, CENTER_Y + 330 });
 		break;
 	case InvenUI::CLOTHING:
 		Font::Get()->RenderText("CLOTHING", { 70, CENTER_Y + 330 });
@@ -238,15 +244,111 @@ void InvenUI::RenderTitle()
 
 void InvenUI::AddItem(string inname)
 {
-	inven_armors.push_back(itemstatus->GetArmor(inname));
-
-	
+	if(itemstatus->GetItem(inname).type == Item::ARMOR)
+		inven_armors.push_back(itemstatus->GetArmor(inname));
+	if (itemstatus->GetItem(inname).type == Item::WEAPON)
+		inven_weapons.push_back(itemstatus->GetWeapon(inname));
 }
 
-void InvenUI::listingItem(string inname)
+void InvenUI::ListingItem()
 {
-	Font::Get()->RenderText(itemstatus->GetArmor(inname)->GetStatus().name, { 275, WIN_HEIGHT - 100 });
-	Font::Get()->RenderText(to_string(itemstatus->GetArmor(inname)->GetStatus().gold), { 515, WIN_HEIGHT - 100 });
-	Font::Get()->RenderText(to_string(itemstatus->GetArmor(inname)->GetStatus().weight), { 550, WIN_HEIGHT - 100 });
-	//Font::Get()->RenderText(to_string(itemstatus->GetArmor(inname)->GetStatus().count), { 540, WIN_HEIGHT - 10 });
+	if (inven_armors.size() > 0 || inven_weapons.size() > 0)
+	{
+		if (selectedTitleNum == InvenUI::ALL)
+		{
+			for (int i = 0; i < inven_armors.size(); i++)
+			{
+				Font::Get()->RenderText(inven_armors[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
+			}
+
+			for (int i = 0; i < inven_weapons.size(); i++)
+			{
+				Font::Get()->RenderText(inven_weapons[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::ARMOR)
+		{
+			for (int i = 0; i < inven_armors.size(); i++)
+			{
+				Font::Get()->RenderText(inven_armors[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::ARMOR_IRON)
+		{
+			int tmp = 0;
+			for (Armor* armor : inven_armors)
+			{
+				if (armor->GetArmorClass() == Armor::IRON)
+				{
+					Font::Get()->RenderText(armor->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(armor->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(armor->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					tmp++;
+				}
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::ARMOR_DRAGONBONE)
+		{
+			int tmp = 0;
+			for (Armor* armor : inven_armors)
+			{
+				if (armor->GetArmorClass() == Armor::DRAGONBONE)
+				{
+					Font::Get()->RenderText(armor->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(armor->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(armor->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					tmp++;
+				}
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::WEAPON)
+		{
+			for (int i = 0; i < inven_weapons.size(); i++)
+			{
+				Font::Get()->RenderText(inven_weapons[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::WEAPON_IRON)
+		{
+			int tmp = 0;
+			for (Weapon* weapon : inven_weapons)
+			{
+				if (weapon->GetWeaponClass() == Weapon::EBONY)
+				{
+					Font::Get()->RenderText(weapon->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(weapon->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(weapon->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					tmp++;
+				}
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::WEAPON_EBONY)
+		{
+			int tmp = 0;
+			for (Weapon* weapon : inven_weapons)
+			{
+				if (weapon->GetWeaponClass() == Weapon::EBONY)
+				{
+					Font::Get()->RenderText(weapon->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(weapon->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					Font::Get()->RenderText(to_string(weapon->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)tmp) });
+					tmp++;
+				}
+			}
+		}	
+	}
 }

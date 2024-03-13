@@ -15,6 +15,11 @@ PlayerScene::PlayerScene()
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim");
 	CAM->LookAtTarget(); 
+
+	test = new Model("ebonydagger");
+	test->Pos().y += 20;
+	test->Rot().x += XM_PI / 2;
+	test->Scale() *= 0.5f;
 }
 
 PlayerScene::~PlayerScene()
@@ -29,6 +34,7 @@ void PlayerScene::Update()
 	player->Update();
 	aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(), aldu);
+	test->UpdateWorld();
 }
 
 void PlayerScene::PreRender()
@@ -38,6 +44,7 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
+	test->Render();
 	//aldu->Render();
 }
 
@@ -48,7 +55,8 @@ void PlayerScene::PostRender()
 
 void PlayerScene::GUIRender()
 {
-	player->GUIRender();
-	aldu->GUIRender();
-	UIManager::Get()->GUIRender();
+	//player->GUIRender();
+	//aldu->GUIRender();
+	//UIManager::Get()->GUIRender();
+	test->GUIRender();
 }

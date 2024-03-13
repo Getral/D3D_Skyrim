@@ -1,14 +1,7 @@
 #include "Framework.h"
 #include "Armor.h"
 
-Armor::Armor(string name, int type, int weight, int value, int armortype, int def)
-	: Item(name, type, weight, value), armortype(armortype),def(def)
+Armor::Armor(string name, int type, int weight, int value, int armor_class, int armor_type, int def)
+	: Item(name, type, weight, value), armor_class(armor_class),armor_type(armor_type),def(def)
 {
-	
-	//name = "dsadsad";
-	//type = Item::AROMOR;
-	//weight = 10;
-	//value = 10;
-	//armortype = Armor::helmat;
-	//def = 10;
 }

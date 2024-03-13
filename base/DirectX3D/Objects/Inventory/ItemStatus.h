@@ -9,15 +9,16 @@ public:
 	Item::Status GetItem(string inname);
 
 	class Armor* GetArmor(string inname);
-	class Weapon* ReturnWeapon();
+	class Weapon* GetWeapon(string inname);
+	class Arrow* GetArrow(string inname);
+	class Potion* GetPotion(string inname);
 private:
 	int CheckType(string inname);
-
-
 private:
-	class Armor* armor1;
-	vector<Armor*> armors;
+	vector<class Armor*> armors;
 	vector<class Weapon*> weapons;
+	vector<class Arrow*> arrows;
+	vector<class Potion*> potions;
 
 	int type;
 };

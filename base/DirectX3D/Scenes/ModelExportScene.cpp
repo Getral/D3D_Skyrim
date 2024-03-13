@@ -43,7 +43,7 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;*/
 
-    string name = "armor";
+    string name = "ebonydagger";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
@@ -53,7 +53,7 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;
 
-
+    /*
     clipName = "alduin_aproach";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
@@ -222,7 +222,7 @@ ModelExportScene::ModelExportScene()
     exporter->ExportClip(clipName);
     delete exporter;
 
-    
+    */
 
     
    /* clipName = "Walk";

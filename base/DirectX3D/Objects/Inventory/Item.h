@@ -8,16 +8,14 @@ public:
 		string name;
 		int type;
 		int weight;	
-		int gold;	
-		int count;
+		int value;	
 	};
-
 	enum Type
 	{
-		AROMOR,
+		ARMOR,
 		WEAPON,
-		CLOTHING,
-		EXPENDABLES,
+		ARROW,
+		POTION,
 		MISC
 	};
 
