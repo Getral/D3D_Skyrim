@@ -31,7 +31,7 @@ void Wolf::Update()
 {
 	Enemy::Update();
 
-	//Behavior();
+	Behavior();
 	ExecuteEvent();
 
 	SetColliderByNode();
@@ -40,10 +40,10 @@ void Wolf::Update()
 void Wolf::Render()
 {
 	Enemy::Render();
-	for (CapsuleCollider* collider : colliders)
-		collider->Render();
-	trackCollider->Render();
-	attackCollider->Render();
+	//for (CapsuleCollider* collider : colliders)
+	//	collider->Render();
+	//trackCollider->Render();
+	//attackCollider->Render();
 }
 
 void Wolf::GUIRender()
@@ -184,7 +184,7 @@ void Wolf::StartRun()
 void Wolf::StartAttack()
 {
 	attackCollider->SetActive(false);
-	attackDelay = 3.0f;
+	attackDelay = 1.5f;
 }
 
 void Wolf::EndAttack()
