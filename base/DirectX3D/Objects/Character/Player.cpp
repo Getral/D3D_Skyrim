@@ -116,6 +116,12 @@ Player::Player()
 	ReadClip("male_bowdrawn_walk_backward_r");
 	ReadClip("male_bowdrawn_walk_left");
 	ReadClip("male_bowdrawn_walk_right");
+	ReadClip("male_1hm_equip");
+	ReadClip("male_1hm_unequip");
+	ReadClip("male_2hm_equip");
+	ReadClip("male_2hm_unequip");
+	ReadClip("male_bow_equip");
+	ReadClip("male_bow_unequip");
 	//ReadClip("male_death");
 
 
@@ -209,6 +215,10 @@ Player::Player()
 
 	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
 	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
+
+	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
+	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
+	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
 }
 
 Player::~Player()
@@ -271,6 +281,7 @@ void Player::Control()
 	Move();
 	Attack();
 	Block();
+	WeaponChange();
 }
 
 void Player::Move()
@@ -288,6 +299,9 @@ void Player::Move()
 		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
 		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
 	if (isBlock) return;
 	if (isHit) return;
@@ -483,6 +497,9 @@ void Player::Attack()
 		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
 		curAction == THM_RUN_R_ATK || curAction == BOW_RELEASE) return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
+		return;
 	if (isHit) return;
 
 	if (is1hm)
@@ -872,6 +889,70 @@ void Player::GetHit()
 	
 }
 
+void Player::WeaponChange()
+{
+	if (curAction != OHM_IDLE && curAction != THM_IDLE && curAction != BOW_IDLE) return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
+		return;
+	if (KEY_PRESS(VK_CONTROL)) return;
+
+	if (is1hm)
+	{
+		if (KEY_DOWN('2'))
+		{
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			is1hm = false;
+			is2hm = true;
+			SetAction(OHM_UNEQUIP);
+		}
+		if (KEY_DOWN('3'))
+		{
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			is1hm = false;
+			isbow = true;
+			SetAction(OHM_UNEQUIP);
+		}
+	}
+	
+	if (is2hm)
+	{
+		if (KEY_DOWN('1'))
+		{
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			is2hm = false;
+			is1hm = true;
+			SetAction(THM_UNEQUIP);
+		}
+		if (KEY_DOWN('3'))
+		{
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			is2hm = false;
+			isbow = true;
+			SetAction(THM_UNEQUIP);
+		}
+	}
+	
+	if (isbow)
+	{
+		if (KEY_DOWN('1'))
+		{
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			isbow = false;
+			is1hm = true;
+			SetAction(BOW_UNEQUIP);
+		}
+		if (KEY_DOWN('2'))
+		{
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			isbow = false;
+			is2hm = true;
+			SetAction(BOW_UNEQUIP);
+		}
+	}
+
+}
+
 void Player::SetAnimation()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
@@ -887,6 +968,9 @@ void Player::SetAnimation()
 		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
 		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
 
 	if (is1hm)
@@ -1185,4 +1269,41 @@ void Player::EndInvincible()
 {
 	isInvincible = false;
 	invincibleCount = 0.0f;
+}
+
+void Player::Change1hm()
+{
+	SetAction(OHM_EQUIP);
+}
+
+void Player::Change2hm()
+{
+	SetAction(THM_EQUIP);
+}
+
+void Player::Changebow()
+{
+	SetAction(BOW_EQUIP);
+}
+
+void Player::Set1hmIdle()
+{
+	SetAction(OHM_IDLE);
+}
+
+void Player::Set2hmIdle()
+{
+	SetAction(THM_IDLE);
+}
+
+void Player::SetbowIdle()
+{
+	SetAction(BOW_IDLE);
+}
+
+
+
+void Player::DoNothing()
+{
+	return;
 }
