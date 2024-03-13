@@ -3,8 +3,7 @@
 
 TerrainScene::TerrainScene()
 {
-	terrain = new Terrain(L"Textures/Landscape/tundra02.dds");
-	terrain->SetSize(Vector2(100, 100));
+	terrain = new Terrain();
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
 	terrain->UpdateWorld();
 	//for (int i = 0; i < terrainSize; i++)

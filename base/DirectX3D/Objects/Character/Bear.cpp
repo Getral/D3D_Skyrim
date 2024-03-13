@@ -1,7 +1,7 @@
 #include "Framework.h"
 
-Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstancing, Transform* transform, Vector3 spawnPos, float trackRange)
-	: Enemy(name, index, modelAnimatorInstancing, transform, spawnPos, trackRange)
+Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstancing, Transform* transform, Vector3 spawnPos)
+	: Enemy(name, index, modelAnimatorInstancing, transform, spawnPos)
 {
 	colliders.push_back(new CapsuleCollider(35.0f)); // HIP
 
@@ -36,7 +36,8 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 
 	colliders.push_back(new CapsuleCollider(25.0f)); // HEAD
 
-	SetCollidersParent();
+	trackRange = 75000.f;
+	attackRange = trackRange * 0.25f;
 
 	SetEvent(STARTSLEEP, bind(&Bear::StartStartSleep, this), 0.0f);
 	SetEvent(STARTSLEEP, bind(&Bear::EndStartSleep, this), 0.9f);
@@ -71,6 +72,8 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	rigidbody->Pos().y = rigidbody->Scale().y * 0.5f;
 
 	SetState(SLEEP);
+
+	Init();
 }
 
 Bear::~Bear()
@@ -90,16 +93,16 @@ void Bear::Render()
 	Enemy::Render();
 	//for (CapsuleCollider* collider : colliders)
 		//collider->Render();
-	attackCollider->Render();
-	trackCollider->Render();
+	//attackCollider->Render();
+	//trackCollider->Render();
 }
 
 void Bear::GUIRender()
 {
-	Enemy::GUIRender();
-	ImGui::Text("Is Wake Up : %d", (int)isWakeUp);
-	ImGui::Text("Is Sleep : %d", (int)isSleep);
-	ImGui::Text("Is Hit : %d", (int)isHit);
+	//Enemy::GUIRender();
+	//ImGui::Text("Is Wake Up : %d", (int)isWakeUp);
+	//ImGui::Text("Is Sleep : %d", (int)isSleep);
+	//ImGui::Text("Is Hit : %d", (int)isHit);
 }
 
 void Bear::SetState(State state)

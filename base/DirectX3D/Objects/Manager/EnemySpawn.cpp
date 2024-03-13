@@ -10,11 +10,11 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 		transform->UpdateWorld();
 		Enemy* tmp;
 		if (enemy->GetName() == "Bear")
-			tmp = new Bear(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+			tmp = new Bear(enemy->GetName(), i, instancing, transform, spawnPos[i]);
 		else if (enemy->GetName() == "Wolf")
-			tmp = new Wolf(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+			tmp = new Wolf(enemy->GetName(), i, instancing, transform, spawnPos[i]);
 		else
-			tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+			tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i]);
 		tmp->SetStatus(enemy->GetStatus());
 		tmp->GetCollider()->Scale() *= 1000.0f;
 		tmp->SetPlayerData(playerData);

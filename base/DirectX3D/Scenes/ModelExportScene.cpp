@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "Bear";
+    string name = "Wolf";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
@@ -13,7 +13,7 @@ ModelExportScene::ModelExportScene()
     //exporter->ExportMesh();
     //delete exporter;
 
-    clipName = "bear_combatidle";
+    clipName = "wolf_combatidle";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);

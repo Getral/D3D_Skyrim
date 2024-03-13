@@ -1,19 +1,16 @@
 #include "Framework.h"
 
-Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform* transform, Vector3 spawnPos, float trackRange)
-	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing), trackRange(trackRange)
+Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform* transform, Vector3 spawnPos)
+	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing)
 {
 	rigidbody = new BoxCollider();
 	rigidbody->SetParent(transform);
 
 	trackCollider = new SphereCollider();
-	trackCollider->Scale() *= trackRange;
 	trackCollider->SetParent(transform);
 
-	attackRange = trackRange * 0.25f;
 	attackCollider = new SphereCollider();
-	attackCollider->Scale() *= attackRange;
-	attackCollider->Pos().SetY(attackRange * 0.5f);
+
 	attackCollider->SetParent(transform);
 
 	motion = modelAnimatorInstancing->GetMotion(index);
@@ -56,6 +53,17 @@ void Enemy::Render()
 void Enemy::GUIRender()
 {
 	Character::GUIRender();
+}
+
+void Enemy::Init()
+{
+	trackCollider->Scale() *= trackRange;
+	attackCollider->Scale() *= attackRange;
+	attackCollider->Pos().SetY(attackRange * 0.5f);
+	SetCollidersParent();
+
+	FOR(totalEvent.size())
+		eventIters[i] = totalEvent[i].begin();
 }
 
 void Enemy::Track()
