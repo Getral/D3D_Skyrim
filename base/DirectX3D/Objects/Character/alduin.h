@@ -28,7 +28,7 @@ private:
 		LAND,
 		LAND_VERTICAL,
 		DIVE,
-		TIMETRAVEL,
+		DEATH,
 		TURN_L,
 		TURN_R
 	};
@@ -60,6 +60,8 @@ private:
 	void EndTakeoff();
 	void beginAproach();
 	void EndAction();
+
+	void Dying();
 	void Dead();
 
 	void Patterns();
