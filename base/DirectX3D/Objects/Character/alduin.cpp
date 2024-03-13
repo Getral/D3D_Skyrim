@@ -4,6 +4,8 @@
 alduin::alduin() :  ModelAnimator("alduin")
 {
 	transform = new Transform();
+	FireAttackTransform = new Transform();
+
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
 	alduinCollider2->SetParent(this->transform);
 
@@ -46,12 +48,11 @@ alduin::alduin() :  ModelAnimator("alduin")
 	
 	breathCollider->Pos().SetZ(-40);
 	breathCollider->SetParent(transform);
-	breathCollider->Scale() *= 0.2;
 	breathCollider->SetActive(false);
 
-	
-	fBallCollider->SetParent(transform);
+
 	fBallCollider->Scale() *= 0.2;
+	fBallCollider->SetParent(transform);
 	fBallCollider->SetActive(false);
 
 	//fBallCollider->SetParent(transform);
@@ -61,6 +62,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_takeoff");
 	this->ReadClip("alduin_hover");
 	this->ReadClip("alduin_flight_hit");
+	this->ReadClip("alduin_forward");
 	this->ReadClip("alduin_backward");
 	this->ReadClip("alduin_bleedidle");
 	this->ReadClip("alduin_aproach");
@@ -78,6 +80,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_landing_soft");
 	this->ReadClip("alduin_landing_hard");
 	this->ReadClip("alduin_land_ground");
+	this->ReadClip("alduin_land_vertical");
 	this->ReadClip("alduin_dive");
 	this->ReadClip("alduin_death");
 	this->ReadClip("alduin_turn_left");
@@ -115,6 +118,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 	GetClip(APROACH)->SetEvent(bind(&alduin::beginAproach, this), 0.9f);
 	//GetClip(FLIGHT_FOR)->SetEvent(bind(&alduin::aproaching, this), 0.0f);
 	GetClip(LANDING_HARD)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
+
+	GetClip(DEATH)->SetEvent(bind(&alduin::Dying, this), 0.0f);
+	GetClip(DEATH)->SetEvent(bind(&alduin::Dead, this), 0.9f);
 
 
 }
@@ -160,6 +166,7 @@ void alduin::Update()
 	{
 		velocity = this->target->GlobalPos() - transform->GlobalPos();
 		Move();
+		//SetAnimation();
 	}
 
 	if(isAscending) 
@@ -178,12 +185,17 @@ void alduin::Update()
 		
 	}
 
+	if (isAttacking)
+	{
+		moveSpeed = 0.0f;
+	}
+
 	if (isFireAttack)
 	{
 		if (curState == FIREBALL)
 		{
-			//fBallCollider->Rot().y = atan2(transform->Forward().x, transform->Forward().z);
-			fBallCollider->Pos() += fBallCollider->Forward() * 150 * DELTA;
+			fBallCollider->Rot().y = Rot().y + XM_PI;
+			fBallCollider->Pos() += fBallCollider->Rot() * 150 * DELTA;
 		}
 			
 		if (curState == BREATH)
@@ -207,7 +219,7 @@ void alduin::Update()
 	//TailCollider->SetWorld(GetTransformByNode(110));
 
 
-	//SetAnimation();
+	
 	
 }
 
@@ -229,6 +241,9 @@ void alduin::GUIRender()
 	Model::GUIRender();
 
 	ImGui::SliderInt("nodeIndex", (int*)&nodeIndex, 0, 500);
+
+	//ImGui::InputInt("FireBallCollider")
+
 }
 
 void alduin::SetTarget(Player* target)
@@ -240,11 +255,11 @@ void alduin::SetTarget(Player* target)
 
 void alduin::Move()
 {
-	//if (velocity.Length() > 150 && curState == IDLE)
-	//{
-	//	SetState(TAKEOFF);
+	if (velocity.Length() > 350 && Pos().y < 1)
+	{
+		SetState(TAKEOFF);
 
-	//}
+	}
 
 	Matrix rotY = XMMatrixRotationY(Rot().y);
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
@@ -257,24 +272,37 @@ void alduin::Move()
 
 	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
 
-	if (cross.y < -30 && !isAttacking) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
+	if (cross.y < -20 && !isAttacking) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
-		if(Pos().y < 1 && !isAscending && !isDescending)
+		if (Pos().y < 1 && velocity.Length() < 350)
+		{
 			SetState(TURN_R);
+			moveSpeed = 0.0f;
+		}
+			
 	}
-	else if (cross.y > 30 && !isAttacking) //반대의 경우
+	else if (cross.y > 20 && !isAttacking) //반대의 경우
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
-		if(Pos().y < 1 && !isAscending && !isDescending)
+		if (Pos().y < 1 && velocity.Length() < 350)
+		{
 			SetState(TURN_L);
+			moveSpeed = 0.0f;
+		}
+			
 	}
-	else if (cross.y >= -30 && cross.y <= 30 && Pos().y < 1 && !isAttacking) //반대의 경우
+	else if (cross.y >= -20 && cross.y <= 20 && !isAttacking) //반대의 경우
 	{
-		if(velocity.Length() <= 150)
-			SetState(IDLE);
+
+		if (Pos().y < 1 && velocity.Length() < 350)
+		{
+			SetState(FORWARD);
+			moveSpeed = 15.0f;
+		}
+			
 	}
 	
 	
@@ -364,14 +392,28 @@ void alduin::EndAction()
 	isAttacking = false;
 	isFireAttack = false;
 	moveSpeed = 15.0f;
-	SetState(IDLE);
+	SetState(FORWARD);
 	Pos().y = 0;
 	Timer::Get()->ResetOneSec();
 
 	breathCollider->SetActive(false);
 	fBallCollider->SetActive(false);
-	fBallCollider->Pos() = transform->Pos();
+	fBallCollider->Pos() = { 0,0,0 };
 	
+}
+
+void alduin::Dying()
+{
+	//파티클 재생
+
+}
+
+void alduin::Dead()
+{
+	this->SetActive(false);
+	transform->SetActive(false);
+
+
 }
 
 
@@ -379,15 +421,15 @@ void alduin::EndAction()
 
 //void alduin::SetAnimation()
 //{
-//	if (curState == BREATH) return;
+//	if (isAttacking || curState == TURN_L || curState == TURN_R || curState == IDLE) return;
 //
-//	if (velocity.z > 0.1f) // 속력 기준이 현재 앞으로 +면
-//		SetState(RUN);
-//	else if (velocity.x > 0.1f) // 좌우 기준 +면
-//		SetState(RUN_R);
-//	else if (velocity.x < -0.1f) //좌우 기준 -면
-//		SetState(RUN_L);
-//	else SetState(IDLE); // 가만히 있으면
+//
+//	if (velocity.z > 0.1f && Pos().y < 1)
+//		SetState(FORWARD);
+//	else if (velocity.z < 0.1f && Pos().y < 1)
+//		SetState(BACKWARD);
+//	//else if(Pos().y < 1 && moveSpeed < 1) 
+//	//	SetState(IDLE); // 가만히 있으면
 //}
 
 void alduin::SetState(State state)
@@ -402,7 +444,7 @@ void alduin::Patterns() //지상패턴
 {
 
 
-	if (curState != IDLE) return;
+	if (curState != FORWARD) return;
 
 	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
@@ -428,7 +470,7 @@ void alduin::Patterns() //지상패턴
 void alduin::PatternFire()
 {
 
-	if (CoolingTime < 8 || curState != IDLE) return;
+	if (CoolingTime < 8 || curState != FORWARD || Pos().y > 1) return;
 
 
 	if (Pos().y < 1) //지상에 있을 때
@@ -448,18 +490,6 @@ void alduin::PatternsAir()
 	if (curState != HOVER) return;
 
 	SetState(APROACH);
-	//switch (Random(0,3))
-	//{
-	//case 0:
-	//	SetState(APROACH);
-	//	break;
-	//case 1:
-	//	SetState(LANDING);
-	//	break;
-	//default:
-	//	break;
-	//}
-
 
 
 }

@@ -8,7 +8,8 @@ private:
 		TAKEOFF,
 		HOVER,
 		HOVER_HIT,
-		WALK,
+		FORWARD,
+		BACKWARD,
 		BLEED,
 		APROACH,
 		FLIGHT_FOR,
@@ -25,8 +26,9 @@ private:
 		LANDING_SOFT,
 		LANDING_HARD,
 		LAND,
+		LAND_VERTICAL,
 		DIVE,
-		DEATH,
+		TIMETRAVEL,
 		TURN_L,
 		TURN_R
 	};
@@ -58,6 +60,7 @@ private:
 	void EndTakeoff();
 	void beginAproach();
 	void EndAction();
+	void Dead();
 
 	void Patterns();
 	void PatternFire();
@@ -83,6 +86,7 @@ private:
 	SphereCollider* fBallCollider;
 
 	Transform* transform;
+	Transform* FireAttackTransform;
 	Player* target;
 	Vector3* tempRot;
 
