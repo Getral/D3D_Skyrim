@@ -207,7 +207,7 @@ Player::Player()
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 
-	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.6f);
+	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
 	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
 }
 
@@ -275,7 +275,19 @@ void Player::Control()
 
 void Player::Move()
 {
-	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P)
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
+		curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM || curAction == OHM_HIT_LARGE ||
+		curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK ||
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
+		curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM || curAction == THM_HIT_LARGE || 
+		curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK ||
+		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
+		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
+		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == THM_WALK_FW_ATK ||
+		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
+		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
+		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
+		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
 		return;
 	if (isBlock) return;
 	if (isHit) return;
@@ -429,11 +441,11 @@ void Player::Move()
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
 
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
@@ -765,11 +777,17 @@ void Player::Attack()
 
 	if (isbow)
 	{
-		if (KEY_PRESS(VK_LBUTTON) && !isbowdrawn)
+		if (KEY_DOWN(VK_LBUTTON))
 		{
-			isbowdrawn = true;
 			SetAction(BOW_DRAW_INTRO);
+		}
+		if (KEY_PRESS(VK_LBUTTON))
+		{
 			attackCharge += DELTA;
+			if (attackCharge > 1.0f)
+			{
+				isbowdrawn = true;
+			}
 		}
 		if (KEY_UP(VK_LBUTTON))
 		{
@@ -777,6 +795,11 @@ void Player::Attack()
 			{
 				SetAction(BOW_RELEASE);
 			}
+			else
+			{
+				SetAction(BOW_IDLE);
+			}
+			isbowdrawn = false;
 			attackCharge = 0.0f;
 		}
 	}
@@ -863,7 +886,7 @@ void Player::SetAnimation()
 		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
 		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
-		curAction == THM_RUN_R_ATK)
+		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
 		return;
 
 	if (is1hm)
@@ -1144,15 +1167,13 @@ void Player::EndBlockHit()
 }
 
 void Player::SetBowDrawn()
-{
+{	
 	SetAction(BOW_DRAW_IDLE);
-	isbowdrawn = true;
 }
 
 void Player::EndBowDrawn()
 {
 	SetAction(BOW_IDLE);
-	isbowdrawn = false;
 }
 
 void Player::SetInvincible()

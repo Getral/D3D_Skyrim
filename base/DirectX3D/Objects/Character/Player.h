@@ -56,10 +56,11 @@ public:
 	BladeSword* GetSword() { return bladeSword; }
 	bool GetIsHit() { return isHit; }
 	ACTION GetAction() { return curAction; }
-
+	bool GetIsInvincible() { return isInvincible; }
 
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }
+	void SetIsInvincible(bool value) { isInvincible = value; }
 
 private:
 	void Control();
