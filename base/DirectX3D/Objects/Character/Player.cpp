@@ -292,13 +292,8 @@ void Player::Move()
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
 		curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM || curAction == THM_HIT_LARGE || 
 		curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK ||
-		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
-		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
-		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == THM_WALK_FW_ATK ||
 		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
-		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
-		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
-		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
 		return;
 	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
 		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
@@ -490,6 +485,7 @@ void Player::Rotate()
 void Player::Attack()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
 		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
 		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
 		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == OHM_CATK_R ||
@@ -500,6 +496,7 @@ void Player::Attack()
 	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
 		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
+	if (isBlock) return;
 	if (isHit) return;
 
 	if (is1hm)
@@ -515,7 +512,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_FW_ATK);
+					SetAction(OHM_RUN_FW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -527,7 +524,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_FW_ATK);
+					SetAction(OHM_WALK_FW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -544,7 +541,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_BW_ATK);
+					SetAction(OHM_RUN_BW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -556,7 +553,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_BW_ATK);
+					SetAction(OHM_WALK_BW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -571,7 +568,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_L_ATK);
+					SetAction(OHM_RUN_L_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -583,7 +580,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_L_ATK);
+					SetAction(OHM_WALK_L_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -598,7 +595,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_R_ATK);
+					SetAction(OHM_RUN_R_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -610,7 +607,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_R_ATK);
+					SetAction(OHM_WALK_R_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -628,18 +625,18 @@ void Player::Attack()
 			{
 				if (attackCharge > 1.0f)
 				{
-					SetAction(THM_ATK_P);
+					SetAction(OHM_ATK_P);
 				}
 				else
 				{
 					if (!isCombo)
 					{
-						SetAction(THM_ATK_R);
+						SetAction(OHM_ATK_R);
 						isCombo = true;
 					}
 					else
 					{
-						SetAction(THM_ATK_L);
+						SetAction(OHM_ATK_L);
 						isCombo = false;
 					}
 				}
