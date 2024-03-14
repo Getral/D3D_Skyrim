@@ -46,15 +46,15 @@ InvenUI::InvenUI()
 	title_weapon->Pos().y = title_all->Pos().y - 160.0f;
 	title_weapon->Scale() *= 0.3f;
 
-	title_clothing = new Quad(L"Textures/UI/icon_clothing.png");
-	title_clothing->Pos().x = title_all->Pos().x;
-	title_clothing->Pos().y = title_all->Pos().y - 280.0f;
-	title_clothing->Scale() *= 0.3f;
+	title_arrow = new Quad(L"Textures/UI/icon_arrow.png");
+	title_arrow->Pos().x = title_all->Pos().x;
+	title_arrow->Pos().y = title_all->Pos().y - 280.0f;
+	title_arrow->Scale() *= 0.05f;
 
-	title_expendable = new Quad(L"Textures/UI/icon_expendable.png");
-	title_expendable->Pos().x = title_all->Pos().x;
-	title_expendable->Pos().y = title_all->Pos().y - 320.0f;
-	title_expendable->Scale() *= 0.05f;
+	title_potion = new Quad(L"Textures/UI/icon_potion.png");
+	title_potion->Pos().x = title_all->Pos().x;
+	title_potion->Pos().y = title_all->Pos().y - 320.0f;
+	title_potion->Scale() *= 0.05f;
 
 	title_misc = new Quad(L"Textures/UI/icon_misc.png");
 	title_misc->Pos().x = title_all->Pos().x;
@@ -65,11 +65,12 @@ InvenUI::InvenUI()
 	selected_bar->Pos() = { CENTER_X - 495,CENTER_Y + 250};
 	selected_bar->GetMaterial()->SetShader(L"UI/EditAlpha2.hlsl");
 
-
-	equiped_icon_armor = new Quad(L"Textures/UI/Equiped_Icon.png");
-	equiped_icon_armor->Scale() *= 0.9f;
-	equiped_icon_armor->Pos() = { CENTER_X ,CENTER_Y };
-
+	FOR(5)
+	{
+		equiped_icon_armor.push_back(new Quad(L"Textures/UI/Equiped_Icon.png"));
+		equiped_icon_armor.back()->Scale() *= 0.9f;
+		equiped_icon_armor.back()->SetActive(false);
+	}
 
 	equiped_icon_weapon = new Quad(L"Textures/UI/Equiped_Icon.png");
 	equiped_icon_weapon->Scale() *= 0.9f;
@@ -82,7 +83,11 @@ InvenUI::InvenUI()
 	item_detail_frame->GetMaterial()->SetShader(L"UI/EditAlpha.hlsl");
 	item_detail_frame->Pos() = { CENTER_X + 300 ,CENTER_Y - 200 };
 
-	player_armor = new Armor("none", -1, -1, -1, -1, -1, 0);
+	player_helmet = new Armor("none", -1, -1, -1, -1, -1, 0);
+	player_cuirass = new Armor("none", -1, -1, -1, -1, -1, 0);
+	player_gauntlet = new Armor("none", -1, -1, -1, -1, -1, 0);
+	player_boots = new Armor("none", -1, -1, -1, -1, -1, 0);
+	player_shield = new Armor("none", -1, -1, -1, -1, -1, 0);
 }
 
 InvenUI::~InvenUI()
@@ -97,13 +102,14 @@ void InvenUI::Update(Player* player)
 	title_all->UpdateWorld();
 	title_weapon->UpdateWorld();
 	title_armor->UpdateWorld();
-	title_clothing->UpdateWorld();
-	title_expendable->UpdateWorld();
+	title_arrow->UpdateWorld();
+	title_potion->UpdateWorld();
 	title_misc->UpdateWorld();
 
 	selected_bar->UpdateWorld();
 
-	equiped_icon_armor->UpdateWorld();
+	for(Quad* icon : equiped_icon_armor)
+		icon->UpdateWorld();
 	equiped_icon_weapon->UpdateWorld();
 
 	item_detail_frame->UpdateWorld();
@@ -111,22 +117,28 @@ void InvenUI::Update(Player* player)
 
 	SelectedBarPosing();
 	
-	if (KEY_DOWN('R'))
+	if (KEY_DOWN('1'))
 		AddItem("ironhelmet");
-	if (KEY_DOWN('T'))
-		AddItem("dragonhelmet");
-	if (KEY_DOWN('Y'))
-		UseItem(player, "ironhelmet");
-	if (KEY_DOWN('U'))
-		UseItem(player, "dragonhelmet");
-	
-		
+	if (KEY_DOWN('2'))
+		AddItem("ironcuirass");
+	if (KEY_DOWN('3'))
+		AddItem("irongauntlet");
+	if (KEY_DOWN('4'))
+		AddItem("ironboots");
+	if (KEY_DOWN('5'))
+		AddItem("ironshield");
 
-	//if (inven_armors.size() > 1)
-	//	a = inven_armors[1]->GetStatus().name;
-	//else
-	//	a = "na";
-	//strcpy(ch, a.c_str());
+	if (KEY_DOWN('6'))
+		UseItem(player, "ironhelmet");
+	if (KEY_DOWN('7'))
+		UseItem(player, "ironcuirass");
+	if (KEY_DOWN('8'))
+		UseItem(player, "irongauntlet");
+	if (KEY_DOWN('9'))
+		UseItem(player, "ironboots");
+	if (KEY_DOWN('0'))
+		UseItem(player, "ironshield");
+	
 }
 
 void InvenUI::Render()
@@ -139,13 +151,14 @@ void InvenUI::Render()
 	title_all->Render();
 	title_weapon->Render();
 	title_armor->Render();
-	title_clothing->Render();
-	title_expendable->Render();
+	title_arrow->Render();
+	title_potion->Render();
 	title_misc->Render();
 
 	selected_bar->Render();
 
-	equiped_icon_armor->Render();
+	for (Quad* icon : equiped_icon_armor)
+		icon->Render();
 	equiped_icon_weapon->Render();
 
 	{
@@ -165,8 +178,12 @@ void InvenUI::Render()
 
 void InvenUI::GUIRender()
 {
-	ImGui::Text(player_armor->GetStatus().name.c_str());
-	ImGui::Text("player_armor equip state : %d", player_armor->GetEquip());
+	ImGui::Text(player_helmet->GetStatus().name.c_str());
+	ImGui::Text(player_cuirass->GetStatus().name.c_str());
+	ImGui::Text(player_gauntlet->GetStatus().name.c_str());
+	ImGui::Text(player_boots->GetStatus().name.c_str());
+	ImGui::Text(player_shield->GetStatus().name.c_str());
+	ImGui::Text("player_helmet equip state : %d", player_helmet->GetEquip());
 
 	if (inven_armors.size() > 1)
 	{
@@ -174,8 +191,7 @@ void InvenUI::GUIRender()
 		ImGui::Text("inven[1] equip state : %d", inven_armors[1]->GetEquip());
 	}
 
-	equiped_icon_armor->GUIRender();
-	equiped_icon_weapon->GUIRender();
+	
 }
 
 void InvenUI::SelectedBarPosing()
@@ -213,11 +229,11 @@ void InvenUI::SelectedBarPosing()
 	case InvenUI::ARMOR_DRAGONBONE:
 		selected_bar->Pos().y = title_armor->GlobalPos().y - 80;
 		break;
-	case InvenUI::CLOTHING:
-		selected_bar->Pos().y = title_clothing->GlobalPos().y;
+	case InvenUI::ARROW:
+		selected_bar->Pos().y = title_arrow->GlobalPos().y;
 		break;
-	case InvenUI::EXPENDABLE:
-		selected_bar->Pos().y = title_expendable->GlobalPos().y;
+	case InvenUI::POTION:
+		selected_bar->Pos().y = title_potion->GlobalPos().y;
 		break;
 	case InvenUI::MISC:
 		selected_bar->Pos().y = title_misc->GlobalPos().y;
@@ -241,9 +257,9 @@ void InvenUI::RenderTitle()
 	Font::Get()->RenderText("Iron", { 110,title_weapon->GlobalPos().y - 40 });
 	Font::Get()->RenderText("Ebony", { 110,title_weapon->GlobalPos().y - 40 * 2 });
 
-	Font::Get()->RenderText("CLOTHING", { 100,title_clothing->GlobalPos().y });
+	Font::Get()->RenderText("ARROW", { 100,title_arrow->GlobalPos().y });
 
-	Font::Get()->RenderText("EXPENDABLE", { 100,title_expendable->GlobalPos().y });
+	Font::Get()->RenderText("POTION", { 100,title_potion->GlobalPos().y });
 
 	Font::Get()->RenderText("MISC", { 100,title_misc->GlobalPos().y });
 
@@ -276,11 +292,11 @@ void InvenUI::RenderTitle()
 	case InvenUI::WEAPON_EBONY:
 		Font::Get()->RenderText("EBONY", { 70, CENTER_Y + 330 });
 		break;
-	case InvenUI::CLOTHING:
-		Font::Get()->RenderText("CLOTHING", { 70, CENTER_Y + 330 });
+	case InvenUI::ARROW:
+		Font::Get()->RenderText("ARROW", { 70, CENTER_Y + 330 });
 		break;
-	case InvenUI::EXPENDABLE:
-		Font::Get()->RenderText("EXPENDABLE", { 70, CENTER_Y + 330 });
+	case InvenUI::POTION:
+		Font::Get()->RenderText("POTION", { 70, CENTER_Y + 330 });
 		break;
 	case InvenUI::MISC:
 		Font::Get()->RenderText("MISC", { 70, CENTER_Y + 330 });
@@ -313,14 +329,57 @@ void InvenUI::UseItem(Player* player, string inname)
 		{
 			if (inven_armors[i]->GetStatus().name == inname)
 			{
-				player_armor->ChangeEquipState();
-				inven_armors[i]->ChangeEquipState();
+				switch (inven_armors[i]->GetArmorType())
+				{
+				case Armor::helmet:
+					player_helmet->ChangeEquipState();
+					inven_armors[i]->ChangeEquipState();
 
-				player->GetStatus().def -= player_armor->GetDef();				
-				player->GetStatus().def += inven_armors[i]->GetDef();				
+					player->GetStatus().def -= player_helmet->GetDef();
+					player->GetStatus().def += inven_armors[i]->GetDef();
+
+					player_helmet = inven_armors[i];
+					break;
+				case Armor::cuirass:
+					player_cuirass->ChangeEquipState();
+					inven_armors[i]->ChangeEquipState();
+
+					player->GetStatus().def -= player_cuirass->GetDef();
+					player->GetStatus().def += inven_armors[i]->GetDef();
+
+					player_cuirass = inven_armors[i];
+					break;
+				case Armor::gauntlet:
+					player_gauntlet->ChangeEquipState();
+					inven_armors[i]->ChangeEquipState();
+
+					player->GetStatus().def -= player_gauntlet->GetDef();
+					player->GetStatus().def += inven_armors[i]->GetDef();
+
+					player_gauntlet = inven_armors[i];
+					break;
+				case Armor::boots:
+					player_boots->ChangeEquipState();
+					inven_armors[i]->ChangeEquipState();
+
+					player->GetStatus().def -= player_boots->GetDef();
+					player->GetStatus().def += inven_armors[i]->GetDef();
+
+					player_boots = inven_armors[i];
+					break;
+				case Armor::shield:
+					player_shield->ChangeEquipState();
+					inven_armors[i]->ChangeEquipState();
+
+					player->GetStatus().def -= player_shield->GetDef();
+					player->GetStatus().def += inven_armors[i]->GetDef();
+
+					player_shield = inven_armors[i];
+					break;
+				default:
+					break;
+				}
 				
-				player_armor = inven_armors[i];
-				break;
 			}
 		}
 	}
@@ -331,6 +390,7 @@ void InvenUI::UseItem(Player* player, string inname)
 	//if (itemstatus->GetItem(inname).type == Item::POTION)
 	//	
 	//if (itemstatus->GetItem(inname).type == Item::MISC)
+	else return;
 }
 
 void InvenUI::ListingItem()
@@ -342,17 +402,52 @@ void InvenUI::ListingItem()
 			for (int i = 0; i < inven_armors.size(); i++)
 			{
 				if (inven_armors[i]->GetEquip() == true)
-					equiped_icon_armor->Pos() = { 260 , WIN_HEIGHT - 105 - (20 * (float)i) };
-				Font::Get()->RenderText(inven_armors[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
-				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				{
+					for (int j = 0; j < equiped_icon_armor.size(); j++)
+					{
+						/// <summary>
+						/// 수정해야함
+						/// </summary>
+						if (equiped_icon_armor[j]->GetActive() == false)
+						{
+							equiped_icon_armor[j]->SetActive(true);
+							equiped_icon_armor[j]->Pos() = { 260 , WIN_HEIGHT - 105 - (20 * (float)i) };
+							break;
+						}
+					}
+				}
+					
+				Font::Get()->RenderText(inven_armors[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
 				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
 			}
 
 			for (int i = 0; i < inven_weapons.size(); i++)
 			{
-				Font::Get()->RenderText(inven_weapons[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
-				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+				Font::Get()->RenderText(inven_weapons[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
 				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+			}
+
+			for (int i = 0; i < inven_arrows.size(); i++)
+			{
+				Font::Get()->RenderText(inven_arrows[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
+				Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
+				Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
+			}
+
+			for (int i = 0; i < inven_potions.size(); i++)
+			{
+				Font::Get()->RenderText(inven_potions[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size())) });
+				Font::Get()->RenderText(to_string(inven_potions[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size())) });
+				Font::Get()->RenderText(to_string(inven_potions[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size())) });
+			}
+
+			for (int i = 0; i < inven_misces.size(); i++)
+			{
+				Font::Get()->RenderText(inven_misces[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
+				Font::Get()->RenderText(to_string(inven_misces[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
+				Font::Get()->RenderText(to_string(inven_misces[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
 			}
 		}
 
@@ -411,7 +506,7 @@ void InvenUI::ListingItem()
 			int tmp = 0;
 			for (Weapon* weapon : inven_weapons)
 			{
-				if (weapon->GetWeaponClass() == Weapon::EBONY)
+				if (weapon->GetWeaponClass() == Weapon::IRON)
 				{
 					Font::Get()->RenderText(weapon->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)tmp) });
 					Font::Get()->RenderText(to_string(weapon->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)tmp) });
@@ -434,7 +529,37 @@ void InvenUI::ListingItem()
 					tmp++;
 				}
 			}
-		}	
+		}
+
+		if (selectedTitleNum == InvenUI::ARROW)
+		{
+			for (int i = 0; i < inven_arrows.size(); i++)
+			{
+				Font::Get()->RenderText(inven_arrows[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::POTION)
+		{
+			for (int i = 0; i < inven_potions.size(); i++)
+			{
+				Font::Get()->RenderText(inven_potions[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_potions[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_potions[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
+			}
+		}
+
+		if (selectedTitleNum == InvenUI::MISC)
+		{
+			for (int i = 0; i < inven_misces.size(); i++)
+			{
+				Font::Get()->RenderText(inven_misces[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_misces[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_misces[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
+			}
+		}
 	}
 }
 

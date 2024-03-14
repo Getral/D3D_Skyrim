@@ -11,8 +11,8 @@ private:
 		WEAPON,
 		WEAPON_IRON,
 		WEAPON_EBONY,
-		CLOTHING,
-		EXPENDABLE,
+		ARROW,
+		POTION,
 		MISC
 	};
 public:
@@ -44,14 +44,15 @@ private:
 	Quad* item_detail_frame;
 
 	Quad* selected_bar;
-	Quad* equiped_icon_armor;
+	vector<Quad*> equiped_icon_armor;
+
 	Quad* equiped_icon_weapon;
 
 	Quad* title_all;
 	Quad* title_weapon;
 	Quad* title_armor;
-	Quad* title_clothing;
-	Quad* title_expendable;
+	Quad* title_arrow;
+	Quad* title_potion;
 	Quad* title_misc;
 	
 	int selectedTitleNum = 0;
@@ -62,11 +63,12 @@ private:
 	vector<class Potion*> inven_potions;
 	vector<class Misc*> inven_misces;
 
-	Armor* player_armor;
+	Armor* player_helmet;
+	Armor* player_cuirass;
+	Armor* player_gauntlet;
+	Armor* player_boots;
+	Armor* player_shield;
 
 	class ItemStatus* itemstatus;
-
-	char ch[10];
-	string a;
 };
 

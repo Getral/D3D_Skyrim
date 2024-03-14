@@ -2,8 +2,14 @@
 
 ItemStatus::ItemStatus()
 {
-	armors.push_back(new Armor("ironhelmet", Item::ARMOR, 10, 11, Armor::IRON ,Armor::helmat, 12));
-	armors.push_back(new Armor("dragonhelmet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmat, 22));
+	armors.push_back(new Armor("ironhelmet", Item::ARMOR, 10, 11, Armor::IRON ,Armor::helmet, 12));
+	armors.push_back(new Armor("ironcuirass", Item::ARMOR, 10, 11, Armor::IRON ,Armor::cuirass, 12));
+	armors.push_back(new Armor("irongauntlet", Item::ARMOR, 10, 11, Armor::IRON ,Armor::gauntlet, 12));
+	armors.push_back(new Armor("ironboots", Item::ARMOR, 10, 11, Armor::IRON ,Armor::boots, 12));
+	armors.push_back(new Armor("ironshield", Item::ARMOR, 10, 11, Armor::IRON ,Armor::shield, 12));
+
+
+	armors.push_back(new Armor("dragonhelmet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmet, 22));
 
 	weapons.push_back(new Weapon("irondagger", Item::WEAPON, 30, 31, Weapon::IRON ,Weapon::dagger, 32));
 	weapons.push_back(new Weapon("ebonydagger", Item::WEAPON, 40, 41, Weapon::EBONY ,Weapon::dagger, 42));
@@ -39,7 +45,7 @@ Item::Status ItemStatus::GetItem(string inname)
 		return GetPotion(inname)->GetStatus();
 		break;
 	case Item::MISC:
-		return GetPotion(inname)->GetStatus();
+		return GetMisc(inname)->GetStatus();
 		break;
 	default:
 		break;
