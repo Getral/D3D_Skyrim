@@ -9,15 +9,10 @@ alduin::alduin() :  ModelAnimator("alduin")
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
 	alduinCollider2->SetParent(this->transform);
 
-	tempRot = new Vector3();
 
 	HeadCollider = new CapsuleCollider(90.0f,0.1f);
-	LWingCollider = new CapsuleCollider(100.0f, 30.0f);
-	RWingCollider = new CapsuleCollider(100.0f, 30.0f);
-	BodyCollider = new CapsuleCollider(70.0f, 260.0f);
-	LLegCollider = new CapsuleCollider(80.0f,0.5f);
-	RLegCollider = new CapsuleCollider(30.0f, 20.0f);
-	TailCollider = new CapsuleCollider(70.0f, 1.0f);
+	BodyCollider = new CapsuleCollider(110.0f, 350.0f);
+	TailCollider = new CapsuleCollider(90.0f, 10.0f);
 
 	breathCollider = new BoxCollider(50.0f);
 	fBallCollider = new SphereCollider(90.0f);
@@ -138,11 +133,7 @@ alduin::~alduin()
 	delete transform;
 
 	delete	HeadCollider;
-	delete	LWingCollider;
-	delete	RWingCollider;
 	delete	BodyCollider;
-	delete	LLegCollider;
-	delete	RLegCollider;
 	delete	TailCollider;
 
 }
@@ -160,8 +151,13 @@ void alduin::Update()
 	breathCollider->UpdateWorld();
 	fBallCollider->UpdateWorld();
 	transform->UpdateWorld();
+	HeadCollider->UpdateWorld();
+	BodyCollider->UpdateWorld();
+	TailCollider->UpdateWorld();
 
 	CoolingTime = Timer::Get()->GetOneSec();
+
+	DeathParticle->Update();
 
 	
 
@@ -218,14 +214,9 @@ void alduin::Update()
 	PatternsAir();
 		
 
-	//alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
 	HeadCollider->SetWorld(GetTransformByNode(45));
-	//LWingCollider->SetWorld(GetTransformByNode(81));
-	//RWingCollider->SetWorld(GetTransformByNode(103));
 	BodyCollider->SetWorld(GetTransformByNode(84));
-	//RLegCollider->SetWorld(GetTransformByNode(119));
-	//LLegCollider->SetWorld(GetTransformByNode(23));
-	//TailCollider->SetWorld(GetTransformByNode(110));
+	TailCollider->SetWorld(GetTransformByNode(110));
 
 
 	
@@ -244,11 +235,13 @@ void alduin::Render()
 	collider_B->Render();
 	breathCollider->Render();
 	fBallCollider->Render();
+	DeathParticle->Render();
 
 	if (curState != DEATH)
 	{
 		HeadCollider->Render();
 		BodyCollider->Render();
+		TailCollider->Render();
 	}
 	
 
@@ -429,7 +422,9 @@ void alduin::EndAction()
 
 void alduin::Dying()
 {
-	DeathParticle->Play(transform->Pos());
+	tempPos = Pos();
+	tempPos += {0, 30, 0};
+	DeathParticle->Play(tempPos);
 	
 	//파티클 재생
 

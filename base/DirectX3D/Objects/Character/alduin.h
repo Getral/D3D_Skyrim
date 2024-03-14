@@ -72,12 +72,7 @@ private:
 	CapsuleCollider* alduinCollider2;
 
 	CapsuleCollider* HeadCollider;
-	CapsuleCollider* LWingCollider;
-	CapsuleCollider* RWingCollider;
 	CapsuleCollider* BodyCollider;
-	CapsuleCollider* RLegCollider;
-	CapsuleCollider* LLegCollider;
-
 	CapsuleCollider* TailCollider;
 
 	CapsuleCollider* collider_F;
@@ -90,7 +85,7 @@ private:
 	Transform* transform;
 	Transform* FireAttackTransform;
 	Player* target;
-	Vector3* tempRot;
+	Vector3 tempPos;
 	ParticleSystem* DeathParticle;
 
 	UINT nodeIndex = 0;
