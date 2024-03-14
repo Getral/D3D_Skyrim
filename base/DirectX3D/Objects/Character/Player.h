@@ -111,11 +111,12 @@ protected:
 
 	Transform* rightHand;
 	Transform* leftHand;
-	//Transform* head;
+	Transform* head;
 	//Transform* body;
 	//Transform* foot;
 	//Transform* hands;
 
+	CapsuleCollider* headCollider;
 
 	Status status;
 
