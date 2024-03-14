@@ -1319,7 +1319,7 @@ void Player::WeaponCollider()
 {
 	if (!bladeSword->GetIsWeapon())
 	{
-		//bladeSword->SetIsCollider(true);
+		bladeSword->SetIsCollider(true);
 	}
 }
 
@@ -1327,7 +1327,7 @@ void Player::EndAttack()
 {
 	if (bladeSword->GetIsWeapon())
 	{
-	//bladeSword->SetIsCollider(false);
+		bladeSword->SetIsCollider(false);
 	}
 	if (is1hm)
 	{

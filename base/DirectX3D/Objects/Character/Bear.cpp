@@ -215,7 +215,7 @@ void Bear::Behavior()
 		if (collider->IsCollision(playerData->GetCollier()) && 
 			(curState == ATTACK || curState == ATTACK2 || curState == ATTACK3))
 		{
-			playerData->SetAction(Player::HIT_MEDIUM);
+			playerData->SetAction(Player::OHM_HIT_MEDIUM);
 			playerData->SetIsHit(true);
 			break;
 		}

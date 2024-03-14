@@ -18,6 +18,6 @@ public:
 
 private:
     BoxCollider* collider;
-    bool isWeapon = true;
+    bool isWeapon = false;
 
 };
