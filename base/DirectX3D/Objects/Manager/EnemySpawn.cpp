@@ -6,16 +6,17 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 	FOR(spawnPos.size())
 	{
 		Transform* transform = instancing->Add();
-		transform->Scale() *= 0.001f;
+		transform->Scale() *= 0.0015f;
+		transform->UpdateWorld();
 		Enemy* tmp;
 		if (enemy->GetName() == "Bear")
-			tmp = new Bear(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+			tmp = new Bear(enemy->GetName(), i, instancing, transform, spawnPos[i]);
 		else if (enemy->GetName() == "Wolf")
-			tmp = new Wolf(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+			tmp = new Wolf(enemy->GetName(), i, instancing, transform, spawnPos[i]);
 		else
-			tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i], 50000);
+			tmp = new Enemy(enemy->GetName(), i, instancing, transform, spawnPos[i]);
 		tmp->SetStatus(enemy->GetStatus());
-		tmp->GetCollier()->Scale() *= 1000.0f;
+		tmp->GetCollider()->Scale() *= 1000.0f;
 		tmp->SetPlayerData(playerData);
 		enemies.push_back(tmp);
 	}
@@ -52,6 +53,7 @@ void EnemySpawn::SetPlayerData(Player* player)
 {
 	playerData = player;
 	for (Enemy* enemy : enemies) enemy->SetPlayerData(player);
+	Spawn();
 }
 
 void EnemySpawn::Spawn()

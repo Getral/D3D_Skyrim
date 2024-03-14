@@ -33,7 +33,7 @@ public:
 
 	Transform* GetTransform() { return transform; }
 	Status& GetStatus() { return status; }
-	SphereCollider* GetCollier() { return collider; }
+	SphereCollider* GetCollider() { return collider; }
 	string GetName() { return name; }
 
 	void Spawn();

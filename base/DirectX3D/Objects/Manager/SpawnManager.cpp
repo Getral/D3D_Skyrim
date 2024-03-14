@@ -17,7 +17,6 @@ SpawnManager::SpawnManager()
 		enemies[i]->SetStatus(statusTable[i]);
 
 		EnemySpawn* tmp = new EnemySpawn(monsterInstancing[i], enemies[i], posTable[i]);
-		tmp->Spawn();
 		monsterSpawnManager.push_back(tmp);
 	}
 }
@@ -58,7 +57,9 @@ void SpawnManager::SetPlayerData(Player* player)
 {
 	playerData = player;
 	for (EnemySpawn* msm : monsterSpawnManager)
+	{
 		msm->SetPlayerData(playerData);
+	}
 }
 
 UINT SpawnManager::GetActivatedMonsterCount()
