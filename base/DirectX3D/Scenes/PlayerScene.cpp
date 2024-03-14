@@ -9,22 +9,17 @@ PlayerScene::PlayerScene()
 
 	player = new Player();
 
-	//aldu = new alduin();
-	//aldu->SetTarget(player);
+	aldu = new alduin();
+	aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim");
 	CAM->LookAtTarget(); 
-
-	test = new Model("ebonydagger");
-	test->Pos().y += 20;
-	test->Rot().x += XM_PI / 2;
-	test->Scale() *= 0.5f;
 }
 
 PlayerScene::~PlayerScene()
 {
-	//delete aldu;
+	delete aldu;
 	delete terrain;
 	delete player;
 }
@@ -32,8 +27,8 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
-	//aldu->Update();
-	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager());
+	aldu->Update();
+	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 }
 
 void PlayerScene::PreRender()
@@ -43,7 +38,7 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
-	//aldu->Render();
+	aldu->Render();
 }
 
 void PlayerScene::PostRender()
@@ -54,5 +49,5 @@ void PlayerScene::PostRender()
 void PlayerScene::GUIRender()
 {
 	player->GUIRender();
-	//aldu->GUIRender();
+	aldu->GUIRender();
 }
