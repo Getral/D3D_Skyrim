@@ -9,9 +9,9 @@ private:
 		HOVER,
 		HOVER_HIT,
 		WALK,
-		RUN,
-		RUN_L,
-		RUN_R,
+		BLEED,
+		APROACH,
+		FLIGHT_FOR,
 		ATTACK_F, //물기, (공중) 접근
 		ATTACK_L, //날개 휘두르기 왼쪽
 		ATTACK_R, //날개 휘두르기 오른쪽
@@ -21,7 +21,14 @@ private:
 		FIREBALL, //inhale -> exhale_fireball
 		PAIN, // pain,pain2  랜덤 재생
 		PAIN2,
-		DEATH
+		LANDING,
+		LANDING_SOFT,
+		LANDING_HARD,
+		LAND,
+		DIVE,
+		DEATH,
+		TURN_L,
+		TURN_R
 	};
 
 public:
@@ -38,21 +45,22 @@ public:
 
 private:
 
-	void SetAnimation();
+	//void SetAnimation();
 	void SetState(State state);
 	void Move();
 
-	void beginAttack();
+	void attacking();
 	void Inhale();
 	void FireBallAttack();
 	void BreathAttack();
 
 	void beginTakeoff();
 	void EndTakeoff();
-	void EndHit();
-	void EndAttack();
+	void beginAproach();
+	void EndAction();
 
 	void Patterns();
+	void PatternsAir();
 
 	State curState = IDLE;
 	CapsuleCollider* alduinCollider2;
@@ -76,12 +84,14 @@ private:
 
 	UINT nodeIndex = 0;
 
-	float moveSpeed = 500;
+	float moveSpeed = 15.0f;
 	float rotSpeed = 0.25;
 	float altitude = 0.0f;
 	float deceleration = 5; //감속
 
 	bool isAscending = false;
+	bool isDescending = false;
+	bool isAttacking = false;
 
 	Vector3 velocity;
 

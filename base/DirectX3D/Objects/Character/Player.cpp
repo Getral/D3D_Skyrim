@@ -5,28 +5,29 @@ Player::Player()
 {
 	ModelAnimator::Scale() *= 0.001;
 
-	ReadClip("male_idle");
+	ReadClip("male_1hm_idle");
 	ReadClip("male_jump");
-	ReadClip("male_stagger");
-	ReadClip("male_stagger_medium");
-	ReadClip("male_stagger_large");
-	ReadClip("male_block_hit_shield");
-	ReadClip("male_walk_forward");
-	ReadClip("male_walk_forward_l");
-	ReadClip("male_walk_forward_r");
-	ReadClip("male_walk_backward");
-	ReadClip("male_walk_backward_l");
-	ReadClip("male_walk_backward_r");
-	ReadClip("male_walk_left");
-	ReadClip("male_walk_right");
-	ReadClip("male_run_forward");
-	ReadClip("male_run_forward_l");
-	ReadClip("male_run_forward_r");
-	ReadClip("male_run_backward");
-	ReadClip("male_run_backward_l");
-	ReadClip("male_run_backward_r");
-	ReadClip("male_run_left");
-	ReadClip("male_run_right");
+	ReadClip("male_1hm_stagger");
+	ReadClip("male_1hm_stagger_medium");
+	ReadClip("male_1hm_stagger_large");
+	ReadClip("male_1hm_stagger_largest");
+	ReadClip("male_1hm_block_hit_shield");
+	ReadClip("male_1hm_walk_forward");
+	ReadClip("male_1hm_walk_forward_l");
+	ReadClip("male_1hm_walk_forward_r");
+	ReadClip("male_1hm_walk_backward");
+	ReadClip("male_1hm_walk_backward_l");
+	ReadClip("male_1hm_walk_backward_r");
+	ReadClip("male_1hm_walk_left");
+	ReadClip("male_1hm_walk_right");
+	ReadClip("male_1hm_run_forward");
+	ReadClip("male_1hm_run_forward_l");
+	ReadClip("male_1hm_run_forward_r");
+	ReadClip("male_1hm_run_backward");
+	ReadClip("male_1hm_run_backward_l");
+	ReadClip("male_1hm_run_backward_r");
+	ReadClip("male_1hm_run_left");
+	ReadClip("male_1hm_run_right");
 	ReadClip("male_crouch_idle");
 	ReadClip("male_crouch_walk_forward");
 	ReadClip("male_crouch_walk_forward_l");
@@ -36,46 +37,103 @@ Player::Player()
 	ReadClip("male_crouch_walk_backward_r");
 	ReadClip("male_crouch_walk_left");
 	ReadClip("male_crouch_walk_right");
-	ReadClip("male_attack_right");
-	ReadClip("male_attack_left");
-	ReadClip("male_attack_power");
-	ReadClip("male_block_shield");
-	ReadClip("male_block_bash_intro_shield");
-	ReadClip("male_block_bash_shield");
+	ReadClip("male_1hm_sneak_attack_right");
+	ReadClip("male_1hm_sneak_attack_left");
+	ReadClip("male_1hm_sneak_attack_power");
+	ReadClip("male_1hm_attack_right");
+	ReadClip("male_1hm_attack_left");
+	ReadClip("male_1hm_attack_power");
+	ReadClip("male_1hm_block_shield");
+	ReadClip("male_1hm_block_bash_intro_shield");
+	ReadClip("male_1hm_block_bash_shield");
+	ReadClip("male_1hm_walk_forward_attack");
+	ReadClip("male_1hm_walk_backward_attack");
+	ReadClip("male_1hm_walk_left_attack");
+	ReadClip("male_1hm_walk_right_attack");
+	ReadClip("male_1hm_run_forward_attack");
+	ReadClip("male_1hm_run_backward_attack");
+	ReadClip("male_1hm_run_left_attack");
+	ReadClip("male_1hm_run_right_attack");
+	ReadClip("male_2hm_idle");
+	ReadClip("male_2hm_block_idle");
+	ReadClip("male_2hm_attack_left");
+	ReadClip("male_2hm_attack_right");
+	ReadClip("male_2hm_attack_power");
+	ReadClip("male_2hm_stagger");
+	ReadClip("male_2hm_stagger_medium");
+	ReadClip("male_2hm_stagger_large");
+	ReadClip("male_2hm_stagger_largest");
+	ReadClip("male_2hm_block_hit");
+	ReadClip("male_2hm_walk_forward");
+	ReadClip("male_2hm_walk_forward_l");
+	ReadClip("male_2hm_walk_forward_r");
+	ReadClip("male_2hm_walk_backward");
+	ReadClip("male_2hm_walk_backward_l");
+	ReadClip("male_2hm_walk_backward_r");
+	ReadClip("male_2hm_walk_left");
+	ReadClip("male_2hm_walk_right");
+	ReadClip("male_2hm_run_forward");
+	ReadClip("male_2hm_run_forward_l");
+	ReadClip("male_2hm_run_forward_r");
+	ReadClip("male_2hm_run_backward");
+	ReadClip("male_2hm_run_backward_l");
+	ReadClip("male_2hm_run_backward_r");
+	ReadClip("male_2hm_run_left");
+	ReadClip("male_2hm_run_right");
+	ReadClip("male_2hm_walk_forward_attack");
+	ReadClip("male_2hm_walk_backward_attack");
+	ReadClip("male_2hm_walk_left_attack");
+	ReadClip("male_2hm_walk_right_attack");
+	ReadClip("male_2hm_run_forward_attack");
+	ReadClip("male_2hm_run_backward_attack");
+	ReadClip("male_2hm_run_left_attack");
+	ReadClip("male_2hm_run_right_attack");
+	ReadClip("male_bow_idle");
+	ReadClip("male_bow_draw_intro");
+	ReadClip("male_bow_draw_idle");
+	ReadClip("male_bow_release");
+	ReadClip("male_bow_walk_forward");
+	ReadClip("male_bow_walk_forward_l");
+	ReadClip("male_bow_walk_forward_r");
+	ReadClip("male_bow_walk_backward");
+	ReadClip("male_bow_walk_backward_l");
+	ReadClip("male_bow_walk_backward_r");
+	ReadClip("male_bow_walk_left");
+	ReadClip("male_bow_walk_right");
+	ReadClip("male_bow_run_forward");
+	ReadClip("male_bow_run_forward_l");
+	ReadClip("male_bow_run_forward_r");
+	ReadClip("male_bow_run_backward");
+	ReadClip("male_bow_run_backward_l");
+	ReadClip("male_bow_run_backward_r");
+	ReadClip("male_bow_run_left");
+	ReadClip("male_bow_run_right");
+	ReadClip("male_bowdrawn_walk_forward");
+	ReadClip("male_bowdrawn_walk_forward_l");
+	ReadClip("male_bowdrawn_walk_forward_r");
+	ReadClip("male_bowdrawn_walk_backward");
+	ReadClip("male_bowdrawn_walk_backward_l");
+	ReadClip("male_bowdrawn_walk_backward_r");
+	ReadClip("male_bowdrawn_walk_left");
+	ReadClip("male_bowdrawn_walk_right");
+	ReadClip("male_1hm_equip");
+	ReadClip("male_1hm_unequip");
+	ReadClip("male_2hm_equip");
+	ReadClip("male_2hm_unequip");
+	ReadClip("male_bow_equip");
+	ReadClip("male_bow_unequip");
+	//ReadClip("male_death");
 
-	//ModelAnimator::Rot().y = XM_PI;
 
-	collider = new CapsuleCollider(3, 5);
+	collider = new CapsuleCollider(2, 6);
 	collider->Scale() *= 1000;
-	collider->Pos().y = 6000;
+	collider->Pos().y = 5000;
+	collider->Pos().z = -600;
 	collider->SetParent(this);
 
 	SpawnManager::Get()->SetPlayerData(this);
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
-
-	//dragonbonehelmet = new Dragonbonehelmet();
-	//dragonbonehelmet->Load();
-	//head = new Transform();
-	//dragonbonehelmet->SetParent(head);
-	//dragonbonecuirassplate = new Dragonbonecuirassplate();
-	//dragonbonecuirassplate->Load();
-	//armor = new IronArmor();
-	//armor->Load();
-	//body = new Transform();
-	//armor->SetParent(body);
-	//dragonbonegauntlets = new Dragonbonegauntlets();
-	//dragonbonegauntlets->Load();
-	//hands = new Transform();
-	//dragonbonegauntlets->SetParent(hands);
-	//dragonboneboots = new Dragonboneboots();
-	//dragonboneboots->Load();
-	//foot = new Transform();
-	//dragonboneboots->SetParent(foot);
-	//dragonboneshield = new Dragonboneshield();
-	//dragonboneshield->Load();
-	//leftHand = new Transform();
-	//dragonboneshield->SetParent(leftHand);
 
 	bladeSword = new BladeSword();
 	bladeSword->Load();
@@ -89,40 +147,106 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
-	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(ATTACK_RIGHT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(ATTACK_LEFT)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(ATTACK_HEAVY)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(HIT_HEAVY)->SetEvent(bind(&Player::EndHit, this), 0.8f);
-	GetClip(HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	headCollider = new CapsuleCollider(10);
+
+	head = new Transform();
+	headCollider->SetParent(head);
+
+	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+
+	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+
+	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
+
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+
+	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
+	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
 	
-	GetClip(HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(HIT_HEAVY)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+
+	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
+
+	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
+	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
+	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
 }
 
 Player::~Player()
 {
 	delete bladeSword;
 	delete shield;
-	//delete armor;
-	//delete dragonboneboots;
-	//delete dragonbonecuirassplate;
-	//delete dragonbonegauntlets;
-	//delete dragonbonehelmet;
-	//delete dragonboneshield;
 	delete collider;
 	delete rightHand;
 	delete leftHand;
-	//delete head;
-	//delete body;
-	//delete foot;
-	//delete hands;
 }
 
 void Player::Update()
@@ -134,29 +258,20 @@ void Player::Update()
 	ModelAnimator::Update();
 
 	collider->UpdateWorld();
-	rightHand->SetWorld(GetTransformByNode(79));
+	rightHand->SetWorld(GetTransformByNode(82));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
 	shield->Update();	
+
+	headCollider->UpdateWorld();
+	head->SetWorld(GetTransformByNode(48));
+
 
 	if (isInvincible)
 	{
 		invincibleCount += DELTA;
 		if (invincibleCount > 2.0f) EndInvincible();
 	}
-
-	//body->SetWorld(GetTransformByNode(nodeIndex1));
-	//armor->Update();
-	//leftHand->SetWorld(GetTransformByNode(119));
-	//dragonboneshield->Update();
-	//head->SetWorld(GetTransformByNode(nodeIndex1));
-	//dragonbonehelmet->Update();
-	//body->SetWorld(GetTransformByNode(nodeIndex2));
-	//dragonbonecuirassplate->Update();
-	//foot->SetWorld(GetTransformByNode(nodeIndex3));
-	//dragonboneboots->Update();
-	//hands->SetWorld(GetTransformByNode(nodeIndex4));
-	//dragonbonegauntlets->Update();
 
 	if (KEY_PRESS('H'))
 		this->status.curstamina -= 10 * DELTA;
@@ -167,14 +282,9 @@ void Player::Render()
 	ModelAnimator::Render();
 	collider->Render();
 	bladeSword->Render();
-	shield->Render();
-	//armor->Render();
-	//dragonboneboots->Render();
-	//dragonbonecuirassplate->Render();
-	//dragonbonegauntlets->Render();
-	//dragonbonehelmet->Render();
-	//dragonboneshield->Render();
+	//shield->Render();
 
+	headCollider->Render();
 }
 
 void Player::PostRender()
@@ -196,11 +306,22 @@ void Player::Control()
 	Move();
 	Attack();
 	Block();
+	WeaponChange();
 }
 
 void Player::Move()
 {
-	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY)
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
+		curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM || curAction == OHM_HIT_LARGE ||
+		curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK ||
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
+		curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM || curAction == THM_HIT_LARGE || 
+		curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK ||
+		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
+		curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
 	if (isBlock) return;
 	if (isHit) return;
@@ -209,51 +330,83 @@ void Player::Move()
 	bool isMoveZ = false;
 	bool isMoveX = false;
 
-	if (KEY_PRESS(VK_SHIFT)) //달리기
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn) //달리기
 	{
 		if (KEY_PRESS('W'))
 		{
 			velocity.z += DELTA * status.speed * 1.0f;
 			isMoveZ = true;
 		}
+		if (KEY_UP('W'))
+		{
+			velocity.z = 0.0f;
+		}
 		if (KEY_PRESS('S'))
 		{
 			velocity.z -= DELTA * status.speed * 1.0f;
 			isMoveZ = true;
+		}
+		if (KEY_UP('S'))
+		{
+			velocity.z = 0.0f;
 		}
 		if (KEY_PRESS('A'))
 		{
 			velocity.x -= DELTA * status.speed * 1.0f;
 			isMoveX = true;
 		}
+		if (KEY_UP('A'))
+		{
+			velocity.x = 0.0f;
+		}
 		if (KEY_PRESS('D'))
 		{
 			velocity.x += DELTA * status.speed * 1.0f;
 			isMoveX = true;
 		}
+		if (KEY_UP('D'))
+		{
+			velocity.x = 0.0f;
+		}
 	}
 
-	else if (KEY_PRESS(VK_CONTROL)) //앉아서 이동
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn) //앉아서 이동
 	{
 		if (KEY_PRESS('W'))
 		{
 			velocity.z += DELTA * status.speed * 0.5f;
 			isMoveZ = true;
 		}
+		if (KEY_UP('W'))
+		{
+			velocity.z = 0.0f;
+		}
 		if (KEY_PRESS('S'))
 		{
 			velocity.z -= DELTA * status.speed * 0.5f;
 			isMoveZ = true;
+		}
+		if (KEY_UP('S'))
+		{
+			velocity.z = 0.0f;
 		}
 		if (KEY_PRESS('A'))
 		{
 			velocity.x -= DELTA * status.speed * 0.5f;
 			isMoveX = true;
 		}
+		if (KEY_UP('A'))
+		{
+			velocity.x = 0.0f;
+		}
 		if (KEY_PRESS('D'))
 		{
 			velocity.x += DELTA * status.speed * 0.5f;
 			isMoveX = true;
+		}
+		if (KEY_UP('D'))
+		{
+			velocity.x = 0.0f;
 		}
 	}
 
@@ -264,36 +417,52 @@ void Player::Move()
 			velocity.z += DELTA * status.speed * 0.7f;
 			isMoveZ = true;
 		}
+		if (KEY_UP('W'))
+		{
+			velocity.z = 0.0f;
+		}
 		if (KEY_PRESS('S'))
 		{
 			velocity.z -= DELTA * status.speed * 0.7f;
 			isMoveZ = true;
+		}
+		if (KEY_UP('S'))
+		{
+			velocity.z = 0.0f;
 		}
 		if (KEY_PRESS('A'))
 		{
 			velocity.x -= DELTA * status.speed * 0.7f;
 			isMoveX = true;
 		}
+		if (KEY_UP('A'))
+		{
+			velocity.x = 0.0f;
+		}
 		if (KEY_PRESS('D'))
 		{
 			velocity.x += DELTA * status.speed * 0.7f;
 			isMoveX = true;
 		}
+		if (KEY_UP('D'))
+		{
+			velocity.x = 0.0f;
+		}
 	}
 		
 
 	//방향을 구하고 정규화
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
-		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 10;
+		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 5.0f;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
-		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 5;
+		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 2.5f;
 	}
 	else
 	{
-		if (velocity.Length() > status.speed * 0.7f) velocity = velocity.GetNormalized() * 7;
+		if (velocity.Length() > status.speed * 0.7f) velocity = velocity.GetNormalized() * 3.5f;
 	}
 
 	if (!isMoveZ)
@@ -306,11 +475,11 @@ void Player::Move()
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
 
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
@@ -340,161 +509,802 @@ void Player::Rotate()
 
 void Player::Attack()
 {
-	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
+		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
+		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
+		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == OHM_CATK_R ||
+		curAction == OHM_CATK_L || curAction == OHM_CATK_P || curAction == THM_WALK_FW_ATK ||
+		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
+		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
+		curAction == THM_RUN_R_ATK || curAction == BOW_RELEASE) return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
+		return;
+	if (isBlock) return;
 	if (isHit) return;
 
-	if (KEY_PRESS(VK_LBUTTON))
+	if (is1hm)
 	{
-		attackCharge += DELTA;
-	}
-	if (KEY_UP(VK_LBUTTON))
-	{
-		if (attackCharge > 1.0f)
+		if (velocity.z < -0.1f && velocity.x < -0.1f || 
+			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
 		{
-			SetAction(ATTACK_HEAVY);
-		}
-		else
-		{
-			if (!isCombo)
+			if (KEY_PRESS(VK_SHIFT))
 			{
-				SetAction(ATTACK_RIGHT);
-				isCombo = true;
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_RUN_FW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else 
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_WALK_FW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f || 
+			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_RUN_BW_ATK);
+					attackCharge = 0.0f;
+				}
 			}
 			else
 			{
-				SetAction(ATTACK_LEFT);
-				isCombo = false;
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_WALK_BW_ATK);
+					attackCharge = 0.0f;
+				}
 			}
 		}
-		attackCharge = 0.0f;
+		else if (velocity.x < -0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_RUN_L_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_WALK_L_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+		else if (velocity.x > 0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_RUN_R_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else 
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(OHM_WALK_R_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+
+		else if (KEY_PRESS(VK_CONTROL)) return;
+
+		else 
+		{
+			if (KEY_PRESS(VK_LBUTTON))
+			{
+				attackCharge += DELTA;
+			}
+			if (KEY_UP(VK_LBUTTON))
+			{
+				if (attackCharge > 1.0f)
+				{
+					SetAction(OHM_ATK_P);
+				}
+				else
+				{
+					if (!isCombo)
+					{
+						SetAction(OHM_ATK_R);
+						isCombo = true;
+					}
+					else
+					{
+						SetAction(OHM_ATK_L);
+						isCombo = false;
+					}
+				}
+				attackCharge = 0.0f;
+			}
+		}		
 	}
+
+	if (is2hm)
+	{
+		if (velocity.z < -0.1f && velocity.x < -0.1f ||
+			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_FW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_FW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f ||
+			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_BW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_BW_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+		else if (velocity.x < -0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_L_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_L_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+		else if (velocity.x > 0.1f && !KEY_PRESS(VK_CONTROL))
+		{
+			if (KEY_PRESS(VK_SHIFT))
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_RUN_R_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+			else
+			{
+				if (KEY_PRESS(VK_LBUTTON))
+				{
+					attackCharge += DELTA;
+				}
+				if (KEY_UP(VK_LBUTTON))
+				{
+					SetAction(THM_WALK_R_ATK);
+					attackCharge = 0.0f;
+				}
+			}
+		}
+
+		else
+		{
+			if (KEY_PRESS(VK_LBUTTON))
+			{
+				attackCharge += DELTA;
+			}
+			if (KEY_UP(VK_LBUTTON))
+			{
+				if (attackCharge > 1.0f)
+				{
+					SetAction(THM_ATK_P);
+				}
+				else
+				{
+					if (!isCombo)
+					{
+						SetAction(THM_ATK_R);
+						isCombo = true;
+					}
+					else
+					{
+						SetAction(THM_ATK_L);
+						isCombo = false;
+					}
+				}
+				attackCharge = 0.0f;
+			}
+		}
+	}
+
+	if (isbow)
+	{
+		if (KEY_DOWN(VK_LBUTTON))
+		{
+			SetAction(BOW_DRAW_INTRO);
+		}
+		if (KEY_PRESS(VK_LBUTTON))
+		{
+			attackCharge += DELTA;
+			if (attackCharge > 1.0f)
+			{
+				isbowdrawn = true;
+			}
+		}
+		if (KEY_UP(VK_LBUTTON))
+		{
+			if (attackCharge > 1.0f)
+			{
+				SetAction(BOW_RELEASE);
+			}
+			else
+			{
+				SetAction(BOW_IDLE);
+			}
+			isbowdrawn = false;
+			attackCharge = 0.0f;
+		}
+	}
+
+	
 }
 
 void Player::Block()
 {
-	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY) return;
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
+	if (isbow) return;
 	if (isHit) return;
 
-	if (KEY_DOWN(VK_RBUTTON))
+	if (is1hm)
 	{
-		SetAction(BLOCK);
-		isBlock = true;
+		if (KEY_DOWN(VK_RBUTTON))
+		{
+			SetAction(OHM_BLOCK);
+			isBlock = true;
+		}
+
+		if (KEY_UP(VK_RBUTTON))
+		{
+			EndBlock();
+		}
 	}
 
-	if (KEY_UP(VK_RBUTTON))
+	if (is2hm)
 	{
-		EndBlock();
+		if (KEY_DOWN(VK_RBUTTON))
+		{
+			SetAction(THM_BLOCK);
+			isBlock = true;
+		}
+
+		if (KEY_UP(VK_RBUTTON))
+		{
+			EndBlock();
+		}
 	}
+
 }
 
 void Player::GetHit()
 {
 	if (isInvincible) return;
+	if (isbow) return;
 
-	if (isBlock)
+	if (is1hm)
 	{
-		if (KEY_DOWN('Z'))
+		if (isBlock)
 		{
-			SetAction(HIT_BLOCK);
-			isHit = true;
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
 		}
-		if (KEY_DOWN('X'))
+		else
 		{
-			SetAction(HIT_BLOCK);
-			isHit = true;
-		}
-		if (KEY_DOWN('C'))
-		{
-			SetAction(HIT_BLOCK);
-			isHit = true;
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(OHM_HIT_LIGHT);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(OHM_HIT_MEDIUM);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(OHM_HIT_LARGE);
+				isHit = true;
+			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(OHM_HIT_LARGEST);
+				isHit = true;
+			}
 		}
 	}
-	else
+
+	if (is2hm)
 	{
-		if (KEY_DOWN('Z'))
+		if (isBlock)
 		{
-			SetAction(HIT_LIGHT);
-			isHit = true;
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
 		}
-		if (KEY_DOWN('X'))
+		else
 		{
-			SetAction(HIT_MEDIUM);
-			isHit = true;
-		}
-		if (KEY_DOWN('C'))
-		{
-			SetAction(HIT_HEAVY);
-			isHit = true;
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(THM_HIT_LIGHT);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(THM_HIT_MEDIUM);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(THM_HIT_LARGE);
+				isHit = true;
+			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(THM_HIT_LARGEST);
+				isHit = true;
+			}
 		}
 	}
+	
+}
+
+void Player::WeaponChange()
+{
+	if (curAction != OHM_IDLE && curAction != THM_IDLE && curAction != BOW_IDLE) return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
+		return;
+	if (KEY_PRESS(VK_CONTROL)) return;
+
+	if (is1hm)
+	{
+		if (KEY_DOWN('2'))
+		{
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			is1hm = false;
+			is2hm = true;
+			SetAction(OHM_UNEQUIP);
+		}
+		if (KEY_DOWN('3'))
+		{
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			is1hm = false;
+			isbow = true;
+			SetAction(OHM_UNEQUIP);
+		}
+	}
+	
+	if (is2hm)
+	{
+		if (KEY_DOWN('1'))
+		{
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			is2hm = false;
+			is1hm = true;
+			SetAction(THM_UNEQUIP);
+		}
+		if (KEY_DOWN('3'))
+		{
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			is2hm = false;
+			isbow = true;
+			SetAction(THM_UNEQUIP);
+		}
+	}
+	
+	if (isbow)
+	{
+		if (KEY_DOWN('1'))
+		{
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			isbow = false;
+			is1hm = true;
+			SetAction(BOW_UNEQUIP);
+		}
+		if (KEY_DOWN('2'))
+		{
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			isbow = false;
+			is2hm = true;
+			SetAction(BOW_UNEQUIP);
+		}
+	}
+
 }
 
 void Player::SetAnimation()
 {
-	if (curAction == ATTACK_RIGHT || curAction == ATTACK_LEFT || curAction == ATTACK_HEAVY
-		|| curAction == BLOCK || curAction == HIT_LIGHT || curAction == HIT_MEDIUM ||
-		curAction == HIT_HEAVY || curAction == HIT_BLOCK)
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
+		curAction == OHM_BLOCK || curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM ||
+		curAction == OHM_HIT_LARGE || curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK || 
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
+		curAction == THM_BLOCK || curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM ||
+		curAction == THM_HIT_LARGE || curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK||
+		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
+		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
+		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == THM_WALK_FW_ATK ||
+		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
+		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK||
+		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
+		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
 
-
-	if (velocity.z < -0.1f && velocity.x < -0.1f)
+	if (is1hm)
 	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_FL);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FL);
-		else SetAction(WALK_FL);
+		if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_FL);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FL);
+			else SetAction(OHM_WALK_FL);
+		}
+
+		else if (velocity.z > 0.1f && velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_FR);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FR);
+			else SetAction(OHM_WALK_FR);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_BL);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BL);
+			else SetAction(OHM_WALK_BL);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_BR);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BR);
+			else SetAction(OHM_WALK_BR);
+		}
+
+		else if (velocity.z > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_F);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_F);
+			else SetAction(OHM_WALK_F);
+		}
+
+		else if (velocity.z < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_B);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_B);
+			else SetAction(OHM_WALK_B);
+		}
+
+		else if (velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_L);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_L);
+			else SetAction(OHM_WALK_L);
+		}
+
+		else if (velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(OHM_RUN_R);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_R);
+			else SetAction(OHM_WALK_R);
+		}
+		else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
+
+		else SetAction(OHM_IDLE);
 	}
 
-	else if (velocity.z > 0.1f && velocity.x > 0.1f)
+	if (is2hm)
 	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_FR);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FR);
-		else SetAction(WALK_FR);
+		if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_FL);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FL);
+			else SetAction(THM_WALK_FL);
+		}
+
+		else if (velocity.z > 0.1f && velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_FR);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FR);
+			else SetAction(THM_WALK_FR);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_BL);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BL);
+			else SetAction(THM_WALK_BL);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_BR);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BR);
+			else SetAction(THM_WALK_BR);
+		}
+
+		else if (velocity.z > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_F);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_F);
+			else SetAction(THM_WALK_F);
+		}
+
+		else if (velocity.z < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_B);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_B);
+			else SetAction(THM_WALK_B);
+		}
+
+		else if (velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_L);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_L);
+			else SetAction(THM_WALK_L);
+		}
+
+		else if (velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(THM_RUN_R);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_R);
+			else SetAction(THM_WALK_R);
+		}
+		else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
+
+		else SetAction(THM_IDLE);
 	}
 
-	else if (velocity.z < -0.1f && velocity.x < -0.1f)
+	if (isbow && !isbowdrawn)
 	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_BL);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BL);
-		else SetAction(WALK_BL);
+		if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_FL);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FL);
+			else SetAction(BOW_WALK_FL);
+		}
+
+		else if (velocity.z > 0.1f && velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_FR);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_FR);
+			else SetAction(BOW_WALK_FR);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_BL);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BL);
+			else SetAction(BOW_WALK_BL);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_BR);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BR);
+			else SetAction(BOW_WALK_BR);
+		}
+
+		else if (velocity.z > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_F);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_F);
+			else SetAction(BOW_WALK_F);
+		}
+
+		else if (velocity.z < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_B);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_B);
+			else SetAction(BOW_WALK_B);
+		}
+
+		else if (velocity.x < -0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_L);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_L);
+			else SetAction(BOW_WALK_L);
+		}
+
+		else if (velocity.x > 0.1f)
+		{
+			if (KEY_PRESS(VK_SHIFT)) SetAction(BOW_RUN_R);
+			else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_R);
+			else SetAction(BOW_WALK_R);
+		}
+
+		else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
+
+
+		else SetAction(BOW_IDLE);
 	}
 
-	else if (velocity.z < -0.1f && velocity.x > 0.1f)
+	if (isbow && isbowdrawn)
 	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_BR);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_BR);
-		else SetAction(WALK_BR);
+		if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FL);
+		}
+
+		else if (velocity.z > 0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FR);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BL);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BR);
+		}
+
+		else if (velocity.z > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_F);
+		}
+
+		else if (velocity.z < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_B);
+		}
+
+		else if (velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_L);
+		}
+
+		else if (velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_R);
+		}
+		else SetAction(BOW_DRAW_IDLE);
 	}
 
-	else if (velocity.z > 0.1f)
-	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_F);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_F);
-		else SetAction(WALK_F);
-	}
-
-	else if (velocity.z < -0.1f)
-	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_B);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_B);
-		else SetAction(WALK_B);
-	}
-
-	else if (velocity.x < -0.1f)
-	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_L);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_L);
-		else SetAction(WALK_L);
-	}
-
-	else if (velocity.x > 0.1f)
-	{
-		if (KEY_PRESS(VK_SHIFT)) SetAction(RUN_R);
-		else if (KEY_PRESS(VK_CONTROL)) SetAction(CMOVE_R);
-		else SetAction(WALK_R);
-	}
-	else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
-
-	else SetAction(IDLE);
 }
 
 void Player::SetAction(ACTION action)
@@ -509,7 +1319,7 @@ void Player::WeaponCollider()
 {
 	if (!bladeSword->GetIsWeapon())
 	{
-		bladeSword->SetIsCollider(true);
+		//bladeSword->SetIsCollider(true);
 	}
 }
 
@@ -517,27 +1327,65 @@ void Player::EndAttack()
 {
 	if (bladeSword->GetIsWeapon())
 	{
-	bladeSword->SetIsCollider(false);
+	//bladeSword->SetIsCollider(false);
 	}
-	SetAction(IDLE);
+	if (is1hm)
+	{
+		SetAction(OHM_IDLE);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_IDLE);
+	} 
 }
 
 void Player::EndBlock()
 {
-	SetAction(IDLE);
+	if (is1hm)
+	{
+		SetAction(OHM_IDLE);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_IDLE);
+	}
 	isBlock = false;
 }
 
 void Player::EndHit()
 {
-	SetAction(IDLE);
+	if (is1hm)
+	{
+		SetAction(OHM_IDLE);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_IDLE);
+	}
 	isHit = false;
 }
 
 void Player::EndBlockHit()
 {
-	SetAction(BLOCK);
+	if (is1hm)
+	{
+		SetAction(OHM_BLOCK);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_BLOCK);
+	}
 	isHit = false;
+}
+
+void Player::SetBowDrawn()
+{	
+	SetAction(BOW_DRAW_IDLE);
+}
+
+void Player::EndBowDrawn()
+{
+	SetAction(BOW_IDLE);
 }
 
 void Player::SetInvincible()
@@ -549,4 +1397,41 @@ void Player::EndInvincible()
 {
 	isInvincible = false;
 	invincibleCount = 0.0f;
+}
+
+void Player::Change1hm()
+{
+	SetAction(OHM_EQUIP);
+}
+
+void Player::Change2hm()
+{
+	SetAction(THM_EQUIP);
+}
+
+void Player::Changebow()
+{
+	SetAction(BOW_EQUIP);
+}
+
+void Player::Set1hmIdle()
+{
+	SetAction(OHM_IDLE);
+}
+
+void Player::Set2hmIdle()
+{
+	SetAction(THM_IDLE);
+}
+
+void Player::SetbowIdle()
+{
+	SetAction(BOW_IDLE);
+}
+
+
+
+void Player::DoNothing()
+{
+	return;
 }
