@@ -40,27 +40,27 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	attackRange = trackRange * 0.25f;
 
 	SetEvent(STARTSLEEP, bind(&Bear::StartStartSleep, this), 0.0f);
-	SetEvent(STARTSLEEP, bind(&Bear::EndStartSleep, this), 0.9f);
+	SetEvent(STARTSLEEP, bind(&Bear::EndStartSleep, this), 0.95f);
 
 	SetEvent(WAKEUP, bind(&Bear::StartWakeUp, this), 0.0f);
-	SetEvent(WAKEUP, bind(&Bear::EndWakeUp, this), 0.9f);
+	SetEvent(WAKEUP, bind(&Bear::EndWakeUp, this), 0.95f);
 
 	SetEvent(RUN, bind(&Bear::StartRun, this), 0.0f);
 	SetEvent(RUN, bind(&Bear::EndRun, this), 0.9f);
 
 	SetEvent(ATTACK, bind(&Bear::StartAttack, this), 0.0f);
-	SetEvent(ATTACK, bind(&Bear::EndAttack, this), 0.9f);
+	SetEvent(ATTACK, bind(&Bear::EndAttack, this), 0.95f);
 
 	SetEvent(ATTACK2, bind(&Bear::StartAttack, this), 0.0f);
-	SetEvent(ATTACK2, bind(&Bear::EndAttack, this), 0.9f);
+	SetEvent(ATTACK2, bind(&Bear::EndAttack, this), 0.95f);
 
 	SetEvent(ATTACK3, bind(&Bear::StartAttack, this), 0.0f);
-	SetEvent(ATTACK3, bind(&Bear::EndAttack, this), 0.9f);
+	SetEvent(ATTACK3, bind(&Bear::EndAttack, this), 0.95f);
 
 	SetEvent(HIT, bind(&Bear::StartHit, this), 0.0f);
-	SetEvent(HIT, bind(&Bear::EndHit, this), 0.7f);
+	SetEvent(HIT, bind(&Bear::EndHit, this), 0.95f);
 
-	SetEvent(HEADSHAKE, bind(&Bear::EndHeadShake, this), 0.7f);
+	SetEvent(HEADSHAKE, bind(&Bear::EndHeadShake, this), 0.95f);
 
 	FOR(totalEvent.size())
 		eventIters[i] = totalEvent[i].begin();
@@ -208,6 +208,8 @@ void Bear::Behavior()
 			}
 		}
 	}
+	if (isHit) return;
+
 	for (CapsuleCollider* collider : colliders)
 	{
 		if (collider->IsCollision(playerData->GetCollier()) && 

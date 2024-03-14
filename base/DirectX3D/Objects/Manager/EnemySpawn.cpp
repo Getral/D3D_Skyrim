@@ -6,7 +6,7 @@ EnemySpawn::EnemySpawn(ModelAnimatorInstancing* modelAnimatorInstancing, Enemy* 
 	FOR(spawnPos.size())
 	{
 		Transform* transform = instancing->Add();
-		transform->Scale() *= 0.001f;
+		transform->Scale() *= 0.0015f;
 		transform->UpdateWorld();
 		Enemy* tmp;
 		if (enemy->GetName() == "Bear")

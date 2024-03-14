@@ -13,7 +13,7 @@ ModelExportScene::ModelExportScene()
     //exporter->ExportMesh();
     //delete exporter;
 
-    clipName = "wolf_combatidle";
+    clipName = "wolf_hit";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);

@@ -13,11 +13,36 @@ private:
 		HOWLING,
 		RUN,
 		ATTACK,
+		ATTACK2,
+		ATTACK3,
+		ATTACK4,
+		HIT
 	};
 
 	enum Collider
 	{
-		HEAD
+		HIP,
+		BELLY,
+		TORSO,
+		THIGH_FL,
+		LEG_FL,
+		FOOT_FL,
+		THIGH_FR,
+		LEG_FR,
+		FOOT_FR,
+		CHEST,
+		NECK,
+		HEAD,
+		MOUTH,
+		THIGH_BL,
+		LEG_BL,
+		FOOT_BL,
+		THIGH_BR,
+		LEG_BR,
+		FOOT_BR,
+		TAIL1,
+		TAIL2,
+		TAIL3
 	};
 
 public:
@@ -36,7 +61,6 @@ private:
 
 	void Behavior();
 	void Walk();
-	void Attack();
 
 	void StartIdle();
 
@@ -46,6 +70,11 @@ private:
 
 	void StartAttack();
 	void EndAttack();
+
+	void EndCombatIdle();
+
+	void StartHit();
+	void EndHit();
 
 	void SetEvent(int clip, Event event, float timeRatio);
 	void ExecuteEvent();
@@ -65,5 +94,8 @@ private:
 	float rotSpeed = 10.0f;
 
 	bool isTracking = false;
+	bool isHit = false;
+
+	int atkType = 0;
 };
 

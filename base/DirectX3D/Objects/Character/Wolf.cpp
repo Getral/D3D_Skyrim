@@ -3,7 +3,37 @@
 Wolf::Wolf(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstancing, Transform* transform, Vector3 spawnPos)
 	: Enemy(name, index, modelAnimatorInstancing, transform, spawnPos)
 {
-	colliders.push_back(new CapsuleCollider(15.0f));
+	//transform->Scale() *= 0.9f;
+
+	colliders.push_back(new CapsuleCollider(20.0f)); // HIP
+	colliders.push_back(new CapsuleCollider(20.0f)); // BELLY
+	colliders.push_back(new CapsuleCollider(20.0f)); // TORSO
+
+	colliders.push_back(new CapsuleCollider(12.5f)); // LEG FRONT LEFT
+	colliders.push_back(new CapsuleCollider(7.5f));
+	colliders.push_back(new CapsuleCollider(7.5f));
+
+	colliders.push_back(new CapsuleCollider(12.5f)); // LEG FRONT RIGHT
+	colliders.push_back(new CapsuleCollider(7.5f));
+	colliders.push_back(new CapsuleCollider(7.5f));
+
+	colliders.push_back(new CapsuleCollider(20.0f)); // CHEST
+	colliders.push_back(new CapsuleCollider(20.0f)); // NECK
+
+	colliders.push_back(new CapsuleCollider(25.0f)); // HEAD
+	colliders.push_back(new CapsuleCollider(15.0)); // MOUTH
+
+	colliders.push_back(new CapsuleCollider(12.5f)); // LEG BACK LEFT
+	colliders.push_back(new CapsuleCollider(7.5f));
+	colliders.push_back(new CapsuleCollider(7.5f));
+
+	colliders.push_back(new CapsuleCollider(12.5f)); // LEG BACK RIGHT
+	colliders.push_back(new CapsuleCollider(7.5f));
+	colliders.push_back(new CapsuleCollider(7.5f));
+
+	colliders.push_back(new CapsuleCollider(10.0)); // TAIL
+	colliders.push_back(new CapsuleCollider(10.0));
+	colliders.push_back(new CapsuleCollider(10.0));
 
 	trackRange = 75000.f;
 	attackRange = trackRange * 0.1f;
@@ -16,6 +46,20 @@ Wolf::Wolf(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 
 	SetEvent(ATTACK, bind(&Wolf::StartAttack, this), 0.0f);
 	SetEvent(ATTACK, bind(&Wolf::EndAttack, this), 0.9f);
+
+	SetEvent(ATTACK2, bind(&Wolf::StartAttack, this), 0.0f);
+	SetEvent(ATTACK2, bind(&Wolf::EndAttack, this), 0.9f);
+
+	SetEvent(ATTACK3, bind(&Wolf::StartAttack, this), 0.0f);
+	SetEvent(ATTACK3, bind(&Wolf::EndAttack, this), 0.9f);
+
+	SetEvent(ATTACK4, bind(&Wolf::StartAttack, this), 0.0f);
+	SetEvent(ATTACK4, bind(&Wolf::EndAttack, this), 0.9f);
+
+	SetEvent(COMBATIDLE, bind(&Wolf::EndCombatIdle, this), 0.9f);
+
+	SetEvent(HIT, bind(&Wolf::StartHit, this), 0.0f);
+	SetEvent(HIT, bind(&Wolf::EndHit, this), 0.9f);
 
 	curState = IDLE;
 
@@ -33,8 +77,6 @@ void Wolf::Update()
 
 	Behavior();
 	ExecuteEvent();
-
-	SetColliderByNode();
 }
 
 void Wolf::Render()
@@ -49,8 +91,7 @@ void Wolf::Render()
 void Wolf::GUIRender()
 {
 	Enemy::GUIRender();
-	ImGui::SliderInt("Node", (int*)&node, 1, 100);
-	ImGui::Text("Cur Idle Time : %f", idleTime);
+	ImGui::Text("Is Hit : %d", (int)isHit);
 }
 
 void Wolf::SetState(State state)
@@ -95,6 +136,16 @@ void Wolf::SetRandIdleRot()
 
 void Wolf::Behavior()
 {
+	//for (CapsuleCollider* collider : colliders)
+	//{
+	//	if (collider->IsCollision(playerData->GetSword()->GetCollider()))
+	//	{
+	//		SetState(HIT);
+	//		break;
+	//	}
+	//}
+	//if (isHit) return;
+
 	if (attackDelay > 0.0f)
 	{
 		attackDelay -= DELTA;
@@ -106,10 +157,33 @@ void Wolf::Behavior()
 		}
 	}
 	
-	if (curState == ATTACK || curState == COMBATIDLE) return;
+	if (curState == ATTACK || curState == ATTACK2 || curState == ATTACK3 || curState == ATTACK4 || curState == COMBATIDLE) return;
 	if (playerData->GetCollier()->IsCollision(attackCollider))
 	{
-		SetState(ATTACK);
+		while (true)
+		{
+			int tmp = Random(0, 4);
+			if (atkType != tmp)
+			{
+				atkType = tmp;
+				break;
+			}
+		}
+		switch (atkType)
+		{
+		case 0:
+			SetState(ATTACK);
+			break;
+		case 1:
+			SetState(ATTACK2);
+			break;
+		case 2:
+			SetState(ATTACK3);
+			break;
+		case 3:
+			SetState(ATTACK4);
+			break;
+		}
 	}
 	else if (playerData->GetCollier()->IsCollision(trackCollider))
 	{
@@ -192,6 +266,22 @@ void Wolf::EndAttack()
 	SetState(COMBATIDLE);
 }
 
+void Wolf::EndCombatIdle()
+{
+	isHit = false;
+}
+
+void Wolf::StartHit()
+{
+	isHit = true;
+}
+
+void Wolf::EndHit()
+{
+	SetState(COMBATIDLE);
+	isHit = false;
+}
+
 void Wolf::SetEvent(int clip, Event event, float timeRatio)
 {
 	if (totalEvent[clip].count(timeRatio) > 0) return; // 선행 예약된 이벤트가 있으면 종료
@@ -214,5 +304,33 @@ void Wolf::ExecuteEvent()
 
 void Wolf::SetColliderByNode()
 {
-	colliderTransforms[HEAD]->SetWorld(instancing->GetTransformByNode(index, node));
+	colliderTransforms[HIP]->SetWorld(instancing->GetTransformByNode(index, 10));
+	colliderTransforms[BELLY]->SetWorld(instancing->GetTransformByNode(index, 11));
+	colliderTransforms[TORSO]->SetWorld(instancing->GetTransformByNode(index, 12));
+
+	colliderTransforms[THIGH_FL]->SetWorld(instancing->GetTransformByNode(index, 15));
+	colliderTransforms[LEG_FL]->SetWorld(instancing->GetTransformByNode(index, 16));
+	colliderTransforms[FOOT_FL]->SetWorld(instancing->GetTransformByNode(index, 18));
+
+	colliderTransforms[THIGH_FR]->SetWorld(instancing->GetTransformByNode(index, 21));
+	colliderTransforms[LEG_FR]->SetWorld(instancing->GetTransformByNode(index, 22));
+	colliderTransforms[FOOT_FR]->SetWorld(instancing->GetTransformByNode(index, 24));
+
+	colliderTransforms[CHEST]->SetWorld(instancing->GetTransformByNode(index, 26));
+	colliderTransforms[CHEST]->SetWorld(instancing->GetTransformByNode(index, 27));
+
+	colliderTransforms[HEAD]->SetWorld(instancing->GetTransformByNode(index, 29));
+	colliderTransforms[MOUTH]->SetWorld(instancing->GetTransformByNode(index, 32));
+
+	colliderTransforms[THIGH_BL]->SetWorld(instancing->GetTransformByNode(index, 66));
+	colliderTransforms[LEG_BL]->SetWorld(instancing->GetTransformByNode(index, 67));
+	colliderTransforms[FOOT_BL]->SetWorld(instancing->GetTransformByNode(index, 69));
+
+	colliderTransforms[THIGH_BR]->SetWorld(instancing->GetTransformByNode(index, 71));
+	colliderTransforms[LEG_BR]->SetWorld(instancing->GetTransformByNode(index, 72));
+	colliderTransforms[FOOT_BR]->SetWorld(instancing->GetTransformByNode(index, 74));
+
+	colliderTransforms[TAIL1]->SetWorld(instancing->GetTransformByNode(index, 75));
+	colliderTransforms[TAIL2]->SetWorld(instancing->GetTransformByNode(index, 76));
+	colliderTransforms[TAIL3]->SetWorld(instancing->GetTransformByNode(index, 77));
 }
