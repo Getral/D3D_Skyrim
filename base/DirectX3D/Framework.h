@@ -158,8 +158,10 @@ using namespace GameMath;
 
 #include "Objects/Actor/ActorUI.h"
 #include "Objects/UI/ProgressBar.h"
+#include "Objects/UI/InvenUI.h"
 
-#include "Objects/Inventory/Inventory.h"
+#include "Objects/Inventory/Item.h"
+#include "Objects/Inventory/ItemStatus.h"
 
 //#include "Objects/Items/Expendables/.h"
 #include "Objects/Items/Expendables/IronArrow.h"
@@ -214,10 +216,11 @@ using namespace GameMath;
 
 #include "Objects/Items/Expendables/Expendables.h"		// 소모품
 #include "objects/Items/Expendables/Potion.h"	
+#include "objects/Items/Expendables/Arrow.h"	
 #include "Objects/Items/Expendables/IronArrow.h"
 #include "Objects/Items/Expendables/EbonyArrow.h"
 
-#include "Objects/Items/Miscellaneous/Miscellaneous.h"	// 잡탬
+#include "Objects/Items/Miscellaneous/Misc.h"	// 잡탬
 
 
 #include "Objects/Landscape/Terrain.h"

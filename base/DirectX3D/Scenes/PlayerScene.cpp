@@ -15,6 +15,11 @@ PlayerScene::PlayerScene()
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim");
 	CAM->LookAtTarget(); 
+
+	test = new Model("ebonydagger");
+	test->Pos().y += 20;
+	test->Rot().x += XM_PI / 2;
+	test->Scale() *= 0.5f;
 }
 
 PlayerScene::~PlayerScene()

@@ -1,29 +1,41 @@
 #pragma once
 
-class Weapon : public Inventory
+class Weapon : public Item
 {
-	struct WeaponAbility
-	{
-		float power = 0;
-		float atkSpeed = 0;
-	};
-
-	struct ArmorType
+public:
+	enum WeaponType
 	{
 		// 1hd
-		float dagger;		// 단검
-		float claymore;		// 한손검
-		float waraxe;		// 한손도끼
-		float mace;			// 한손둔기
+		dagger,		// 단검
+		claymore,		// 한손검
+		waraxe,		// 한손도끼
+		mace,			// 한손둔기
 
-		// 2hd
-		float longsword;	// 양손검
-		float battleaxe;	// 양손도끼
-		float warhammer;	// 양손둔기
+		
+		longsword,	// 양손검
+		battleaxe,	// 양손도끼
+		warhammer,	// 양손둔기
 
-		// 
-		float bow;			// 활
+		
+		bow			// 활
 	};
+
+	enum WeaponClass
+	{
+		IRON,
+		EBONY
+	};
+	Weapon(string name, int type, int weight, int value, int weapon_class ,int weapon_type, int atk);
+
+	
+	int GetWeaponClass() { return weapon_class; }
+	int GetAtk() { return atk; }
+	void ChangeEquipState() { isEquiped = !isEquiped; }
+private:
+	int weapon_class;
+	int weapon_type;
+	int atk;
+	bool isEquiped = false;
 };
 
 /*

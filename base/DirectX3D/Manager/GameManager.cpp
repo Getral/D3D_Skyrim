@@ -29,7 +29,8 @@ GameManager::GameManager()
     SceneManager::Get()->Add("Player");
 
     Font::Get()->AddColor("Gray", 185.0f / 255.0f, 185.0f / 255.0f, 185.0f / 255.0f);
-    Font::Get()->AddStyle("Futura", L"Futura");
+    Font::Get()->AddStyle("Futura", L"Futura",20.0f);
+    Font::Get()->AddStyle("Futura_big", L"Futura", 30.0f);
 
     Font::Get()->SetColor("Gray");
     Font::Get()->SetStyle("Futura");
@@ -68,7 +69,7 @@ void GameManager::Render()
     ImGui::NewFrame();
     
     string fps = "FPS : " + to_string(Timer::Get()->GetFPS());
-    Font::Get()->RenderText(fps, { 100, WIN_HEIGHT - 10 });
+    
     
     static bool isActive = true;
 

@@ -1,22 +1,33 @@
 #pragma once
 
-class Armor : public Inventory
+class Armor : public Item
 {
-	struct ArmorAbility
+public:
+	enum ArmorType
 	{
-		float defense = 0;
-
-		// 마법부여는 필요하면 추가
+		 helmat,
+		 cuirass,
+		 gauntlets,
+		 boots,
+		 shield,
 	};
 
-	struct ArmorType
+	enum ArmorClass
 	{
-		float hamet;
-		float cuirass;
-		float gauntlets;
-		float boots;
-		
-		float shield;
+		IRON,
+		DRAGONBONE
 	};
+public:
+	Armor(string name, int type, int weight, int value, int armor_class, int armor_type, int def);
+	
+	int GetArmorClass() { return armor_class; }
+	int GetDef() { return def; }
+	void ChangeEquipState() { isEquiped = !isEquiped; }
+	int GetEquip() { return isEquiped; }
+
+private:
+	int armor_class;
+	int armor_type;
+	int def;
+	bool isEquiped = false;
 };
-

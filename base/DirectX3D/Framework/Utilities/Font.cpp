@@ -119,8 +119,8 @@ void Font::RenderText(string text, Float2 pos, Float2 size)
 	pos.y = WIN_HEIGHT - pos.y;
 
 	D2D1_RECT_F rectF;
-	rectF.left = pos.x - halfSize.x;
-	rectF.right = pos.x + halfSize.x;
+	rectF.left = pos.x;
+	rectF.right = pos.x + halfSize.x * 2;
 	rectF.top = pos.y - halfSize.y;
 	rectF.bottom = pos.y + halfSize.y;
 
