@@ -38,7 +38,9 @@ public:
 		BOW_DRAWN_WALK_F, BOW_DRAWN_WALK_FL, BOW_DRAWN_WALK_FR, BOW_DRAWN_WALK_B, 
 		BOW_DRAWN_WALK_BL, BOW_DRAWN_WALK_BR, BOW_DRAWN_WALK_L, BOW_DRAWN_WALK_R,
 
-		//DEATH
+		OHM_EQUIP, OHM_UNEQUIP, THM_EQUIP, THM_UNEQUIP, BOW_EQUIP, BOW_UNEQUIP
+
+		//,DEATH
 	};
 
 public:
@@ -71,6 +73,8 @@ private:
 	void Block();
 	void GetHit();
 
+	void WeaponChange();
+
 	void SetAnimation();
 
 	void WeaponCollider();
@@ -83,6 +87,15 @@ private:
 	void EndBowDrawn();
 	void SetInvincible();
 	void EndInvincible();
+
+	void Change1hm();
+	void Change2hm();
+	void Changebow();
+	void Set1hmIdle();
+	void Set2hmIdle();
+	void SetbowIdle();
+	
+	void DoNothing();
 
 protected:
 
@@ -98,11 +111,12 @@ protected:
 
 	Transform* rightHand;
 	Transform* leftHand;
-	//Transform* head;
+	Transform* head;
 	//Transform* body;
 	//Transform* foot;
 	//Transform* hands;
 
+	CapsuleCollider* headCollider;
 
 	Status status;
 
@@ -131,9 +145,11 @@ protected:
 	bool isBlock = false;
 	bool isHit = false;
 	bool isCombo = false;
+
 	bool is1hm = false;
 	bool is2hm = false;
 	bool isbow = true;
+
 	bool isbowdrawn = false;
 
 

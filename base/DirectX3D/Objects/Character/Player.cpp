@@ -116,12 +116,19 @@ Player::Player()
 	ReadClip("male_bowdrawn_walk_backward_r");
 	ReadClip("male_bowdrawn_walk_left");
 	ReadClip("male_bowdrawn_walk_right");
+	ReadClip("male_1hm_equip");
+	ReadClip("male_1hm_unequip");
+	ReadClip("male_2hm_equip");
+	ReadClip("male_2hm_unequip");
+	ReadClip("male_bow_equip");
+	ReadClip("male_bow_unequip");
 	//ReadClip("male_death");
 
 
-	collider = new CapsuleCollider(3, 5);
+	collider = new CapsuleCollider(2, 6);
 	collider->Scale() *= 1000;
-	collider->Pos().y = 6000;
+	collider->Pos().y = 5000;
+	collider->Pos().z = -600;
 	collider->SetParent(this);
 
 	SpawnManager::Get()->SetPlayerData(this);
@@ -140,19 +147,17 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
+	headCollider = new CapsuleCollider(10);
+
+	head = new Transform();
+	headCollider->SetParent(head);
+
 	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-
-	GetClip(THM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
 
 	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
@@ -178,6 +183,13 @@ Player::Player()
 	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
 
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+
 	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
 	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
 	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
@@ -199,16 +211,33 @@ Player::Player()
 	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
 	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
-	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.8f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
 	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
 	
 	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 
 	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
 	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
+
+	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
+	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
+	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
 }
 
 Player::~Player()
@@ -229,10 +258,14 @@ void Player::Update()
 	ModelAnimator::Update();
 
 	collider->UpdateWorld();
-	rightHand->SetWorld(GetTransformByNode(79));
+	rightHand->SetWorld(GetTransformByNode(82));
 	bladeSword->Update();
 	leftHand->SetWorld(GetTransformByNode(119));
 	shield->Update();	
+
+	headCollider->UpdateWorld();
+	head->SetWorld(GetTransformByNode(48));
+
 
 	if (isInvincible)
 	{
@@ -249,7 +282,9 @@ void Player::Render()
 	ModelAnimator::Render();
 	collider->Render();
 	bladeSword->Render();
-	shield->Render();
+	//shield->Render();
+
+	headCollider->Render();
 }
 
 void Player::PostRender()
@@ -271,6 +306,7 @@ void Player::Control()
 	Move();
 	Attack();
 	Block();
+	WeaponChange();
 }
 
 void Player::Move()
@@ -281,13 +317,11 @@ void Player::Move()
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
 		curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM || curAction == THM_HIT_LARGE || 
 		curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK ||
-		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
-		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
-		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == THM_WALK_FW_ATK ||
 		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
-		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
-		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
-		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
 	if (isBlock) return;
 	if (isHit) return;
@@ -476,6 +510,7 @@ void Player::Rotate()
 void Player::Attack()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
 		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
 		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
 		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == OHM_CATK_R ||
@@ -483,6 +518,10 @@ void Player::Attack()
 		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
 		curAction == THM_RUN_R_ATK || curAction == BOW_RELEASE) return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
+		return;
+	if (isBlock) return;
 	if (isHit) return;
 
 	if (is1hm)
@@ -498,7 +537,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_FW_ATK);
+					SetAction(OHM_RUN_FW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -510,7 +549,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_FW_ATK);
+					SetAction(OHM_WALK_FW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -527,7 +566,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_BW_ATK);
+					SetAction(OHM_RUN_BW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -539,7 +578,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_BW_ATK);
+					SetAction(OHM_WALK_BW_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -554,7 +593,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_L_ATK);
+					SetAction(OHM_RUN_L_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -566,7 +605,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_L_ATK);
+					SetAction(OHM_WALK_L_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -581,7 +620,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_RUN_R_ATK);
+					SetAction(OHM_RUN_R_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -593,7 +632,7 @@ void Player::Attack()
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
-					SetAction(THM_WALK_R_ATK);
+					SetAction(OHM_WALK_R_ATK);
 					attackCharge = 0.0f;
 				}
 			}
@@ -611,18 +650,18 @@ void Player::Attack()
 			{
 				if (attackCharge > 1.0f)
 				{
-					SetAction(THM_ATK_P);
+					SetAction(OHM_ATK_P);
 				}
 				else
 				{
 					if (!isCombo)
 					{
-						SetAction(THM_ATK_R);
+						SetAction(OHM_ATK_R);
 						isCombo = true;
 					}
 					else
 					{
-						SetAction(THM_ATK_L);
+						SetAction(OHM_ATK_L);
 						isCombo = false;
 					}
 				}
@@ -813,16 +852,34 @@ void Player::Block()
 	if (isbow) return;
 	if (isHit) return;
 
-	if (KEY_DOWN(VK_RBUTTON))
+	if (is1hm)
 	{
-		SetAction(OHM_BLOCK);
-		isBlock = true;
+		if (KEY_DOWN(VK_RBUTTON))
+		{
+			SetAction(OHM_BLOCK);
+			isBlock = true;
+		}
+
+		if (KEY_UP(VK_RBUTTON))
+		{
+			EndBlock();
+		}
 	}
 
-	if (KEY_UP(VK_RBUTTON))
+	if (is2hm)
 	{
-		EndBlock();
+		if (KEY_DOWN(VK_RBUTTON))
+		{
+			SetAction(THM_BLOCK);
+			isBlock = true;
+		}
+
+		if (KEY_UP(VK_RBUTTON))
+		{
+			EndBlock();
+		}
 	}
+
 }
 
 void Player::GetHit()
@@ -849,6 +906,11 @@ void Player::GetHit()
 				SetAction(OHM_HIT_BLOCK);
 				isHit = true;
 			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(OHM_HIT_BLOCK);
+				isHit = true;
+			}
 		}
 		else
 		{
@@ -867,9 +929,128 @@ void Player::GetHit()
 				SetAction(OHM_HIT_LARGE);
 				isHit = true;
 			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(OHM_HIT_LARGEST);
+				isHit = true;
+			}
+		}
+	}
+
+	if (is2hm)
+	{
+		if (isBlock)
+		{
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(THM_HIT_BLOCK);
+				isHit = true;
+			}
+		}
+		else
+		{
+			if (KEY_DOWN('Z'))
+			{
+				SetAction(THM_HIT_LIGHT);
+				isHit = true;
+			}
+			if (KEY_DOWN('X'))
+			{
+				SetAction(THM_HIT_MEDIUM);
+				isHit = true;
+			}
+			if (KEY_DOWN('C'))
+			{
+				SetAction(THM_HIT_LARGE);
+				isHit = true;
+			}
+			if (KEY_DOWN('V'))
+			{
+				SetAction(THM_HIT_LARGEST);
+				isHit = true;
+			}
 		}
 	}
 	
+}
+
+void Player::WeaponChange()
+{
+	if (curAction != OHM_IDLE && curAction != THM_IDLE && curAction != BOW_IDLE) return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
+		return;
+	if (KEY_PRESS(VK_CONTROL)) return;
+
+	if (is1hm)
+	{
+		if (KEY_DOWN('2'))
+		{
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			is1hm = false;
+			is2hm = true;
+			SetAction(OHM_UNEQUIP);
+		}
+		if (KEY_DOWN('3'))
+		{
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			is1hm = false;
+			isbow = true;
+			SetAction(OHM_UNEQUIP);
+		}
+	}
+	
+	if (is2hm)
+	{
+		if (KEY_DOWN('1'))
+		{
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			is2hm = false;
+			is1hm = true;
+			SetAction(THM_UNEQUIP);
+		}
+		if (KEY_DOWN('3'))
+		{
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			is2hm = false;
+			isbow = true;
+			SetAction(THM_UNEQUIP);
+		}
+	}
+	
+	if (isbow)
+	{
+		if (KEY_DOWN('1'))
+		{
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			isbow = false;
+			is1hm = true;
+			SetAction(BOW_UNEQUIP);
+		}
+		if (KEY_DOWN('2'))
+		{
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			isbow = false;
+			is2hm = true;
+			SetAction(BOW_UNEQUIP);
+		}
+	}
+
 }
 
 void Player::SetAnimation()
@@ -887,6 +1068,9 @@ void Player::SetAnimation()
 		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
 		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
+		return;
+	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
+		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
 
 	if (is1hm)
@@ -1135,7 +1319,7 @@ void Player::WeaponCollider()
 {
 	if (!bladeSword->GetIsWeapon())
 	{
-		bladeSword->SetIsCollider(true);
+		//bladeSword->SetIsCollider(true);
 	}
 }
 
@@ -1143,26 +1327,54 @@ void Player::EndAttack()
 {
 	if (bladeSword->GetIsWeapon())
 	{
-	bladeSword->SetIsCollider(false);
+	//bladeSword->SetIsCollider(false);
 	}
-	SetAction(OHM_IDLE);
+	if (is1hm)
+	{
+		SetAction(OHM_IDLE);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_IDLE);
+	} 
 }
 
 void Player::EndBlock()
 {
-	SetAction(OHM_IDLE);
+	if (is1hm)
+	{
+		SetAction(OHM_IDLE);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_IDLE);
+	}
 	isBlock = false;
 }
 
 void Player::EndHit()
 {
-	SetAction(OHM_IDLE);
+	if (is1hm)
+	{
+		SetAction(OHM_IDLE);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_IDLE);
+	}
 	isHit = false;
 }
 
 void Player::EndBlockHit()
 {
-	SetAction(OHM_BLOCK);
+	if (is1hm)
+	{
+		SetAction(OHM_BLOCK);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_BLOCK);
+	}
 	isHit = false;
 }
 
@@ -1185,4 +1397,41 @@ void Player::EndInvincible()
 {
 	isInvincible = false;
 	invincibleCount = 0.0f;
+}
+
+void Player::Change1hm()
+{
+	SetAction(OHM_EQUIP);
+}
+
+void Player::Change2hm()
+{
+	SetAction(THM_EQUIP);
+}
+
+void Player::Changebow()
+{
+	SetAction(BOW_EQUIP);
+}
+
+void Player::Set1hmIdle()
+{
+	SetAction(OHM_IDLE);
+}
+
+void Player::Set2hmIdle()
+{
+	SetAction(THM_IDLE);
+}
+
+void Player::SetbowIdle()
+{
+	SetAction(BOW_IDLE);
+}
+
+
+
+void Player::DoNothing()
+{
+	return;
 }
