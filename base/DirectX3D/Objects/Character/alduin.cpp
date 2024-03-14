@@ -21,6 +21,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	breathCollider = new BoxCollider(50.0f);
 	fBallCollider = new SphereCollider(90.0f);
+
+	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	
 
 	//alduinCollider3 = new CapsuleCollider();
@@ -148,6 +150,7 @@ alduin::~alduin()
 void alduin::Update()
 {
 	
+	
 	ModelAnimator::Update(); 
 
 	collider_F->UpdateWorld();
@@ -201,6 +204,12 @@ void alduin::Update()
 		if (curState == BREATH)
 			breathCollider->SetActive(true);
 	}
+
+	if (curHp <= 0)
+		SetState(DEATH);
+
+	if (KEY_PRESS('K'))
+		curHp = 0.0f;
 		
 
 
@@ -210,10 +219,10 @@ void alduin::Update()
 		
 
 	//alduinCollider2->SetWorld(GetTransformByNode(nodeIndex));
-	//HeadCollider->SetWorld(GetTransformByNode(45));
+	HeadCollider->SetWorld(GetTransformByNode(45));
 	//LWingCollider->SetWorld(GetTransformByNode(81));
 	//RWingCollider->SetWorld(GetTransformByNode(103));
-	//BodyCollider->SetWorld(GetTransformByNode(84));
+	BodyCollider->SetWorld(GetTransformByNode(84));
 	//RLegCollider->SetWorld(GetTransformByNode(119));
 	//LLegCollider->SetWorld(GetTransformByNode(23));
 	//TailCollider->SetWorld(GetTransformByNode(110));
@@ -225,7 +234,9 @@ void alduin::Update()
 
 void alduin::Render()
 {
-	ModelAnimator::Render();
+
+	if(ModelAnimator::Active())
+		ModelAnimator::Render();
 
 	collider_F->Render();
 	collider_R->Render();
@@ -233,6 +244,13 @@ void alduin::Render()
 	collider_B->Render();
 	breathCollider->Render();
 	fBallCollider->Render();
+
+	if (curState != DEATH)
+	{
+		HeadCollider->Render();
+		BodyCollider->Render();
+	}
+	
 
 }
 
@@ -255,6 +273,12 @@ void alduin::SetTarget(Player* target)
 
 void alduin::Move()
 {
+	if (curState == DEATH)
+	{
+		moveSpeed = 0.0f;
+		return;
+	}
+
 	if (velocity.Length() > 350 && Pos().y < 1)
 	{
 		SetState(TAKEOFF);
@@ -304,6 +328,8 @@ void alduin::Move()
 		}
 			
 	}
+
+	
 	
 	
 }
@@ -312,17 +338,16 @@ void alduin::Move()
 void alduin::Inhale()
 {
 
-	//if (velocity.Length() < 150)
-	//{
-	//	SetState(BREATH);
-	//}
+	if (velocity.Length() < 150)
+	{
+		SetState(BREATH);
+	}
 
-	//if (velocity.Length() > 150)
-	//{
-	//	SetState(FIREBALL);
-	//}
+	if (velocity.Length() > 150)
+	{
+		SetState(FIREBALL);
+	}
 
-	SetState(FIREBALL);
 
 }
 
@@ -404,15 +429,16 @@ void alduin::EndAction()
 
 void alduin::Dying()
 {
+	DeathParticle->Play(transform->Pos());
+	
 	//파티클 재생
 
 }
 
 void alduin::Dead()
 {
-	this->SetActive(false);
+	ModelAnimator::SetActive(false);
 	transform->SetActive(false);
-
 
 }
 
@@ -444,7 +470,7 @@ void alduin::Patterns() //지상패턴
 {
 
 
-	if (curState != FORWARD) return;
+	if (curState != FORWARD || curState == DEATH) return;
 
 	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
@@ -470,7 +496,7 @@ void alduin::Patterns() //지상패턴
 void alduin::PatternFire()
 {
 
-	if (CoolingTime < 8 || curState != FORWARD || Pos().y > 1) return;
+	if (CoolingTime < 8 || curState != FORWARD || Pos().y > 1 || curState == DEATH) return;
 
 
 	if (Pos().y < 1) //지상에 있을 때

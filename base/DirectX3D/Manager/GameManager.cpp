@@ -22,6 +22,7 @@ GameManager::GameManager()
     SceneManager::Get()->Add("Grid");
     //SceneManager::Get()->Add("ModelExport");     
     //SceneManager::Get()->Add("ParticleConfig");
+    //SceneManager::Get()->Add("Particle");
     SceneManager::Get()->Add("Player");
     //SceneManager::Get()->Add("Monster");
 

@@ -91,6 +91,7 @@ private:
 	Transform* FireAttackTransform;
 	Player* target;
 	Vector3* tempRot;
+	ParticleSystem* DeathParticle;
 
 	UINT nodeIndex = 0;
 
