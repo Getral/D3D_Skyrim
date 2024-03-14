@@ -165,7 +165,7 @@
     <ClInclude Include="Objects\Items\Expendables\EbonyArrow.h" />
     <ClInclude Include="Objects\Items\Expendables\Expendables.h" />
     <ClInclude Include="Objects\Items\Expendables\IronArrow.h" />
-    <ClInclude Include="Objects\Items\Miscellaneous\Miscellaneous.h" />
+    <ClInclude Include="Objects\Items\Miscellaneous\Misc.h" />
     <ClInclude Include="Objects\Items\Weapons\BladeSword.h" />
     <ClInclude Include="Objects\Character\Player.h" />
     <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.h" />
@@ -317,7 +317,7 @@
     <ClCompile Include="Objects\Items\Expendables\EbonyArrow.cpp" />
     <ClCompile Include="Objects\Items\Expendables\Expendables.cpp" />
     <ClCompile Include="Objects\Items\Expendables\IronArrow.cpp" />
-    <ClCompile Include="Objects\Items\Miscellaneous\Miscellaneous.cpp" />
+    <ClCompile Include="Objects\Items\Miscellaneous\Misc.cpp" />
     <ClCompile Include="Objects\Items\Weapons\BladeSword.cpp" />
     <ClCompile Include="Objects\Character\Player.cpp" />
     <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.cpp" />

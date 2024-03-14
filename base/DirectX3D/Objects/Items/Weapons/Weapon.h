@@ -27,12 +27,15 @@ public:
 	};
 	Weapon(string name, int type, int weight, int value, int weapon_class ,int weapon_type, int atk);
 
+	
 	int GetWeaponClass() { return weapon_class; }
-
+	int GetAtk() { return atk; }
+	void ChangeEquipState() { isEquiped = !isEquiped; }
 private:
 	int weapon_class;
 	int weapon_type;
 	int atk;
+	bool isEquiped = false;
 };
 
 /*

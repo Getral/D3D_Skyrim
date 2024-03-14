@@ -182,7 +182,7 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
         enemies[0]->GetEnemies()[0]->GetStatus().curHp -= 50 * DELTA;
     }
     if(isInven)
-        invenUI->Update();
+        invenUI->Update(player);
     if (KEY_DOWN('I'))
         isInven = !isInven;
 }

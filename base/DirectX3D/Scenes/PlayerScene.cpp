@@ -57,6 +57,6 @@ void PlayerScene::GUIRender()
 {
 	//player->GUIRender();
 	//aldu->GUIRender();
-	//UIManager::Get()->GUIRender();
-	test->GUIRender();
+	UIManager::Get()->GUIRender();
+	ImGui::Text("def : %f", player->GetStatus().def);
 }

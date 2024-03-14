@@ -27,6 +27,7 @@ GameManager::GameManager()
 
     Font::Get()->AddColor("Gray", 185.0f / 255.0f, 185.0f / 255.0f, 185.0f / 255.0f);
     Font::Get()->AddStyle("Futura", L"Futura",20.0f);
+    Font::Get()->AddStyle("Futura_big", L"Futura", 30.0f);
 
     Font::Get()->SetColor("Gray");
     Font::Get()->SetStyle("Futura");

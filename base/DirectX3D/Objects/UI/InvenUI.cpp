@@ -15,18 +15,22 @@ InvenUI::InvenUI()
 	framebar->Scale().x *= 5.5f;
 
 	framebar2 = new Quad(L"Textures/UI/frameColor.png");
-	//framebar2->SetParent(frame);
 	framebar2->Pos() = { CENTER_X - 400 ,CENTER_Y };
 	framebar2->Scale().x *= 2.5f;
 	framebar2->Scale().y *= 1000.0f;
 	framebar2->UpdateWorld();
 
 	framebar3 = new Quad(L"Textures/UI/frameColor.png");
-	//framebar2->SetParent(frame);
 	framebar3->Pos() = { CENTER_X - 228 ,CENTER_Y + 275 };
 	framebar3->Scale().x *= 340.0f;
 	framebar3->Scale().y *= 2.5f;
 	framebar3->UpdateWorld();
+
+	detailedframebar = new Quad(L"Textures/UI/frameColor.png");
+	detailedframebar->Pos() = { CENTER_X - 228 ,CENTER_Y + 275 };
+	detailedframebar->Scale().x *= 340.0f;
+	detailedframebar->Scale().y *= 2.5f;
+	
 
 	title_all = new Quad(L"Textures/UI/icon_all.png");
 	title_all->Pos() = {70, 610};
@@ -57,24 +61,35 @@ InvenUI::InvenUI()
 	title_misc->Pos().y = title_all->Pos().y - 360.0f;
 	title_misc->Scale() *= 0.3f;
 
+	selected_bar = new Quad(Vector2(180, 40));
+	selected_bar->Pos() = { CENTER_X - 495,CENTER_Y + 250};
+	selected_bar->GetMaterial()->SetShader(L"UI/EditAlpha2.hlsl");
 
-	selectedBar = new Quad(Vector2(180, 40));
-	selectedBar->Pos() = { CENTER_X - 495,CENTER_Y + 250};
-	selectedBar->GetMaterial()->SetShader(L"UI/EditAlpha2.hlsl");
+
+	equiped_icon_armor = new Quad(L"Textures/UI/Equiped_Icon.png");
+	equiped_icon_armor->Scale() *= 0.9f;
+	equiped_icon_armor->Pos() = { CENTER_X ,CENTER_Y };
+
+
+	equiped_icon_weapon = new Quad(L"Textures/UI/Equiped_Icon.png");
+	equiped_icon_weapon->Scale() *= 0.9f;
+	equiped_icon_weapon->Pos() = { CENTER_X ,CENTER_Y };
+	
 
 	itemstatus = new ItemStatus();
 
 	item_detail_frame = new Quad(L"Textures/UI/Item_detail_frame.png");
 	item_detail_frame->GetMaterial()->SetShader(L"UI/EditAlpha.hlsl");
 	item_detail_frame->Pos() = { CENTER_X + 300 ,CENTER_Y - 200 };
-	
+
+	player_armor = new Armor("none", -1, -1, -1, -1, -1, 0);
 }
 
 InvenUI::~InvenUI()
 {
 }
 
-void InvenUI::Update()
+void InvenUI::Update(Player* player)
 {
 	frame->UpdateWorld();
 	framebar->UpdateWorld();
@@ -86,9 +101,14 @@ void InvenUI::Update()
 	title_expendable->UpdateWorld();
 	title_misc->UpdateWorld();
 
-	selectedBar->UpdateWorld();
+	selected_bar->UpdateWorld();
+
+	equiped_icon_armor->UpdateWorld();
+	equiped_icon_weapon->UpdateWorld();
 
 	item_detail_frame->UpdateWorld();
+	detailedframebar->UpdateWorld();
+
 	SelectedBarPosing();
 	
 	if (KEY_DOWN('R'))
@@ -96,9 +116,17 @@ void InvenUI::Update()
 	if (KEY_DOWN('T'))
 		AddItem("dragonhelmet");
 	if (KEY_DOWN('Y'))
-		AddItem("irondagger");
+		UseItem(player, "ironhelmet");
 	if (KEY_DOWN('U'))
-		AddItem("ebonydagger");
+		UseItem(player, "dragonhelmet");
+	
+		
+
+	//if (inven_armors.size() > 1)
+	//	a = inven_armors[1]->GetStatus().name;
+	//else
+	//	a = "na";
+	//strcpy(ch, a.c_str());
 }
 
 void InvenUI::Render()
@@ -115,17 +143,39 @@ void InvenUI::Render()
 	title_expendable->Render();
 	title_misc->Render();
 
-	selectedBar->Render();
+	selected_bar->Render();
 
-	item_detail_frame->Render();
+	equiped_icon_armor->Render();
+	equiped_icon_weapon->Render();
 
+	{
+		item_detail_frame->Render();
+
+		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30});
+		Font::Get()->RenderText("Weight",   { item_detail_frame->Pos().x - 40, item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText("Value",    { item_detail_frame->Pos().x + 60, item_detail_frame->Pos().y - 30 });
+	}
+	
 	RenderTitle();
 
 	ListingItem();
+
+	ListingDetailed("ironhelmet");
 }
 
 void InvenUI::GUIRender()
 {
+	ImGui::Text(player_armor->GetStatus().name.c_str());
+	ImGui::Text("player_armor equip state : %d", player_armor->GetEquip());
+
+	if (inven_armors.size() > 1)
+	{
+		ImGui::Text("inven[0] equip state : %d", inven_armors[0]->GetEquip());
+		ImGui::Text("inven[1] equip state : %d", inven_armors[1]->GetEquip());
+	}
+
+	equiped_icon_armor->GUIRender();
+	equiped_icon_weapon->GUIRender();
 }
 
 void InvenUI::SelectedBarPosing()
@@ -143,34 +193,34 @@ void InvenUI::SelectedBarPosing()
 	switch (selectedTitleNum)
 	{
 	case InvenUI::ALL:
-		selectedBar->Pos().y = title_all->GlobalPos().y;
+		selected_bar->Pos().y = title_all->GlobalPos().y;
 		break;
 	case InvenUI::WEAPON:
-		selectedBar->Pos().y = title_weapon->GlobalPos().y;
+		selected_bar->Pos().y = title_weapon->GlobalPos().y;
 		break;
 	case InvenUI::WEAPON_IRON:
-		selectedBar->Pos().y = title_weapon->GlobalPos().y - 40;
+		selected_bar->Pos().y = title_weapon->GlobalPos().y - 40;
 		break;
 	case InvenUI::WEAPON_EBONY:
-		selectedBar->Pos().y = title_weapon->GlobalPos().y - 80;
+		selected_bar->Pos().y = title_weapon->GlobalPos().y - 80;
 		break;
 	case InvenUI::ARMOR:
-		selectedBar->Pos().y = title_armor->GlobalPos().y;
+		selected_bar->Pos().y = title_armor->GlobalPos().y;
 		break;
 	case InvenUI::ARMOR_IRON:
-		selectedBar->Pos().y = title_armor->GlobalPos().y - 40;
+		selected_bar->Pos().y = title_armor->GlobalPos().y - 40;
 		break;
 	case InvenUI::ARMOR_DRAGONBONE:
-		selectedBar->Pos().y = title_armor->GlobalPos().y - 80;
+		selected_bar->Pos().y = title_armor->GlobalPos().y - 80;
 		break;
 	case InvenUI::CLOTHING:
-		selectedBar->Pos().y = title_clothing->GlobalPos().y;
+		selected_bar->Pos().y = title_clothing->GlobalPos().y;
 		break;
 	case InvenUI::EXPENDABLE:
-		selectedBar->Pos().y = title_expendable->GlobalPos().y;
+		selected_bar->Pos().y = title_expendable->GlobalPos().y;
 		break;
 	case InvenUI::MISC:
-		selectedBar->Pos().y = title_misc->GlobalPos().y;
+		selected_bar->Pos().y = title_misc->GlobalPos().y;
 		break;
 	default:
 		break;
@@ -202,7 +252,6 @@ void InvenUI::RenderTitle()
 	Font::Get()->RenderText("WGT", { 515, CENTER_Y + 290 });
 	Font::Get()->RenderText("VAL", { 550, CENTER_Y + 290 });
 
-	Font::Get()->AddStyle("Futura_big", L"Futura", 30.0f);
 	Font::Get()->SetStyle("Futura_big");
 	switch (selectedTitleNum)
 	{
@@ -248,6 +297,40 @@ void InvenUI::AddItem(string inname)
 		inven_armors.push_back(itemstatus->GetArmor(inname));
 	if (itemstatus->GetItem(inname).type == Item::WEAPON)
 		inven_weapons.push_back(itemstatus->GetWeapon(inname));
+	if (itemstatus->GetItem(inname).type == Item::ARROW)
+		inven_arrows.push_back(itemstatus->GetArrow(inname));
+	if (itemstatus->GetItem(inname).type == Item::POTION)
+		inven_potions.push_back(itemstatus->GetPotion(inname));
+	if (itemstatus->GetItem(inname).type == Item::MISC)
+		inven_misces.push_back(itemstatus->GetMisc(inname));
+}
+
+void InvenUI::UseItem(Player* player, string inname)
+{
+	if (itemstatus->GetItem(inname).type == Item::ARMOR)
+	{
+		FOR(inven_armors.size())
+		{
+			if (inven_armors[i]->GetStatus().name == inname)
+			{
+				player_armor->ChangeEquipState();
+				inven_armors[i]->ChangeEquipState();
+
+				player->GetStatus().def -= player_armor->GetDef();				
+				player->GetStatus().def += inven_armors[i]->GetDef();				
+				
+				player_armor = inven_armors[i];
+				break;
+			}
+		}
+	}
+	//if (itemstatus->GetItem(inname).type == Item::WEAPON)
+	//	
+	//if (itemstatus->GetItem(inname).type == Item::ARROW)
+	//	
+	//if (itemstatus->GetItem(inname).type == Item::POTION)
+	//	
+	//if (itemstatus->GetItem(inname).type == Item::MISC)
 }
 
 void InvenUI::ListingItem()
@@ -258,6 +341,8 @@ void InvenUI::ListingItem()
 		{
 			for (int i = 0; i < inven_armors.size(); i++)
 			{
+				if (inven_armors[i]->GetEquip() == true)
+					equiped_icon_armor->Pos() = { 260 , WIN_HEIGHT - 105 - (20 * (float)i) };
 				Font::Get()->RenderText(inven_armors[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
 				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
 				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
@@ -351,4 +436,32 @@ void InvenUI::ListingItem()
 			}
 		}	
 	}
+}
+
+void InvenUI::ListingDetailed(string inname)
+{
+	if (itemstatus->GetItem(inname).type == Item::ARMOR)
+	{
+		FOR(inven_armors.size())
+		{
+			if (inven_armors[i]->GetStatus().name == inname)
+			{
+				Font::Get()->SetStyle("Futura_big");
+				Font::Get()->RenderText(inven_armors[i]->GetStatus().name, { item_detail_frame->Pos().x - inname.size() * 15 ,item_detail_frame->Pos().y + 40 });				
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetDef()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });				
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30});
+				Font::Get()->SetStyle("Futura");
+			}
+		}
+	}
+		
+	//if (itemstatus->GetItem(inname).type == Item::WEAPON)
+	//	
+	//if (itemstatus->GetItem(inname).type == Item::ARROW)
+	//	
+	//if (itemstatus->GetItem(inname).type == Item::POTION)
+	//	
+	//if (itemstatus->GetItem(inname).type == Item::MISC)
+		
 }

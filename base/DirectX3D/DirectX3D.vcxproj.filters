@@ -396,7 +396,7 @@
     <ClInclude Include="Objects\Items\Expendables\IronArrow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Miscellaneous\Miscellaneous.h">
+    <ClInclude Include="Objects\Items\Miscellaneous\Misc.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.h">
@@ -821,7 +821,7 @@
     <ClCompile Include="Objects\Items\Expendables\IronArrow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Miscellaneous\Miscellaneous.cpp">
+    <ClCompile Include="Objects\Items\Miscellaneous\Misc.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.cpp">

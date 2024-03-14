@@ -22,9 +22,12 @@ public:
 	
 	int GetArmorClass() { return armor_class; }
 	int GetDef() { return def; }
-	
+	void ChangeEquipState() { isEquiped = !isEquiped; }
+	int GetEquip() { return isEquiped; }
+
 private:
 	int armor_class;
 	int armor_type;
 	int def;
+	bool isEquiped = false;
 };

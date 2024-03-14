@@ -10,6 +10,7 @@ public:
 		float curstamina = 100;
 		float maxstamina = 100;
 		float atk = 10;
+		float def = 10;
 		float speed = 5;
 	};
 
@@ -33,7 +34,7 @@ public:
 	void PostRender();
 	void GUIRender();
 
-	Status GetStatus() { return status; }
+	Status& GetStatus() { return status; }
 	CapsuleCollider* GetCollier() { return collider; }
 	BladeSword* GetSword() { return bladeSword; }
 	bool GetIsHit() { return isHit; }

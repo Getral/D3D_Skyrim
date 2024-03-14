@@ -8,7 +8,7 @@
 
 #define MAX_LIGHT 10
 #define MAX_BONE 512
-#define MAX_FRAME 2048
+#define MAX_FRAME 512
 #define MAX_INSTANCE 128
 
 #define CENTER_X (WIN_WIDTH * 0.5f)
@@ -220,7 +220,7 @@ using namespace GameMath;
 #include "Objects/Items/Expendables/IronArrow.h"
 #include "Objects/Items/Expendables/EbonyArrow.h"
 
-#include "Objects/Items/Miscellaneous/Miscellaneous.h"	// 잡탬
+#include "Objects/Items/Miscellaneous/Misc.h"	// 잡탬
 
 
 #include "Objects/Landscape/Terrain.h"
