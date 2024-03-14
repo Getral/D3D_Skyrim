@@ -20,11 +20,16 @@ public:
 	{ return elapsedTime > EPSILON ? EPSILON : elapsedTime * deltaScale; }
 	int GetFPS() { return frameRate; }
 
+	int GetOneSec() { return OneSecElapsed; }
+	void ResetOneSec() { OneSecElapsed = 0; }
+
 private:
 	float timeScale = 0.0f;
 	float elapsedTime = 0.0f;
 	float oneSecCount = 0.0f;
 	float deltaScale = 1.0f;	
+	int OneSecElapsed = 0;
+
 
 	__int64 curTime = 0;
 	__int64 lastTime = 0;

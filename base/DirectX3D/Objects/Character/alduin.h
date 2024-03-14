@@ -8,7 +8,8 @@ private:
 		TAKEOFF,
 		HOVER,
 		HOVER_HIT,
-		WALK,
+		FORWARD,
+		BACKWARD,
 		BLEED,
 		APROACH,
 		FLIGHT_FOR,
@@ -25,6 +26,7 @@ private:
 		LANDING_SOFT,
 		LANDING_HARD,
 		LAND,
+		LAND_VERTICAL,
 		DIVE,
 		DEATH,
 		TURN_L,
@@ -49,38 +51,42 @@ private:
 	void SetState(State state);
 	void Move();
 
-	void attacking();
 	void Inhale();
 	void FireBallAttack();
 	void BreathAttack();
 
+	void Attacking();
 	void beginTakeoff();
 	void EndTakeoff();
 	void beginAproach();
 	void EndAction();
 
+	void Dying();
+	void Dead();
+
 	void Patterns();
+	void PatternFire();
 	void PatternsAir();
 
 	State curState = IDLE;
 	CapsuleCollider* alduinCollider2;
 
 	CapsuleCollider* HeadCollider;
-	CapsuleCollider* LWingCollider;
-	CapsuleCollider* RWingCollider;
 	CapsuleCollider* BodyCollider;
-	CapsuleCollider* RLegCollider;
-	CapsuleCollider* LLegCollider;
-
 	CapsuleCollider* TailCollider;
 
 	CapsuleCollider* collider_F;
 	CapsuleCollider* collider_R;
 	CapsuleCollider* collider_L;
 	CapsuleCollider* collider_B;
+	BoxCollider* breathCollider;
+	SphereCollider* fBallCollider;
+
 	Transform* transform;
+	Transform* FireAttackTransform;
 	Player* target;
-	Vector3* tempRot;
+	Vector3 tempPos;
+	ParticleSystem* DeathParticle;
 
 	UINT nodeIndex = 0;
 
@@ -88,10 +94,14 @@ private:
 	float rotSpeed = 0.25;
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
+	float CoolingTime = 0;
+	float fireBallDir = 0.0f;
 
 	bool isAscending = false;
 	bool isDescending = false;
 	bool isAttacking = false;
+	bool isFireAttack = false;
+
 
 	Vector3 velocity;
 
