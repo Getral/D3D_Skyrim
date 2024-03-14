@@ -15,21 +15,22 @@ private:
 
 	vector<vector<string>> clipNameTable =
 	{
-		{ "bear_idle", "bear_run_forward", "bear_attack", "bear_attack2", "bear_attack3", "bear_hit"},
-		{ "wolf_idle", "wolf_run_forward", "wolf_attack"}
+		{ "bear_sleep", "bear_startsleep", "bear_wakeup","bear_idle", "bear_combatidle","bear_run_forward", "bear_attack", "bear_attack2",
+			"bear_attack3", "bear_attack_standing", "bear_hit", "bear_headshake", "bear_death" },
+		{ "wolf_idle", "wolf_combatidle", "wolf_walk", "wolf_howling" ,"wolf_run_forward", "wolf_attack", "wolf_attack2", "wolf_attack3",
+			"wolf_attack4", "wolf_hit"}
 	};
 
 	vector<vector<Vector3>> posTable =
 	{
-		{Vector3(100, 0, 100)},{}
-		//{ Vector3(50, 0, 50), Vector3(-20, 0, 30), Vector3(-10, 0, -20) },
-		//{ Vector3(10, 0, -20), Vector3(-100, 0, 50), Vector3(75, 0, 80) }
+		{ Vector3(100, 0, 100), Vector3(-200, 0, 300), Vector3(-100, 0, -200) },
+		{ Vector3(10, 0, -20), Vector3(-100, 0, 50), Vector3(75, 0, 80) }
 	};
 
 	vector<Character::Status> statusTable =
 	{
 		Character::Status(15, 300, 200, 20, 25),
-		Character::Status(10, 150, 100, 10, 15)
+		Character::Status(10, 150, 100, 10, 35)
 	};
 
 	UINT MONSTER_SIZE = 2;
