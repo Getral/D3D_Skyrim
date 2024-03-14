@@ -44,7 +44,9 @@ void Character::SetStatus(int level, float hp, float stam, float atk, float spee
 void Character::Spawn()
 {
 	transform->SetActive(true);
+	transform->UpdateWorld();
 	collider->SetActive(true);
+	collider->UpdateWorld();
 
 	status.curHp = status.maxHp;
 

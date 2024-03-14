@@ -4,7 +4,7 @@ class Enemy : public Character
 {
 public:
 	Enemy(string name, UINT index = 0, ModelAnimatorInstancing* modelAnimatorInstancing = new ModelAnimatorInstancing(""),
-		Transform* transform = new Transform(), Vector3 spawnPos = { 0, 0, 0 }, float trackRange = 1000.0f);
+		Transform* transform = new Transform(), Vector3 spawnPos = { 0, 0, 0 });
 	~Enemy();
 
 	virtual void Update();
@@ -19,8 +19,11 @@ public:
 	vector<CapsuleCollider*> GetColliders() { return colliders; }
 
 protected:
+	void Init();
+
 	virtual void Track();
 	virtual void SetCollidersParent();
+	virtual void SetColliderByNode();
 
 protected:
 	ModelAnimatorInstancing* instancing;
@@ -37,6 +40,7 @@ protected:
 	UINT index;
 	UINT node;
 
+	BoxCollider* rigidbody;
 	SphereCollider* trackCollider;
 	SphereCollider* attackCollider;
 	vector<CapsuleCollider*> colliders;

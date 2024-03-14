@@ -1,0 +1,75 @@
+// Weapon
+
+// Iron
+IronDagger
+IronClaymore
+IronWarAxe
+IronMace
+IronLongSword
+IronBattleAxe
+IronWarHammer
+IronBow - IronQuiver
+
+// Ebony
+EbonyDagger
+EbonyClaymore
+EbonyWarAxe
+EbonyMace
+EbonyLongSword
+EbonyBattleAxe
+EbonyWarHammer
+EbonyBow - EbonyQuiver
+
+-------------------------------------
+
+// Armor
+
+//IronArmor
+IronHalmet
+IronCuirass
+IronGauntlets
+IronBoots
+
+IronShield
+
+// DragonBoneArmor	-> 경로명길어질까봐 dragon으로 입력할예정
+DragonHalmet
+DragonCuirass
+DragonGauntlets
+DragonBoots
+
+DragonShield
+
+---------------------------------
+
+Expendables (소모품)
+
+
+Potion hp/sp
+Arrow type 
+
+Food(선택)
+
+HpPothion
+MpPotion
+
+EbonyArrow
+IronArrow
+
+gold (골드, 가치)
+
+----------------------------------
+
+MIscellaneous -> Misc (잡탬)
+
+아직 미정
+
+
+
+
+
+
+
+
+
+

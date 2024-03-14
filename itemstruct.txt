@@ -1,0 +1,24 @@
+itemStatus
+  weapon         (name, type, weight, value, armortype, attack)
+  armor            (name, type, weight, value, armortype, defense)
+  clothing         (name, type, weight, value, armortype, defense)
+  expendables (name, type, weight, value)
+  misc               (name, type, weight, value)
+
+vector<armor>
+vector<weapon>
+vector<cloth>
+vector<misc>
+
+itemStatus(Table)->getitem(name)->status
+
+inven
+
+AddItem(item)
+equipItem
+name->status->type ->wepaon
+vector(w).pushback
+a
+c
+e
+m

@@ -16,6 +16,7 @@ private:
 
 public:
     void SetEvent(Event event, float timeRatio);
+    void SetEvent(Event event, float timeRatio, bool overload);
 
 private:
     string name;

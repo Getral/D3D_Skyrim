@@ -1,16 +1,16 @@
 #include "Framework.h"
 
-Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform * transform, Vector3 spawnPos, float trackRange)
-	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing), trackRange(trackRange)
+Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform* transform, Vector3 spawnPos)
+	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing)
 {
+	rigidbody = new BoxCollider();
+	rigidbody->SetParent(transform);
+
 	trackCollider = new SphereCollider();
-	trackCollider->Scale() *= trackRange;
 	trackCollider->SetParent(transform);
 
-	attackRange = trackRange * 0.3f;
 	attackCollider = new SphereCollider();
-	attackCollider->Scale() *= attackRange;
-	attackCollider->Pos().SetY(attackRange * 0.5f);
+
 	attackCollider->SetParent(transform);
 
 	motion = modelAnimatorInstancing->GetMotion(index);
@@ -33,10 +33,13 @@ Enemy::~Enemy()
 void Enemy::Update()
 {
 	Character::Update();
+	rigidbody->UpdateWorld();
 	trackCollider->UpdateWorld();
 	attackCollider->UpdateWorld();
 	for (Transform* t : colliderTransforms)
 		t->UpdateWorld();
+
+	SetColliderByNode();
 
 	for (CapsuleCollider* collider : colliders)
 		collider->UpdateWorld();
@@ -52,6 +55,17 @@ void Enemy::GUIRender()
 	Character::GUIRender();
 }
 
+void Enemy::Init()
+{
+	trackCollider->Scale() *= trackRange;
+	attackCollider->Scale() *= attackRange;
+	attackCollider->Pos().SetY(attackRange * 0.5f);
+	SetCollidersParent();
+
+	FOR(totalEvent.size())
+		eventIters[i] = totalEvent[i].begin();
+}
+
 void Enemy::Track()
 {
 }
@@ -64,4 +78,8 @@ void Enemy::SetCollidersParent()
 		colliderTransforms[i]->SetParent(transform);
 		colliders[i]->SetParent(colliderTransforms[i]);
 	}
+}
+
+void Enemy::SetColliderByNode()
+{
 }

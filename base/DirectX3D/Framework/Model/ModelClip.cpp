@@ -42,3 +42,10 @@ void ModelClip::SetEvent(Event event, float timeRatio)
 
     events[timeRatio] = event;
 }
+
+void ModelClip::SetEvent(Event event, float timeRatio, bool overload)
+{
+    if (events.count(timeRatio) > 0 && !overload) return;
+
+    events[timeRatio] = event;
+}

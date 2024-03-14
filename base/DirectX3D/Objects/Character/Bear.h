@@ -5,12 +5,19 @@ class Bear : public Enemy
 private:
 	enum State
 	{
+		SLEEP,
+		STARTSLEEP,
+		WAKEUP,
 		IDLE,
+		COMBATIDLE,
 		RUN,
 		ATTACK,
 		ATTACK2,
 		ATTACK3,
+		ATTACK4,
 		HIT,
+		HEADSHAKE,
+		DEATH
 	};
 
 	enum Collider
@@ -45,7 +52,7 @@ private:
 
 public:
 	Bear(string name, UINT index = 0, ModelAnimatorInstancing* modelAnimatorInstancing = new ModelAnimatorInstancing(""),
-		Transform* transform = new Transform(), Vector3 spawnPos = { 0, 0, 0 }, float trackRange = 1000.0f);
+		Transform* transform = new Transform(), Vector3 spawnPos = { 0, 0, 0 });
 	~Bear();
 
 	virtual void Update();
@@ -58,11 +65,22 @@ private:
 	void SetEvent();
 	void Behavior();
 
+	void StartStartSleep();
+	void EndStartSleep();
+
+	void StartWakeUp();
+	void EndWakeUp();
+
+	void StartRun();
+	void EndRun();
+
 	void StartAttack();
 	void EndAttack();
 
 	void StartHit();
 	void EndHit();
+
+	void EndHeadShake();
 
 	void SetEvent(int clip, Event event, float timeRatio);
 	void ExecuteEvent();
@@ -72,7 +90,10 @@ private:
 
 private:
 	float rotSpeed = 4.0f;
+	float attackDelay = 0.0f;
 	bool isHit = false;
+	bool isSleep = true;
+	bool isWakeUp = false;
 
 	State curState;
 	UINT attackState = 0;
