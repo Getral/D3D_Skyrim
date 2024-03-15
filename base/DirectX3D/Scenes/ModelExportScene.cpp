@@ -3,15 +3,15 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "Wolf";
+    string name = "alduin";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
 
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportMaterial();
-    //exporter->ExportMesh();
-    //delete exporter;
+    exporter = new ModelExporter(name, file);
+    exporter->ExportMaterial();
+    exporter->ExportMesh();
+    delete exporter;
 
     //string name = "dragonboneshield";
     //string file = "Models/FBX/" + name + ".fbx";

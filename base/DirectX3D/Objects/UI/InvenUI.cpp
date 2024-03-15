@@ -163,6 +163,7 @@ void InvenUI::Render()
 	equiped_icon_weapon->Render();
 
 	{
+		// 디테일 렌더하는 조건 필요
 		item_detail_frame->Render();
 
 		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30});
@@ -222,6 +223,7 @@ void InvenUI::GUIRender()
 	}
 }
 
+// 아이템 타입 선택
 void InvenUI::SelectedBarPosing()
 {
 	if (selectedTitleNum < InvenUI::ALL)
@@ -272,7 +274,7 @@ void InvenUI::SelectedBarPosing()
 
 
 }
-
+// 아이템 타입 글씨 렌더
 void InvenUI::RenderTitle()
 {
 	Font::Get()->RenderText("ALL", { 100, title_all->GlobalPos().y });
@@ -334,7 +336,7 @@ void InvenUI::RenderTitle()
 	}
 	Font::Get()->SetStyle("Futura");
 }
-
+// 아이템 추가
 void InvenUI::AddItem(string inname)
 {
 	if (itemstatus->GetItem(inname).type == Item::ARMOR)
@@ -390,7 +392,7 @@ void InvenUI::AddItem(string inname)
 	else
 		return;
 }
-
+// 아이템 사용(장비(갑옷,무기)->착용 / 화살->착용 or 같은이름시 소모 / 포션->소모)
 void InvenUI::UseItem(Player* player, string inname)
 {
 	if (itemstatus->GetItem(inname).type == Item::ARMOR)
@@ -574,7 +576,7 @@ void InvenUI::UseItem(Player* player, string inname)
 
 	else return;
 }
-
+// 벡터로된 인벤에서 아이템 타입에 맞쳐서 아이템 나열
 void InvenUI::ListingItem()
 {
 	if (inven_armors.size() > 0 || inven_weapons.size() > 0 || inven_arrows.size() > 0 || inven_potions.size() > 0 || inven_misces.size() > 0)
@@ -744,7 +746,7 @@ void InvenUI::ListingItem()
 		}
 	}
 }
-
+// 선택된 아이템 상세정보
 void InvenUI::ListingDetailed(string inname)
 {
 	if (itemstatus->GetItem(inname).type == Item::ARMOR)
