@@ -273,7 +273,7 @@ void alduin::Move()
 		return;
 	}
 
-	if (velocity.Length() > 350 && Pos().y < 1)
+	if (velocity.Length() > 300 && Pos().y < 1)
 	{
 		SetState(TAKEOFF);
 
@@ -294,7 +294,7 @@ void alduin::Move()
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
-		if (Pos().y < 1 && velocity.Length() < 350)
+		if (Pos().y < 1.0f && velocity.Length() < 300)
 		{
 			SetState(TURN_R);
 			moveSpeed = 0.0f;
@@ -305,7 +305,7 @@ void alduin::Move()
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
-		if (Pos().y < 1 && velocity.Length() < 350)
+		if (Pos().y < 1.0f && velocity.Length() < 300)
 		{
 			SetState(TURN_L);
 			moveSpeed = 0.0f;
@@ -315,7 +315,7 @@ void alduin::Move()
 	else if (cross.y >= -20 && cross.y <= 20 && !isAttacking) //반대의 경우
 	{
 
-		if (Pos().y < 1 && velocity.Length() < 350)
+		if (Pos().y < 1.0f && velocity.Length() < 350)
 		{
 			SetState(FORWARD);
 			moveSpeed = 15.0f;
@@ -323,8 +323,6 @@ void alduin::Move()
 			
 	}
 
-	
-	
 	
 }
 
@@ -382,7 +380,7 @@ void alduin::beginAproach()
 {
 	isDescending = true;
 	SetState(DIVE);
-	moveSpeed = 300;
+	moveSpeed = 300.0f;
 }
 
 //void alduin::aproaching()
@@ -441,19 +439,6 @@ void alduin::Dead()
 
 
 
-
-//void alduin::SetAnimation()
-//{
-//	if (isAttacking || curState == TURN_L || curState == TURN_R || curState == IDLE) return;
-//
-//
-//	if (velocity.z > 0.1f && Pos().y < 1)
-//		SetState(FORWARD);
-//	else if (velocity.z < 0.1f && Pos().y < 1)
-//		SetState(BACKWARD);
-//	//else if(Pos().y < 1 && moveSpeed < 1) 
-//	//	SetState(IDLE); // 가만히 있으면
-//}
 
 void alduin::SetState(State state)
 {

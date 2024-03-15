@@ -13,7 +13,7 @@ PlayerScene::PlayerScene()
 	aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("Skyrim");
+	CAM->TargetOptionLoad("skyrim2");
 	CAM->LookAtTarget(); 
 }
 
