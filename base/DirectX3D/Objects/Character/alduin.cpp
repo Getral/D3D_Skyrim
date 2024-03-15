@@ -17,6 +17,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	breathCollider = new BoxCollider({ 300,200,400 });
 
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
+	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
 	
 
 	//alduinCollider3 = new CapsuleCollider();
@@ -96,7 +97,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	
 	//화염 공격
 
-
+	GetClip(INHALE)->SetEvent(bind(&alduin::InhaleStart, this), 0.0f);
 	GetClip(INHALE)->SetEvent(bind(&alduin::Inhale, this), 0.9f);
 
 	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.0f);
@@ -122,6 +123,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 alduin::~alduin()
 {
+	delete BreathParticle;
+	delete DeathParticle;
 	delete breathCollider;
 	delete collider_B;
 	delete collider_L;
@@ -152,7 +155,7 @@ void alduin::Update()
 	TailCollider->UpdateWorld();
 
 	CoolingTime += DELTA;
-
+	BreathParticle->Update();
 	DeathParticle->Update();
 
 	
@@ -229,6 +232,7 @@ void alduin::Render()
 	collider_L->Render();
 	collider_B->Render();
 	breathCollider->Render();
+	BreathParticle->Render();
 	DeathParticle->Render();
 
 	if (curState != DEATH)
@@ -329,7 +333,17 @@ void alduin::Inhale()
 {
 
 	SetState(BREATH);
+	
 
+}
+
+void alduin::InhaleStart()
+{
+	tempPos = Pos();
+	tempPos += {0, 0, -30};
+	tempRot = Rot();
+
+	BreathParticle->Play(tempPos, tempRot);
 }
 
 
@@ -338,6 +352,8 @@ void alduin::Inhale()
 void alduin::BreathAttack()
 {
 	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
+
+	
 
 	breathCollider->SetActive(true);
 

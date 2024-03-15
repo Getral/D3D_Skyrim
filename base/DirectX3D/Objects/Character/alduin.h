@@ -53,6 +53,7 @@ private:
 	void Move();
 
 	void Inhale();
+	void InhaleStart();
 	void BreathAttack();
 
 	void Attacking();
@@ -87,7 +88,9 @@ private:
 	Transform* FireAttackTransform;
 	Player* target;
 	Vector3 tempPos;
+	Vector3 tempRot;
 	ParticleSystem* DeathParticle;
+	ParticleSystem* BreathParticle;
 
 	UINT nodeIndex = 0;
 
