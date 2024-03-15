@@ -82,6 +82,8 @@ private:
 
 	void EndHeadShake();
 
+	void Death();
+
 	void SetEvent(int clip, Event event, float timeRatio);
 	void ExecuteEvent();
 
@@ -91,6 +93,7 @@ private:
 private:
 	float rotSpeed = 4.0f;
 	float attackDelay = 0.0f;
+
 	bool isHit = false;
 	bool isSleep = true;
 	bool isWakeUp = false;

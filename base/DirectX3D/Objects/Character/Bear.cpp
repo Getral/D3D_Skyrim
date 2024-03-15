@@ -62,6 +62,8 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 
 	SetEvent(HEADSHAKE, bind(&Bear::EndHeadShake, this), 0.95f);
 
+	SetEvent(DEATH, bind(&Bear::Death, this), 0.9f);
+
 	FOR(totalEvent.size())
 		eventIters[i] = totalEvent[i].begin();
 
@@ -82,27 +84,23 @@ Bear::~Bear()
 
 void Bear::Update()
 {
-	Enemy::Update();
+	if (transform->Active())
+	{
+		Enemy::Update();
 
-	Behavior();
-	ExecuteEvent();
+		Behavior();
+		ExecuteEvent();
+	}
 }
 
 void Bear::Render()
 {
-	Enemy::Render();
-	//for (CapsuleCollider* collider : colliders)
-		//collider->Render();
-	//attackCollider->Render();
-	//trackCollider->Render();
+	if (transform->Active())
+		Enemy::Render();
 }
 
 void Bear::GUIRender()
 {
-	//Enemy::GUIRender();
-	//ImGui::Text("Is Wake Up : %d", (int)isWakeUp);
-	//ImGui::Text("Is Sleep : %d", (int)isSleep);
-	//ImGui::Text("Is Hit : %d", (int)isHit);
 }
 
 void Bear::SetState(State state)
@@ -192,17 +190,31 @@ void Bear::EndHit()
 
 void Bear::EndHeadShake()
 {
+	SetState(COMBATIDLE);
+	attackDelay = 3.0f;
 	isHit = false;
+}
+
+void Bear::Death()
+{
+	Enemy::Death();
 }
 
 void Bear::Behavior()
 {
+	if (this->status.curHp <= 0)
+	{
+		this->status.curHp = 0;
+		SetState(DEATH);
+	}
+
 	for (CapsuleCollider* collider : colliders)
 	{
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
 		{
 			if (!isHit)
 			{
+				this->status.curHp -= playerData->GetStatus().atk;
 				SetState(HIT);
 				break;
 			}
