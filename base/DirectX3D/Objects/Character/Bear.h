@@ -75,6 +75,8 @@ private:
 	void EndRun();
 
 	void StartAttack();
+	void StartAttackTrigger();
+	void EndAttackTrigger();
 	void EndAttack();
 
 	void StartHit();
@@ -93,10 +95,12 @@ private:
 private:
 	float rotSpeed = 4.0f;
 	float attackDelay = 0.0f;
+	float hitDelay = 0.0f;
 
 	bool isHit = false;
 	bool isSleep = true;
 	bool isWakeUp = false;
+	bool attackTrigger = false;
 
 	State curState;
 	UINT attackState = 0;

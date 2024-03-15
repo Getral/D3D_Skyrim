@@ -159,12 +159,21 @@ void Wolf::Behavior()
 		SetState(DEATH);
 	}
 
+	if (hitDelay > 0.0f)
+	{
+		hitDelay -= DELTA;
+		if (hitDelay <= 0.0f)
+			hitDelay = 0.0f;
+	}
+
 	for (CapsuleCollider* collider : colliders)
 	{
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
 		{
 			this->status.curHp -= playerData->GetStatus().atk;
-			SetState(HIT);
+			hitDelay = 1.0f;
+			if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+				SetState(HIT);
 			break;
 		}
 	}
@@ -309,7 +318,7 @@ void Wolf::EndAttackTrigger()
 
 void Wolf::EndAttack()
 {
-	SetState(COMBATIDLE);
+	SetState(RUN);
 }
 
 void Wolf::EndCombatIdle()

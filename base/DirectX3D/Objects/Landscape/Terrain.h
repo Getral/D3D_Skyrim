@@ -8,7 +8,7 @@ private:
 
 public:
     Terrain(Vector2 size = { 10, 10 });
-    Terrain(wstring mapFile);
+    Terrain(wstring mapFile, wstring heightmap);
     ~Terrain();
 
     void Render();
