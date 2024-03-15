@@ -10,9 +10,10 @@ ItemStatus::ItemStatus()
 
 
 	armors.push_back(new Armor("dragonhelmet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmet, 22));
-	armors.push_back(new Armor("dragoncuirass", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmet, 22));
-	armors.push_back(new Armor("dragongauntlet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmet, 22));
-	armors.push_back(new Armor("dragonboots", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmet, 22));
+	armors.push_back(new Armor("dragoncuirass", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::cuirass, 22));
+	armors.push_back(new Armor("dragongauntlet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::gauntlet, 22));
+	armors.push_back(new Armor("dragonboots", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::boots, 22));
+	armors.push_back(new Armor("dragonshield", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::shield, 22));
 
 	weapons.push_back(new Weapon("irondagger", Item::WEAPON, 30, 31, Weapon::IRON ,Weapon::dagger, 32));
 	weapons.push_back(new Weapon("ebonydagger", Item::WEAPON, 40, 41, Weapon::EBONY ,Weapon::dagger, 42));

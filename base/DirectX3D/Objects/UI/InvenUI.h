@@ -64,16 +64,10 @@ private:
 	vector<class Misc*> inven_misces;
 
 	vector<class Armor*> temp_armors;
-
 	vector<Armor*> player_armors;
-	Armor* player_helmet;
-	Armor* player_cuirass;
-	Armor* player_gauntlet;
-	Armor* player_boots;
 	Armor* player_shield;
 
 	Weapon* player_weapon;
-
 	Arrow* player_arrow;
 
 

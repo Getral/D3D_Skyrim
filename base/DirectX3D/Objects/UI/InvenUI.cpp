@@ -88,12 +88,7 @@ InvenUI::InvenUI()
 		player_armors.push_back(new Armor("none", -1, -1, -1, -1, -1, 0));
 	}
 
-	player_helmet = new Armor("none", -1, -1, -1, -1, -1, 0);
-	player_cuirass = new Armor("none", -1, -1, -1, -1, -1, 0);
-	player_gauntlet = new Armor("none", -1, -1, -1, -1, -1, 0);
-	player_boots = new Armor("none", -1, -1, -1, -1, -1, 0);
 	player_shield = new Armor("none", -1, -1, -1, -1, -1, 0);
-
 	player_weapon = new Weapon("none", -1, -1, -1, -1, -1, 0);
 	player_arrow = new Arrow("none", -1, -1, -1, -1, -1);
 }
@@ -126,25 +121,25 @@ void InvenUI::Update(Player* player)
 	SelectedBarPosing();
 	
 	if (KEY_DOWN('1'))
-		AddItem("ironarrow");
+		AddItem("ironhelmet");
 	if (KEY_DOWN('2'))
-		AddItem("dragonbonearrow");
+		AddItem("ironcuirass");
 	if (KEY_DOWN('3'))
 		AddItem("irongauntlet");
 	if (KEY_DOWN('4'))
 		AddItem("ironboots");
 	if (KEY_DOWN('5'))
-		AddItem("dragonhelmet");
+		AddItem("ironshield");
 	if (KEY_DOWN('6'))
-		AddItem("dragoncuirass");
+		AddItem("dragonshield");
 	if (KEY_DOWN('7'))
 		AddItem("dragongauntlet");
 	if (KEY_DOWN('8'))
 		AddItem("dragonboots");
 	if (KEY_DOWN('9'))
-		UseItem(player, "ironarrow");
+		UseItem(player, "ironhelmet");
 	if (KEY_DOWN('0'))
-		UseItem(player, "dragonbonearrow");
+		UseItem(player, "ironshield");
 }
 
 void InvenUI::Render()
@@ -184,39 +179,47 @@ void InvenUI::Render()
 
 void InvenUI::GUIRender()
 {
+	ImGui::Text("player helmet");
 	ImGui::Text(player_armors[0]->GetStatus().name.c_str());
+	ImGui::Text("player cuirass");
 	ImGui::Text(player_armors[1]->GetStatus().name.c_str());
+	ImGui::Text("player gauntlet");
 	ImGui::Text(player_armors[2]->GetStatus().name.c_str());
+	ImGui::Text("player boots");
 	ImGui::Text(player_armors[3]->GetStatus().name.c_str());
+	ImGui::Text("player shield");
 	ImGui::Text(player_shield->GetStatus().name.c_str());
+	ImGui::Text("player weapon");
 	ImGui::Text(player_weapon->GetStatus().name.c_str());
+	ImGui::Text("player arrow");
 	ImGui::Text(player_arrow->GetStatus().name.c_str());
 
 	if (inven_arrows.size() > 1)
 	{
+		ImGui::Text("inven arrow");
 		ImGui::Text(inven_arrows[0]->GetStatus().name.c_str());
 		ImGui::Text(inven_arrows[1]->GetStatus().name.c_str());
 	}
-
-	ImGui::Text("size : %d", inven_arrows.size());
 
 	if (inven_arrows.size() > 1)
 	{
 		ImGui::Text("ironarrow count : %d", inven_arrows[0]->GetCount());
 		ImGui::Text("dragonarrow count : %d", inven_arrows[1]->GetCount());
-		//ImGui::Text("inven_sp count : %d", inven_potions[1]->GetCount());
-		//ImGui::Text("inven_sp type : %d", inven_potions[1]->GetPotionType());
 	}
 
-	//if (inven_potions.size() > 1)
-	//{
-	//	ImGui::Text("inven_hp count : %d", inven_potions[0]->GetCount());
-	//	ImGui::Text("inven_hp type : %d", inven_potions[0]->GetPotionType());
-	//	ImGui::Text("inven_sp count : %d", inven_potions[1]->GetCount());
-	//	ImGui::Text("inven_sp type : %d", inven_potions[1]->GetPotionType());
-	//}
+	if (inven_potions.size() > 1)
+	{
+		ImGui::Text("inven_hp count : %d", inven_potions[0]->GetCount());
+		ImGui::Text("inven_hp type : %d", inven_potions[0]->GetPotionType());
+		ImGui::Text("inven_sp count : %d", inven_potions[1]->GetCount());
+		ImGui::Text("inven_sp type : %d", inven_potions[1]->GetPotionType());
+	}
 
-	
+	if (inven_misces.size() > 1)
+	{
+		ImGui::Text(inven_misces[0]->GetStatus().name.c_str());
+		ImGui::Text("misc count : %d", inven_misces[0]->GetCount());
+	}
 }
 
 void InvenUI::SelectedBarPosing()
@@ -337,6 +340,7 @@ void InvenUI::AddItem(string inname)
 	if (itemstatus->GetItem(inname).type == Item::ARMOR)
 	{
 		inven_armors.push_back(itemstatus->GetArmor(inname));
+		// Çï¸ä,°©¿Ê,°ÇÆ²·¿,ºÎÃ÷ ¼øÀ¸·Î Á¤·ÄÇÊ¿ä
 		//FOR(inven_armors.size())
 		//{
 		//	
@@ -395,21 +399,36 @@ void InvenUI::UseItem(Player* player, string inname)
 		{
 			if (inven_armors[i]->GetStatus().name == inname)
 			{
-				for (int j = 0; j < inven_armors.size(); j++)
+				if (inven_armors[i]->GetArmorType() == Armor::shield)
 				{
-					if (inven_armors[i]->GetArmorClass() == inven_armors[j]->GetArmorClass())
-					{
-						if (inven_armors[j]->GetArmorType() == Armor::helmet)
-							temp_armors.push_back(inven_armors[j]);
-						else if (inven_armors[j]->GetArmorType() == Armor::cuirass)
-							temp_armors.push_back(inven_armors[j]);
-						else if (inven_armors[j]->GetArmorType() == Armor::gauntlet)
-							temp_armors.push_back(inven_armors[j]);
-						else if (inven_armors[j]->GetArmorType() == Armor::boots)
-							temp_armors.push_back(inven_armors[j]);
-					}				
+					player_shield->ChangeEquipState();
+					inven_armors[i]->ChangeEquipState();
+
+					player->GetStatus().atk -= player_shield->GetDef();
+					player->GetStatus().atk += inven_armors[i]->GetDef();
+
+					player_shield = inven_armors[i];
+					return;
 				}
 
+				else
+				{
+					for (int j = 0; j < inven_armors.size(); j++)
+					{
+						if (inven_armors[i]->GetArmorClass() == inven_armors[j]->GetArmorClass())
+						{
+
+							if (inven_armors[j]->GetArmorType() == Armor::helmet)
+								temp_armors.push_back(inven_armors[j]);
+							else if (inven_armors[j]->GetArmorType() == Armor::cuirass)
+								temp_armors.push_back(inven_armors[j]);
+							else if (inven_armors[j]->GetArmorType() == Armor::gauntlet)
+								temp_armors.push_back(inven_armors[j]);
+							else if (inven_armors[j]->GetArmorType() == Armor::boots)
+								temp_armors.push_back(inven_armors[j]);
+						}
+					}
+				}
 				
 				if (temp_armors.size() == 4)
 				{
