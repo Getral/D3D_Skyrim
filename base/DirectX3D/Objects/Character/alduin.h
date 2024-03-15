@@ -28,6 +28,7 @@ private:
 		LAND,
 		LAND_VERTICAL,
 		DIVE,
+		HIT,
 		DEATH,
 		TURN_L,
 		TURN_R
@@ -52,7 +53,6 @@ private:
 	void Move();
 
 	void Inhale();
-	void FireBallAttack();
 	void BreathAttack();
 
 	void Attacking();
@@ -60,7 +60,9 @@ private:
 	void EndTakeoff();
 	void beginAproach();
 	void EndAction();
+	void HitDelayEnd();
 
+	void hit();
 	void Dying();
 	void Dead();
 
@@ -80,7 +82,6 @@ private:
 	CapsuleCollider* collider_L;
 	CapsuleCollider* collider_B;
 	BoxCollider* breathCollider;
-	SphereCollider* fBallCollider;
 
 	Transform* transform;
 	Transform* FireAttackTransform;
@@ -94,7 +95,8 @@ private:
 	float rotSpeed = 0.25;
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
-	float CoolingTime = 0;
+	float CoolingTime = 1.0f;
+	float HitDelay = 1.0f;
 	float fireBallDir = 0.0f;
 
 	bool isAscending = false;
