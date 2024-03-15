@@ -1,10 +1,10 @@
 #pragma once
 
-class BladeSword : public Model
+class EbonyQuiver : public Model
 {
 public:
-    BladeSword();
-    ~BladeSword();
+    EbonyQuiver();
+    ~EbonyQuiver();
 
     void Update();
     void Render();
@@ -16,9 +16,7 @@ public:
     void ColliderManager(bool isWeaponColl);
 
 private:
+    Model* ebonyquiver;
     BoxCollider* collider;
-
-    //bool isWeapon = true;   // 수정할려고 true로 설정해둠 후에 삭제
-    bool isWeapon = false;
-
+    bool isWeapon = true;
 };

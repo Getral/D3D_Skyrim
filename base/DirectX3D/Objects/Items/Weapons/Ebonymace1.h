@@ -1,10 +1,9 @@
 #pragma once
-
-class BladeSword : public Model
+class EbonyMace1 :public Model
 {
 public:
-    BladeSword();
-    ~BladeSword();
+    EbonyMace1();
+    ~EbonyMace1();
 
     void Update();
     void Render();
@@ -16,9 +15,8 @@ public:
     void ColliderManager(bool isWeaponColl);
 
 private:
+    Model* ebonymace1;
     BoxCollider* collider;
-
-    //bool isWeapon = true;   // 수정할려고 true로 설정해둠 후에 삭제
-    bool isWeapon = false;
-
+    bool isWeapon = true;
 };
+
