@@ -273,7 +273,7 @@ void alduin::Move()
 		return;
 	}
 
-	if (velocity.Length() > 300 && Pos().y < 1)
+	if (velocity.Length() > 250 && Pos().y < 1)
 	{
 		SetState(TAKEOFF);
 
@@ -294,7 +294,7 @@ void alduin::Move()
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
-		if (Pos().y < 1.0f && velocity.Length() < 300)
+		if (Pos().y < 1.0f && velocity.Length() < 250)
 		{
 			SetState(TURN_R);
 			moveSpeed = 0.0f;
@@ -305,7 +305,7 @@ void alduin::Move()
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
-		if (Pos().y < 1.0f && velocity.Length() < 300)
+		if (Pos().y < 1.0f && velocity.Length() < 250)
 		{
 			SetState(TURN_L);
 			moveSpeed = 0.0f;
@@ -315,7 +315,7 @@ void alduin::Move()
 	else if (cross.y >= -20 && cross.y <= 20 && !isAttacking) //반대의 경우
 	{
 
-		if (Pos().y < 1.0f && velocity.Length() < 350)
+		if (Pos().y < 1.0f && velocity.Length() < 250)
 		{
 			SetState(FORWARD);
 			moveSpeed = 15.0f;
