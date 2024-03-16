@@ -65,6 +65,11 @@ InvenUI::InvenUI()
 	selected_bar->Pos() = { CENTER_X - 495,CENTER_Y + 250};
 	selected_bar->GetMaterial()->SetShader(L"UI/EditAlpha2.hlsl");
 
+	selectedItem_bar = new Quad(L"Textures/UI/selectedItem_bar.png");
+	selectedItem_bar->Pos() = { CENTER_X - 250,WIN_HEIGHT - 105 };
+	selectedItem_bar->Scale() *= 0.725f;
+	
+
 	FOR(5)
 	{
 		equiped_icon_armor.push_back(new Quad(L"Textures/UI/Equiped_Icon.png"));
@@ -110,6 +115,7 @@ void InvenUI::Update(Player* player)
 	title_misc->UpdateWorld();
 
 	selected_bar->UpdateWorld();
+	selectedItem_bar->UpdateWorld();
 
 	for(Quad* icon : equiped_icon_armor)
 		icon->UpdateWorld();
@@ -118,18 +124,29 @@ void InvenUI::Update(Player* player)
 	item_detail_frame->UpdateWorld();
 	detailedframebar->UpdateWorld();
 
-	SelectedBarPosing();
+	if(KEY_DOWN(VK_RIGHT))
+		isSelectingItem = true;
+	if (KEY_DOWN(VK_LEFT))
+	{
+		selectedItemNum = 0;
+		isSelectingItem = false;
+	}
+
+	
+	SelectedItemPosing();
+	
+	SelectedTitlePosing();
 	
 	if (KEY_DOWN('1'))
 		AddItem("ironhelmet");
 	if (KEY_DOWN('2'))
-		AddItem("ironcuirass");
+		AddItem("irondagger");
 	if (KEY_DOWN('3'))
-		AddItem("irongauntlet");
+		AddItem("hp_potion");
 	if (KEY_DOWN('4'))
-		AddItem("ironboots");
+		AddItem("ironarrow");
 	if (KEY_DOWN('5'))
-		AddItem("ironshield");
+		AddItem("misc1");
 	if (KEY_DOWN('6'))
 		AddItem("dragonshield");
 	if (KEY_DOWN('7'))
@@ -157,6 +174,8 @@ void InvenUI::Render()
 	title_misc->Render();
 
 	selected_bar->Render();
+	if(isSelectingItem)
+		selectedItem_bar->Render();
 
 	for (Quad* icon : equiped_icon_armor)
 		icon->Render();
@@ -170,6 +189,8 @@ void InvenUI::Render()
 		Font::Get()->RenderText("Weight",   { item_detail_frame->Pos().x - 40, item_detail_frame->Pos().y - 30 });
 		Font::Get()->RenderText("Value",    { item_detail_frame->Pos().x + 60, item_detail_frame->Pos().y - 30 });
 	}
+
+
 	
 	RenderTitle();
 
@@ -221,20 +242,27 @@ void InvenUI::GUIRender()
 		ImGui::Text(inven_misces[0]->GetStatus().name.c_str());
 		ImGui::Text("misc count : %d", inven_misces[0]->GetCount());
 	}
+
+	ImGui::Text("bool : %d", isSelectingItem);
+	ImGui::Text("size : %d", title_inven_size);
 }
 
 // 아이템 타입 선택
-void InvenUI::SelectedBarPosing()
+void InvenUI::SelectedTitlePosing()
 {
 	if (selectedTitleNum < InvenUI::ALL)
 		selectedTitleNum = InvenUI::ALL;
 	if (selectedTitleNum > InvenUI::MISC)
 		selectedTitleNum = InvenUI::MISC;
 
-	if (KEY_DOWN(VK_DOWN))
-		selectedTitleNum++;
-	if (KEY_DOWN(VK_UP))
-		selectedTitleNum--;
+	if (isSelectingItem == false)
+	{
+		if (KEY_DOWN(VK_DOWN))
+			selectedTitleNum++;
+		if (KEY_DOWN(VK_UP))
+			selectedTitleNum--;
+	}
+	
 
 	switch (selectedTitleNum)
 	{
@@ -273,6 +301,62 @@ void InvenUI::SelectedBarPosing()
 	}
 
 
+}
+void InvenUI::SelectedItemPosing()
+{
+	if (selectedItemNum < 0)
+		selectedItemNum = 0;
+	
+	if (selectedItemNum > title_inven_size - 1)
+		selectedItemNum = title_inven_size - 1;
+
+	if (isSelectingItem == true)
+	{
+		if (KEY_DOWN(VK_DOWN))
+			selectedItemNum++;
+		if (KEY_DOWN(VK_UP))
+			selectedItemNum--;
+	}
+	
+
+	//if (selectedTitleNum == ALL)
+	//{
+	//	title_inven_size = inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size() + inven_misces.size();
+	//	selectedItem_bar->Pos().y = WIN_HEIGHT - 105 - (20 * selectedItemNum);
+	//}
+
+	switch (selectedTitleNum)
+	{
+	case InvenUI::ALL:
+		title_inven_size = inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size() + inven_misces.size();	
+		break;
+	case InvenUI::ARMOR:
+		title_inven_size = inven_armors.size();
+		break;
+	case InvenUI::ARMOR_IRON:
+		break;
+	case InvenUI::ARMOR_DRAGONBONE:
+		break;
+	case InvenUI::WEAPON:
+		title_inven_size = inven_weapons.size();
+		break;
+	case InvenUI::WEAPON_IRON:
+		break;
+	case InvenUI::WEAPON_EBONY:
+		break;
+	case InvenUI::ARROW:
+		title_inven_size = inven_arrows.size();
+		break;
+	case InvenUI::POTION:
+		title_inven_size = inven_potions.size();
+		break;
+	case InvenUI::MISC:
+		title_inven_size = inven_misces.size();
+		break;
+	default:
+		break;
+	}
+	selectedItem_bar->Pos().y = WIN_HEIGHT - 105 - (20 * selectedItemNum);
 }
 // 아이템 타입 글씨 렌더
 void InvenUI::RenderTitle()

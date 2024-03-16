@@ -23,7 +23,9 @@ public:
 	void Render();
 	void GUIRender();
 
-	void SelectedBarPosing();
+	void SelectedTitlePosing();
+	void SelectedItemPosing();
+	
 	
 	void RenderTitle();
 	void AddItem(string inname);
@@ -44,6 +46,8 @@ private:
 	Quad* item_detail_frame;
 
 	Quad* selected_bar;
+	Quad* selectedItem_bar;
+	int title_inven_size;
 	vector<Quad*> equiped_icon_armor;
 
 	Quad* equiped_icon_weapon;
@@ -56,6 +60,8 @@ private:
 	Quad* title_misc;
 	
 	int selectedTitleNum = 0;
+	int selectedItemNum = 0;
+	bool isSelectingItem = false;
 
 	vector<class Armor*> inven_armors;
 	vector<class Weapon*> inven_weapons;
