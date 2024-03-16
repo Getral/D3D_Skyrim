@@ -117,6 +117,8 @@ void InvenUI::Update(Player* player)
 	selected_bar->UpdateWorld();
 	selectedItem_bar->UpdateWorld();
 
+	
+
 	for(Quad* icon : equiped_icon_armor)
 		icon->UpdateWorld();
 	equiped_icon_weapon->UpdateWorld();
@@ -137,12 +139,15 @@ void InvenUI::Update(Player* player)
 	
 	SelectedTitlePosing();
 	
+	if (isSelectingItem && KEY_DOWN(VK_RETURN))
+		UseSelectedItem(player);
+
 	if (KEY_DOWN('1'))
 		AddItem("ironhelmet");
 	if (KEY_DOWN('2'))
 		AddItem("irondagger");
 	if (KEY_DOWN('3'))
-		AddItem("hp_potion");
+		AddItem("ebonydagger");
 	if (KEY_DOWN('4'))
 		AddItem("ironarrow");
 	if (KEY_DOWN('5'))
@@ -156,7 +161,7 @@ void InvenUI::Update(Player* player)
 	if (KEY_DOWN('9'))
 		UseItem(player, "ironhelmet");
 	if (KEY_DOWN('0'))
-		UseItem(player, "ironshield");
+		UseItem(player, "irondagger");
 }
 
 void InvenUI::Render()
@@ -243,8 +248,11 @@ void InvenUI::GUIRender()
 		ImGui::Text("misc count : %d", inven_misces[0]->GetCount());
 	}
 
-	ImGui::Text("bool : %d", isSelectingItem);
-	ImGui::Text("size : %d", title_inven_size);
+	ImGui::Text("enter bool : %d", KEY_PRESS(VK_RETURN));
+	ImGui::Text("isSelectingItem bool : %d", isSelectingItem);
+	ImGui::Text("selectedItemNum bool : %d", selectedItemNum);
+	ImGui::Text("title_inven_size : %d", title_inven_size);
+	ImGui::Text("title_inven_size : %d", a);
 }
 
 // 아이템 타입 선택
@@ -357,6 +365,48 @@ void InvenUI::SelectedItemPosing()
 		break;
 	}
 	selectedItem_bar->Pos().y = WIN_HEIGHT - 105 - (20 * selectedItemNum);
+}
+
+void InvenUI::UseSelectedItem(Player* player)
+{
+	switch (selectedTitleNum)
+	{
+	case InvenUI::ALL:
+		if (selectedItemNum < inven_armors.size())
+			UseItem(player, inven_armors[selectedItemNum]->GetStatus().name);
+
+		if (selectedItemNum >= inven_armors.size() && selectedItemNum < inven_armors.size() + inven_weapons.size())
+			UseItem(player, inven_weapons[selectedItemNum - inven_armors.size()]->GetStatus().name);
+		break;
+	case InvenUI::ARMOR:
+		UseItem(player, inven_armors[selectedItemNum]->GetStatus().name);
+		break;
+	case InvenUI::ARMOR_IRON:
+		break;
+	case InvenUI::ARMOR_DRAGONBONE:
+		break;
+	case InvenUI::WEAPON:
+		UseItem(player, inven_weapons[selectedItemNum]->GetStatus().name);
+		break;
+	case InvenUI::WEAPON_IRON:
+		break;
+	case InvenUI::WEAPON_EBONY:
+		break;
+	case InvenUI::ARROW:
+		UseItem(player, inven_arrows[selectedItemNum]->GetStatus().name);
+		break;
+	case InvenUI::POTION:
+		FOR(title_inven_size)
+		{
+			UseItem(player, inven_potions[selectedItemNum]->GetStatus().name);
+		}
+		break;
+	case InvenUI::MISC:
+		break;
+	default:
+		break;
+	}
+
 }
 // 아이템 타입 글씨 렌더
 void InvenUI::RenderTitle()

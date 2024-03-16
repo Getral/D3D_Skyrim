@@ -25,6 +25,8 @@ public:
 
 	void SelectedTitlePosing();
 	void SelectedItemPosing();
+
+	void UseSelectedItem(Player* player);
 	
 	
 	void RenderTitle();
@@ -78,5 +80,7 @@ private:
 
 
 	class ItemStatus* itemstatus;
+
+	int a = 0;
 };
 
