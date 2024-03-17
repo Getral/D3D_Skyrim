@@ -19,11 +19,11 @@ ModelExportScene::ModelExportScene()
     exporter->ExportClip(clipName);
     delete exporter;
 
-    //clipName = "male_1hm_unequip";
-    //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportClip(clipName);
-    //delete exporter;
+    clipName = "wolf_death";
+    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    exporter = new ModelExporter(name, file);
+    exporter->ExportClip(clipName);
+    delete exporter;
 
     //clipName = "male_2hm_equip";
     //file = "Models/Animations/" + name + "/" + clipName + ".fbx";

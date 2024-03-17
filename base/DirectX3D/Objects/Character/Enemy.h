@@ -20,6 +20,7 @@ public:
 
 protected:
 	void Init();
+	void Death();
 
 	virtual void Track();
 	virtual void SetCollidersParent();

@@ -4,11 +4,11 @@ class Terrain : public GameObject
 {
 private:
     typedef VertexUVNormalTangent VertexType;
-    const float MAX_HEIGHT = 20.0f;
+    const float MAX_HEIGHT = 256.0f;
 
 public:
     Terrain(Vector2 size = { 10, 10 });
-    Terrain(wstring mapFile);
+    Terrain(wstring mapFile, wstring heightmap);
     ~Terrain();
 
     void Render();

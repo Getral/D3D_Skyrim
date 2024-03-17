@@ -16,7 +16,8 @@ private:
 		ATTACK2,
 		ATTACK3,
 		ATTACK4,
-		HIT
+		HIT,
+		DEATH
 	};
 
 	enum Collider
@@ -59,6 +60,8 @@ public:
 private:
 	void SetRandIdleRot();
 
+	void Death();
+
 	void Behavior();
 	void Walk();
 
@@ -69,6 +72,8 @@ private:
 	void StartRun();
 
 	void StartAttack();
+	void StartAttackTrigger();
+	void EndAttackTrigger();
 	void EndAttack();
 
 	void EndCombatIdle();
@@ -95,6 +100,7 @@ private:
 
 	bool isTracking = false;
 	bool isHit = false;
+	bool attackTrigger = false;
 
 	int atkType = 0;
 };

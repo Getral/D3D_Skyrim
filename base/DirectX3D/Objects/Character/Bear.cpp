@@ -49,18 +49,26 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	SetEvent(RUN, bind(&Bear::EndRun, this), 0.9f);
 
 	SetEvent(ATTACK, bind(&Bear::StartAttack, this), 0.0f);
+	SetEvent(ATTACK, bind(&Bear::StartAttackTrigger, this), 0.4f);
+	SetEvent(ATTACK, bind(&Bear::EndAttackTrigger, this), 0.6f);
 	SetEvent(ATTACK, bind(&Bear::EndAttack, this), 0.95f);
 
 	SetEvent(ATTACK2, bind(&Bear::StartAttack, this), 0.0f);
+	SetEvent(ATTACK2, bind(&Bear::StartAttackTrigger, this), 0.4f);
+	SetEvent(ATTACK2, bind(&Bear::EndAttackTrigger, this), 0.6f);
 	SetEvent(ATTACK2, bind(&Bear::EndAttack, this), 0.95f);
 
 	SetEvent(ATTACK3, bind(&Bear::StartAttack, this), 0.0f);
+	SetEvent(ATTACK3, bind(&Bear::StartAttackTrigger, this), 0.4f);
+	SetEvent(ATTACK3, bind(&Bear::EndAttackTrigger, this), 0.6f);
 	SetEvent(ATTACK3, bind(&Bear::EndAttack, this), 0.95f);
 
 	SetEvent(HIT, bind(&Bear::StartHit, this), 0.0f);
 	SetEvent(HIT, bind(&Bear::EndHit, this), 0.95f);
 
 	SetEvent(HEADSHAKE, bind(&Bear::EndHeadShake, this), 0.95f);
+
+	SetEvent(DEATH, bind(&Bear::Death, this), 0.9f);
 
 	FOR(totalEvent.size())
 		eventIters[i] = totalEvent[i].begin();
@@ -82,27 +90,23 @@ Bear::~Bear()
 
 void Bear::Update()
 {
-	Enemy::Update();
+	if (transform->Active())
+	{
+		Enemy::Update();
 
-	Behavior();
-	ExecuteEvent();
+		Behavior();
+		ExecuteEvent();
+	}
 }
 
 void Bear::Render()
 {
-	Enemy::Render();
-	//for (CapsuleCollider* collider : colliders)
-		//collider->Render();
-	//attackCollider->Render();
-	//trackCollider->Render();
+	if (transform->Active())
+		Enemy::Render();
 }
 
 void Bear::GUIRender()
 {
-	//Enemy::GUIRender();
-	//ImGui::Text("Is Wake Up : %d", (int)isWakeUp);
-	//ImGui::Text("Is Sleep : %d", (int)isSleep);
-	//ImGui::Text("Is Hit : %d", (int)isHit);
 }
 
 void Bear::SetState(State state)
@@ -174,9 +178,19 @@ void Bear::StartAttack()
 	attackDelay = 3.0f;
 }
 
+void Bear::StartAttackTrigger()
+{
+	attackTrigger = true;
+}
+
+void Bear::EndAttackTrigger()
+{
+	attackTrigger = false;
+}
+
 void Bear::EndAttack()
 {
-	SetState(COMBATIDLE);
+	SetState(RUN);
 }
 
 void Bear::StartHit()
@@ -192,18 +206,41 @@ void Bear::EndHit()
 
 void Bear::EndHeadShake()
 {
+	SetState(COMBATIDLE);
+	attackDelay = 1.0f;
 	isHit = false;
+}
+
+void Bear::Death()
+{
+	Enemy::Death();
 }
 
 void Bear::Behavior()
 {
+	if (this->status.curHp <= 0)
+	{
+		this->status.curHp = 0;
+		SetState(DEATH);
+	}
+
+	if (hitDelay > 0.0f)
+	{
+		hitDelay -= DELTA;
+		if (hitDelay <= 0.0f)
+			hitDelay = 0.0f;
+	}
+
 	for (CapsuleCollider* collider : colliders)
 	{
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
 		{
-			if (!isHit)
+			if (hitDelay == 0.0f)
 			{
-				SetState(HIT);
+				this->status.curHp -= playerData->GetStatus().atk;
+				hitDelay = 1.0f;
+				if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+					SetState(HIT);
 				break;
 			}
 		}
@@ -212,8 +249,7 @@ void Bear::Behavior()
 
 	for (CapsuleCollider* collider : colliders)
 	{
-		if (collider->IsCollision(playerData->GetCollier()) && 
-			(curState == ATTACK || curState == ATTACK2 || curState == ATTACK3))
+		if (collider->IsCollision(playerData->GetCollier()) && attackTrigger)
 		{
 			playerData->SetAction(Player::OHM_HIT_MEDIUM);
 			playerData->SetIsHit(true);
@@ -245,7 +281,7 @@ void Bear::Behavior()
 			attackState++;
 			break;
 		case 2:
-			SetState(ATTACK4);
+			SetState(ATTACK3);
 			attackState = 0;
 			break;
 		}
