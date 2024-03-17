@@ -4,7 +4,7 @@ class Terrain : public GameObject
 {
 private:
     typedef VertexUVNormalTangent VertexType;
-    const float MAX_HEIGHT = 256.0f;
+    const float MAX_HEIGHT = 64.0f;
 
 public:
     Terrain(Vector2 size = { 10, 10 });

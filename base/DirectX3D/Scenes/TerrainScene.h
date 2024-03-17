@@ -16,8 +16,8 @@ public:
 	virtual void GUIRender() override;
 
 private:
-	UINT width = 2;
-	UINT height = 2;
+	UINT width = 6;
+	UINT height = 6;
 
 	vector<vector<Terrain*>> terrain;
 	//Terrain* terrain;
