@@ -6,6 +6,9 @@ TerrainScene::TerrainScene()
 	terrain = new Terrain();
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
 	terrain->UpdateWorld();
+
+	farmhouse = new Model("farmhouse");
+	farmhouse->Scale() *= 0.05;
 	//for (int i = 0; i < terrainSize; i++)
 	//{
 	//	vector<Terrain*> tmp;
@@ -32,11 +35,13 @@ TerrainScene::~TerrainScene()
 	//for (vector<Terrain*> terrains : terrain)
 	//	for (Terrain* t : terrains)
 	//		delete t;
+	delete farmhouse;
 	delete terrain;
 }
 
 void TerrainScene::Update()
 {
+	farmhouse->UpdateWorld();
 }
 
 void TerrainScene::PreRender()
@@ -49,6 +54,7 @@ void TerrainScene::Render()
 	//	for (Terrain* t : terrains)
 	//		t->Render();
 	terrain->Render();
+	farmhouse->Render();
 }
 
 void TerrainScene::PostRender()
@@ -57,4 +63,5 @@ void TerrainScene::PostRender()
 
 void TerrainScene::GUIRender()
 {
+	farmhouse->GUIRender();
 }

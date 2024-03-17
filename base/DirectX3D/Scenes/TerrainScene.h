@@ -18,5 +18,6 @@ public:
 private:
 	//vector<vector<Terrain*>> terrain;
 	Terrain* terrain;
+	Model* farmhouse;
 };
 
