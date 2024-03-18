@@ -7,7 +7,7 @@ TerrainScene::TerrainScene()
 	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
 	terrain->UpdateWorld();
 
-	farmhouse = new Model("farmhouse2");
+	farmhouse = new Model("windmill");
 	farmhouse->Scale() *= 0.05;
 	//for (int i = 0; i < terrainSize; i++)
 	//{
