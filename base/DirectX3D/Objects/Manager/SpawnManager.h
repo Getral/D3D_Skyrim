@@ -51,6 +51,7 @@ public:
 	Enemy* GetEnemyWithIndex(int index) { return enemies[index]; }
 	vector<EnemySpawn*> GetMonsterSpawnManager() { return monsterSpawnManager; }
 	EnemySpawn* GetMonsterSpawnManagerWithIndex(int index) { return monsterSpawnManager[index]; }
+	Player* GetPlayerData() { return playerData; }
 
 	vector<ModelAnimatorInstancing*> &GetMonsterInstancing() { return monsterInstancing; }
 	vector<Enemy*> &GetEnemies() { return enemies; }

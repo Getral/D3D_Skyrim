@@ -3,7 +3,7 @@
 
 TerrainScene::TerrainScene()
 {
-	for (int i = 0; i < height; i++)
+	/*for (int i = 0; i < height; i++)
 	{
 		vector<Terrain*> tmp;
 		for (int j = 1; j <= width; j++)
@@ -20,30 +20,31 @@ TerrainScene::TerrainScene()
 		terrain.push_back(tmp);
 	}
 
+	player = SpawnManager::Get()->GetPlayerData();
+
+	float size = 16.0f;
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)
 		{
-			terrain[i][j]->Pos().SetX(-(terrain[i][j]->GetSize().x * (width / 2 - j)) + terrain[i][j]->GetSize().x * 0.5f);
-			terrain[i][j]->Pos().SetY(-200);
-			terrain[i][j]->Pos().SetZ(-(terrain[i][j]->GetSize().y * (height / 2 - i)) + terrain[i][j]->GetSize().y * 0.5f);
+			terrain[i][j]->Scale() *= size;
+			terrain[i][j]->Pos().SetX(terrain[i][j]->GetSize().x * size * 0.5f);
+			terrain[i][j]->Pos().SetY(-3200);
+			terrain[i][j]->Pos().SetZ(terrain[i][j]->GetSize().y * size * 0.5f);
+			terrain[i][j]->Rot().y = XM_PI;
 			terrain[i][j]->UpdateWorld();
 		}
-	}
+	}*/
 }
 
 TerrainScene::~TerrainScene()
 {
-	for (vector<Terrain*> terrains : terrain)
-		for (Terrain* t : terrains)
-			delete t;
+
 }
 
 void TerrainScene::Update()
 {
-	for (vector<Terrain*> terrains : terrain)
-		for (Terrain* t : terrains)
-			t->UpdateWorld();
+	TerrainManager::Get()->Update();
 }
 
 void TerrainScene::PreRender()
@@ -52,9 +53,7 @@ void TerrainScene::PreRender()
 
 void TerrainScene::Render()
 {
-	for (vector<Terrain*> terrains : terrain)
-		for (Terrain* t : terrains)
-			t->Render();
+	TerrainManager::Get()->Render();
 }
 
 void TerrainScene::PostRender()
@@ -63,4 +62,5 @@ void TerrainScene::PostRender()
 
 void TerrainScene::GUIRender()
 {
+	TerrainManager::Get()->GUIRender();
 }

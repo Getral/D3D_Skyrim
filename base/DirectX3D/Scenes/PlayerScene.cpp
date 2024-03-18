@@ -3,10 +3,6 @@
 
 PlayerScene::PlayerScene()
 {
-	terrain = new Terrain();
-	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
-	terrain->UpdateWorld();
-
 	player = new Player();
 
 	aldu = new alduin();
@@ -20,7 +16,6 @@ PlayerScene::PlayerScene()
 PlayerScene::~PlayerScene()
 {
 	delete aldu;
-	delete terrain;
 	delete player;
 }
 
