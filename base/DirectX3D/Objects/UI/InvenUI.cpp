@@ -31,7 +31,6 @@ InvenUI::InvenUI()
 	detailedframebar->Scale().x *= 340.0f;
 	detailedframebar->Scale().y *= 2.5f;
 	
-
 	title_all = new Quad(L"Textures/UI/icon_all.png");
 	title_all->Pos() = {70, 610};
 	title_all->Scale() *= 0.3f;
@@ -69,7 +68,6 @@ InvenUI::InvenUI()
 	selectedItem_bar->Pos() = { CENTER_X - 250,WIN_HEIGHT - 105 };
 	selectedItem_bar->Scale() *= 0.725f;
 	
-
 	FOR(5)
 	{
 		equiped_icon_armor.push_back(new Quad(L"Textures/UI/Equiped_Icon.png"));
@@ -117,8 +115,6 @@ void InvenUI::Update(Player* player)
 	selected_bar->UpdateWorld();
 	selectedItem_bar->UpdateWorld();
 
-	
-
 	for(Quad* icon : equiped_icon_armor)
 		icon->UpdateWorld();
 	equiped_icon_weapon->UpdateWorld();
@@ -134,7 +130,6 @@ void InvenUI::Update(Player* player)
 		isSelectingItem = false;
 	}
 
-	
 	SelectedItemPosing();
 	
 	SelectedTitlePosing();
@@ -195,8 +190,6 @@ void InvenUI::Render()
 		Font::Get()->RenderText("Value",    { item_detail_frame->Pos().x + 60, item_detail_frame->Pos().y - 30 });
 	}
 
-
-	
 	RenderTitle();
 
 	ListingItem();
@@ -326,13 +319,6 @@ void InvenUI::SelectedItemPosing()
 			selectedItemNum--;
 	}
 	
-
-	//if (selectedTitleNum == ALL)
-	//{
-	//	title_inven_size = inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size() + inven_misces.size();
-	//	selectedItem_bar->Pos().y = WIN_HEIGHT - 105 - (20 * selectedItemNum);
-	//}
-
 	switch (selectedTitleNum)
 	{
 	case InvenUI::ALL:

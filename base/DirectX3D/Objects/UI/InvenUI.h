@@ -78,9 +78,7 @@ private:
 	Weapon* player_weapon;
 	Arrow* player_arrow;
 
-
 	class ItemStatus* itemstatus;
 
 	int a = 0;
 };
-
