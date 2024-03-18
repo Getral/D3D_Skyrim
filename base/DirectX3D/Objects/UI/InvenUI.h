@@ -53,6 +53,7 @@ private:
 	vector<Quad*> equiped_icon_armor;
 
 	Quad* equiped_icon_weapon;
+	Quad* equiped_icon_arrow;
 
 	Quad* title_all;
 	Quad* title_weapon;
@@ -75,6 +76,7 @@ private:
 	vector<Armor*> player_armors;
 	Armor* player_shield;
 
+	vector<Weapon*> temp_weapons;
 	Weapon* player_weapon;
 	Arrow* player_arrow;
 

@@ -9,9 +9,11 @@ public:
 	};
 	Arrow(string name, int type, int weight, int value, int arrow_type, int atk);
 
+	int GetType() { return arrow_type; }
 	int GetAtk() { return atk; }
 	int& GetCount() { return count; }
 
+	bool GetEquip() { return isEquiped; }
 	void ChangeEquipState() { isEquiped != isEquiped; }
 private:
 	int arrow_type;
