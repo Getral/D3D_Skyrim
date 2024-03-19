@@ -13,6 +13,8 @@ public:
 	void Render();
 	void GUIRender();
 
+	Terrain* GetTerrain() { return terrain; }
+
 	void SetPlayerData(Player* player) { if (player != playerData) playerData = player; }
 
 private:

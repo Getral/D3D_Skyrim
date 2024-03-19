@@ -23,7 +23,7 @@ private:
 
 	vector<vector<Vector3>> posTable =
 	{
-		{ Vector3(100, 0, 100), Vector3(-200, 0, 300), Vector3(-100, 0, -200) },
+		{ Vector3(100, 2000, 100), Vector3(-200, 2000, 300), Vector3(-100, 2000, -200) },
 		{ Vector3(10, 0, -20), Vector3(-100, 0, 50), Vector3(75, 0, 80) }
 	};
 

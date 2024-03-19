@@ -5,7 +5,9 @@ Player::Player()
 {
 	ModelAnimator::Scale() *= 0.001;
 
-	Pos().y = 200.0f;
+	Pos().x = 1000.0f;
+	Pos().y = 2000.0f;
+	Pos().z = 1000.0f;
 
 	ReadClip("male_1hm_idle");
 	ReadClip("male_jump");

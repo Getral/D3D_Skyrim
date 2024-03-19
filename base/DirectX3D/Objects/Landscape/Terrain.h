@@ -4,7 +4,7 @@ class Terrain : public GameObject
 {
 private:
     typedef VertexUVNormalTangent VertexType;
-    const float MAX_HEIGHT = 128.0f;
+    const float MAX_HEIGHT = 200.0f;
 
     class RayBuffer : public ConstBuffer
     {
@@ -50,7 +50,7 @@ public:
     float GetHeight(const Vector3& pos, Vector3* normal = nullptr);
 
     Vector3 Picking();
-    bool ComputePicking(Vector3& pos, Player* player);
+    bool ComputePicking(Vector3& pos, Transform* transform);
 
     Vector2 GetSize() { return Vector2(width, height); } //가로 세로를 직접 받을 수 있게 추가
 
