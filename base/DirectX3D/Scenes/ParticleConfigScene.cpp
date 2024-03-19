@@ -4,7 +4,7 @@
 ParticleConfigScene::ParticleConfigScene()
 {
     // 구성할 파티클의 파일 이름 정하기 (여기서 값을 수정하고 파티클 만들기)
-    wstring FILENAME = L"Textures/Effect/star.png";
+    wstring FILENAME = L"Textures/Effect/fire.png";
 
     quad = new Quad(Vector2(1, 1));
 
@@ -103,8 +103,8 @@ void ParticleConfigScene::GUIRender()
     ImGui::ColorEdit4("EndColor", (float*)&data.endColor);
     ImGui::SliderFloat3("MinVelocity", (float*)&data.minVelocity, -1, 1);
     ImGui::SliderFloat3("MaxVelocity", (float*)&data.maxVelocity, -1, 1);
-    ImGui::SliderFloat3("MinAcceleration", (float*)&data.minAcceleration, -5, 5);
-    ImGui::SliderFloat3("MaxAcceleration", (float*)&data.maxAcceleration, -5, 5);
+    ImGui::SliderFloat3("MinAcceleration", (float*)&data.minAcceleration, -15, 15);
+    ImGui::SliderFloat3("MaxAcceleration", (float*)&data.maxAcceleration, -15, 15);
     ImGui::SliderFloat3("MinStartScale", (float*)&data.minStartScale, 0, 5);
     ImGui::SliderFloat3("MaxStartScale", (float*)&data.maxStartScale, 0, 5);
     ImGui::SliderFloat3("MinEndScale", (float*)&data.minEndScale, 0, 5);
