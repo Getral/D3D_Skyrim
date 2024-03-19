@@ -9,8 +9,8 @@ PlayerScene::PlayerScene()
 
 	player = new Player();
 
-	aldu = new alduin();
-	aldu->SetTarget(player);
+	//aldu = new alduin();
+	//aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim");
@@ -19,7 +19,7 @@ PlayerScene::PlayerScene()
 
 PlayerScene::~PlayerScene()
 {
-	delete aldu;
+	//delete aldu;
 	delete terrain;
 	delete player;
 }
@@ -27,8 +27,8 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
-	aldu->Update();
-	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
+	//aldu->Update();
+	//UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 }
 
 void PlayerScene::PreRender()
@@ -38,7 +38,7 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
-	aldu->Render();
+	//aldu->Render();
 }
 
 void PlayerScene::PostRender()
@@ -49,5 +49,5 @@ void PlayerScene::PostRender()
 void PlayerScene::GUIRender()
 {
 	player->GUIRender();
-	aldu->GUIRender();
+	//aldu->GUIRender();
 }
