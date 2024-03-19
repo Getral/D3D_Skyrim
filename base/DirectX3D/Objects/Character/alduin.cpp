@@ -462,8 +462,9 @@ void alduin::Attacking2()
 
 }
 
-void alduin::beginTakeoff()
+void alduin::beginTakeoff() 
 {
+
 	isAscending = true;
 	
 }

@@ -66,6 +66,17 @@ void Enemy::Init()
 		eventIters[i] = totalEvent[i].begin();
 }
 
+void Enemy::Death()
+{
+	transform->SetActive(false);
+	trackCollider->SetActive(false);
+	attackCollider->SetActive(false);
+	for (Transform* colliderTransform : colliderTransforms)
+		colliderTransform->SetActive(false);
+	for (CapsuleCollider* collider : colliders)
+		collider->SetActive(false);
+}
+
 void Enemy::Track()
 {
 }

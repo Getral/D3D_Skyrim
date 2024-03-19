@@ -49,7 +49,7 @@ private:
 	bool isQuest = true;
 	
 	InvenUI* invenUI;
-	bool isInven = false;
+	bool isInven = true;
 
 	ItemStatus* itemstatus;
 };

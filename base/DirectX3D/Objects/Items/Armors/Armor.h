@@ -5,9 +5,9 @@ class Armor : public Item
 public:
 	enum ArmorType
 	{
-		 helmat,
+		 helmet,
 		 cuirass,
-		 gauntlets,
+		 gauntlet,
 		 boots,
 		 shield,
 	};
@@ -17,17 +17,20 @@ public:
 		IRON,
 		DRAGONBONE
 	};
+
 public:
 	Armor(string name, int type, int weight, int value, int armor_class, int armor_type, int def);
 	
 	int GetArmorClass() { return armor_class; }
+	int GetArmorType() { return armor_type; }
 	int GetDef() { return def; }
+
 	void ChangeEquipState() { isEquiped = !isEquiped; }
 	int GetEquip() { return isEquiped; }
-
 private:
 	int armor_class;
 	int armor_type;
 	int def;
+
 	bool isEquiped = false;
 };

@@ -9,14 +9,10 @@ public:
 		dagger,		// 단검
 		claymore,		// 한손검
 		waraxe,		// 한손도끼
-		mace,			// 한손둔기
-
-		
+		mace,			// 한손둔기	
 		longsword,	// 양손검
 		battleaxe,	// 양손도끼
 		warhammer,	// 양손둔기
-
-		
 		bow			// 활
 	};
 
@@ -31,6 +27,7 @@ public:
 	int GetWeaponClass() { return weapon_class; }
 	int GetAtk() { return atk; }
 	void ChangeEquipState() { isEquiped = !isEquiped; }
+	bool GetEquip() { return isEquiped; }
 private:
 	int weapon_class;
 	int weapon_type;
