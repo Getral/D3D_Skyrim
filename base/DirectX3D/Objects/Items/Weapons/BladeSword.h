@@ -10,6 +10,7 @@ public:
     void Render();
     void GUIRender();
 
+    BoxCollider* GetCollider() { return collider; }
     bool GetIsWeapon() { return isWeapon; }
     void SetIsCollider(bool value) { isWeapon = value; }
 
@@ -17,8 +18,6 @@ public:
 
 private:
     BoxCollider* collider;
-
-    //bool isWeapon = true;   // 수정할려고 true로 설정해둠 후에 삭제
     bool isWeapon = false;
 
 };

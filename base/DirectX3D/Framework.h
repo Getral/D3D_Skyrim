@@ -201,19 +201,18 @@ using namespace GameMath;
 
 #include "Objects/Items/Armors/Armor.h"
 //Iron Armor
-#include "Objects/Items/Armors/IronArmorSet.h"
+//#include "Objects/Items/Armors/IronArmorSet.h"
 #include "Objects/Items/Armors/IronHelmet.h"
 #include "Objects/Items/Armors/IronCuirassplate.h"
 #include "Objects/Items/Armors/IronGauntlets.h"
 #include "Objects/Items/Armors/IronBoots.h"
 #include "Objects/Items/Armors/IronShield.h"
 //DragonBone Armor
-#include "Objects/Items/Armors/DragonArmorSet.h"
+//#include "Objects/Items/Armors/DragonArmorSet.h"
 #include "Objects/Items/Armors/DragonHelmet.h"
 #include "Objects/Items/Armors/DragonCuirassplate.h"
 #include "Objects/Items/Armors/DragonGauntlets.h"
 #include "Objects/Items/Armors/DragonBoots.h"
-#include "Objects/Items/Armors/DragonShield.h"
 
 
 #include "Objects/Items/Expendables/Expendables.h"		// 소모품

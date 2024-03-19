@@ -354,37 +354,19 @@
     <ClInclude Include="Objects\Items\Armors\IronArmor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonboneboots.h">
+    <ClInclude Include="Objects\Items\Armors\IronBoots.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonbonecuirassplate.h">
+    <ClInclude Include="Objects\Items\Armors\IronCuirassplate.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonbonegauntlets.h">
+    <ClInclude Include="Objects\Items\Armors\IronGauntlets.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonbonehelmet.h">
+    <ClInclude Include="Objects\Items\Armors\IronHelmet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonboneArmors\dragonboneshield.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronArmors\ironboots.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronArmors\ironcuirassplate.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronArmors\irongauntlets.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronArmors\ironhelmet.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronArmors\ironshield.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\Armor.h">
+    <ClInclude Include="Objects\Items\Armors\IronShield.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Expendables\EbonyArrow.h">
@@ -396,52 +378,46 @@
     <ClInclude Include="Objects\Items\Expendables\IronArrow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyBow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyClaymore.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyClaymore.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyDagger.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyDagger.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyMace.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyWarAxe.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyWarAxe.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyBattleAxe.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyBattleAxe.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyLongSword.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyLongSword.h">
+    <ClInclude Include="Objects\Items\Weapons\IronBow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyWarHamer.h">
+    <ClInclude Include="Objects\Items\Weapons\IronClaymore.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronBow.h">
+    <ClInclude Include="Objects\Items\Weapons\IronDagger.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronClaymore.h">
+    <ClInclude Include="Objects\Items\Weapons\IronMace.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronDagger.h">
+    <ClInclude Include="Objects\Items\Weapons\IronWaraxe.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronMace.h">
+    <ClInclude Include="Objects\Items\Weapons\IronBattleAxe.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\1hd\IronWaraxe.h">
+    <ClInclude Include="Objects\Items\Weapons\IronLongSword.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\2hd\IronBattleAxe.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\2hd\IronLongSword.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWeapons\2hd\IronWarHammer.h">
+    <ClInclude Include="Objects\Items\Weapons\IronWarHammer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\Weapon.h">
@@ -477,34 +453,22 @@
     <ClInclude Include="Scenes\alduinScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronWarHammer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyBattleAxe.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyBow.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyClaymore.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyDagger.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyLongSword.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\Ebonymace1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\EbonyQuiver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWarAxe.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyWarHammer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\EbonyWarHammer.h">
+    <ClInclude Include="Objects\Items\Weapons\IronQuiver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\DragonShield.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\IronArmorSet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\IronBattleAxe.h">
@@ -525,34 +489,40 @@
     <ClInclude Include="Objects\Items\Weapons\IronMace.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\IronQuiver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\IronWaraxe.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonArmorSet.h">
+    <ClInclude Include="Objects\Items\Weapons\IronWarHammer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonShield.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyBattleAxe.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronArmorSet.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyBow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronShield.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyClaymore.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronHelmet.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyDagger.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronBoots.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyLongSword.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronCuirassplate.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyMace.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\IronGauntlets.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyWarAxe.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Weapons\EbonyWarHamer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\Armor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\DragonBoots.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Armors\DragonCuirassplate.h">
@@ -564,7 +534,25 @@
     <ClInclude Include="Objects\Items\Armors\DragonHelmet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Armors\DragonBoots.h">
+    <ClInclude Include="Objects\Items\Armors\IronBoots.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\IronCuirassplate.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\IronGauntlets.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\IronHelmet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\IronShield.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\DragonArmorSet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Armors\DragonShield.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -875,37 +863,19 @@
     <ClCompile Include="Objects\Character\alduin.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonboneboots.cpp">
+    <ClCompile Include="Objects\Items\Armors\IronBoots.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonecuirassplate.cpp">
+    <ClCompile Include="Objects\Items\Armors\IronCuirassplate.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonegauntlets.cpp">
+    <ClCompile Include="Objects\Items\Armors\IronGauntlets.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonbonehelmet.cpp">
+    <ClCompile Include="Objects\Items\Armors\IronHelmet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonboneArmors\dragonboneshield.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronArmors\ironboots.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronArmors\ironcuirassplate.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronArmors\irongauntlets.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronArmors\ironhelmet.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronArmors\ironshield.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\Armor.cpp">
+    <ClCompile Include="Objects\Items\Armors\IronShield.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Expendables\EbonyArrow.cpp">
@@ -917,52 +887,46 @@
     <ClCompile Include="Objects\Items\Expendables\IronArrow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyBow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyClaymore.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyClaymore.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyDagger.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyDagger.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyMace.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyWarAxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyWarAxe.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyBattleAxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyBattleAxe.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyLongSword.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyLongSword.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronBow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\2hd\EbonyWarHamer.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronClaymore.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronBow.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronDagger.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronClaymore.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronMace.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronDagger.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronWaraxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronMace.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronBattleAxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\1hd\IronWaraxe.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronLongSword.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\2hd\IronBattleAxe.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\2hd\IronLongSword.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronWeapons\2hd\IronWarHammer.cpp">
+    <ClCompile Include="Objects\Items\Weapons\IronWarHammer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\Weapon.cpp">
@@ -998,33 +962,6 @@
     <ClCompile Include="Scenes\alduinScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyBattleAxe.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyBow.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyClaymore.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyDagger.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyLongSword.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\Ebonymace1.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyQuiver.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWarAxe.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\EbonyWarHammer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\IronBattleAxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -1043,37 +980,37 @@
     <ClCompile Include="Objects\Items\Weapons\IronMace.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\IronQuiver.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\IronWaraxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\IronWarHammer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonArmorSet.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyBattleAxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonShield.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyBow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronArmorSet.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyClaymore.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronShield.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyDagger.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronHelmet.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyLongSword.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronBoots.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyMace.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronCuirassplate.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyWarAxe.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\IronGauntlets.cpp">
+    <ClCompile Include="Objects\Items\Armors\Armor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\DragonBoots.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Armors\DragonCuirassplate.cpp">
@@ -1085,7 +1022,22 @@
     <ClCompile Include="Objects\Items\Armors\DragonHelmet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Armors\DragonBoots.cpp">
+    <ClCompile Include="Objects\Items\Armors\IronBoots.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\IronCuirassplate.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\IronGauntlets.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\IronHelmet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\IronShield.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Armors\DragonShield.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
