@@ -256,7 +256,7 @@ void alduin::Update()
 		moveSpeed = 0.0f;
 	}
 
-	if (curHp <= 0)
+	if (curHp <= 0.0f)
 		SetState(DEATH);
 
 	if (KEY_PRESS('K'))
