@@ -1,6 +1,7 @@
 #pragma once
 class alduin : public ModelAnimator
 { 
+	
 private:
 	enum State
 	{
@@ -33,7 +34,6 @@ private:
 		TURN_L,
 		TURN_R
 	};
-
 public:
 
 	alduin();

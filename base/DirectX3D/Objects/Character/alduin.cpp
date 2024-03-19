@@ -46,23 +46,27 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	//공격 범위
 	Acollider_F = new CapsuleCollider(90.0f, 0.1f);
-	Acollider_F->Pos().SetZ(-25);
+	Acollider_F->Pos().SetZ(-32);
 	Acollider_F->SetParent(transform);
+	Acollider_F->Scale() *= 0.1;
 	Acollider_F->SetActive(false);
 
 	Acollider_R = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_R->Pos().SetX(-25);
 	Acollider_R->SetParent(transform);
+	Acollider_R->Scale() *= 0.1;
 	Acollider_R->SetActive(false);
 
 	Acollider_L = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_L->Pos().SetX(25);
 	Acollider_L->SetParent(transform);
+	Acollider_L->Scale() *= 0.1;
 	Acollider_L->SetActive(false);
 
 	Acollider_B = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_B->Pos().SetZ(25);
 	Acollider_B->SetParent(transform);
+	Acollider_B->Scale() *= 0.1;
 	Acollider_B->SetActive(false);
 
 	
@@ -117,7 +121,10 @@ alduin::alduin() :  ModelAnimator("alduin")
 		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 	}
 
-	GetClip(ATTACK_F)->SetEvent(bind(&alduin::Attacking, this), 0.0f);
+	GetClip(ATTACK_F)->SetEvent(bind(&alduin::Attacking2, this), 0.5f);
+	GetClip(ATTACK_R)->SetEvent(bind(&alduin::Attacking2, this), 0.3f);
+	GetClip(ATTACK_L)->SetEvent(bind(&alduin::Attacking2, this), 0.3f);
+	GetClip(ATTACK_B)->SetEvent(bind(&alduin::Attacking2, this), 0.5f);
 
 
 	
@@ -174,17 +181,52 @@ void alduin::Update()
 	collider_R->UpdateWorld();
 	collider_L->UpdateWorld();
 	collider_B->UpdateWorld();
+
+	Acollider_F->UpdateWorld();
+	Acollider_R->UpdateWorld();
+	Acollider_L->UpdateWorld();
+	Acollider_B->UpdateWorld();
+
+
 	breathCollider->UpdateWorld();
 	transform->UpdateWorld();
 	HeadCollider->UpdateWorld();
 	BodyCollider->UpdateWorld();
 	TailCollider->UpdateWorld();
 
+
+
+
 	CoolingTime += DELTA;
 	BreathParticle->Update();
 	DeathParticle->Update();
 
 	
+	if (Acollider_F->Active() && Acollider_F->IsCapsuleCollision(target->GetCollier()))
+	{
+		//3 : OHM_HIT_MEDIUM
+		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+	}
+
+	else if (Acollider_R->Active() && Acollider_R->IsCapsuleCollision(target->GetCollier()))
+	{
+		//3 : OHM_HIT_MEDIUM
+		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+	}
+
+	else if (Acollider_L->Active() && Acollider_L->IsCapsuleCollision(target->GetCollier()))
+	{
+		//3 : OHM_HIT_MEDIUM
+		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+	}
+
+	else if (Acollider_B->Active() && Acollider_B->IsCapsuleCollision(target->GetCollier()))
+	{
+		//3 : OHM_HIT_MEDIUM
+		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+	}
+
+
 
 	if (target)
 	{
@@ -257,6 +299,10 @@ void alduin::Render()
 	collider_R->Render();
 	collider_L->Render();
 	collider_B->Render();
+	Acollider_F->Render();
+	Acollider_R->Render();
+	Acollider_L->Render();
+	Acollider_B->Render();
 	breathCollider->Render();
 	BreathParticle->Render();
 	DeathParticle->Render();
@@ -391,6 +437,18 @@ void alduin::Attacking()
 
 void alduin::Attacking2()
 {
+	if (curState == ATTACK_F) Acollider_F->SetActive(true);
+
+	else if (curState == ATTACK_R) Acollider_R->SetActive(true);
+
+	else if (curState == ATTACK_L) Acollider_L->SetActive(true);
+
+	else if (curState == ATTACK_B) Acollider_B->SetActive(true);
+
+
+
+
+
 }
 
 void alduin::beginTakeoff()
@@ -433,6 +491,17 @@ void alduin::EndAction()
 	CoolingTime = 0.0f;
 
 	breathCollider->SetActive(false);
+
+	Acollider_F->SetActive(false);
+	Acollider_R->SetActive(false);
+	Acollider_L->SetActive(false);
+	Acollider_B->SetActive(false);
+
+	if (target->GetAction() == Player::ACTION::OHM_HIT_MEDIUM)
+	{
+		target->SetAction(Player::ACTION::OHM_IDLE);
+	}
+	
 	
 }
 
@@ -491,10 +560,12 @@ void alduin::Patterns() //지상패턴
 	}
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
+		if(curState == TURN_L || curState == TURN_R)
 		SetState(ATTACK_R);
 	}
 	else if (collider_L->IsCapsuleCollision(this->target->GetCollier()))
 	{
+		if (curState == TURN_L || curState == TURN_R)
 		SetState(ATTACK_L);
 	}
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))

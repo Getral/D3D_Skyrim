@@ -46,6 +46,7 @@ public:
 
 public:
 
+
 	Player();
 	~Player();
 
