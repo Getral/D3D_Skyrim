@@ -57,6 +57,7 @@ private:
 	void BreathAttack();
 
 	void Attacking();
+	void Attacking2();
 	void beginTakeoff();
 	void EndTakeoff();
 	void beginAproach();

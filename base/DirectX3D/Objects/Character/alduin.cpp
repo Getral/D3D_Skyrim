@@ -117,6 +117,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 		GetClip(clipIndex)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 	}
 
+	GetClip(ATTACK_F)->SetEvent(bind(&alduin::Attacking, this), 0.0f);
+
+
 	
 	//È­¿° °ø°Ý
 
@@ -384,6 +387,10 @@ void alduin::BreathAttack()
 void alduin::Attacking()
 {
 	isAttacking = true;
+}
+
+void alduin::Attacking2()
+{
 }
 
 void alduin::beginTakeoff()
