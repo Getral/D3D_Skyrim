@@ -3,10 +3,10 @@
 class Misc: public Item
 {	
 public:
-	Misc(string name, int type, int weight, int value, int count);
+	Misc(string name, int type, int weight, int value);
 
 	int& GetCount() { return count; }
 private:
-	int count;
+	int count = 1;
 };
 

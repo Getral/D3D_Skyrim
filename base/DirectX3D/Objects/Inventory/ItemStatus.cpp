@@ -2,19 +2,28 @@
 
 ItemStatus::ItemStatus()
 {
-	armors.push_back(new Armor("ironhelmet", Item::ARMOR, 10, 11, Armor::IRON ,Armor::helmat, 12));
-	armors.push_back(new Armor("dragonhelmet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmat, 22));
+	armors.push_back(new Armor("ironhelmet", Item::ARMOR, 10, 11, Armor::IRON ,Armor::helmet, 12));
+	armors.push_back(new Armor("ironcuirass", Item::ARMOR, 10, 11, Armor::IRON ,Armor::cuirass, 12));
+	armors.push_back(new Armor("irongauntlet", Item::ARMOR, 10, 11, Armor::IRON ,Armor::gauntlet, 12));
+	armors.push_back(new Armor("ironboots", Item::ARMOR, 10, 11, Armor::IRON ,Armor::boots, 12));
+	armors.push_back(new Armor("ironshield", Item::ARMOR, 10, 11, Armor::IRON ,Armor::shield, 12));
+
+	armors.push_back(new Armor("dragonhelmet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmet, 22));
+	armors.push_back(new Armor("dragoncuirass", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::cuirass, 22));
+	armors.push_back(new Armor("dragongauntlet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::gauntlet, 22));
+	armors.push_back(new Armor("dragonboots", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::boots, 22));
+	armors.push_back(new Armor("dragonshield", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::shield, 22));
 
 	weapons.push_back(new Weapon("irondagger", Item::WEAPON, 30, 31, Weapon::IRON ,Weapon::dagger, 32));
 	weapons.push_back(new Weapon("ebonydagger", Item::WEAPON, 40, 41, Weapon::EBONY ,Weapon::dagger, 42));
 
-	arrows.push_back(new Arrow("iron_arrow", Item::ARROW, 1, 2, Arrow::IRON, 100));
-	arrows.push_back(new Arrow("dragonbone_arrow", Item::ARROW, 1, 2, Arrow::DRAGONBONE, 100));
+	arrows.push_back(new Arrow("ironarrow", Item::ARROW, 1, 2, Arrow::IRON, 100));
+	arrows.push_back(new Arrow("dragonarrow", Item::ARROW, 1, 2, Arrow::DRAGONBONE, 200));
 
-	potions.push_back(new Potion("hp_potion", Item::POTION, 1, 2, Potion::POTION_HP, 100));
-	potions.push_back(new Potion("sp_potion", Item::POTION, 1, 2, Potion::POTION_SP, 100));
+	potions.push_back(new Potion("hp_potion", Item::POTION, 1, 2, Potion::POTION_HP, 10));
+	potions.push_back(new Potion("sp_potion", Item::POTION, 1, 2, Potion::POTION_SP, 10));
 
-	misces.push_back(new Misc("misc1", Item::MISC, 1, 1, 10));
+	misces.push_back(new Misc("misc1", Item::MISC, 1, 1));
 }
 
 ItemStatus::~ItemStatus()
@@ -39,7 +48,7 @@ Item::Status ItemStatus::GetItem(string inname)
 		return GetPotion(inname)->GetStatus();
 		break;
 	case Item::MISC:
-		return GetPotion(inname)->GetStatus();
+		return GetMisc(inname)->GetStatus();
 		break;
 	default:
 		break;

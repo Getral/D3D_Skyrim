@@ -5,9 +5,9 @@ class Player : public ModelAnimator
 public:
 	struct Status
 	{
-		float curHp = 100;
+		float curHp = 10;
 		float maxHp = 100;
-		float curstamina = 100;
+		float curstamina = 10;
 		float maxstamina = 100;
 		float atk = 10;
 		float def = 10;

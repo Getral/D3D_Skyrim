@@ -11,8 +11,8 @@ private:
 		WEAPON,
 		WEAPON_IRON,
 		WEAPON_EBONY,
-		CLOTHING,
-		EXPENDABLE,
+		ARROW,
+		POTION,
 		MISC
 	};
 public:
@@ -23,7 +23,11 @@ public:
 	void Render();
 	void GUIRender();
 
-	void SelectedBarPosing();
+	void SelectedTitlePosing();
+	void SelectedItemPosing();
+
+	void UseSelectedItem(Player* player);
+	
 	
 	void RenderTitle();
 	void AddItem(string inname);
@@ -32,7 +36,7 @@ public:
 	
 	void ListingItem();
 
-	void ListingDetailed(string inname);
+	void ListingDetailed();
 
 private:
 	Quad* frame;
@@ -44,17 +48,23 @@ private:
 	Quad* item_detail_frame;
 
 	Quad* selected_bar;
-	Quad* equiped_icon_armor;
+	Quad* selectedItem_bar;
+	int title_inven_size;
+	vector<Quad*> equiped_icon_armor;
+
 	Quad* equiped_icon_weapon;
+	Quad* equiped_icon_arrow;
 
 	Quad* title_all;
 	Quad* title_weapon;
 	Quad* title_armor;
-	Quad* title_clothing;
-	Quad* title_expendable;
+	Quad* title_arrow;
+	Quad* title_potion;
 	Quad* title_misc;
 	
 	int selectedTitleNum = 0;
+	int selectedItemNum = 0;
+	bool isSelectingItem = false;
 
 	vector<class Armor*> inven_armors;
 	vector<class Weapon*> inven_weapons;
@@ -62,11 +72,13 @@ private:
 	vector<class Potion*> inven_potions;
 	vector<class Misc*> inven_misces;
 
-	Armor* player_armor;
+	vector<class Armor*> temp_armors;
+	vector<Armor*> player_armors;
+	Armor* player_shield;
+
+	vector<Weapon*> temp_weapons;
+	Weapon* player_weapon;
+	Arrow* player_arrow;
 
 	class ItemStatus* itemstatus;
-
-	char ch[10];
-	string a;
 };
-
