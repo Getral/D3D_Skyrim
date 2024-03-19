@@ -9,8 +9,8 @@ PlayerScene::PlayerScene()
 
 	player = new Player();
 
-	//aldu = new alduin();
-	//aldu->SetTarget(player);
+	aldu = new alduin();
+	aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim");
@@ -28,7 +28,7 @@ void PlayerScene::Update()
 {
 	player->Update();
 	//aldu->Update();
-	//UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
+	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 }
 
 void PlayerScene::PreRender()
