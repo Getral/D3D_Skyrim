@@ -251,7 +251,7 @@ void Bear::Behavior()
 	{
 		if (collider->IsCollision(playerData->GetCollier()) && attackTrigger)
 		{
-			playerData->SetAction(Player::OHM_HIT_MEDIUM);
+			playerData->SetHit();
 			playerData->SetIsHit(true);
 			break;
 		}
