@@ -82,6 +82,11 @@ private:
 	CapsuleCollider* collider_R;
 	CapsuleCollider* collider_L;
 	CapsuleCollider* collider_B;
+
+	CapsuleCollider* Acollider_F;
+	CapsuleCollider* Acollider_R;
+	CapsuleCollider* Acollider_L;
+	CapsuleCollider* Acollider_B;
 	BoxCollider* breathCollider;
 
 	Transform* transform;

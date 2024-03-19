@@ -22,6 +22,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	//alduinCollider3 = new CapsuleCollider();
 
+
+	//공격 인식
 	collider_F = new CapsuleCollider(90.0f, 0.1f);
 	collider_F->Pos().SetZ(-30);
 	collider_F->SetParent(transform);
@@ -41,6 +43,27 @@ alduin::alduin() :  ModelAnimator("alduin")
 	collider_B->Pos().SetZ(30);
 	collider_B->SetParent(transform);
 	collider_B->Scale() *= 0.2;
+
+	//공격 범위
+	Acollider_F = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_F->Pos().SetZ(-25);
+	Acollider_F->SetParent(transform);
+	Acollider_F->SetActive(false);
+
+	Acollider_R = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_R->Pos().SetX(-25);
+	Acollider_R->SetParent(transform);
+	Acollider_R->SetActive(false);
+
+	Acollider_L = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_L->Pos().SetX(25);
+	Acollider_L->SetParent(transform);
+	Acollider_L->SetActive(false);
+
+	Acollider_B = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_B->Pos().SetZ(25);
+	Acollider_B->SetParent(transform);
+	Acollider_B->SetActive(false);
 
 	
 	breathCollider->Pos().SetZ(-70);
