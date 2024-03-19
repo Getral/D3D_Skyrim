@@ -191,12 +191,13 @@ using namespace GameMath;
 #include "Objects/Items/Weapons/EbonyBow.h"
 #include "Objects/Items/Weapons/EbonyDagger.h"
 #include "Objects/Items/Weapons/EbonyClaymore.h"
-#include "Objects/Items/Weapons/EbonyMace.h"
+#include "Objects/Items/Weapons/Ebonymace1.h"
 #include "Objects/Items/Weapons/EbonyWarAxe.h"
 //2hd
 #include "Objects/Items/Weapons/EbonyLongSword.h"
 #include "Objects/Items/Weapons/EbonybattleAxe.h"
-#include "Objects/Items/Weapons/EbonyWarHamer.h"
+#include "Objects/Items/Weapons/EbonyWarHammer.h"
+#include "Objects/Items/Weapons/EbonyQuiver.h"
 
 
 #include "Objects/Items/Armors/Armor.h"
