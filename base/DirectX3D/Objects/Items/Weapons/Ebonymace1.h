@@ -1,9 +1,9 @@
 #pragma once
-class EbonyWarAxe : public Model
+class EbonyMace1 :public Model
 {
 public:
-    EbonyWarAxe();
-    ~EbonyWarAxe();
+    EbonyMace1();
+    ~EbonyMace1();
 
     void Update();
     void Render();
@@ -15,7 +15,8 @@ public:
     void ColliderManager(bool isWeaponColl);
 
 private:
-    Model* ebonywaraxe;
+    Model* ebonymace1;
     BoxCollider* collider;
     bool isWeapon = true;
 };
+

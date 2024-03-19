@@ -1,15 +1,15 @@
 #include "Framework.h"
 
-EbonyBow::EbonyBow() : Model("EbonyBow")
+EbonyQuiver::EbonyQuiver() : Model("EbonyQuiver")
 {
-	SetTag("EbonyBow");
-	Pos().x += -27.0f;
+	SetTag("EbonyQuiver");
+	Pos().x += 26.0f;
 	Pos().y += 0;
-	Pos().z += 1.6f;
+	Pos().z += 1.5f;
 
 	Rot().x += 0;
 	Rot().y += 0;
-	Rot().z += 0;
+	Rot().z += 179.0f;
 
 	Scale().x *= 1.0f;
 	Scale().y *= 1.0f;
@@ -29,36 +29,36 @@ EbonyBow::EbonyBow() : Model("EbonyBow")
 	collider->Scale().z *= 1.0f;
 
 
-	collider->SetTag("EbonyBowCollider");
+	collider->SetTag("EbonyQuiverCollider");
 	collider->SetParent(this);
 	collider->Load();
 }
 
-EbonyBow::~EbonyBow()
+EbonyQuiver::~EbonyQuiver()
 {
 	delete collider;
 }
 
-void EbonyBow::Update()
+void EbonyQuiver::Update()
 {
 	UpdateWorld();
 	ColliderManager(isWeapon);
 	collider->UpdateWorld();
 }
 
-void EbonyBow::Render()
+void EbonyQuiver::Render()
 {
 	Model::Render();
 	collider->Render();
 }
 
-void EbonyBow::GUIRender()
+void EbonyQuiver::GUIRender()
 {
 	Model::GUIRender();
 	collider->GUIRender();
 }
 
-void EbonyBow::ColliderManager(bool isWeaponColl)
+void EbonyQuiver::ColliderManager(bool isWeaponColl)
 {
 	if (isWeaponColl)
 	{

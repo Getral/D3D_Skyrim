@@ -1,11 +1,11 @@
 #include "Framework.h"
 
-EbonyBow::EbonyBow() : Model("EbonyBow")
+EbonyWarHammer::EbonyWarHammer() : Model("EbonyWarHammer")
 {
-	SetTag("EbonyBow");
-	Pos().x += -27.0f;
+	SetTag("EbonyWarHammer");
+	Pos().x += 0;
 	Pos().y += 0;
-	Pos().z += 1.6f;
+	Pos().z += 0;
 
 	Rot().x += 0;
 	Rot().y += 0;
@@ -16,49 +16,49 @@ EbonyBow::EbonyBow() : Model("EbonyBow")
 	Scale().z *= 1.0f;
 
 	collider = new BoxCollider();
-	collider->Pos().x += 21.0f;
-	collider->Pos().y += 0.0;
+	collider->Pos().x += 2.5f;
+	collider->Pos().y += 51.0;
 	collider->Pos().z += 0.0f;
 
 	collider->Rot().x += 0.0f;
 	collider->Rot().y += 0.0f;
 	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 22.7f;
-	collider->Scale().y *= 116.0f;
-	collider->Scale().z *= 1.0f;
+	collider->Scale().x *= 29.5f;
+	collider->Scale().y *= 14.5f;
+	collider->Scale().z *= 5.1f;
 
 
-	collider->SetTag("EbonyBowCollider");
+	collider->SetTag("EbonyWarHammerCollider");
 	collider->SetParent(this);
 	collider->Load();
 }
 
-EbonyBow::~EbonyBow()
+EbonyWarHammer::~EbonyWarHammer()
 {
 	delete collider;
 }
 
-void EbonyBow::Update()
+void EbonyWarHammer::Update()
 {
 	UpdateWorld();
 	ColliderManager(isWeapon);
 	collider->UpdateWorld();
 }
 
-void EbonyBow::Render()
+void EbonyWarHammer::Render()
 {
 	Model::Render();
 	collider->Render();
 }
 
-void EbonyBow::GUIRender()
+void EbonyWarHammer::GUIRender()
 {
 	Model::GUIRender();
 	collider->GUIRender();
 }
 
-void EbonyBow::ColliderManager(bool isWeaponColl)
+void EbonyWarHammer::ColliderManager(bool isWeaponColl)
 {
 	if (isWeaponColl)
 	{
