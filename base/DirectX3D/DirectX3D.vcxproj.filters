@@ -396,9 +396,6 @@
     <ClInclude Include="Objects\Items\Expendables\IronArrow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Miscellaneous\Miscellaneous.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -453,9 +450,6 @@
     <ClInclude Include="Objects\Items\Expendables\Potion.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Inventory\Inventory.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\Character\Bear.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -463,6 +457,24 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\TerrainScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Expendables\Arrow.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Inventory\ItemStatus.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\UI\InvenUI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Inventory\Item.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Items\Miscellaneous\Misc.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Manager\ObjectManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -815,9 +827,6 @@
     <ClCompile Include="Objects\Items\Expendables\IronArrow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Miscellaneous\Miscellaneous.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\EbonyWeapons\1hd\EbonyBow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -872,9 +881,6 @@
     <ClCompile Include="Objects\Items\Expendables\Potion.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Inventory\Inventory.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\Character\Bear.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -882,6 +888,24 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\TerrainScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Expendables\Arrow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Inventory\ItemStatus.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\UI\InvenUI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Inventory\Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Items\Miscellaneous\Misc.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Manager\ObjectManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -932,6 +956,9 @@
     <FxCompile Include="Shaders\Effect\Fog.hlsl" />
     <FxCompile Include="Shaders\Effect\Particle.hlsl" />
     <FxCompile Include="Shaders\UI\RevProgressBar.hlsl" />
+    <FxCompile Include="Shaders\UI\CenterEndProgressBar.hlsl" />
+    <FxCompile Include="Shaders\UI\EditAlpha.hlsl" />
+    <FxCompile Include="Shaders\UI\EditAlpha2.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexHeader.hlsli" />

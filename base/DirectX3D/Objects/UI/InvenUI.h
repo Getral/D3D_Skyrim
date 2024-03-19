@@ -36,7 +36,7 @@ public:
 	
 	void ListingItem();
 
-	void ListingDetailed(string inname);
+	void ListingDetailed();
 
 private:
 	Quad* frame;

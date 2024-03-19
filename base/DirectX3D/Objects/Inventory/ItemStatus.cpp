@@ -8,7 +8,6 @@ ItemStatus::ItemStatus()
 	armors.push_back(new Armor("ironboots", Item::ARMOR, 10, 11, Armor::IRON ,Armor::boots, 12));
 	armors.push_back(new Armor("ironshield", Item::ARMOR, 10, 11, Armor::IRON ,Armor::shield, 12));
 
-
 	armors.push_back(new Armor("dragonhelmet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::helmet, 22));
 	armors.push_back(new Armor("dragoncuirass", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::cuirass, 22));
 	armors.push_back(new Armor("dragongauntlet", Item::ARMOR, 20, 21, Armor::DRAGONBONE ,Armor::gauntlet, 22));

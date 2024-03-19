@@ -262,6 +262,7 @@ using namespace GameMath;
 #include "Objects/Manager/EnemySpawn.h"
 #include "Objects/Manager/SpawnManager.h"
 #include "Objects/Manager/UIManager.h"
+#include "Objects/Manager/ObjectManager.h"
 
 //Scene Header
 #include "Scenes/Scene.h"

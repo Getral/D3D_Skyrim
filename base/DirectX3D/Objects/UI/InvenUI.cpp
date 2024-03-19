@@ -30,9 +30,9 @@ InvenUI::InvenUI()
 	detailedframebar->Pos() = { CENTER_X - 228 ,CENTER_Y + 275 };
 	detailedframebar->Scale().x *= 340.0f;
 	detailedframebar->Scale().y *= 2.5f;
-	
+
 	title_all = new Quad(L"Textures/UI/icon_all.png");
-	title_all->Pos() = {70, 610};
+	title_all->Pos() = { 70, 610 };
 	title_all->Scale() *= 0.3f;
 
 	title_armor = new Quad(L"Textures/UI/icon_armor.png");
@@ -61,13 +61,13 @@ InvenUI::InvenUI()
 	title_misc->Scale() *= 0.3f;
 
 	selected_bar = new Quad(Vector2(180, 40));
-	selected_bar->Pos() = { CENTER_X - 495,CENTER_Y + 250};
+	selected_bar->Pos() = { CENTER_X - 495,CENTER_Y + 250 };
 	selected_bar->GetMaterial()->SetShader(L"UI/EditAlpha2.hlsl");
 
 	selectedItem_bar = new Quad(L"Textures/UI/selectedItem_bar.png");
 	selectedItem_bar->Pos() = { CENTER_X - 250,WIN_HEIGHT - 105 };
 	selectedItem_bar->Scale() *= 0.725f;
-	
+
 	FOR(5)
 	{
 		equiped_icon_armor.push_back(new Quad(L"Textures/UI/Equiped_Icon.png"));
@@ -83,7 +83,7 @@ InvenUI::InvenUI()
 	equiped_icon_arrow->Scale() *= 0.9f;
 	equiped_icon_arrow->SetActive(false);
 
-	
+
 
 	itemstatus = new ItemStatus();
 
@@ -125,7 +125,7 @@ void InvenUI::Update(Player* player)
 	else
 		selectedItem_bar->SetActive(true);
 
-	for(Quad* icon : equiped_icon_armor)
+	for (Quad* icon : equiped_icon_armor)
 		icon->UpdateWorld();
 	equiped_icon_weapon->UpdateWorld();
 	equiped_icon_arrow->UpdateWorld();
@@ -133,7 +133,7 @@ void InvenUI::Update(Player* player)
 	item_detail_frame->UpdateWorld();
 	detailedframebar->UpdateWorld();
 
-	if(KEY_DOWN(VK_RIGHT))
+	if (KEY_DOWN(VK_RIGHT))
 		isSelectingItem = true;
 	if (KEY_DOWN(VK_LEFT))
 	{
@@ -142,9 +142,9 @@ void InvenUI::Update(Player* player)
 	}
 
 	SelectedItemPosing();
-	
+
 	SelectedTitlePosing();
-	
+
 	if (isSelectingItem && KEY_DOWN(VK_RETURN))
 		UseSelectedItem(player);
 
@@ -189,7 +189,7 @@ void InvenUI::Render()
 	title_misc->Render();
 
 	selected_bar->Render();
-	if(isSelectingItem)
+	if (isSelectingItem)
 		selectedItem_bar->Render();
 
 	for (Quad* icon : equiped_icon_armor)
@@ -197,20 +197,12 @@ void InvenUI::Render()
 	equiped_icon_weapon->Render();
 	equiped_icon_arrow->Render();
 
-	{
-		// 디테일 렌더하는 조건 필요
-		item_detail_frame->Render();
-
-		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30});
-		Font::Get()->RenderText("Weight",   { item_detail_frame->Pos().x - 40, item_detail_frame->Pos().y - 30 });
-		Font::Get()->RenderText("Value",    { item_detail_frame->Pos().x + 60, item_detail_frame->Pos().y - 30 });
-	}
-
 	RenderTitle();
 
 	ListingItem();
 
-	ListingDetailed("ironhelmet");
+	if (selectedItemNum >= 0 && isSelectingItem)
+		ListingDetailed();
 }
 
 void InvenUI::GUIRender()
@@ -234,7 +226,7 @@ void InvenUI::GUIRender()
 	if (inven_armors.size() > 1)
 	{
 		ImGui::Text("eeeeeeeeee");
-		ImGui::Text("%d",inven_armors[0]->GetEquip());
+		ImGui::Text("%d", inven_armors[0]->GetEquip());
 		ImGui::Text("%d", inven_armors[1]->GetEquip());
 	}
 
@@ -286,7 +278,7 @@ void InvenUI::SelectedTitlePosing()
 		if (KEY_DOWN(VK_UP))
 			selectedTitleNum--;
 	}
-	
+
 
 	switch (selectedTitleNum)
 	{
@@ -331,7 +323,7 @@ void InvenUI::SelectedItemPosing()
 {
 	if (selectedItemNum < 0)
 		selectedItemNum = 0;
-	
+
 	if (selectedItemNum > title_inven_size - 1)
 		selectedItemNum = title_inven_size - 1;
 
@@ -342,12 +334,12 @@ void InvenUI::SelectedItemPosing()
 		if (KEY_DOWN(VK_UP))
 			selectedItemNum--;
 	}
-	
+
 	int temp = 0;
 	switch (selectedTitleNum)
 	{
 	case InvenUI::ALL:
-		title_inven_size = inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size() + inven_misces.size();	
+		title_inven_size = inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size() + inven_misces.size();
 		break;
 	case InvenUI::ARMOR:
 		title_inven_size = inven_armors.size();
@@ -457,7 +449,7 @@ void InvenUI::UseSelectedItem(Player* player)
 		UseItem(player, inven_arrows[selectedItemNum]->GetStatus().name);
 		break;
 	case InvenUI::POTION:
-		UseItem(player, inven_potions[selectedItemNum]->GetStatus().name);		
+		UseItem(player, inven_potions[selectedItemNum]->GetStatus().name);
 		break;
 	default:
 		break;
@@ -487,7 +479,7 @@ void InvenUI::RenderTitle()
 	Font::Get()->RenderText("TYPE", { 400, CENTER_Y + 290 });
 	Font::Get()->RenderText("WGT", { 515, CENTER_Y + 290 });
 	Font::Get()->RenderText("VAL", { 550, CENTER_Y + 290 });
-	if(selectedTitleNum == ARROW || selectedTitleNum == POTION || selectedTitleNum == MISC)
+	if (selectedTitleNum == ARROW || selectedTitleNum == POTION || selectedTitleNum == MISC)
 		Font::Get()->RenderText("COUNT", { 350, CENTER_Y + 290 });
 
 	Font::Get()->SetStyle("Futura_big");
@@ -534,7 +526,7 @@ bool armorComparator(Armor* armor1, Armor* armor2) {
 		return armor1->GetArmorClass() < armor2->GetArmorClass();
 	}
 
-	return armor1->GetArmorType() <= armor2->GetArmorType();	
+	return armor1->GetArmorType() <= armor2->GetArmorType();
 }
 // 아이템 추가
 void InvenUI::AddItem(string inname)
@@ -547,7 +539,7 @@ void InvenUI::AddItem(string inname)
 				return;
 		}
 		inven_armors.push_back(itemstatus->GetArmor(inname));
-		sort(inven_armors.begin(), inven_armors.end(), armorComparator);	
+		sort(inven_armors.begin(), inven_armors.end(), armorComparator);
 	}
 
 	else if (itemstatus->GetItem(inname).type == Item::WEAPON)
@@ -640,18 +632,18 @@ void InvenUI::UseItem(Player* player, string inname)
 						}
 					}
 				}
-				
+
 				if (temp_armors.size() == 4)
 				{
-					
+
 					for (int i = 0; i < temp_armors.size(); i++)
 					{
 						temp_armors[i]->ChangeEquipState();
 						player_armors[i]->ChangeEquipState();
-				
+
 						player->GetStatus().def -= player_armors[i]->GetDef();
 						player->GetStatus().def += temp_armors[i]->GetDef();
-				
+
 						if (temp_armors[i]->GetArmorType() == Armor::helmet)
 							player_armors[0] = temp_armors[i];
 						if (temp_armors[i]->GetArmorType() == Armor::cuirass)
@@ -662,7 +654,7 @@ void InvenUI::UseItem(Player* player, string inname)
 							player_armors[3] = temp_armors[i];
 					}
 				}
-				
+
 				temp_armors.clear();
 				/*
 				switch (inven_armors[i]->GetArmorType())
@@ -737,7 +729,7 @@ void InvenUI::UseItem(Player* player, string inname)
 			}
 		}
 	}
-		
+
 	else if (itemstatus->GetItem(inname).type == Item::ARROW)
 	{
 		if (player_arrow->GetStatus().name == itemstatus->GetArrow(inname)->GetStatus().name)
@@ -768,7 +760,7 @@ void InvenUI::UseItem(Player* player, string inname)
 			}
 		}
 	}
-		
+
 	else if (itemstatus->GetItem(inname).type == Item::POTION)
 	{
 		FOR(inven_potions.size())
@@ -779,7 +771,7 @@ void InvenUI::UseItem(Player* player, string inname)
 				{
 					player->GetStatus().curHp += (float)inven_potions[i]->GetAmount();
 					inven_potions[i]->GetCount() -= 1;
-				}		
+				}
 				else if (inven_potions[i]->GetPotionType() == Potion::POTION_SP)
 				{
 					player->GetStatus().curstamina += (float)inven_potions[i]->GetAmount();
@@ -808,11 +800,11 @@ void InvenUI::ListingItem()
 					for (int j = 0; j < equiped_icon_armor.size() - 1; j++)
 					{
 						equiped_icon_armor[j]->SetActive(true);
-						equiped_icon_armor[j]->Pos() = { 260 , WIN_HEIGHT - 45 - (20 * (float)(i + j)) };							
-					}				
+						equiped_icon_armor[j]->Pos() = { 260 , WIN_HEIGHT - 45 - (20 * (float)(i + j)) };
+					}
 				}
-				
-				Font::Get()->RenderText(inven_armors[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
+
+				Font::Get()->RenderText(inven_armors[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)i) });
 				if (inven_armors[i]->GetArmorType() == Armor::helmet)
 					Font::Get()->RenderText("helmet", { 400,WIN_HEIGHT - 100 - (20 * (float)i) });
 				if (inven_armors[i]->GetArmorType() == Armor::cuirass)
@@ -823,7 +815,7 @@ void InvenUI::ListingItem()
 					Font::Get()->RenderText("boots", { 400,WIN_HEIGHT - 100 - (20 * (float)i) });
 				if (inven_armors[i]->GetArmorType() == Armor::shield)
 					Font::Get()->RenderText("shield", { 400,WIN_HEIGHT - 100 - (20 * (float)i) });
-				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
+				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
 				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });
 			}
 
@@ -834,10 +826,10 @@ void InvenUI::ListingItem()
 					equiped_icon_weapon->SetActive(true);
 					equiped_icon_weapon->Pos() = { 260 , WIN_HEIGHT - 105 - (20 * (float)(i + inven_armors.size())) };
 				}
-				
 
-				Font::Get()->RenderText(inven_weapons[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
-				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+
+				Font::Get()->RenderText(inven_weapons[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
+				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
 				Font::Get()->RenderText(to_string(inven_weapons[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size())) });
 			}
 
@@ -877,8 +869,8 @@ void InvenUI::ListingItem()
 
 			for (int i = 0; i < inven_misces.size(); i++)
 			{
-				Font::Get()->RenderText(inven_misces[i]->GetStatus().name,              { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
-				Font::Get()->RenderText(to_string(inven_misces[i]->GetStatus().value),  { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
+				Font::Get()->RenderText(inven_misces[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
+				Font::Get()->RenderText(to_string(inven_misces[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
 				Font::Get()->RenderText(to_string(inven_misces[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())) });
 			}
 		}
@@ -1113,30 +1105,189 @@ void InvenUI::ListingItem()
 	}
 }
 // 선택된 아이템 상세정보
-void InvenUI::ListingDetailed(string inname)
+void InvenUI::ListingDetailed()
 {
-	if (itemstatus->GetItem(inname).type == Item::ARMOR)
+	item_detail_frame->Render();
+
+	
+	Font::Get()->RenderText("Weight", { item_detail_frame->Pos().x - 40, item_detail_frame->Pos().y - 30 });
+	Font::Get()->RenderText("Value", { item_detail_frame->Pos().x + 60, item_detail_frame->Pos().y - 30 });
+
+	
+	if (selectedTitleNum == InvenUI::ALL)
 	{
-		FOR(inven_armors.size())
+		if (selectedItemNum < inven_armors.size())
 		{
-			if (inven_armors[i]->GetStatus().name == inname)
+			Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->RenderText(inven_armors[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+			Font::Get()->RenderText(to_string(inven_armors[selectedItemNum]->GetDef()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_armors[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_armors[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura");
+		}
+
+		if (selectedItemNum >= inven_armors.size() && selectedItemNum < inven_armors.size() + inven_weapons.size())
+		{
+			Font::Get()->RenderText("Attack", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->RenderText(inven_weapons[selectedItemNum - inven_armors.size()]->GetStatus().name, { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y + 40 });
+			Font::Get()->RenderText(to_string(inven_weapons[selectedItemNum - inven_armors.size()]->GetAtk()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_weapons[selectedItemNum - inven_armors.size()]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_weapons[selectedItemNum - inven_armors.size()]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura");
+		}
+
+
+		if (selectedItemNum >= inven_armors.size() + inven_weapons.size() && selectedItemNum < inven_armors.size() + inven_weapons.size() + inven_arrows.size())
+		{
+			Font::Get()->RenderText("Attack", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->RenderText(inven_arrows[selectedItemNum - inven_armors.size() - inven_weapons.size()]->GetStatus().name, { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y + 40 });
+			Font::Get()->RenderText(to_string(inven_arrows[selectedItemNum - inven_armors.size() - inven_weapons.size()]->GetAtk()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_arrows[selectedItemNum - inven_armors.size() - inven_weapons.size()]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_arrows[selectedItemNum - inven_armors.size() - inven_weapons.size()]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura");
+		}
+			
+
+		if (selectedItemNum >= inven_armors.size() + inven_weapons.size() + inven_arrows.size() && selectedItemNum < inven_armors.size() + inven_weapons.size() + inven_arrows.size() + inven_potions.size())
+		{
+			Font::Get()->RenderText("Amount", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->RenderText(inven_potions[selectedItemNum - inven_armors.size() - inven_weapons.size() - inven_arrows.size()]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+			Font::Get()->RenderText(to_string(inven_potions[selectedItemNum - inven_armors.size() - inven_weapons.size() - inven_arrows.size()]->GetAmount()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_potions[selectedItemNum - inven_armors.size() - inven_weapons.size() - inven_arrows.size()]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+			Font::Get()->RenderText(to_string(inven_potions[selectedItemNum - inven_armors.size() - inven_weapons.size() - inven_arrows.size()]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+			Font::Get()->SetStyle("Futura");
+		}																	
+	}
+
+	if (selectedTitleNum == InvenUI::ARMOR)
+	{
+		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(inven_armors[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(inven_armors[selectedItemNum]->GetDef()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_armors[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_armors[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+	}
+
+	if (selectedTitleNum == InvenUI::ARMOR_IRON)
+	{
+		for (Armor* armor : inven_armors)
+		{
+			if (armor->GetArmorClass() == Armor::IRON)
 			{
-				Font::Get()->SetStyle("Futura_big");
-				Font::Get()->RenderText(inven_armors[i]->GetStatus().name, { item_detail_frame->Pos().x - inname.size() * 15 ,item_detail_frame->Pos().y + 40 });				
-				Font::Get()->RenderText(to_string(inven_armors[i]->GetDef()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });				
-				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
-				Font::Get()->RenderText(to_string(inven_armors[i]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30});
-				Font::Get()->SetStyle("Futura");
+				temp_armors.push_back(armor);
 			}
 		}
+
+		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(temp_armors[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(temp_armors[selectedItemNum]->GetDef()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_armors[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_armors[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+
+		temp_armors.clear();
 	}
-		
-	//if (itemstatus->GetItem(inname).type == Item::WEAPON)
-	//	
-	//if (itemstatus->GetItem(inname).type == Item::ARROW)
-	//	
-	//if (itemstatus->GetItem(inname).type == Item::POTION)
-	//	
-	//if (itemstatus->GetItem(inname).type == Item::MISC)
-		
+
+	if (selectedTitleNum == InvenUI::ARMOR_DRAGONBONE)
+	{
+		for (Armor* armor : inven_armors)
+		{
+			if (armor->GetArmorClass() == Armor::DRAGONBONE)
+			{
+				temp_armors.push_back(armor);
+			}
+		}
+
+		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(temp_armors[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(temp_armors[selectedItemNum]->GetDef()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_armors[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_armors[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+
+		temp_armors.clear();
+	}
+
+	if (selectedTitleNum == InvenUI::WEAPON)
+	{
+		Font::Get()->RenderText("Attack", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(inven_weapons[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(inven_weapons[selectedItemNum]->GetAtk()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_weapons[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_weapons[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+	}
+
+	if (selectedTitleNum == InvenUI::WEAPON_IRON)
+	{
+		for (Weapon* weapon : inven_weapons)
+		{
+			if (weapon->GetWeaponClass() == Weapon::IRON)
+			{
+				temp_weapons.push_back(weapon);
+			}
+		}
+
+		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(temp_weapons[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(temp_weapons[selectedItemNum]->GetAtk()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_weapons[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_weapons[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+
+		temp_weapons.clear();
+	}
+
+	if (selectedTitleNum == InvenUI::WEAPON_EBONY)
+	{
+		for (Weapon* weapon : inven_weapons)
+		{
+			if (weapon->GetWeaponClass() == Weapon::EBONY)
+			{
+				temp_weapons.push_back(weapon);
+			}
+		}
+
+		Font::Get()->RenderText("Deffense", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(temp_weapons[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(temp_weapons[selectedItemNum]->GetAtk()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_weapons[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(temp_weapons[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+
+		temp_weapons.clear();
+	}
+
+	if (selectedTitleNum == InvenUI::ARROW)
+	{
+		Font::Get()->RenderText("Attack", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(inven_arrows[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(inven_arrows[selectedItemNum]->GetAtk()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_arrows[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_arrows[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+	}
+
+	if (selectedTitleNum == InvenUI::POTION)
+	{
+		Font::Get()->RenderText("Amount", { item_detail_frame->Pos().x - 160,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura_big");
+		Font::Get()->RenderText(inven_potions[selectedItemNum]->GetStatus().name, { item_detail_frame->Pos().x - 100 ,item_detail_frame->Pos().y + 40 });
+		Font::Get()->RenderText(to_string(inven_potions[selectedItemNum]->GetAmount()), { item_detail_frame->Pos().x - 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_potions[selectedItemNum]->GetStatus().weight), { item_detail_frame->Pos().x + 10,item_detail_frame->Pos().y - 30 });
+		Font::Get()->RenderText(to_string(inven_potions[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
+		Font::Get()->SetStyle("Futura");
+	}
 }
