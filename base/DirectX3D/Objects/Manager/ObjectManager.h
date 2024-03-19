@@ -5,18 +5,24 @@ public:
 	ObjectManager();
 	~ObjectManager();
 
-	void Update();
+	void Update(Player* player);
 	void Render();
 	void GUIRender();
 
-	Model* GetModel(string inname);
+	vector<BoxCollider*> GetsStructuresCol() { return structures_col; }
+	vector<BoxCollider*> GetItemsCol() { return items_col; }
+
+	Structure* GetStructure(string inname);
 	void Create(Vector3 pos, string inname);
 
 private:
-	vector<Model*> structures;
-	vector<Model*> items;
+	vector<Structure*> structures;
+	vector<Structure*> items;
+	
+	vector<Structure*> world_structures;
+	vector<Structure*> world_items;
 
-	vector<Model*> world_structures;
-	vector<Model*> world_items;
+	vector<BoxCollider*> structures_col;
+	vector<BoxCollider*> items_col;
 };
 

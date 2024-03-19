@@ -17,5 +17,6 @@ private:
 	Player* player;
 	alduin* aldu;
 
+	//Structure* test;
 };
 

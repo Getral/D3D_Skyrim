@@ -295,6 +295,7 @@
     <ClInclude Include="Scenes\MonsterScene.h" />
     <ClInclude Include="Objects\Manager\SpawnManager.h" />
     <ClInclude Include="Objects\Items\Weapons\Shield.h" />
+    <ClInclude Include="Objects\Landscape\Structure.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Objects\Particle\Trail.h" />
     <ClInclude Include="Objects\Landscape\TerrainData.h" />
@@ -455,6 +456,7 @@
     <ClCompile Include="Objects\Manager\SpawnManager.cpp" />
     <ClCompile Include="Objects\Items\Weapons\Shield.cpp" />
     <ClCompile Include="Scenes\TerrainScene.cpp" />
+    <ClCompile Include="Objects\Landscape\Structure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX3D.rc" />

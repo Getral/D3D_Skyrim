@@ -2,83 +2,78 @@
 
 ObjectManager::ObjectManager()
 {
-	structures.push_back(new Model("farmhouse"));
-	structures.back()->SetName("farmhouse");
-	structures.back()->Rot().x += XM_PI / 2;
-	structures.back()->Scale() *= 0.01f;
-	structures.back()->SetName("farmhouse");
-	
-	//structures.push_back(new Model("farmhouse2"));
-	//structures.back()->SetName("farmhouse2");
-	
-	for (Model* structure : structures)
-	{
-		structure->Rot().x += XM_PI / 2;
-		structure->Scale() *= 0.01f;
-		structure->SetTag("Structure");
-	}
+	structures.push_back(new Structure("farmhouse", { 0,0,0 }, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("farmhouse2", { 0,0,0 }, { 1350,650,1250 }, "Structure"));
 
-	items.push_back(new Model("ebonydagger"));
-	items.back()->SetName("ebonydagger");
-
-	for (Model* item : items)
-	{
-		item->Scale() *= 0.1f;
-		item->SetTag("Item");
-	}
+	structures.push_back(new Structure("ebonydagger", { 0,0,0 }, { 10,10,10 }, "Item"));
 }
 
 ObjectManager::~ObjectManager()
 {
 }
 
-void ObjectManager::Update()
+void ObjectManager::Update(Player* player)
 {
-	for (Model* structure : world_structures)
-		structure->UpdateWorld();
-	for (Model* item : world_items)
-		item->UpdateWorld();
+	for (Structure* structure : world_structures)
+	{
+		structures_col.push_back(structure->GetCollider());
+		structure->Update();
+	}
+	for (Structure* item : world_items)
+	{
+		items_col.push_back(item->GetCollider());
+		item->Update();
+	}
+
+	FOR(world_items.size())
+	{
+		if (player->GetCollier()->IsCollision(world_items[i]->GetCollider()))
+			UIManager::Get()->GetInvenUI()->AddItem(world_items[i]->GetModel()->GetName());
+	}
 }
 
 void ObjectManager::Render()
 {
-	for (Model* structure : structures)
+	for (Structure* structure : world_structures)
 		structure->Render();
-	//for (Model* item : world_items)
-	//	item->Render();
+	for (Structure* item : world_items)
+		item->Render();
+
 }
 
 void ObjectManager::GUIRender()
 {
-	//ImGui::Text(structures[0]->GetTag().c_str());
-	//ImGui::Text(structures[1]->GetTag().c_str());
-	//ImGui::Text(structures[0]->GetName().c_str());
-	//ImGui::Text(structures[1]->GetName().c_str());
-	
 }
 
 void ObjectManager::Create(Vector3 pos, string inname)
 {
-	//if (GetModel(inname)->GetTag() == "Structure")
-	//	world_structures.push_back(GetModel(inname));
-	//if (GetModel(inname)->GetTag() == "Item")
-	//	world_items.push_back(GetModel(inname));
+	if (GetStructure(inname)->GetModel()->GetTag() == "Structure")
+	{
+		GetStructure(inname)->GetModel()->Pos() = pos;
+		world_structures.push_back(GetStructure(inname));
+	}
+		
+	if (GetStructure(inname)->GetModel()->GetTag() == "Item")
+	{
+		GetStructure(inname)->GetModel()->Pos() = pos;
+		world_items.push_back(GetStructure(inname));
+	}
 }
 
 
-Model* ObjectManager::GetModel(string inname)
+Structure* ObjectManager::GetStructure(string inname)
 {
-	for (Model* structure : structures)
+	for (Structure* structure : structures)
 	{
-		if (structure->GetTag() == inname)
+		if (structure->GetModel()->GetName() == inname)
 		{
 			return structure;
 		}
 	}
 
-	for (Model* item : items)
+	for (Structure* item : items)
 	{
-		if (item->GetTag() == inname)
+		if (item->GetModel()->GetName() == inname)
 		{
 			return item;
 		}
