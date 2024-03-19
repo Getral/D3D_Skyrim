@@ -4,7 +4,7 @@ class Terrain : public GameObject
 {
 private:
     typedef VertexUVNormalTangent VertexType;
-    const float MAX_HEIGHT = 32.0f;
+    const float MAX_HEIGHT = 128.0f;
 
     class RayBuffer : public ConstBuffer
     {

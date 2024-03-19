@@ -8,10 +8,10 @@ TerrainManager::TerrainManager()
 	terrain = new Terrain(L"Textures/Landscape/tamriel.4.0.0.dds", heightMap);
 
 	float size = 16.0f;
-	//terrain->Scale() *= size;
-	//terrain->Pos().SetX(terrain->GetSize().x * size * 0.5f);
-	//terrain->Pos().SetZ(terrain->GetSize().y * size * 0.5f);
-	//terrain->Rot().y = XM_PI;
+	terrain->Scale() *= size;
+	terrain->Pos().SetX(-terrain->GetSize().x * size * 0.5f);
+	terrain->Pos().SetZ(-terrain->GetSize().y * size * 0.5f);
+	terrain->Pos().y -= 600.0f;
 	terrain->UpdateWorld();
 }
 
