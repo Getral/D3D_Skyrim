@@ -18,7 +18,7 @@ private:
 		{ "bear_sleep", "bear_startsleep", "bear_wakeup","bear_idle", "bear_combatidle","bear_run_forward", "bear_attack", "bear_attack2",
 			"bear_attack3", "bear_attack_standing", "bear_hit", "bear_headshake", "bear_death" },
 		{ "wolf_idle", "wolf_combatidle", "wolf_walk", "wolf_howling" ,"wolf_run_forward", "wolf_attack", "wolf_attack2", "wolf_attack3",
-			"wolf_attack4", "wolf_hit"}
+			"wolf_attack4", "wolf_hit", "wolf_death"}
 	};
 
 	vector<vector<Vector3>> posTable =

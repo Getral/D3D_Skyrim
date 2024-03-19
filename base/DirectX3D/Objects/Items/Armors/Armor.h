@@ -17,6 +17,7 @@ public:
 		IRON,
 		DRAGONBONE
 	};
+
 public:
 	Armor(string name, int type, int weight, int value, int armor_class, int armor_type, int def);
 	

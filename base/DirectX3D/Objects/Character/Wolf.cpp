@@ -45,21 +45,31 @@ Wolf::Wolf(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	SetEvent(RUN, bind(&Wolf::StartRun, this), 0.0f);
 
 	SetEvent(ATTACK, bind(&Wolf::StartAttack, this), 0.0f);
+	SetEvent(ATTACK, bind(&Wolf::StartAttackTrigger, this), 0.4f);
+	SetEvent(ATTACK, bind(&Wolf::EndAttackTrigger, this), 0.6f);
 	SetEvent(ATTACK, bind(&Wolf::EndAttack, this), 0.9f);
 
 	SetEvent(ATTACK2, bind(&Wolf::StartAttack, this), 0.0f);
+	SetEvent(ATTACK2, bind(&Wolf::StartAttackTrigger, this), 0.4f);
+	SetEvent(ATTACK2, bind(&Wolf::EndAttackTrigger, this), 0.6f);
 	SetEvent(ATTACK2, bind(&Wolf::EndAttack, this), 0.9f);
 
 	SetEvent(ATTACK3, bind(&Wolf::StartAttack, this), 0.0f);
+	SetEvent(ATTACK3, bind(&Wolf::StartAttackTrigger, this), 0.4f);
+	SetEvent(ATTACK3, bind(&Wolf::EndAttackTrigger, this), 0.6f);
 	SetEvent(ATTACK3, bind(&Wolf::EndAttack, this), 0.9f);
 
 	SetEvent(ATTACK4, bind(&Wolf::StartAttack, this), 0.0f);
+	SetEvent(ATTACK4, bind(&Wolf::StartAttackTrigger, this), 0.4f);
+	SetEvent(ATTACK4, bind(&Wolf::EndAttackTrigger, this), 0.6f);
 	SetEvent(ATTACK4, bind(&Wolf::EndAttack, this), 0.9f);
 
 	SetEvent(COMBATIDLE, bind(&Wolf::EndCombatIdle, this), 0.9f);
 
 	SetEvent(HIT, bind(&Wolf::StartHit, this), 0.0f);
 	SetEvent(HIT, bind(&Wolf::EndHit, this), 0.9f);
+
+	SetEvent(DEATH, bind(&Wolf::Death, this), 0.9f);
 
 	curState = IDLE;
 
@@ -73,15 +83,19 @@ Wolf::~Wolf()
 
 void Wolf::Update()
 {
-	Enemy::Update();
+	if (transform->Active())
+	{
+		Enemy::Update();
 
-	Behavior();
-	ExecuteEvent();
+		Behavior();
+		ExecuteEvent();
+	}
 }
 
 void Wolf::Render()
 {
-	Enemy::Render();
+	if (transform->Active())
+		Enemy::Render();
 	//for (CapsuleCollider* collider : colliders)
 	//	collider->Render();
 	//trackCollider->Render();
@@ -90,8 +104,6 @@ void Wolf::Render()
 
 void Wolf::GUIRender()
 {
-	Enemy::GUIRender();
-	ImGui::Text("Is Hit : %d", (int)isHit);
 }
 
 void Wolf::SetState(State state)
@@ -134,17 +146,48 @@ void Wolf::SetRandIdleRot()
 	}
 }
 
+void Wolf::Death()
+{
+	Enemy::Death();
+}
+
 void Wolf::Behavior()
 {
-	//for (CapsuleCollider* collider : colliders)
-	//{
-	//	if (collider->IsCollision(playerData->GetSword()->GetCollider()))
-	//	{
-	//		SetState(HIT);
-	//		break;
-	//	}
-	//}
-	//if (isHit) return;
+	if (this->status.curHp <= 0)
+	{
+		this->status.curHp = 0;
+		SetState(DEATH);
+	}
+
+	if (hitDelay > 0.0f)
+	{
+		hitDelay -= DELTA;
+		if (hitDelay <= 0.0f)
+			hitDelay = 0.0f;
+	}
+
+	for (CapsuleCollider* collider : colliders)
+	{
+		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
+		{
+			this->status.curHp -= playerData->GetStatus().atk;
+			hitDelay = 1.0f;
+			if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+				SetState(HIT);
+			break;
+		}
+	}
+	if (isHit) return;
+
+	for (CapsuleCollider* collider : colliders)
+	{
+		if (collider->IsCollision(playerData->GetCollier()) && attackTrigger)
+		{
+			//playerData->SetAction(Player::OHM_HIT_MEDIUM);
+			//playerData->SetIsHit(true);
+			//break;
+		}
+	}
 
 	if (attackDelay > 0.0f)
 	{
@@ -155,9 +198,11 @@ void Wolf::Behavior()
 			attackDelay = 0.0f;
 			SetState(RUN);
 		}
+		return;
 	}
 	
-	if (curState == ATTACK || curState == ATTACK2 || curState == ATTACK3 || curState == ATTACK4 || curState == COMBATIDLE) return;
+	if (curState == ATTACK || curState == ATTACK2 || curState == ATTACK3 || curState == ATTACK4
+		|| curState == HIT) return;
 	if (playerData->GetCollier()->IsCollision(attackCollider))
 	{
 		while (true)
@@ -258,12 +303,22 @@ void Wolf::StartRun()
 void Wolf::StartAttack()
 {
 	attackCollider->SetActive(false);
-	attackDelay = 1.5f;
+	attackDelay = 5.0f;
+}
+
+void Wolf::StartAttackTrigger()
+{
+	attackTrigger = true;
+}
+
+void Wolf::EndAttackTrigger()
+{
+	attackTrigger = false;
 }
 
 void Wolf::EndAttack()
 {
-	SetState(COMBATIDLE);
+	SetState(RUN);
 }
 
 void Wolf::EndCombatIdle()

@@ -61,6 +61,7 @@ public:
 	ACTION GetAction() { return curAction; }
 	bool GetIsInvincible() { return isInvincible; }
 
+	void SetHit() { return GetHit(); }
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }
 	void SetIsInvincible(bool value) { isInvincible = value; }
@@ -147,9 +148,9 @@ protected:
 	bool isHit = false;
 	bool isCombo = false;
 
-	bool is1hm = false;
+	bool is1hm = true;
 	bool is2hm = false;
-	bool isbow = true;
+	bool isbow = false;
 
 	bool isbowdrawn = false;
 
