@@ -365,8 +365,9 @@ void alduin::Attacking()
 	isAttacking = true;
 }
 
-void alduin::beginTakeoff()
+void alduin::beginTakeoff() 
 {
+
 	isAscending = true;
 	
 }
