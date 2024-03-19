@@ -15,6 +15,8 @@ PlayerScene::PlayerScene()
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("skyrim2");
 	CAM->LookAtTarget(); 
+
+
 }
 
 PlayerScene::~PlayerScene()
