@@ -160,8 +160,8 @@ Vector3 Terrain::Picking()
 
 bool Terrain::ComputePicking(Vector3& pos, Player* player)
 {
-    rayBuffer->Get().pos = player->Pos();
-    rayBuffer->Get().dir = player->Down();
+    rayBuffer->Get().pos = player->GetCollier()->Pos();
+    rayBuffer->Get().dir = player->GetCollier()->Down();
     rayBuffer->Get().triangleSize = triangleSize;
 
     rayBuffer->SetCS(0);
@@ -196,7 +196,7 @@ bool Terrain::ComputePicking(Vector3& pos, Player* player)
 
     if (minIndex >= 0)
     {
-        pos = player->Pos() + player->Down() * minDistance;
+        pos = player->GetCollier()->Pos() + player->GetCollier()->Down() * minDistance;
         return true;
     }
 
