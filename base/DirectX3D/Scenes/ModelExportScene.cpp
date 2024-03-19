@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "windmill";
+    string name = "male_dragonbone";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;

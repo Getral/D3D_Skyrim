@@ -63,5 +63,5 @@ void TerrainScene::PostRender()
 
 void TerrainScene::GUIRender()
 {
-	farmhouse->GUIRender();
+	//farmhouse->GUIRender();
 }
