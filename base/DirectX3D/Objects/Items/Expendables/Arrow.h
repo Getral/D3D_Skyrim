@@ -13,8 +13,8 @@ public:
 	int GetAtk() { return atk; }
 	int& GetCount() { return count; }
 
-	bool GetEquip() { return isEquiped; }
-	void ChangeEquipState() { isEquiped != isEquiped; }
+	bool& GetEquip() { return isEquiped; }
+	void ChangeEquipState() { isEquiped = !isEquiped; }
 private:
 	int arrow_type;
 	int atk;

@@ -53,4 +53,6 @@ void PlayerScene::GUIRender()
 	UIManager::Get()->GUIRender();
 	ImGui::Text("player cur hp = %f", player->GetStatus().curHp);
 	ImGui::Text("player cur sp = %f", player->GetStatus().curstamina);
+	ImGui::Text("player cur atk = %f", player->GetStatus().atk);
+	
 }

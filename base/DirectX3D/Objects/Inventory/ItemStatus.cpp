@@ -18,7 +18,7 @@ ItemStatus::ItemStatus()
 	weapons.push_back(new Weapon("ebonydagger", Item::WEAPON, 40, 41, Weapon::EBONY ,Weapon::dagger, 42));
 
 	arrows.push_back(new Arrow("ironarrow", Item::ARROW, 1, 2, Arrow::IRON, 100));
-	arrows.push_back(new Arrow("dragonarrow", Item::ARROW, 1, 2, Arrow::DRAGONBONE, 100));
+	arrows.push_back(new Arrow("dragonarrow", Item::ARROW, 1, 2, Arrow::DRAGONBONE, 200));
 
 	potions.push_back(new Potion("hp_potion", Item::POTION, 1, 2, Potion::POTION_HP, 10));
 	potions.push_back(new Potion("sp_potion", Item::POTION, 1, 2, Potion::POTION_SP, 10));

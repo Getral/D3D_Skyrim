@@ -81,6 +81,4 @@ private:
 	Arrow* player_arrow;
 
 	class ItemStatus* itemstatus;
-
-	int a = 0;
 };
