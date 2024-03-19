@@ -337,17 +337,22 @@ void alduin::SetTarget(Player* target)
 void alduin::Move()
 {
 	if (curState == HIT)
+	{
+		isMoving = false;
 		return;
+	}
 
 	if (curState == DEATH)
 	{
 		moveSpeed = 0.0f;
+		isMoving = false;
 		return;
 	}
 
 	if (velocity.Length() > 250 && Pos().y < 1)
 	{
 		SetState(TAKEOFF);
+		isMoving = false;
 
 	}
 
@@ -369,6 +374,7 @@ void alduin::Move()
 		if (Pos().y < 1.0f && velocity.Length() < 250)
 		{
 			SetState(TURN_R);
+			isMoving = true;
 			moveSpeed = 0.0f;
 		}
 			
@@ -380,16 +386,18 @@ void alduin::Move()
 		if (Pos().y < 1.0f && velocity.Length() < 250)
 		{
 			SetState(TURN_L);
+			isMoving = true;
 			moveSpeed = 0.0f;
 		}
 			
 	}
-	else if (cross.y >= -20 && cross.y <= 20 && !isAttacking) //반대의 경우
+	else if (cross.y >= -0 && cross.y <= 20 && !isAttacking) //반대의 경우
 	{
 
 		if (Pos().y < 1.0f && velocity.Length() < 250)
 		{
 			SetState(FORWARD);
+			isMoving = true;
 			moveSpeed = 15.0f;
 		}
 			
@@ -433,6 +441,8 @@ void alduin::BreathAttack()
 void alduin::Attacking()
 {
 	isAttacking = true;
+
+	isMoving = false;
 }
 
 void alduin::Attacking2()
@@ -444,8 +454,6 @@ void alduin::Attacking2()
 	else if (curState == ATTACK_L) Acollider_L->SetActive(true);
 
 	else if (curState == ATTACK_B) Acollider_B->SetActive(true);
-
-
 
 
 
@@ -485,6 +493,7 @@ void alduin::beginAproach()
 void alduin::EndAction()
 {
 	isAttacking = false;
+	isMoving = true;
 	moveSpeed = 15.0f;
 	SetState(FORWARD);
 	Pos().y = 0;
@@ -549,9 +558,9 @@ void alduin::SetState(State state)
 
 void alduin::Patterns() //지상패턴
 {
+	
 
-
-	if (curState != FORWARD || curState == DEATH || curState == HIT) return;
+	if (!isMoving || curState == DEATH || curState == HIT) return;
 
 	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
@@ -560,18 +569,18 @@ void alduin::Patterns() //지상패턴
 	}
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		if(curState == TURN_L || curState == TURN_R)
 		SetState(ATTACK_R);
 	}
 	else if (collider_L->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		if (curState == TURN_L || curState == TURN_R)
 		SetState(ATTACK_L);
 	}
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))
 	{
 		SetState(ATTACK_B);
 	}
+
+	
 
 
 }
@@ -581,6 +590,7 @@ void alduin::PatternFire()
 
 	if (CoolingTime < 8 || curState != FORWARD || Pos().y > 1 || curState == DEATH || curState == HIT) return;
 
+	isMoving = false;
 
 	if (Pos().y < 1) //지상에 있을 때
 	{

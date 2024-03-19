@@ -112,6 +112,7 @@ private:
 	bool isDescending = false;
 	bool isAttacking = false;
 	bool isFireAttack = false;
+	bool isMoving = false;
 
 
 	Vector3 velocity;
