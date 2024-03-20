@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "ebonydagger";
+    string name = "alduin";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
@@ -13,18 +13,19 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;
 
-    //string name = "dragonboneshield";
-    //string file = "Models/FBX/" + name + ".fbx";
-    //ModelExporter* exporter;
-    //string clipName;
+    clipName = "alduin_sleep";
+    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    exporter = new ModelExporter(name, file);//string name = "dragonbonegauntlets";
+    exporter->ExportClip(clipName);//string file = "Models/FBX/" + name + ".fbx";
+    delete exporter;
 
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportMaterial();
-    //exporter->ExportMesh();
-    //delete exporter;
+    clipName = "alduin_wakeUp";
+    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    exporter = new ModelExporter(name, file);//string name = "dragonbonegauntlets";
+    exporter->ExportClip(clipName);//string file = "Models/FBX/" + name + ".fbx";
+    delete exporter;
 
-    //string name = "dragonbonegauntlets";
-    //string file = "Models/FBX/" + name + ".fbx";
+    
     //ModelExporter* exporter;
     //string clipName;
 

@@ -32,7 +32,9 @@ private:
 		HIT,
 		DEATH,
 		TURN_L,
-		TURN_R
+		TURN_R,
+		SLEEP,
+		WAKEUP
 	};
 public:
 
@@ -65,6 +67,10 @@ private:
 	void EndAction();
 	void HitDelayEnd();
 
+	void SleepWake();
+	void WakeUp();
+	
+
 	void hit();
 	void Dying();
 	void Dead();
@@ -91,6 +97,8 @@ private:
 	CapsuleCollider* Acollider_B;
 	BoxCollider* breathCollider;
 
+	SphereCollider* WakeUpCollider;
+
 	Transform* transform;
 	Transform* FireAttackTransform;
 	Player* target;
@@ -115,6 +123,7 @@ private:
 	bool isAttacking = false;
 	bool isFireAttack = false;
 	bool isMoving = false;
+	bool isSleeping = true;
 
 
 	Vector3 velocity;
