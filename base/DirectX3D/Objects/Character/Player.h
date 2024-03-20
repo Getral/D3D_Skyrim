@@ -87,6 +87,7 @@ private:
 	void EndBlockHit();
 
 	void SetBowDrawn();
+	void ShootArrow();
 	void EndBowDrawn();
 	void SetInvincible();
 	void EndInvincible();
@@ -111,6 +112,8 @@ protected:
 	//Dragonbonehelmet* dragonbonehelmet;
 	//Dragonboneshield* dragonboneshield;
 	//IronArmor* armor;
+
+	POINT clientCenterPos = { WIN_WIDTH / 2, WIN_HEIGHT / 2 };
 
 	Transform* rightHand;
 	Transform* leftHand;
@@ -137,11 +140,14 @@ protected:
 
 	Vector3 velocity;
 
+	Vector3 prevMousePos;
+
 	float jumpVelocity = 0;
 	float jumpForce = 0.5f;
 	float gravityMult = 0.5f;
 	float attackCharge = 0.0f;
 	float invincibleCount = 0.0f; // 무적시간 재는 변수
+	float delay = 0.5f;
 
 	bool isInvincible = false; //무적인가?
 	bool isJump = false;
