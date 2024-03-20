@@ -147,6 +147,7 @@ protected:
 	float gravityMult = 0.5f;
 	float attackCharge = 0.0f;
 	float invincibleCount = 0.0f; // 무적시간 재는 변수
+	float delay = 0.5f;
 
 	bool isInvincible = false; //무적인가?
 	bool isJump = false;

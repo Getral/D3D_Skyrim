@@ -134,6 +134,8 @@ Player::Player()
 	collider->Pos().z = -600;
 	collider->SetParent(this);
 
+	CAM->Rot().x = 0;
+
 	SpawnManager::Get()->SetPlayerData(this);
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
@@ -302,8 +304,8 @@ void Player::GUIRender()
 	bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
-	ImGui::Text("Win_width : %d", mousePos.x);
-	ImGui::Text("Win_height : %d", mousePos.y);
+	ImGui::Text("Win_width : %d", clientCenterPos.x);
+	ImGui::Text("Win_height : %d", clientCenterPos.y);
 	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);
 	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
 }
@@ -500,7 +502,7 @@ void Player::Jump()
 void Player::Rotate()
 {
 	//Vector3 delta = mousePos - Vector3(clientCenterPos.x, clientCenterPos.y);
-	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);		
 
 	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
 	prevMousePos = mousePos;
@@ -511,6 +513,12 @@ void Player::Rotate()
 	CAM->Rot().x -= delta.y * rotSpeed * DELTA;
 	//Rot().y = CAM->Rot().y;
 	//Rot().x = CAM->Rot().x;
+
+
+	if (KEY_DOWN(VK_MBUTTON))
+	{
+		CAM->Rot().x = 20;
+	}
 
 
 	//if (KEY_PRESS('Q'))
