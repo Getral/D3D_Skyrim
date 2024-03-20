@@ -3,8 +3,8 @@
 Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
-	//ClientToScreen(hWnd, &clientCenterPos);
-	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+	ClientToScreen(hWnd, &clientCenterPos);
+	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
 
 	ModelAnimator::Scale() *= 0.001;
 
@@ -242,6 +242,8 @@ Player::Player()
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
+
+	prevMousePos = mousePos;
 }
 
 Player::~Player()
@@ -498,22 +500,28 @@ void Player::Jump()
 void Player::Rotate()
 {
 	//Vector3 delta = mousePos - Vector3(clientCenterPos.x, clientCenterPos.y);
-	// 마우스가 움직일 때마다 위치를 중간으로 고정
 	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
 
-	//Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
-	//CAM->Rot().x -= delta.y * rotSpeed * DELTA; // 카메라 상하회전
+	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
+	prevMousePos = mousePos;
+
+	Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
+	//Rot().x -= delta.y * rotSpeed * DELTA; // 카메라 상하회전
+
+	CAM->Rot().x -= delta.y * rotSpeed * DELTA;
+	//Rot().y = CAM->Rot().y;
+	//Rot().x = CAM->Rot().x;
 
 
-	if (KEY_PRESS('Q'))
-	{
-		Rot().y -= DELTA * rotSpeed;
-	}
+	//if (KEY_PRESS('Q'))
+	//{
+	//	Rot().y -= DELTA * rotSpeed;
+	//}
 
-	if (KEY_PRESS('E'))
-	{
-		Rot().y += DELTA * rotSpeed;
-	}
+	//if (KEY_PRESS('E'))
+	//{
+	//	Rot().y += DELTA * rotSpeed;
+	//}
 
 }
 

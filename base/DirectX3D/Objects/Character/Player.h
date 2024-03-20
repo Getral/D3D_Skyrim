@@ -140,6 +140,8 @@ protected:
 
 	Vector3 velocity;
 
+	Vector3 prevMousePos;
+
 	float jumpVelocity = 0;
 	float jumpForce = 0.5f;
 	float gravityMult = 0.5f;
