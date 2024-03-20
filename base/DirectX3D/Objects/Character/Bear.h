@@ -59,6 +59,8 @@ public:
 	virtual void Render();
 	virtual void GUIRender();
 
+	bool isBattle() { return isBattle; };
+
 	void SetState(State state);
 
 private:
