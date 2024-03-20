@@ -12,7 +12,9 @@ PlayerScene::PlayerScene()
 	CAM->TargetOptionLoad("Skyrim2");
 	CAM->LookAtTarget(); 
 
-
+	ObjectManager::Get()->Create({ 50,0,-50 }, "farmhouse");
+	ObjectManager::Get()->Create({ 50,0,50 }, "farmhouse2");
+	ObjectManager::Get()->Create({ -50,0,50 }, "ebonydagger");
 }
 
 PlayerScene::~PlayerScene()
@@ -24,8 +26,9 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
-	//aldu->Update();
+	aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
+	ObjectManager::Get()->Update(player);
 }
 
 void PlayerScene::PreRender()
@@ -35,16 +38,21 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
-	//aldu->Render();
+	aldu->Render();
+	ObjectManager::Get()->Render();
+	//model->Render();
 }
 
 void PlayerScene::PostRender()
 {
 	UIManager::Get()->PostRender();
+
 }
 
 void PlayerScene::GUIRender()
 {
-	player->GUIRender();
+	//player->GUIRender();
 	//aldu->GUIRender();
+
+	//ObjectManager::Get()->GUIRender();
 }

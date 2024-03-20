@@ -233,6 +233,7 @@ using namespace GameMath;
 #include "Objects/Landscape/QuadTreeTerrain.h"
 #include "Objects/Landscape/TerrainLOD.h"
 #include "Objects/Landscape/Water.h"
+#include "Objects/Landscape/Structure.h"
 
 #include "Objects/Algorithm/DNode.h"
 #include "Objects/Algorithm/Dijkstra.h"
