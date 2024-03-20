@@ -9,7 +9,7 @@ public:
 	void Render();
 	void GUIRender();
 
-	vector<BoxCollider*> GetsStructuresCol() { return structures_col; }
+	vector<Structure*>& GetsStructures() { return world_structures; }
 	vector<BoxCollider*> GetItemsCol() { return items_col; }
 
 	Structure* GetStructure(string inname);
