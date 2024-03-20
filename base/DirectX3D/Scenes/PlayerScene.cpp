@@ -11,6 +11,8 @@ PlayerScene::PlayerScene()
 	CAM->SetTarget(player); 
 	CAM->TargetOptionLoad("Skyrim2");
 	CAM->LookAtTarget(); 
+
+
 }
 
 PlayerScene::~PlayerScene()
@@ -23,7 +25,7 @@ void PlayerScene::Update()
 {
 	player->Update();
 	//aldu->Update();
-	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(), aldu);
+	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 }
 
 void PlayerScene::PreRender()

@@ -1,6 +1,7 @@
 #pragma once
 class alduin : public ModelAnimator
 { 
+	
 private:
 	enum State
 	{
@@ -33,7 +34,6 @@ private:
 		TURN_L,
 		TURN_R
 	};
-
 public:
 
 	alduin();
@@ -57,6 +57,7 @@ private:
 	void BreathAttack();
 
 	void Attacking();
+	void Attacking2();
 	void beginTakeoff();
 	void EndTakeoff();
 	void beginAproach();
@@ -82,6 +83,11 @@ private:
 	CapsuleCollider* collider_R;
 	CapsuleCollider* collider_L;
 	CapsuleCollider* collider_B;
+
+	CapsuleCollider* Acollider_F;
+	CapsuleCollider* Acollider_R;
+	CapsuleCollider* Acollider_L;
+	CapsuleCollider* Acollider_B;
 	BoxCollider* breathCollider;
 
 	Transform* transform;
@@ -106,6 +112,7 @@ private:
 	bool isDescending = false;
 	bool isAttacking = false;
 	bool isFireAttack = false;
+	bool isMoving = false;
 
 
 	Vector3 velocity;

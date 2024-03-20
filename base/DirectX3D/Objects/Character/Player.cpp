@@ -274,7 +274,7 @@ void Player::Update()
 	if (isInvincible)
 	{
 		invincibleCount += DELTA;
-		if (invincibleCount > 2.0f) EndInvincible();
+		if (invincibleCount > 1.0f) EndInvincible();
 	}
 
 	if (KEY_PRESS('H'))
@@ -316,11 +316,7 @@ void Player::Control()
 void Player::Move()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
-		curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM || curAction == OHM_HIT_LARGE ||
-		curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK ||
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
-		curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM || curAction == THM_HIT_LARGE || 
-		curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK ||
 		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
 		curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
 		return;
@@ -328,7 +324,7 @@ void Player::Move()
 		curAction == THM_UNEQUIP || curAction == BOW_EQUIP || curAction == BOW_UNEQUIP)
 		return;
 	if (isBlock) return;
-	if (isHit) return;
+	//if (isHit) return;
 	if (!KEY_PRESS('W') && !KEY_PRESS('S') && !KEY_PRESS('A') && !KEY_PRESS('D')) velocity.z = 0.0f, velocity.x = 0.0f;
 
 	bool isMoveZ = false;
@@ -888,56 +884,19 @@ void Player::Block()
 
 void Player::GetHit()
 {
+	if (!isHit) return;
 	if (isInvincible) return;
 	if (isbow) return;
 
 	if (is1hm)
 	{
 		if (isBlock)
-		{
-			if (KEY_DOWN('Z'))
-			{
+		{			
 				SetAction(OHM_HIT_BLOCK);
-				isHit = true;
-			}
-			if (KEY_DOWN('X'))
-			{
-				SetAction(OHM_HIT_BLOCK);
-				isHit = true;
-			}
-			if (KEY_DOWN('C'))
-			{
-				SetAction(OHM_HIT_BLOCK);
-				isHit = true;
-			}
-			if (KEY_DOWN('V'))
-			{
-				SetAction(OHM_HIT_BLOCK);
-				isHit = true;
-			}
 		}
 		else
 		{
-			if (KEY_DOWN('Z'))
-			{
 				SetAction(OHM_HIT_LIGHT);
-				isHit = true;
-			}
-			if (KEY_DOWN('X'))
-			{
-				SetAction(OHM_HIT_MEDIUM);
-				isHit = true;
-			}
-			if (KEY_DOWN('C'))
-			{
-				SetAction(OHM_HIT_LARGE);
-				isHit = true;
-			}
-			if (KEY_DOWN('V'))
-			{
-				SetAction(OHM_HIT_LARGEST);
-				isHit = true;
-			}
 		}
 	}
 
@@ -945,49 +904,11 @@ void Player::GetHit()
 	{
 		if (isBlock)
 		{
-			if (KEY_DOWN('Z'))
-			{
 				SetAction(THM_HIT_BLOCK);
-				isHit = true;
-			}
-			if (KEY_DOWN('X'))
-			{
-				SetAction(THM_HIT_BLOCK);
-				isHit = true;
-			}
-			if (KEY_DOWN('C'))
-			{
-				SetAction(THM_HIT_BLOCK);
-				isHit = true;
-			}
-			if (KEY_DOWN('V'))
-			{
-				SetAction(THM_HIT_BLOCK);
-				isHit = true;
-			}
 		}
 		else
 		{
-			if (KEY_DOWN('Z'))
-			{
 				SetAction(THM_HIT_LIGHT);
-				isHit = true;
-			}
-			if (KEY_DOWN('X'))
-			{
-				SetAction(THM_HIT_MEDIUM);
-				isHit = true;
-			}
-			if (KEY_DOWN('C'))
-			{
-				SetAction(THM_HIT_LARGE);
-				isHit = true;
-			}
-			if (KEY_DOWN('V'))
-			{
-				SetAction(THM_HIT_LARGEST);
-				isHit = true;
-			}
 		}
 	}
 	

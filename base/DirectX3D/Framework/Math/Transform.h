@@ -29,6 +29,7 @@ public:
     bool Active();
     bool ActiveSelf() { return isActive; }
 
+    bool GetActive() { return isActive; }
     void SetActive(bool isActive) { this->isActive = isActive; }
 
     void SetTag(string tag) { this->tag = tag; }
