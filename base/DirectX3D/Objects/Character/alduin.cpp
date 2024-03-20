@@ -443,8 +443,6 @@ void alduin::BreathAttack()
 {
 	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
 
-	
-
 	breathCollider->SetActive(true);
 
 }
@@ -528,16 +526,16 @@ void alduin::EndAction()
 
 void alduin::hit()
 {
-	if (HitDelay > 0) return;
+	//if (HitDelay > 0) return;
 
 	curHp -= 300;
-	HitDelay += DELTA;
+	//HitDelay += DELTA;
 
 }
 
 void alduin::HitDelayEnd()
 {
-	HitDelay = 0.0f;
+	//HitDelay = 0.0f;
 	SetState(FORWARD);
 }
 
