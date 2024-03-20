@@ -3,6 +3,9 @@
 Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
+	//ClientToScreen(hWnd, &clientCenterPos);
+	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+
 	ModelAnimator::Scale() *= 0.001;
 
 	ReadClip("male_1hm_idle");
@@ -233,6 +236,7 @@ Player::Player()
 	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 
 	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::ShootArrow, this), 0.1f);
 	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
 
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
@@ -296,6 +300,8 @@ void Player::GUIRender()
 	bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
+	ImGui::Text("Win_width : %d", mousePos.x);
+	ImGui::Text("Win_height : %d", mousePos.y);
 	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);
 	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
 }
@@ -491,6 +497,14 @@ void Player::Jump()
 
 void Player::Rotate()
 {
+	//Vector3 delta = mousePos - Vector3(clientCenterPos.x, clientCenterPos.y);
+	// 마우스가 움직일 때마다 위치를 중간으로 고정
+	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+
+	//Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
+	//CAM->Rot().x -= delta.y * rotSpeed * DELTA; // 카메라 상하회전
+
+
 	if (KEY_PRESS('Q'))
 	{
 		Rot().y -= DELTA * rotSpeed;
@@ -1302,6 +1316,12 @@ void Player::EndBlockHit()
 void Player::SetBowDrawn()
 {	
 	SetAction(BOW_DRAW_IDLE);
+}
+
+void Player::ShootArrow()
+{
+
+
 }
 
 void Player::EndBowDrawn()

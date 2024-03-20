@@ -87,6 +87,7 @@ private:
 	void EndBlockHit();
 
 	void SetBowDrawn();
+	void ShootArrow();
 	void EndBowDrawn();
 	void SetInvincible();
 	void EndInvincible();
@@ -111,6 +112,8 @@ protected:
 	//Dragonbonehelmet* dragonbonehelmet;
 	//Dragonboneshield* dragonboneshield;
 	//IronArmor* armor;
+
+	POINT clientCenterPos = { WIN_WIDTH / 2, WIN_HEIGHT / 2 };
 
 	Transform* rightHand;
 	Transform* leftHand;
