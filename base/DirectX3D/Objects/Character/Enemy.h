@@ -18,6 +18,8 @@ public:
 	SphereCollider* GetAttackCollider() { return attackCollider; }
 	vector<CapsuleCollider*> GetColliders() { return colliders; }
 
+	bool IsBattle() { return isBattle; }
+
 protected:
 	void Init();
 	void Death();
@@ -29,6 +31,8 @@ protected:
 protected:
 	ModelAnimatorInstancing* instancing;
 	ModelAnimatorInstancing::Motion* motion;
+
+	bool isBattle = false;
 
 	float trackTime = 0.0f;
 	float hitDelay = 0.0f;
