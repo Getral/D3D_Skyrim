@@ -3,7 +3,7 @@
 
 TerrainManager::TerrainManager()
 {
-	wstring heightMap = L"Textures/HeightMaps/Tamriel.png";
+	wstring heightMap = L"Textures/HeightMaps/Tamriel.jpg";
 	//wstring heightMap = L"Textures/HeightMaps/TestMap.png";
 	terrain = new Terrain(L"Textures/Landscape/tamriel.4.0.0.dds", heightMap);
 
