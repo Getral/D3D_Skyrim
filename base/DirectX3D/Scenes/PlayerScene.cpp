@@ -7,6 +7,9 @@ PlayerScene::PlayerScene()
 
 	aldu = new alduin();
 	aldu->SetTarget(player);
+	aldu->Pos() = { 280,0,123 };
+	aldu->GetTransform()->Pos() = {280, 0, 123};
+	
 
 	//CAM->SetTarget(player); 
 	//CAM->TargetOptionLoad("Skyrim2");
