@@ -19,7 +19,7 @@ private:
 	UINT width = 1;
 	UINT height = 1;
 
-	Model* testPos;
+	Model* testModel;
 
 	Player* player;
 
