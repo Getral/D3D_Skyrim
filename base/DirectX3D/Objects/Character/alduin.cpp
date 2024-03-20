@@ -111,9 +111,10 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_death");
 	this->ReadClip("alduin_turn_left");
 	this->ReadClip("alduin_turn_right");
-	Scale() *= 0.001f;
+	Scale() *= 0.0003f;
+	transform->Scale() *= 0.1f;
 
-	moveSpeed = 15.0f;
+	moveSpeed = 1.5f;
 
 
 	//일반 공격
@@ -181,6 +182,7 @@ alduin::~alduin()
 void alduin::Update()
 {
 	
+
 	ModelAnimator::Update(); 
 
 	collider_F->UpdateWorld();
@@ -245,7 +247,7 @@ void alduin::Update()
 		{
 			isDescending = false;
 			SetState(LANDING_HARD);
-			moveSpeed = 15.0f;
+			moveSpeed = 0.5f;
 		}
 		
 	}
@@ -413,7 +415,7 @@ void alduin::Move()
 		{
 			SetState(FORWARD);
 			isMoving = true;
-			moveSpeed = 15.0f;
+			moveSpeed = 0.5f;
 		}
 			
 	}
@@ -486,7 +488,7 @@ void alduin::beginAproach()
 {
 	isDescending = true;
 	SetState(DIVE);
-	moveSpeed = 300.0f;
+	moveSpeed = 150.0f;
 }
 
 //void alduin::aproaching()
@@ -504,7 +506,7 @@ void alduin::EndAction()
 {
 	isAttacking = false;
 	isMoving = true;
-	moveSpeed = 15.0f;
+	moveSpeed = 0.5f;
 	SetState(FORWARD);
 	Pos().y = 0;
 	CoolingTime = 0.0f;
