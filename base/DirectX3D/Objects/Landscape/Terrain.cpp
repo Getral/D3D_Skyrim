@@ -161,7 +161,7 @@ Vector3 Terrain::Picking()
 bool Terrain::ComputePicking(Vector3& pos, Transform* transform)
 {
     Vector3 pickingPos = transform->Pos();
-    pickingPos.y += 5.0f;
+    pickingPos.y += 3.0f;
 
     rayBuffer->Get().pos = pickingPos;
     rayBuffer->Get().dir = transform->Down();
