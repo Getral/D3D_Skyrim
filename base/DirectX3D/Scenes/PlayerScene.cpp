@@ -5,6 +5,9 @@ PlayerScene::PlayerScene()
 {
 	player = new Player();
 
+	player->Pos() = { 200,100,200 };
+
+
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
@@ -26,7 +29,7 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
-	aldu->Update();
+	//aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
 }
@@ -38,7 +41,7 @@ void PlayerScene::PreRender()
 void PlayerScene::Render()
 {
 	player->Render();
-	aldu->Render();
+	//aldu->Render();
 	ObjectManager::Get()->Render();
 }
 
@@ -50,8 +53,10 @@ void PlayerScene::PostRender()
 
 void PlayerScene::GUIRender()
 {
-	//player->GUIRender();
+	player->GUIRender();
 	//aldu->GUIRender();
 
 	//ObjectManager::Get()->GUIRender();
+
+	ImGui::Text("active : %d", SpawnManager::Get()->GetMonsterSpawnManager()[0]->GetEnemies()[0]->GetTransform()->Active());
 }

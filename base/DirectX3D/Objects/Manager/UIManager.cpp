@@ -152,7 +152,6 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
     FOR(monsterCount)
     {
         enemies_dir[i]->Pos().x = final_angles[i] * compass->GetSize().x / 140;
-
         enemies_dir[i]->UpdateWorld();
     }
 
@@ -189,7 +188,6 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 
 void UIManager::Render()
 {
-
 }
 
 void UIManager::PostRender()
@@ -201,12 +199,34 @@ void UIManager::PostRender()
             compass_dir[i]->Render();
     }
 
-    FOR(monsterCount)
+    //FOR(monsterCount)
+    //{
+    //    
+    //
+    //
+    //    if(SpawnManager::Get()->GetMonsterSpawnManager()[0]->GetEnemies()[0]->GetTransform()->Active())
+    //    if (enemies_dir[i]->Pos().x >= -60 * compass->GetSize().x / 140 && enemies_dir[i]->Pos().x <= +60 * compass->GetSize().x / 140)
+    //        enemies_dir[i]->Render();
+    //}
+    
+    if (monsterCount > 0)
     {
-        if (enemies_dir[i]->Pos().x >= -60 * compass->GetSize().x / 140 && enemies_dir[i]->Pos().x <= +60 * compass->GetSize().x / 140)
-            enemies_dir[i]->Render();
+        int tmp = 0;
+        for (int i = 0; i < SpawnManager::Get()->GetMonsterSpawnManager().size(); i++)
+        {
+            for (int j = 0; j < SpawnManager::Get()->GetMonsterSpawnManager()[i]->GetEnemies().size(); j++)
+            {
+                if (SpawnManager::Get()->GetMonsterSpawnManager()[i]->GetEnemies()[j]->GetTransform()->Active())
+                {
+                    enemies_dir[tmp]->Render();
+                    tmp++;
+                }
+            }
+        }
     }
-  
+    
+
+
     
     if (enemies_dir.back()->Pos().x >= -60 * compass->GetSize().x / 140 && enemies_dir.back()->Pos().x <= +60 * compass->GetSize().x / 140)
     {
