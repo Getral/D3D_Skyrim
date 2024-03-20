@@ -3,17 +3,13 @@
 
 PlayerScene::PlayerScene()
 {
-	terrain = new Terrain();
-	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
-	terrain->UpdateWorld();
-
 	player = new Player();
 
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("skyrim2");
+	CAM->TargetOptionLoad("Skyrim2");
 	CAM->LookAtTarget(); 
 
 
@@ -21,8 +17,7 @@ PlayerScene::PlayerScene()
 
 PlayerScene::~PlayerScene()
 {
-	//delete aldu;
-	delete terrain;
+	delete aldu;
 	delete player;
 }
 

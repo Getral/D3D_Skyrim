@@ -34,6 +34,7 @@ protected:
 	float hitDelay = 0.0f;
 	float trackRange = 0.0f;
 	float attackRange = 0.0f;
+	float gravity = 50.0f;
 
 	vector<map<float, Event>> totalEvent;
 	vector<map<float, Event>::iterator> eventIters;

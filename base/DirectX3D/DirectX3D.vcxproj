@@ -300,6 +300,7 @@
     <ClInclude Include="Objects\Landscape\TerrainLOD.h" />
     <ClInclude Include="Objects\Landscape\Water.h" />
     <ClInclude Include="Scenes\TerrainScene.h" />
+    <ClInclude Include="Objects\Manager\TerrainManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\Items\Armors\DragonBoots.cpp" />
@@ -453,6 +454,7 @@
     <ClCompile Include="Objects\Manager\SpawnManager.cpp" />
     <ClCompile Include="Objects\Items\Weapons\Shield.cpp" />
     <ClCompile Include="Scenes\TerrainScene.cpp" />
+    <ClCompile Include="Objects\Manager\TerrainManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX3D.rc" />
