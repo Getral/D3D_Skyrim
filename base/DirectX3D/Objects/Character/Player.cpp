@@ -521,7 +521,7 @@ void Player::Rotate()
 
 	if (KEY_DOWN(VK_MBUTTON))
 	{
-		CAM->Rot().x = 20;
+		CAM->Rot().x = 0;
 	}
 
 
