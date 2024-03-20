@@ -8,9 +8,9 @@ PlayerScene::PlayerScene()
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
-	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("Skyrim2");
-	CAM->LookAtTarget(); 
+	//CAM->SetTarget(player); 
+	//CAM->TargetOptionLoad("Skyrim2");
+	//CAM->LookAtTarget(); 
 
 	
 }
