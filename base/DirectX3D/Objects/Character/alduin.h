@@ -47,6 +47,7 @@ public:
 
 	void SetTarget(Player* target);
 	float GetHP() { return curHp; }
+	Transform* GetTransform() { return transform; }
 	
 
 private:

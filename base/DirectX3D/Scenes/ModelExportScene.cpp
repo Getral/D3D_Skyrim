@@ -13,13 +13,7 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;
 
-    clipName = "alduin_sleep";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);//string name = "dragonbonegauntlets";
-    exporter->ExportClip(clipName);//string file = "Models/FBX/" + name + ".fbx";
-    delete exporter;
-
-    clipName = "alduin_wakeUp";
+    clipName = "alduin_rotate_right";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);//string name = "dragonbonegauntlets";
     exporter->ExportClip(clipName);//string file = "Models/FBX/" + name + ".fbx";

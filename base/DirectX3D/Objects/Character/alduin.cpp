@@ -4,7 +4,9 @@
 alduin::alduin() :  ModelAnimator("alduin")
 {
 	transform = new Transform();
-	transform->SetParent(this);
+	//transform->SetParent(this);
+
+	//transform->Rot().SetY(this->Rot().y);
 	FireAttackTransform = new Transform();
 
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
@@ -31,46 +33,46 @@ alduin::alduin() :  ModelAnimator("alduin")
 	collider_F = new CapsuleCollider(90.0f, 0.1f);
 	collider_F->Pos().SetZ(-30);
 	collider_F->SetParent(transform);
-	collider_F->Scale() *= 0.1;
+	collider_F->Scale() *= 0.2;
 
 	collider_R = new CapsuleCollider(90.0f, 0.1f);
 	collider_R->Pos().SetX(-30);
 	collider_R->SetParent(transform);
-	collider_R->Scale() *= 0.1;
+	collider_R->Scale() *= 0.2;
 
 	collider_L = new CapsuleCollider(90.0f, 0.1f);
 	collider_L->Pos().SetX(30);
 	collider_L->SetParent(transform);
-	collider_L->Scale() *= 0.1;
+	collider_L->Scale() *= 0.2;
 
 	collider_B = new CapsuleCollider(90.0f, 0.1f);
 	collider_B->Pos().SetZ(30);
 	collider_B->SetParent(transform);
-	collider_B->Scale() *= 0.1;
+	collider_B->Scale() *= 0.2;
 
 	//공격 범위
 	Acollider_F = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_F->Pos().SetZ(-32);
 	Acollider_F->SetParent(transform);
-	Acollider_F->Scale() *= 0.1;
+	Acollider_F->Scale() *= 0.2;
 	Acollider_F->SetActive(false);
 
 	Acollider_R = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_R->Pos().SetX(-25);
 	Acollider_R->SetParent(transform);
-	Acollider_R->Scale() *= 0.1;
+	Acollider_R->Scale() *= 0.2;
 	Acollider_R->SetActive(false);
 
 	Acollider_L = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_L->Pos().SetX(25);
 	Acollider_L->SetParent(transform);
-	Acollider_L->Scale() *= 0.1;
+	Acollider_L->Scale() *= 0.2;
 	Acollider_L->SetActive(false);
 
 	Acollider_B = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_B->Pos().SetZ(25);
 	Acollider_B->SetParent(transform);
-	Acollider_B->Scale() *= 0.1;
+	Acollider_B->Scale() *= 0.2;
 	Acollider_B->SetActive(false);
 	
 	breathCollider->Pos().SetZ(-70);
@@ -78,9 +80,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 	breathCollider->Scale() *= 0.2;
 	breathCollider->SetActive(false);
 
-	WakeUpCollider = new SphereCollider(250.0f);
+	WakeUpCollider = new SphereCollider(2500.0f);
 	WakeUpCollider->SetParent(this);
-	WakeUpCollider->Scale() *= 10.0f;
+	WakeUpCollider->Scale() *= 50.0f;
 	WakeUpCollider->SetActive(true);
 
 	//fBallCollider->SetParent(transform);
