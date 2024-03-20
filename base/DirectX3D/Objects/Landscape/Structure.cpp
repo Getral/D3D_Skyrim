@@ -2,6 +2,7 @@
 #include "Structure.h"
 
 Structure::Structure(string modelName, Vector3 pos, float scale, Vector3 colliderSize, string tag)
+	:modelName(modelName),pos(pos),scale(scale),colliderSize(colliderSize),tag(tag)
 {
 	model = new Model(modelName);
 	model->Pos() = pos;
@@ -20,7 +21,7 @@ Structure::Structure(string modelName, Vector3 pos, float scale, Vector3 collide
 		//model->Scale() *= 0.1f;
 	}
 	
-
+	
 	collider = new BoxCollider(colliderSize);
 	collider->SetParent(model);
 }
@@ -44,4 +45,5 @@ void Structure::Render()
 void Structure::GUIRender()
 {
 	collider->GUIRender();
+	model->GUIRender();
 }
