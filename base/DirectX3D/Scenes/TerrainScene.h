@@ -19,9 +19,9 @@ private:
 	UINT width = 1;
 	UINT height = 1;
 
-	Player* player;
+	Model* testPos;
 
-	float testPos;
+	Player* player;
 
 	vector<vector<Terrain*>> terrain;
 	//Terrain* terrain;

@@ -2,7 +2,7 @@
 class Structure
 {
 public:
-	Structure(string modelName, Vector3 pos, Vector3 size ,string tag);
+	Structure(string modelName, Vector3 pos, float scale, Vector3 colliderSize, string tag);
 	~Structure();
 
 	void Update();
