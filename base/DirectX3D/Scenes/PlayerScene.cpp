@@ -9,10 +9,8 @@ PlayerScene::PlayerScene()
 	aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("Skyrim2");
+	//CAM->TargetOptionLoad("Skyrim2");
 	CAM->LookAtTarget(); 
-
-	
 }
 
 PlayerScene::~PlayerScene()
@@ -24,6 +22,13 @@ PlayerScene::~PlayerScene()
 void PlayerScene::Update()
 {
 	player->Update();
+
+	if (KEY_PRESS('Q'))
+		player->Rot().y -= 1 * DELTA;
+
+	if (KEY_PRESS('E'))
+		player->Rot().y += 1 * DELTA;
+
 	//aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
@@ -50,6 +55,6 @@ void PlayerScene::GUIRender()
 {
 	//player->GUIRender();
 	//aldu->GUIRender();
-
+	UIManager::Get()->GUIRender();
 	ObjectManager::Get()->GUIRender();
 }

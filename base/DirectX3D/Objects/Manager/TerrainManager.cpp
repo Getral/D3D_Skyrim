@@ -3,8 +3,9 @@
 
 TerrainManager::TerrainManager()
 {
-	wstring heightMap = L"Textures/HeightMaps/Tamriel.jpg";
+	//wstring heightMap = L"Textures/HeightMaps/Tamriel.jpg";
 	//wstring heightMap = L"Textures/HeightMaps/TestMap.png";
+	wstring heightMap = L"Textures/Color/Black.png";
 	terrain = new Terrain(L"Textures/Landscape/tamriel.4.0.0.dds", heightMap);
 
 	//float size = 2.0f;
