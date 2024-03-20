@@ -20,6 +20,9 @@ private:
 	UINT height = 1;
 
 	vector<vector<Terrain*>> terrain;
+
+	Model* tree01;
+	Model* tree02;
 	//Terrain* terrain;
 };
 

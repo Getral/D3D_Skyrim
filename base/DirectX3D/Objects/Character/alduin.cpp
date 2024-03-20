@@ -11,10 +11,11 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 
 	HeadCollider = new CapsuleCollider(90.0f,0.1f);
+	HeadCollider->SetParent(transform);
 	BodyCollider = new CapsuleCollider(110.0f, 350.0f);
-
+	BodyCollider->SetParent(transform);
 	TailCollider = new CapsuleCollider(90.0f, 10.0f);
-
+	TailCollider->SetParent(transform);
 
 	breathCollider = new BoxCollider({ 300,200,400 });
 
