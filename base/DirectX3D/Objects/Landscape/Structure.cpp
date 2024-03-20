@@ -11,7 +11,7 @@ Structure::Structure(string modelName, Vector3 pos, float scale, Vector3 collide
 
 	if (tag == "Structure")
 	{
-		//model->Rot().x += XM_PI / 2;
+		model->Rot().x += XM_PI / 2;
 		//model->Scale() *= 0.07f;
 	}
 	
