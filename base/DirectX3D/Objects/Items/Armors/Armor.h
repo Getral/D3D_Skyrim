@@ -27,6 +27,7 @@ public:
 
 	void ChangeEquipState() { isEquiped = !isEquiped; }
 	int GetEquip() { return isEquiped; }
+
 private:
 	int armor_class;
 	int armor_type;

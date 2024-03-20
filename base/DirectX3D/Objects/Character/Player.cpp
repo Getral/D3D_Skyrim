@@ -135,11 +135,17 @@ Player::Player()
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
-	bladeSword = new BladeSword();
-	bladeSword->Load();
+
+
+	ebonybattleaxe = new EbonyBattleAxe("EbonyBattleAxe", 
+		Item::Type::WEAPON, weight, value, Weapon::WeaponClass::EBONY, 
+		Weapon::WeaponType::battleaxe, Weapon::WeaponAtk::atk);
+	ebonybattleaxe->Load();	
 
 	rightHand = new Transform();
-	bladeSword->SetParent(rightHand);
+	ebonybattleaxe->SetParent(rightHand);
+
+
 
 	shield = new Shield();
 	shield->Load();
@@ -147,10 +153,13 @@ Player::Player()
 	leftHand = new Transform();
 	shield->SetParent(leftHand);
 
+
+
 	headCollider = new CapsuleCollider(10);
 
 	head = new Transform();
 	headCollider->SetParent(head);
+
 
 	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
@@ -281,8 +290,13 @@ void Player::Render()
 {
 	ModelAnimator::Render();
 	collider->Render();
-	bladeSword->Render();
-	//shield->Render();
+	//bladeSword->Render();
+	shield->Render();
+
+	// Weapon
+	// Ebony
+	ebonybattleaxe->Render();
+
 
 	headCollider->Render();
 }
@@ -293,7 +307,12 @@ void Player::PostRender()
 
 void Player::GUIRender()
 {
-	bladeSword->GUIRender();
+	// Weapon
+	// Ebony
+	ebonybattleaxe->GUIRender();
+
+
+	//bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
 	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);

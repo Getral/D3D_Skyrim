@@ -105,12 +105,11 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
-	//Dragonboneboots* dragonboneboots;
-	//Dragonbonecuirassplate* dragonbonecuirassplate;
-	//Dragonbonegauntlets* dragonbonegauntlets;
-	//Dragonbonehelmet* dragonbonehelmet;
-	//Dragonboneshield* dragonboneshield;
-	//IronArmor* armor;
+	// Weapon
+	//  Ebony
+	EbonyBattleAxe* ebonybattleaxe;
+
+
 
 	Transform* rightHand;
 	Transform* leftHand;
@@ -156,6 +155,11 @@ protected:
 	bool isbowdrawn = false;
 
 
-	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
+	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값 
+
+
+	int weight;
+	int value;
+	int atk;
 };
 

@@ -3,15 +3,48 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "farmhouse";
+    string name = "ebonybattleaxe";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
-
+    
     exporter = new ModelExporter(name, file);
     exporter->ExportMaterial();
     exporter->ExportMesh();
     delete exporter;
+
+
+    string name1 = "male_dragonbone";
+    string file1 = "Models/FBX/" + name1 + ".fbx";
+    ModelExporter* exporter1;
+    string clipName1;
+
+    exporter1 = new ModelExporter(name1, file1);
+    exporter1->ExportMaterial();
+    exporter1->ExportMesh();
+    delete exporter1;
+
+
+    string name2 = "male_dragonbone";
+    string file2 = "Models/FBX/" + name2 + ".fbx";
+    ModelExporter* exporter2;
+    string clipName2;
+
+    exporter2 = new ModelExporter(name2, file2);
+    exporter2->ExportMaterial();
+    exporter2->ExportMesh();
+    delete exporter2;
+
+
+    //string name = "farmhouse";
+    //string file = "Models/FBX/" + name + ".fbx";
+    //ModelExporter* exporter;
+    //string clipName;
+    //
+    //exporter = new ModelExporter(name, file);
+    //exporter->ExportMaterial();
+    //exporter->ExportMesh();
+    //delete exporter;
 
     //string name = "dragonboneshield";
     //string file = "Models/FBX/" + name + ".fbx";

@@ -1,8 +1,10 @@
 #include "Framework.h"
 
-
-EbonyBattleAxe::EbonyBattleAxe() : Model("EbonyBattleAxe")
+EbonyBattleAxe::EbonyBattleAxe(string name, int type, int weight, int value,
+	int weapon_class, int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class, weapon_type, atk) 
 {
+	ebonybattleaxe = new Model("EbonyBattleAxe");
 	SetTag("EbonyBattleAxe");
 
 	Pos().x *= 0;
@@ -12,10 +14,11 @@ EbonyBattleAxe::EbonyBattleAxe() : Model("EbonyBattleAxe")
 	Rot().x *= 0;
 	Rot().y *= 0;
 	Rot().z *= 0;
-
+	
 	Scale().x *= 1;
 	Scale().y *= 1;
 	Scale().z *= 1;
+
 
 	collider = new BoxCollider();
 	collider->Pos().x = -12.3f;
@@ -30,10 +33,11 @@ EbonyBattleAxe::EbonyBattleAxe() : Model("EbonyBattleAxe")
 	collider->Scale().y *= 66.8f;
 	collider->Scale().z *= 1;
 
-
 	collider->SetTag("EbonyBattleAxeCollider");
 	collider->SetParent(this);
 	collider->Load();
+
+
 }
 
 EbonyBattleAxe::~EbonyBattleAxe()

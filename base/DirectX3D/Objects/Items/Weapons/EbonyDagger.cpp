@@ -1,7 +1,10 @@
 #include "Framework.h"
 
-EbonyDagger::EbonyDagger() : Model("EbonyDagger")
+EbonyDagger::EbonyDagger(string name, int type, int weight, int value,
+	int weapon_class, int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class, weapon_type, atk)
 {
+	ebonydagger = new Model("EbonyDagger");
 	SetTag("EbonyDagger");
 
 	Pos().x *= 0;
