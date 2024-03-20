@@ -6,7 +6,11 @@ Player::Player()
 	ClientToScreen(hWnd, &clientCenterPos);
 	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
 
-	ModelAnimator::Scale() *= 0.001;
+	ModelAnimator::Scale() *= 0.0001f;
+
+	Pos().x = 200.0f;
+	Pos().y = 500.0f;
+	Pos().z = 200.0f;
 
 	ReadClip("male_1hm_idle");
 	ReadClip("male_jump");
@@ -127,7 +131,6 @@ Player::Player()
 	ReadClip("male_bow_unequip");
 	//ReadClip("male_death");
 
-
 	collider = new CapsuleCollider(2, 6);
 	collider->Scale() *= 1000;
 	collider->Pos().y = 5000;
@@ -137,6 +140,7 @@ Player::Player()
 	CAM->Rot().x = 0;
 
 	SpawnManager::Get()->SetPlayerData(this);
+	TerrainManager::Get()->SetPlayerData(this);
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 

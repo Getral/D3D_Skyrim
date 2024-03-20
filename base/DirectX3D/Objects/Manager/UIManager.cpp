@@ -209,10 +209,15 @@ void UIManager::PostRender()
   
     
     if (enemies_dir.back()->Pos().x >= -60 * compass->GetSize().x / 140 && enemies_dir.back()->Pos().x <= +60 * compass->GetSize().x / 140)
-        enemies_dir.back()->Render();
+    {
+        if (isQuest)
+            bossQuest_dir->Render();
+        else
+            enemies_dir.back()->Render();
+    }
 
-    if(isQuest)
-        bossQuest_dir->Render();
+   
+
 
     HP_bar_background->Render();
     HP_bar->Render();

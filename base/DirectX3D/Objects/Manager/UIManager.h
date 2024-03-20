@@ -10,6 +10,9 @@ public:
 	void PostRender();
 	void GUIRender();
 
+	
+	InvenUI* GetInvenUI() { return invenUI; }
+
 	void TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies, alduin* alduin);
 
 	//float GetEnemyDegree() { return final_angle; }
@@ -49,7 +52,7 @@ private:
 	bool isQuest = true;
 	
 	InvenUI* invenUI;
-	bool isInven = true;
+	bool isInven = false;
 
 	ItemStatus* itemstatus;
 };
