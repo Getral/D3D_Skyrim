@@ -8,16 +8,11 @@ PlayerScene::PlayerScene()
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
-	//CAM->SetTarget(player); 
-	//CAM->TargetOptionLoad("Skyrim2");
-	//CAM->LookAtTarget(); 
+	CAM->SetTarget(player); 
+	CAM->TargetOptionLoad("Skyrim2");
+	CAM->LookAtTarget(); 
 
-	ObjectManager::Get()->Create({ 0,0,0 }, "farmhouse");
-	ObjectManager::Get()->Create({ 0,50,0 }, "farmhouse");
-	ObjectManager::Get()->Create({ 0,100,0 }, "farmhouse");
-	ObjectManager::Get()->Create({ 0,150,0 }, "farmhouse");
-	ObjectManager::Get()->Create({ -50,0,50 }, "ebonydagger");
-	ObjectManager::Get()->Create({ -50,50,50 }, "ebonydagger");
+	
 }
 
 PlayerScene::~PlayerScene()
@@ -40,7 +35,7 @@ void PlayerScene::PreRender()
 
 void PlayerScene::Render()
 {
-	//player->Render();
+	player->Render();
 	//aldu->Render();
 	ObjectManager::Get()->Render();
 }
