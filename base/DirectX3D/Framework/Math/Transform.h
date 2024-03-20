@@ -32,7 +32,11 @@ public:
     bool GetActive() { return isActive; }
     void SetActive(bool isActive) { this->isActive = isActive; }
 
+    string GetTag() { return tag; }
     void SetTag(string tag) { this->tag = tag; }
+
+    string GetName() { return name; }
+    void SetName(string name) { this->name = name; }
 
     Vector3& Pos() { return localPosition; }
     Vector3& Rot() { return localRotation; }
@@ -43,6 +47,7 @@ public:
 
 protected:
     string tag;
+    string name;
 
     Vector3 localPosition;
     Vector3 localRotation = { 0, 0, 0 };
