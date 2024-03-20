@@ -5,6 +5,16 @@ ObjectManager::ObjectManager()
 	structures.push_back(new Structure("farmhouse", { 0,0,0 }, 0.01f, { 1350,650,1250 }, "Structure"));
 	structures.push_back(new Structure("farmhouse2", { 0,0,0 }, 0.07f, { 1350,650,1250 }, "Structure"));
 	structures.push_back(new Structure("rock_large1", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large2", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large3", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large4", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large5", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium1", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium2", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium3", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium4", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_small1", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_small2", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
 
 	items.push_back(new Structure("ebonydagger", { 0,0,0 }, 0.1f, { 10,10,10 }, "Item"));
 }
