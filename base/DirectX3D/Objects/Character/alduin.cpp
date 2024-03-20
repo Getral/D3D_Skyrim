@@ -81,7 +81,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_death");
 	this->ReadClip("alduin_turn_left");
 	this->ReadClip("alduin_turn_right");
-	Scale() *= 0.001;
+	Scale() *= 0.001f;
 
 	moveSpeed = 15.0f;
 

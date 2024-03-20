@@ -183,9 +183,9 @@ void Wolf::Behavior()
 	{
 		if (collider->IsCollision(playerData->GetCollier()) && attackTrigger)
 		{
-			//playerData->SetAction(Player::OHM_HIT_MEDIUM);
-			//playerData->SetIsHit(true);
-			//break;
+			playerData->SetAction(Player::OHM_HIT_MEDIUM);
+			playerData->SetIsHit(true);
+			break;
 		}
 	}
 
@@ -303,7 +303,7 @@ void Wolf::StartRun()
 void Wolf::StartAttack()
 {
 	attackCollider->SetActive(false);
-	attackDelay = 5.0f;
+	attackDelay = 2.5f;
 }
 
 void Wolf::StartAttackTrigger()
@@ -318,7 +318,7 @@ void Wolf::EndAttackTrigger()
 
 void Wolf::EndAttack()
 {
-	SetState(RUN);
+	SetState(COMBATIDLE);
 }
 
 void Wolf::EndCombatIdle()

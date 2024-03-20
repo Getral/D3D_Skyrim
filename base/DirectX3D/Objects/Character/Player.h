@@ -11,7 +11,7 @@ public:
 		float maxstamina = 100;
 		float atk = 10;
 		float def = 10;
-		float speed = 15;
+		float speed = 5.0f;
 	};
 
 	enum ACTION
