@@ -13,7 +13,7 @@ PlayerScene::PlayerScene()
 	CAM->LookAtTarget(); 
 
 	ObjectManager::Get()->Create({ 50,0,-50 }, "farmhouse");
-	ObjectManager::Get()->Create({ 50,0,50 }, "farmhouse2");
+	ObjectManager::Get()->Create({ 0,0,0 }, "farmhouse2");
 	ObjectManager::Get()->Create({ -50,0,50 }, "ebonydagger");
 }
 
@@ -40,7 +40,6 @@ void PlayerScene::Render()
 	player->Render();
 	aldu->Render();
 	ObjectManager::Get()->Render();
-	//model->Render();
 }
 
 void PlayerScene::PostRender()
