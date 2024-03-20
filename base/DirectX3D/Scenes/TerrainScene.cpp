@@ -35,7 +35,7 @@ TerrainScene::TerrainScene()
 			terrain[i][j]->UpdateWorld();
 		}
 	}*/
-	tree01 = new Model("tree_winter");
+	//tree01 = new Model("tree_winter");
 
 
 	//for (int i = 0; i < height; i++)
@@ -83,7 +83,7 @@ void TerrainScene::PreRender()
 
 void TerrainScene::Render()
 {
-	tree01->Render();
+	//tree01->Render();
 	//for (vector<Terrain*> terrains : terrain)
 	//	for (Terrain* t : terrains)
 	//		t->Render();
