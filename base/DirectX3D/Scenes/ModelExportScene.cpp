@@ -12,8 +12,8 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMaterial();
     exporter->ExportMesh();
     delete exporter;
-
-    clipName = "alduin_rotate_right";
+    
+    clipName = "alduin_turn_right";
     file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     exporter = new ModelExporter(name, file);//string name = "dragonbonegauntlets";
     exporter->ExportClip(clipName);//string file = "Models/FBX/" + name + ".fbx";
