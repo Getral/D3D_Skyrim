@@ -13,10 +13,18 @@ Terrain::Terrain(Vector2 size)
     //secondMap = Texture::Add(L"Textures/Landscape/Dirt.png");
     //thirdMap = Texture::Add(L"Textures/Landscape/Dirt3.png");
 
+    computeShader = Shader::AddCS(L"Compute/ComputePicking.hlsl");
+
+    structuredBuffer = new StructuredBuffer(
+        inputs.data(), sizeof(InputDesc), triangleSize,
+        sizeof(OutputDesc), triangleSize);
+    rayBuffer = new RayBuffer();
+
     mesh = new Mesh<VertexType>();
     MakeMesh();
     MakeNormal();
     MakeTangent();
+    MakeComputeData();
     mesh->CreateMesh();
 }
 
@@ -38,7 +46,15 @@ Terrain::Terrain(wstring mapFile, wstring heightmap)
     MakeMesh();
     MakeNormal();
     MakeTangent();
+    MakeComputeData();
     mesh->CreateMesh();
+
+    computeShader = Shader::AddCS(L"Compute/ComputePicking.hlsl");
+
+    structuredBuffer = new StructuredBuffer(
+        inputs.data(), sizeof(InputDesc), triangleSize,
+        sizeof(OutputDesc), triangleSize);
+    rayBuffer = new RayBuffer();
 }
 
 Terrain::~Terrain()
@@ -140,6 +156,54 @@ Vector3 Terrain::Picking()
     }
 
     return Vector3();
+}
+
+bool Terrain::ComputePicking(Vector3& pos, Transform* transform)
+{
+    Vector3 pickingPos = transform->Pos();
+    pickingPos.y += 3.0f;
+
+    rayBuffer->Get().pos = pickingPos;
+    rayBuffer->Get().dir = transform->Down();
+    rayBuffer->Get().triangleSize = triangleSize;
+
+    rayBuffer->SetCS(0);
+
+    DC->CSSetShaderResources(0, 1, &structuredBuffer->GetSRV());
+    DC->CSSetUnorderedAccessViews(0, 1, &structuredBuffer->GetUAV(), nullptr);
+
+    computeShader->Set();
+
+    UINT x = ceil((float)triangleSize / 64.0f);
+
+    DC->Dispatch(x, 1, 1);
+
+    structuredBuffer->Copy(outputs.data(), sizeof(OutputDesc) * triangleSize);
+
+    float minDistance = FLT_MAX;
+    int minIndex = -1;
+
+    UINT index = 0;
+    for (OutputDesc output : outputs)
+    {
+        if (output.picked)
+        {
+            if (minDistance > output.distance)
+            {
+                minDistance = output.distance;
+                minIndex = index;
+            }
+        }
+        index++;
+    }
+
+    if (minIndex >= 0)
+    {
+        pos = pickingPos + transform->Down() * minDistance;
+        return true;
+    }
+
+    return false;
 }
 
 void Terrain::MakeNormal()
@@ -250,4 +314,26 @@ void Terrain::MakeMesh()
             indices.push_back(width * (z + 1) + x + 1);//3
         }
     }    
+}
+
+void Terrain::MakeComputeData()
+{
+    vector<VertexType> vertices = mesh->GetVertices();
+    vector<UINT> indices = mesh->GetIndices();
+
+    triangleSize = indices.size() / 3;
+
+    inputs.resize(triangleSize);
+    outputs.resize(triangleSize);
+
+    for (UINT i = 0; i < triangleSize; i++)
+    {
+        UINT index0 = indices[i * 3 + 0];
+        UINT index1 = indices[i * 3 + 1];
+        UINT index2 = indices[i * 3 + 2];
+
+        inputs[i].v0 = vertices[index0].pos;
+        inputs[i].v1 = vertices[index1].pos;
+        inputs[i].v2 = vertices[index2].pos;
+    }
 }

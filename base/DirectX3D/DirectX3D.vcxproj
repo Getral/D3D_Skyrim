@@ -174,7 +174,6 @@
     <ClInclude Include="Objects\Items\Weapons\IronQuiver.h" />
     <ClInclude Include="Objects\Items\Weapons\IronWaraxe.h" />
     <ClInclude Include="Objects\Items\Weapons\IronWarHammer.h" />
-    <ClInclude Include="Objects\Manager\ObjectManager.h" />
     <ClInclude Include="Objects\UI\InvenUI.h" />
     <ClInclude Include="Objects\Character\Bear.h" />
     <ClInclude Include="Objects\Character\Wolf.h" />
@@ -295,13 +294,13 @@
     <ClInclude Include="Scenes\MonsterScene.h" />
     <ClInclude Include="Objects\Manager\SpawnManager.h" />
     <ClInclude Include="Objects\Items\Weapons\Shield.h" />
-    <ClInclude Include="Objects\Landscape\Structure.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Objects\Particle\Trail.h" />
     <ClInclude Include="Objects\Landscape\TerrainData.h" />
     <ClInclude Include="Objects\Landscape\TerrainLOD.h" />
     <ClInclude Include="Objects\Landscape\Water.h" />
     <ClInclude Include="Scenes\TerrainScene.h" />
+    <ClInclude Include="Objects\Manager\TerrainManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\Items\Armors\DragonBoots.cpp" />
@@ -336,7 +335,6 @@
     <ClCompile Include="Objects\Items\Weapons\IronQuiver.cpp" />
     <ClCompile Include="Objects\Items\Weapons\IronWaraxe.cpp" />
     <ClCompile Include="Objects\Items\Weapons\IronWarHammer.cpp" />
-    <ClCompile Include="Objects\Manager\ObjectManager.cpp" />
     <ClCompile Include="Objects\UI\InvenUI.cpp" />
     <ClCompile Include="Objects\Character\Bear.cpp" />
     <ClCompile Include="Objects\Character\Wolf.cpp" />
@@ -456,7 +454,7 @@
     <ClCompile Include="Objects\Manager\SpawnManager.cpp" />
     <ClCompile Include="Objects\Items\Weapons\Shield.cpp" />
     <ClCompile Include="Scenes\TerrainScene.cpp" />
-    <ClCompile Include="Objects\Landscape\Structure.cpp" />
+    <ClCompile Include="Objects\Manager\TerrainManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX3D.rc" />

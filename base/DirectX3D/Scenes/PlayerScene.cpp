@@ -3,18 +3,13 @@
 
 PlayerScene::PlayerScene()
 {
-	terrain = new Terrain();
-	terrain->Pos() = { -terrain->GetSize().x / 2, 0, -terrain->GetSize().y / 2 };
-	terrain->UpdateWorld();
-
 	player = new Player();
-	player->Scale() *= 1.0f;
 
 	aldu = new alduin();
 	aldu->SetTarget(player);
 
 	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("skyrim2");
+	CAM->TargetOptionLoad("Skyrim2");
 	CAM->LookAtTarget(); 
 
 	ObjectManager::Get()->Create({ 50,0,-50 }, "farmhouse");
@@ -25,7 +20,6 @@ PlayerScene::PlayerScene()
 PlayerScene::~PlayerScene()
 {
 	delete aldu;
-	delete terrain;
 	delete player;
 }
 
