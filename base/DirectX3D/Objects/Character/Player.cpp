@@ -3,6 +3,9 @@
 Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
+	ClientToScreen(hWnd, &clientCenterPos);
+	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+
 	ModelAnimator::Scale() *= 0.0001f;
 
 	Pos().x = 200.0f;
@@ -134,6 +137,8 @@ Player::Player()
 	collider->Pos().z = -600;
 	collider->SetParent(this);
 
+	CAM->Rot().x = 0;
+
 	SpawnManager::Get()->SetPlayerData(this);
 	TerrainManager::Get()->SetPlayerData(this);
 
@@ -237,11 +242,14 @@ Player::Player()
 	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 
 	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::ShootArrow, this), 0.1f);
 	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
 
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
+
+	prevMousePos = mousePos;
 }
 
 Player::~Player()
@@ -300,6 +308,8 @@ void Player::GUIRender()
 	bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
+	ImGui::Text("Win_width : %d", clientCenterPos.x);
+	ImGui::Text("Win_height : %d", clientCenterPos.y);
 	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);
 	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
 }
@@ -495,15 +505,35 @@ void Player::Jump()
 
 void Player::Rotate()
 {
-	if (KEY_PRESS('Q'))
+	//Vector3 delta = mousePos - Vector3(clientCenterPos.x, clientCenterPos.y);
+	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);		
+
+	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
+	prevMousePos = mousePos;
+
+	Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
+	//Rot().x -= delta.y * rotSpeed * DELTA; // 카메라 상하회전
+
+	CAM->Rot().x -= delta.y * rotSpeed * DELTA;
+	//Rot().y = CAM->Rot().y;
+	//Rot().x = CAM->Rot().x;
+
+
+	if (KEY_DOWN(VK_MBUTTON))
 	{
-		Rot().y -= DELTA * rotSpeed;
+		CAM->Rot().x = 0;
 	}
 
-	if (KEY_PRESS('E'))
-	{
-		Rot().y += DELTA * rotSpeed;
-	}
+
+	//if (KEY_PRESS('Q'))
+	//{
+	//	Rot().y -= DELTA * rotSpeed;
+	//}
+
+	//if (KEY_PRESS('E'))
+	//{
+	//	Rot().y += DELTA * rotSpeed;
+	//}
 
 }
 
@@ -1306,6 +1336,12 @@ void Player::EndBlockHit()
 void Player::SetBowDrawn()
 {	
 	SetAction(BOW_DRAW_IDLE);
+}
+
+void Player::ShootArrow()
+{
+
+
 }
 
 void Player::EndBowDrawn()

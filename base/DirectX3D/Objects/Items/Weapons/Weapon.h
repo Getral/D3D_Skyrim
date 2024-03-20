@@ -10,6 +10,7 @@ public:
 		claymore,		// 한손검
 		waraxe,		// 한손도끼
 		mace,			// 한손둔기	
+		//2hd
 		longsword,	// 양손검
 		battleaxe,	// 양손도끼
 		warhammer,	// 양손둔기
