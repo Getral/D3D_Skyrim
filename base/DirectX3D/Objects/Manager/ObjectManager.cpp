@@ -3,20 +3,23 @@
 ObjectManager::ObjectManager()
 {
 	structures.push_back(new Structure("farmhouse", 0.01f, { 1350,650,1250 }, "Structure"));
-	structures.push_back(new Structure("farmhouse2", 0.01f, { 1350,650,1250 }, "Structure"));
-	structures.push_back(new Structure("rock_large1", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large2", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large3", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large4", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large5", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium1", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium2", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium3", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium4", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_small1", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_small2", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("farmhouse2", 0.07f, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("rock_large1", 0.05f, { 250, 400, 250 }, "Structure"));
+	structures.push_back(new Structure("rock_large2", 0.05f, { 600, 490, 200 }, "Structure"));
+	structures.push_back(new Structure("rock_large3", 0.05f, { 400, 400, 150 }, "Structure"));
+	structures.push_back(new Structure("rock_large4", 0.05f, { 200, 250, 370 }, "Structure"));
+	structures.push_back(new Structure("rock_large5", 0.05f, { 250, 300, 190 }, "Structure"));
+	structures.push_back(new Structure("rock_medium1", 0.05f, { 250, 160, 110 }, "Structure"));
+	structures.push_back(new Structure("rock_medium2", 0.05f, { 130, 130, 100 }, "Structure"));
+	structures.push_back(new Structure("rock_medium3", 0.05f, { 250, 230, 135 }, "Structure"));
+	structures.push_back(new Structure("rock_medium4", 0.05f, { 150, 140, 100 }, "Structure"));
+
+	structures.push_back(new Structure("tree", 0.025f, { 10,10,10 }, "Structure", true));
+
 
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
+
+	
 }
 
 ObjectManager::~ObjectManager()
@@ -107,7 +110,10 @@ void ObjectManager::Update(Player* player)
 void ObjectManager::Render()
 {
 	for (Structure* structure : world_structures)
+	{
 		structure->Render();
+	}
+
 	for (Structure* item : world_items)
 		item->Render();
 }
@@ -121,7 +127,7 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 {
 	if (GetStructure(inname)->GetModel()->GetTag() == "Structure")
 	{
-		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag(),GetStructure(inname)->GetIsAlpha());
 		world_structures.push_back(temp);
 		world_structures.back()->GetModel()->Pos() = pos;
 		world_structures.back()->GetModel()->Rot().y = Rot_y;
