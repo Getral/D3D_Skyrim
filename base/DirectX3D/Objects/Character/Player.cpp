@@ -344,7 +344,7 @@ void Player::Update()
 	//ebonymace->Update();
 	//ebonywaraxe->Update();
 	//ebonywarhammer->Update();
-	ebonyarrow->UpdateWorld();
+	ebonyarrow->Update();
 	
 
 	//ironbattleaxe->Update();

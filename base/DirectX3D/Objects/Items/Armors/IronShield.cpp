@@ -33,8 +33,6 @@ IronShield::IronShield(string name, int type, int weight,
 	collider->Scale().y *= 60.0f;
 	collider->Scale().z *= 10.0f;
 
-
-
 	collider->SetTag("IronShieldCollider");
 	collider->SetParent(this);
 	collider->Load();
