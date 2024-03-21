@@ -180,7 +180,7 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 	{
 		for (int j = 0; j < enemies[i]->GetEnemies().size(); j++)
 		{
-			if (enemies[i]->GetEnemies()[j]->GetTransform()->Active())
+			if (enemies[i]->GetEnemies()[j]->GetTransform()->Active() && enemies[i]->GetEnemies()[j]->IsBattle())
 			{
 				enemies_dir[tmp]->SetActive(true);
 			}
@@ -210,10 +210,7 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 	enemy_HP_bar->SetAmount(curEnemy->GetStatus().curHp / curEnemy->GetStatus().maxHp);
 	enemy_HP_bar->UpdateWorld();
 
-	if (KEY_PRESS('H'))
-	{
-		enemies[0]->GetEnemies()[0]->GetStatus().curHp -= 50 * DELTA;
-	}
+	
 	if (isInven)
 		invenUI->Update(player);
 	if (KEY_DOWN('I'))
@@ -254,7 +251,7 @@ void UIManager::PostRender()
 	SP_bar_background->Render();
 	SP_bar->Render();
 
-	if (curEnemy->GetStatus().curHp > 0)
+	if (curEnemy->GetStatus().curHp > 0 && curEnemy->IsBattle() == true)
 	{
 		enemy_HP_bar_background->Render();
 		enemy_HP_bar->Render();
