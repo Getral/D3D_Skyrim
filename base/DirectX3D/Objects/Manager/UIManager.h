@@ -63,5 +63,7 @@ private:
 	ItemStatus* itemstatus;
 
 	int timer = 0;
+
+	bool aldu_isSleeping = true;
 };
 

@@ -49,9 +49,10 @@ public:
 
 	void SetTarget(Player* target);
 	float GetHP() { return curHp; }
+	float GetMaxHP() { return maxHp; }
 	Transform* GetTransform() { return transform; }
 	
-
+	bool GetIsSleeping() { return isSleeping; }
 private:
 
 	//void SetAnimation();

@@ -7,7 +7,7 @@ PlayerScene::PlayerScene()
 
 	aldu = new alduin();
 	aldu->SetTarget(player);
-	aldu->Pos() = { 280,0,123 };
+	aldu->Pos() = { 280,0,200 };
 	aldu->GetTransform()->Pos() = {280, 0, 123};
 	
 
@@ -42,6 +42,7 @@ void PlayerScene::Render()
 	player->Render();
 	aldu->Render();
 	ObjectManager::Get()->Render();
+	
 }
 
 void PlayerScene::PostRender()
@@ -54,4 +55,5 @@ void PlayerScene::GUIRender()
 {
 	player->GUIRender();
 	aldu->GUIRender();
+	UIManager::Get()->GUIRender()
 }
