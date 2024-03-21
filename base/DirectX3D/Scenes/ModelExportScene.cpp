@@ -3,15 +3,26 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "rock_large2";
-    string file = "Models/FBX/" + name + ".fbx";
-    ModelExporter* exporter;
-    string clipName;
+    vector<string> modelName =
+    {
+        "rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
+        "rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4",
+        "rock_small1", "rock_small2"
+    };
 
-    exporter = new ModelExporter(name, file);
-    exporter->ExportMaterial();
-    exporter->ExportMesh();
-    delete exporter;
+    //string name = "rock_large2";
+    //string file = "Models/FBX/" + name + ".fbx";
+    //string clipName;
+
+    FOR(modelName.size())
+    {
+        string file = "Models/FBX/" + modelName[i] + ".fbx";
+        ModelExporter* exporter;
+        exporter = new ModelExporter(modelName[i], file);
+        exporter->ExportMaterial();
+        exporter->ExportMesh();
+        delete exporter;
+    }
 
     //string name = "dragonboneshield";
     //string file = "Models/FBX/" + name + ".fbx";
