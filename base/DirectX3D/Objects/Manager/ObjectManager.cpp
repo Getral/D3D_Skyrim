@@ -2,10 +2,11 @@
 
 ObjectManager::ObjectManager()
 {
-	structures.push_back(new Structure("farmhouse", { 0,0,0 }, { 1350,650,1250 }, "Structure"));
-	structures.push_back(new Structure("farmhouse2", { 0,0,0 }, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("farmhouse", { 0,0,0 }, 0.01f, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("farmhouse2", { 0,0,0 }, 0.07f, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("rock_large1", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
 
-	structures.push_back(new Structure("ebonydagger", { 0,0,0 }, { 10,10,10 }, "Item"));
+	items.push_back(new Structure("ebonydagger", { 0,0,0 }, 0.1f, { 10,10,10 }, "Item"));
 }
 
 ObjectManager::~ObjectManager()
@@ -103,22 +104,23 @@ void ObjectManager::Render()
 
 void ObjectManager::GUIRender()
 {
-	if(world_structures.size() > 1)
-		world_structures[0]->GUIRender();
+
 }
 
 void ObjectManager::Create(Vector3 pos, string inname)
 {
 	if (GetStructure(inname)->GetModel()->GetTag() == "Structure")
 	{
-		GetStructure(inname)->GetModel()->Pos() = pos;
-		world_structures.push_back(GetStructure(inname));
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetPos(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		world_structures.push_back(temp);
+		world_structures.back()->GetModel()->Pos() = pos;
 	}
 		
 	if (GetStructure(inname)->GetModel()->GetTag() == "Item")
 	{
-		GetStructure(inname)->GetModel()->Pos() = pos;
-		world_items.push_back(GetStructure(inname));
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetPos(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		world_items.push_back(temp);
+		world_items.back()->GetModel()->Pos() = pos;
 	}
 }
 

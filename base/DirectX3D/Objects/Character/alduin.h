@@ -45,6 +45,7 @@ public:
 
 	void SetTarget(Player* target);
 	float GetHP() { return curHp; }
+	
 
 private:
 
@@ -105,7 +106,8 @@ private:
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
 	float CoolingTime = 1.0f;
-	float HitDelay = 1.0f;
+	float HitDelay = 0.0f;
+	float HitDelay2 = 1.0f;
 	float fireBallDir = 0.0f;
 
 	bool isAscending = false;

@@ -2,8 +2,14 @@
 class Structure
 {
 public:
-	Structure(string modelName, Vector3 pos, Vector3 size ,string tag);
+	Structure(string modelName, Vector3 pos, float scale, Vector3 colliderSize, string tag);
 	~Structure();
+
+	string GetmodelName() { return modelName; }
+	Vector3 GetPos() { return pos; }
+	float GetScale() { return scale; }
+	Vector3 GetColliderSize() { return colliderSize; }
+	string GetTag() { return tag; }
 
 	void Update();
 	void Render();
@@ -14,5 +20,11 @@ public:
 private:
 	Model* model;
 	BoxCollider* collider;
+
+	string modelName;
+	Vector3 pos;
+	float scale;
+	Vector3 colliderSize;
+	string tag;
 };
 

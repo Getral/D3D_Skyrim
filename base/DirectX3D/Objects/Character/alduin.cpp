@@ -11,11 +11,11 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 
 	HeadCollider = new CapsuleCollider(90.0f,0.1f);
+	HeadCollider->SetParent(transform);
 	BodyCollider = new CapsuleCollider(110.0f, 350.0f);
-
+	BodyCollider->SetParent(transform);
 	TailCollider = new CapsuleCollider(90.0f, 10.0f);
-
-
+	TailCollider->SetParent(transform);
 
 	breathCollider = new BoxCollider({ 300,200,400 });
 
@@ -159,6 +159,10 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 alduin::~alduin()
 {
+	delete Acollider_F;
+	delete Acollider_R;
+	delete Acollider_L;
+	delete Acollider_B;
 	delete BreathParticle;
 	delete DeathParticle;
 	delete breathCollider;
@@ -176,7 +180,6 @@ alduin::~alduin()
 
 void alduin::Update()
 {
-	
 	
 	ModelAnimator::Update(); 
 
@@ -197,9 +200,6 @@ void alduin::Update()
 	BodyCollider->UpdateWorld();
 	TailCollider->UpdateWorld();
 
-
-
-
 	CoolingTime += DELTA;
 	BreathParticle->Update();
 	DeathParticle->Update();
@@ -213,22 +213,18 @@ void alduin::Update()
 
 	else if (Acollider_R->Active() && Acollider_R->IsCapsuleCollision(target->GetCollier()))
 	{
-		//3 : OHM_HIT_MEDIUM
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
 	}
 
 	else if (Acollider_L->Active() && Acollider_L->IsCapsuleCollision(target->GetCollier()))
 	{
-		//3 : OHM_HIT_MEDIUM
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
 	}
 
 	else if (Acollider_B->Active() && Acollider_B->IsCapsuleCollision(target->GetCollier()))
 	{
-		//3 : OHM_HIT_MEDIUM
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
 	}
-
 
 
 	if (target)
@@ -266,17 +262,35 @@ void alduin::Update()
 		curHp = 0.0f;
 
 
-	if (HeadCollider->IsCollision(target->GetSword()->GetCollider()) 
-		|| BodyCollider->IsCollision(target->GetSword()->GetCollider()) 
-		|| TailCollider->IsCollision(target->GetSword()->GetCollider()))
+	if (HitDelay2 > 0.0f)
 	{
+		HitDelay2 -= DELTA;
+		if (HitDelay2 <= 0.0f)
+			HitDelay2 = 0.0f;
+	}
 
-		SetState(HIT);
+	if (HitDelay2 <= 0.1f)
+	{
+		if (HeadCollider->IsCollision(target->GetSword()->GetCollider())
+			|| BodyCollider->IsCollision(target->GetSword()->GetCollider())
+			|| TailCollider->IsCollision(target->GetSword()->GetCollider()))
+		{
 
+			if (curHp < 1000)
+				SetState(HIT);
+
+			else if (curHp >= 1000)
+			{
+				curHp -= 300;
+			}
+
+			HitDelay2 = 1.0f;
+
+
+		}
 
 	}
-		
-
+	
 
 	Patterns();
 	PatternFire();
@@ -286,8 +300,6 @@ void alduin::Update()
 	HeadCollider->SetWorld(GetTransformByNode(45));
 	BodyCollider->SetWorld(GetTransformByNode(84));
 	TailCollider->SetWorld(GetTransformByNode(110));
-
-
 	
 	
 }
@@ -406,7 +418,6 @@ void alduin::Move()
 			
 	}
 
-	
 }
 
 
@@ -428,13 +439,9 @@ void alduin::InhaleStart()
 }
 
 
-
-
 void alduin::BreathAttack()
 {
 	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
-
-	
 
 	breathCollider->SetActive(true);
 
@@ -457,7 +464,6 @@ void alduin::Attacking2()
 	else if (curState == ATTACK_L) Acollider_L->SetActive(true);
 
 	else if (curState == ATTACK_B) Acollider_B->SetActive(true);
-
 
 
 }
@@ -520,15 +526,16 @@ void alduin::EndAction()
 
 void alduin::hit()
 {
-	if (HitDelay > 0) return;
+	//if (HitDelay > 0) return;
 
-	curHp -= 50;
-	HitDelay += DELTA;
+	curHp -= 300;
+	//HitDelay += DELTA;
 
 }
+
 void alduin::HitDelayEnd()
 {
-	HitDelay = 0.0f;
+	//HitDelay = 0.0f;
 	SetState(FORWARD);
 }
 
@@ -562,7 +569,6 @@ void alduin::SetState(State state)
 
 void alduin::Patterns() //지상패턴
 {
-	
 
 	if (!isMoving || curState == DEATH || curState == HIT) return;
 
