@@ -223,25 +223,25 @@ void alduin::Update()
 	if (Acollider_F->Active() && Acollider_F->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= 5.0f;
+		target->GetStatus().curHp -= (150.0f - target->GetStatus().def);
 	}
 
 	else if (Acollider_R->Active() && Acollider_R->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= 2.0f;
+		target->GetStatus().curHp -= (142.0f - target->GetStatus().def);
 	}
 
 	else if (Acollider_L->Active() && Acollider_L->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= 2.0f;
+		target->GetStatus().curHp -= (142.0f - target->GetStatus().def);
 	}
 
 	else if (Acollider_B->Active() && Acollider_B->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= 8.0f;
+		target->GetStatus().curHp -= (170.0f - target->GetStatus().def);
 	}
 
 
@@ -249,7 +249,7 @@ void alduin::Update()
 	{
 		if (breathDelay < 0)
 		{
-			target->GetStatus().curHp -= 1.0f;
+			target->GetStatus().curHp -= (140.0f - target->GetStatus().def);
 			breathDelay = 1.0f;
 		}
 		else breathDelay -= DELTA;
@@ -306,15 +306,15 @@ void alduin::Update()
 			|| TailCollider->IsCollision(target->GetSword()->GetCollider()))
 		{
 
-			if (curHp < 1000)
+			if (curHp < 100)
 				SetState(HIT);
 
-			else if (curHp >= 1000)
+			else if (curHp >= 100)
 			{
-				curHp -= 300;
+				curHp -= target->GetStatus().atk * 2;
 			}
 
-			HitDelay2 = 1.0f;
+			HitDelay2 = 0.7f;
 
 
 		}
@@ -568,7 +568,7 @@ void alduin::hit()
 {
 	//if (HitDelay > 0) return;
 
-	curHp -= 300;
+	curHp -= target->GetStatus().atk;
 	//HitDelay += DELTA;
 
 }
@@ -595,7 +595,7 @@ void alduin::SleepWake()
 void alduin::Dying()
 {
 	tempPos = Pos();
-	tempPos += {0, 15, 0};
+	tempPos += {0, 10, 0};
 	DeathParticle->Play(tempPos);
 	
 	//파티클 재생
