@@ -42,6 +42,12 @@ void ModelExporter::ExportMaterial(wstring texture)
     WriteMaterial(texture);
 }
 
+void ModelExporter::ExportMaterial()
+{
+    ReadMaterial();
+    WriteMaterial();
+}
+
 void ModelExporter::ExportMesh()
 {
     ReadNode(scene->mRootNode, -1, -1);
@@ -116,6 +122,32 @@ void ModelExporter::WriteMaterial(wstring texture)
     {
         string path = savePath + material->GetName() + ".mat";
         material->SetDiffuseMap(texture);
+        material->Save(path);
+
+        writer->String(path);
+
+        delete material;
+    }
+
+    materials.clear();
+
+    delete writer;
+}
+
+void ModelExporter::WriteMaterial()
+{
+    string savePath = "Models/Materials/" + name + "/";
+    string file = name + ".mats";
+
+    CreateFolders(savePath);
+
+    BinaryWriter* writer = new BinaryWriter(savePath + file);
+
+    writer->UInt(materials.size());
+
+    for (Material* material : materials)
+    {
+        string path = savePath + material->GetName() + ".mat";
         material->Save(path);
 
         writer->String(path);
