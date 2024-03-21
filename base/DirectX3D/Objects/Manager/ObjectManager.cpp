@@ -14,7 +14,12 @@ ObjectManager::ObjectManager()
 	structures.push_back(new Structure("rock_medium3", 0.05f, { 250, 230, 135 }, "Structure"));
 	structures.push_back(new Structure("rock_medium4", 0.05f, { 150, 140, 100 }, "Structure"));
 
+	structures.push_back(new Structure("tree", 0.05f, { 10,10,10 }, "Structure", true));
+
+
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
+
+	
 }
 
 ObjectManager::~ObjectManager()
@@ -105,7 +110,10 @@ void ObjectManager::Update(Player* player)
 void ObjectManager::Render()
 {
 	for (Structure* structure : world_structures)
+	{
 		structure->Render();
+	}
+
 	for (Structure* item : world_items)
 		item->Render();
 }
@@ -119,7 +127,7 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 {
 	if (GetStructure(inname)->GetModel()->GetTag() == "Structure")
 	{
-		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag(),GetStructure(inname)->GetIsAlpha());
 		world_structures.push_back(temp);
 		world_structures.back()->GetModel()->Pos() = pos;
 		world_structures.back()->GetModel()->Rot().y = Rot_y;

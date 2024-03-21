@@ -26,6 +26,8 @@ Terrain::Terrain(Vector2 size)
     MakeTangent();
     MakeComputeData();
     mesh->CreateMesh();
+
+
 }
 
 Terrain::Terrain(wstring mapFile, wstring heightmap)
@@ -55,6 +57,7 @@ Terrain::Terrain(wstring mapFile, wstring heightmap)
         inputs.data(), sizeof(InputDesc), triangleSize,
         sizeof(OutputDesc), triangleSize);
     rayBuffer = new RayBuffer();
+
 }
 
 Terrain::~Terrain()
@@ -67,9 +70,9 @@ void Terrain::Render()
     //alphaMap->PSSet(10);
     //secondMap->PSSet(11);
     //thirdMap->PSSet(12);
-
     GameObject::SetRender();
     mesh->Draw();
+    
 }
 
 float Terrain::GetHeight(const Vector3& pos, Vector3* normal)

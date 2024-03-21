@@ -8,7 +8,7 @@ private:
 	vector<string> objectName =
 	{
 		"rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
-		"rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4"
+		"rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree"
 	};
 
 	vector<vector<Vector3>> objectPos =
@@ -42,6 +42,8 @@ private:
 			Vector3(210.9, -1.5, 78.1) }, // rock_medium3
 		{ Vector3(200.2, 0, 146.6), Vector3(188.1, 3.1, 136.4), Vector3(205, 2, 107.9), Vector3(216.1, 2.3, 88.7), Vector3(206.9, -1, 182),
 			Vector3(134.2, 32.1, 193.5), Vector3(159, 31.6, 220.2) }, // rock_medium4
+		{ Vector3(157, 18, 146), Vector3(159, 16, 113), Vector3(179, 9, 102), Vector3(162, 12, 184), Vector3(189, 10, 199),Vector3(214, 12, 199),
+			Vector3(233, 9, 217),Vector3(262, 6, 198), Vector3(292, 12, 164), Vector3(297, 17, 210), Vector3(299, 15, 231), Vector3(292, 6, 262), Vector3(239, 0, 305)}
 	};
 
 	vector<vector<float>> objectRot =
@@ -58,6 +60,7 @@ private:
 		{ -175, 169, -25, 79, 105, 61, 115, 115, 65, 107, 78, 160, 180, 123, -160, 68, 167, 93, 98,
 			60, 109 }, // rock_medium3
 		{ 104, 35, -2, -121, -174, -119, -67 }, // rock_medium4
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 	};
 
 public:

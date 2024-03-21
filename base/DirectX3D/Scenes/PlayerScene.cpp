@@ -30,6 +30,7 @@ void PlayerScene::Update()
 	aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
+
 }
 
 void PlayerScene::PreRender()
@@ -52,6 +53,5 @@ void PlayerScene::PostRender()
 void PlayerScene::GUIRender()
 {
 	player->GUIRender();
-	//aldu->GUIRender();
-
+	aldu->GUIRender();
 }
