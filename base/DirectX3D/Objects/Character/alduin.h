@@ -47,9 +47,10 @@ public:
 
 	void SetTarget(Player* target);
 	float GetHP() { return curHp; }
+	float GetMaxHP() { return maxHp; }
 	Transform* GetTransform() { return transform; }
 	
-
+	bool GetIsSleeping() { return isSleeping; }
 private:
 
 	//void SetAnimation();
@@ -133,8 +134,6 @@ private:
 	vector<map<float, Event>::iterator> eventIters;
 
 	float maxHp = 3000.0f;
-	float curHp = 3000.0f;
-
-
+	float curHp = 1500.0f;
 };
 

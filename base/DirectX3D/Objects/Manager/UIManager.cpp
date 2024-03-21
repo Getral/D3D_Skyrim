@@ -180,7 +180,7 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 	{
 		for (int j = 0; j < enemies[i]->GetEnemies().size(); j++)
 		{
-			if (enemies[i]->GetEnemies()[j]->GetTransform()->Active() && enemies[i]->GetEnemies()[j]->IsBattle())
+			if (enemies[i]->GetEnemies()[j]->GetTransform()->Active() && enemies[i]->GetEnemies()[j]->IsBattle() && alduin->GetIsSleeping() == true)
 			{
 				enemies_dir[tmp]->SetActive(true);
 			}
@@ -207,10 +207,15 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 		timer = 0;
 	}
 
-	enemy_HP_bar->SetAmount(curEnemy->GetStatus().curHp / curEnemy->GetStatus().maxHp);
+	if(alduin->GetIsSleeping() == false)
+		enemy_HP_bar->SetAmount(alduin->GetHP() / alduin->GetMaxHP());
+
+	else
+		enemy_HP_bar->SetAmount(curEnemy->GetStatus().curHp / curEnemy->GetStatus().maxHp);
+
 	enemy_HP_bar->UpdateWorld();
 
-	
+	aldu_isSleeping = alduin->GetIsSleeping(); // Render조건에 사용
 	if (isInven)
 		invenUI->Update(player);
 	if (KEY_DOWN('I'))
@@ -237,13 +242,13 @@ void UIManager::PostRender()
 	}
 
 
-	//if (boss_dir->Pos().x >= -60 * compass->GetSize().x / 140 && boss_dir->Pos().x <= +60 * compass->GetSize().x / 140)
-	//{
-	//    if (isQuest)
-	//        bossQuest_dir->Render();
-	//    else
-	//        boss_dir->Render();
-	//}
+	if (boss_dir->Pos().x >= -60 * compass->GetSize().x / 140 && boss_dir->Pos().x <= +60 * compass->GetSize().x / 140)
+	{
+	    if (isQuest)
+	        bossQuest_dir->Render();
+	    else
+	        boss_dir->Render();
+	}
 
 	HP_bar_background->Render();
 	HP_bar->Render();
@@ -251,18 +256,27 @@ void UIManager::PostRender()
 	SP_bar_background->Render();
 	SP_bar->Render();
 
-	if (curEnemy->GetStatus().curHp > 0 && curEnemy->IsBattle() == true)
+	if ((curEnemy->GetStatus().curHp > 0 && curEnemy->IsBattle() == true) || aldu_isSleeping == false)
 	{
 		enemy_HP_bar_background->Render();
 		enemy_HP_bar->Render();
+	}
+	
 
+
+
+	if (aldu_isSleeping == false)
+	{
+
+		enemyName_alduin->Render();
+	}
+	else
+	{
 		if (curEnemy->GetName() == "Bear")
 			enemyName_bear->Render();
 		else if (curEnemy->GetName() == "Wolf")
 			enemyName_wolf->Render();
 	}
-	
-	
 	
 
 	if (isInven)
@@ -279,6 +293,7 @@ void UIManager::GUIRender()
 	ImGui::Text("enemy_pos0 : %f", enemies_dir[0]->Pos().x);
 	Vector3 dist = Vector3(1, 2, 3) - Vector3(4, 5, 6);
 	ImGui::Text("enemy_pos0 : %f", dist.Length());
+	ImGui::Text("bool : %d", curEnemy->IsBattle());
 	//ImGui::Text("enemy_angle : %f", enemies_dir[1]->Pos().x);
 
 	//ImGui::Text("weight : %d", itemstatus->GetArmor("armor1")->GetStatus().weight);
