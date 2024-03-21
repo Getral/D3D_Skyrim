@@ -16,7 +16,7 @@ ObjectManager::ObjectManager()
 	structures.push_back(new Structure("rock_small1", 0.05f, { 10,10,10 }, "Structure"));
 	structures.push_back(new Structure("rock_small2", 0.05f, { 10,10,10 }, "Structure"));
 
-	structures.push_back(new Structure("tree", 0.01f, { 10,10,10 }, "Structure", true));
+	structures.push_back(new Structure("tree", 0.025f, { 10,10,10 }, "Structure", true));
 
 
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
