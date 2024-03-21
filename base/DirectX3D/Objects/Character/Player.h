@@ -65,6 +65,7 @@ public:
 	void SetHit() { return GetHit(); }
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }
+	void SetIsJump(bool value) { isJump = value; }
 	void SetIsInvincible(bool value) { isInvincible = value; }
 
 private:
@@ -142,9 +143,8 @@ protected:
 
 	Vector3 prevMousePos;
 
-	float jumpVelocity = 0;
-	float jumpForce = 0.5f;
-	float gravityMult = 0.5f;
+	float jumpForce = 50.0f;
+	float gravity = 50.0f;
 	float attackCharge = 0.0f;
 	float invincibleCount = 0.0f; // 무적시간 재는 변수
 	float delay = 0.5f;

@@ -180,7 +180,7 @@ bool Terrain::ComputePicking(Vector3& pos, Transform* transform)
 
     structuredBuffer->Copy(outputs.data(), sizeof(OutputDesc) * triangleSize);
 
-    float minDistance = FLT_MAX;
+    float minDistance = 10;
     int minIndex = -1;
 
     UINT index = 0;
@@ -199,7 +199,7 @@ bool Terrain::ComputePicking(Vector3& pos, Transform* transform)
 
     if (minIndex >= 0)
     {
-        pos = pickingPos + transform->Down() * minDistance;
+        //pos = pickingPos + transform->Down() * minDistance;
         return true;
     }
 

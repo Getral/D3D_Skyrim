@@ -317,6 +317,7 @@ void Player::GUIRender()
 void Player::Control()
 {
 	Rotate();
+	Jump();
 	Move();
 	Attack();
 	Block();
@@ -501,6 +502,17 @@ void Player::Move()
 
 void Player::Jump()
 {
+	if (isJump)
+	{
+		Pos().y += gravity * DELTA;
+	}
+
+	if (isJump) return;
+
+	if (KEY_DOWN(VK_SPACE))
+	{
+		isJump = true;
+	}
 }
 
 void Player::Rotate()
