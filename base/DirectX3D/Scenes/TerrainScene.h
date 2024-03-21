@@ -20,7 +20,8 @@ private:
 			Vector3(200, 0, 100), Vector3(288.9, 0.5, 154.3), Vector3(168.8, 0.5, 163.6) }, // rock_large2
 		{ Vector3(188, 0, 125.5), Vector3(246, 0, 203), Vector3(278, -1, 189.5), Vector3(277.8, 6.5, 205.3), Vector3(307.5, 1, 208),
 			Vector3(303.6, 1.5, 215.2), Vector3(296.6, -0.3, 246.4), Vector3(256.7, -0.5, 240.5), Vector3(273.7, -0.5, 307.9) }, // rock_large3
-		{ Vector3(0, 0, 0) }, // rock_large4
+		{ Vector3(284.5, 0, 196.5), Vector3(307.5, 184), Vector3(296.8, 0, 235.7), Vector3(220.9, -2.4, 256.4), Vector3(172.3, 25.3, 241.7),
+			Vector3(178.9, 7.5, 282.3), Vector3(193.3, 7.5, 336.1), Vector3(229.9, -0.7, 342.2), Vector3(265.6, -0.7, 344.3) }, // rock_large4
 		{ Vector3(0, 0, 0) }, // rock_large5
 		{ Vector3(0, 0, 0) }, // rock_medium1
 		{ Vector3(0, 0, 0) }, // rock_medium2
