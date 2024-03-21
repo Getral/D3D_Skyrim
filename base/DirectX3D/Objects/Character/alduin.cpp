@@ -20,7 +20,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	TailCollider = new CapsuleCollider(90.0f, 10.0f);
 	TailCollider->SetParent(transform);
 
-	breathCollider = new BoxCollider({ 200,100,300 });
+	breathCollider = new BoxCollider({ 150,50,300 });
 
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
@@ -30,52 +30,52 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 
 	//공격 인식
-	collider_F = new CapsuleCollider(90.0f, 0.1f);
-	collider_F->Pos().SetZ(-30);
+	collider_F = new CapsuleCollider(60.0f, 0.1f);
+	collider_F->Pos().SetZ(-22);
 	collider_F->SetParent(transform);
 	collider_F->Scale() *= 0.2;
 
-	collider_R = new CapsuleCollider(90.0f, 0.1f);
-	collider_R->Pos().SetX(-30);
+	collider_R = new CapsuleCollider(70.0f, 0.1f);
+	collider_R->Pos().SetX(-25);
 	collider_R->SetParent(transform);
 	collider_R->Scale() *= 0.2;
 
-	collider_L = new CapsuleCollider(90.0f, 0.1f);
-	collider_L->Pos().SetX(30);
+	collider_L = new CapsuleCollider(70.0f, 0.1f);
+	collider_L->Pos().SetX(25);
 	collider_L->SetParent(transform);
 	collider_L->Scale() *= 0.2;
 
-	collider_B = new CapsuleCollider(90.0f, 0.1f);
+	collider_B = new CapsuleCollider(110.0f, 0.1f);
 	collider_B->Pos().SetZ(30);
 	collider_B->SetParent(transform);
 	collider_B->Scale() *= 0.2;
 
 	//공격 범위
-	Acollider_F = new CapsuleCollider(90.0f, 0.1f);
-	Acollider_F->Pos().SetZ(-32);
+	Acollider_F = new CapsuleCollider(60.0f, 0.1f);
+	Acollider_F->Pos().SetZ(-22);
 	Acollider_F->SetParent(transform);
 	Acollider_F->Scale() *= 0.2;
 	Acollider_F->SetActive(false);
 
-	Acollider_R = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_R = new CapsuleCollider(70.0f, 0.1f);
 	Acollider_R->Pos().SetX(-25);
 	Acollider_R->SetParent(transform);
 	Acollider_R->Scale() *= 0.2;
 	Acollider_R->SetActive(false);
 
-	Acollider_L = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_L = new CapsuleCollider(70.0f, 0.1f);
 	Acollider_L->Pos().SetX(25);
 	Acollider_L->SetParent(transform);
 	Acollider_L->Scale() *= 0.2;
 	Acollider_L->SetActive(false);
 
-	Acollider_B = new CapsuleCollider(90.0f, 0.1f);
-	Acollider_B->Pos().SetZ(25);
+	Acollider_B = new CapsuleCollider(120.0f, 0.1f);
+	Acollider_B->Pos().SetZ(30);
 	Acollider_B->SetParent(transform);
 	Acollider_B->Scale() *= 0.2;
 	Acollider_B->SetActive(false);
 	
-	breathCollider->Pos().SetZ(-70);
+	breathCollider->Pos().SetZ(-50);
 	breathCollider->SetParent(transform);
 	breathCollider->Scale() *= 0.2;
 	breathCollider->SetActive(false);
@@ -135,8 +135,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 	}
 
 	GetClip(ATTACK_F)->SetEvent(bind(&alduin::Attacking2, this), 0.5f);
-	GetClip(ATTACK_R)->SetEvent(bind(&alduin::Attacking2, this), 0.3f);
-	GetClip(ATTACK_L)->SetEvent(bind(&alduin::Attacking2, this), 0.3f);
+	GetClip(ATTACK_R)->SetEvent(bind(&alduin::Attacking2, this), 0.15f);
+	GetClip(ATTACK_L)->SetEvent(bind(&alduin::Attacking2, this), 0.15f);
 	GetClip(ATTACK_B)->SetEvent(bind(&alduin::Attacking2, this), 0.5f);
 
 
@@ -146,8 +146,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	GetClip(INHALE)->SetEvent(bind(&alduin::InhaleStart, this), 0.0f);
 	GetClip(INHALE)->SetEvent(bind(&alduin::Inhale, this), 0.9f);
 
-	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.0f);
-
+	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.2f);
 	GetClip(BREATH)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 
 
@@ -369,8 +368,6 @@ void alduin::SetTarget(Player* target)
 	this->target = target;
 }
 
-
-
 void alduin::Move()
 {
 	if (curState == HIT)
@@ -460,9 +457,8 @@ void alduin::Inhale()
 
 void alduin::InhaleStart()
 {
-	tempPos = transform->Pos();
-	tempPos += {0, 0, -30};
-	tempRot = transform->Rot();
+	tempPos = Pos() + Back() * 10;
+	tempRot = Rot();
 
 	BreathParticle->Play(tempPos, tempRot);
 }
@@ -472,9 +468,10 @@ void alduin::BreathAttack()
 {
 	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
 
-	breathCollider->SetActive(true);
+		breathCollider->SetActive(true);
 
 }
+
 
 
 void alduin::Attacking()
@@ -537,6 +534,7 @@ void alduin::EndAction()
 	SetState(FORWARD);
 	Pos().y = 0;
 	CoolingTime = 0.0f;
+	breathDelay = 1.0f;
 
 	breathCollider->SetActive(false);
 
@@ -584,7 +582,7 @@ void alduin::SleepWake()
 void alduin::Dying()
 {
 	tempPos = Pos();
-	tempPos += {0, 30, 0};
+	tempPos += {0, 15, 0};
 	DeathParticle->Play(tempPos);
 	
 	//파티클 재생
@@ -601,12 +599,12 @@ void alduin::Dead()
 
 
 
-void alduin::SetState(State state)
+void alduin::SetState(State state,float Scale)
 {
 	if (curState == state) return;
 
 	curState = state;
-	this->PlayClip((int)state);
+	this->PlayClip((int)state,Scale);
 }
 
 void alduin::Patterns() //지상패턴
@@ -617,15 +615,15 @@ void alduin::Patterns() //지상패턴
 	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_F);
+		SetState(ATTACK_F, 1.5f);
 	}
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_R);
+		SetState(ATTACK_R, 0.7f);
 	}
 	else if (collider_L->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_L);
+		SetState(ATTACK_L, 0.7f);
 	}
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))
 	{

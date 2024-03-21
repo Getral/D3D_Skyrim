@@ -17,9 +17,7 @@ ModelExportScene::ModelExportScene()
     //    L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree02"
     //};
 
-    //string name = "rock_large2";
-    //string file = "Models/FBX/" + name + ".fbx";
-    //string clipName;
+    // Export Without Texture
 
     //FOR(modelName.size())
     //{
