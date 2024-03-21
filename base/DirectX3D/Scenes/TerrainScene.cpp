@@ -5,7 +5,7 @@ TerrainScene::TerrainScene()
 {
 	TerrainManager::Get();
 
-	testModel = new Model("rock_large4");
+	testModel = new Model("rock_medium1");
 	testModel->Scale() *= 0.05f;
 
 	FOR(objectName.size())
@@ -31,7 +31,7 @@ void TerrainScene::PreRender()
 void TerrainScene::Render()
 {
 	TerrainManager::Get()->Render();
-	//testModel->Render();
+	testModel->Render();
 }
 
 void TerrainScene::PostRender()

@@ -51,7 +51,7 @@ void PlayerScene::PostRender()
 
 void PlayerScene::GUIRender()
 {
-	player->GUIRender();
-	aldu->GUIRender();
+	//player->GUIRender();
+	//aldu->GUIRender();
 
 }
