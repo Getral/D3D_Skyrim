@@ -1,6 +1,7 @@
 #pragma once
 
-#define MAX_GROUND_ATK 90
+#define MAX_GROUND_ATK 76
+
 class alduin : public ModelAnimator
 { 
 	
@@ -114,14 +115,13 @@ private:
 	UINT nodeIndex = 0;
 
 
-
 	float moveSpeed = 15.0f;
 	float rotSpeed = 0.25;
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
 	float CoolingTime = 1.0f;
 	float HitDelay = 0.0f;
-	float HitDelay2 = 1.0f;
+	float HitDelay2 = 0.7f;
 	float breathDelay = 1.0f;
 
 	bool isAscending = false;
@@ -137,8 +137,8 @@ private:
 	vector<map<float, Event>> totalEvent;
 	vector<map<float, Event>::iterator> eventIters;
 
-	float maxHp = 3000.0f;
-	float curHp = 3000.0f;
+	float maxHp = 300.0f;
+	float curHp = 300.0f;
 
 	
 
