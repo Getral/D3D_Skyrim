@@ -1,6 +1,7 @@
 #pragma once
 
-#define MAX_GROUND_ATK 90
+#define MAX_GROUND_ATK 76
+
 class alduin : public ModelAnimator
 { 
 	
@@ -111,7 +112,6 @@ private:
 	ParticleSystem* BreathParticle;
 
 	UINT nodeIndex = 0;
-
 
 
 	float moveSpeed = 15.0f;

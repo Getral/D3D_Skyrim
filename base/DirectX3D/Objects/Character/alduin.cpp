@@ -12,7 +12,6 @@ alduin::alduin() :  ModelAnimator("alduin")
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
 	alduinCollider2->SetParent(this->transform);
 
-
 	HeadCollider = new CapsuleCollider(90.0f,0.1f);
 	HeadCollider->SetParent(transform);
 	BodyCollider = new CapsuleCollider(110.0f, 350.0f);
@@ -24,7 +23,6 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
-	
 
 	//alduinCollider3 = new CapsuleCollider();
 
@@ -211,7 +209,6 @@ void alduin::Update()
 	Acollider_L->UpdateWorld();
 	Acollider_B->UpdateWorld();
 
-
 	breathCollider->UpdateWorld();
 	transform->UpdateWorld();
 	HeadCollider->UpdateWorld();
@@ -225,23 +222,38 @@ void alduin::Update()
 	
 	if (Acollider_F->Active() && Acollider_F->IsCapsuleCollision(target->GetCollier()))
 	{
-		//3 : OHM_HIT_MEDIUM
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= 5.0f;
 	}
 
 	else if (Acollider_R->Active() && Acollider_R->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= 2.0f;
 	}
 
 	else if (Acollider_L->Active() && Acollider_L->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= 2.0f;
 	}
 
 	else if (Acollider_B->Active() && Acollider_B->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= 8.0f;
+	}
+
+
+	if (breathCollider->Active() && breathCollider->IsCapsuleCollision(target->GetCollier()))
+	{
+		if (breathDelay < 0)
+		{
+			target->GetStatus().curHp -= 1.0f;
+			breathDelay = 1.0f;
+		}
+		else breathDelay -= DELTA;
+
 	}
 
 
@@ -469,6 +481,7 @@ void alduin::BreathAttack()
 	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
 
 		breathCollider->SetActive(true);
+
 
 }
 
