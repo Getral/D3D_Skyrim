@@ -137,13 +137,20 @@ Player::Player()
 
 
 
-	ironwarhammer = new IronWarHammer("ironwarhammer",
-		Weapon::Type::WEAPON, weight, value, Weapon::WeaponClass::EBONY, 
-		Weapon::WeaponType::claymore, atk);
-	ironwarhammer->Load();
+	//ironwarhammer = new IronWarHammer("ironwarhammer",
+	//	Weapon::Type::WEAPON, weight, value, Weapon::WeaponClass::EBONY, 
+	//	Weapon::WeaponType::claymore, atk);
+	//ironwarhammer->Load();
+	//
+	//rightHand = new Transform();
+	//ironwarhammer->SetParent(rightHand);
+
+	ebonyarrow = new EbonyArrow("ebonyarrow", 
+		Arrow::Type::ARROW, weight, value, Arrow::ArrowType::IRON, atk);
+	ebonyarrow->Load();
 	
 	rightHand = new Transform();
-	ironwarhammer->SetParent(rightHand);
+	ebonyarrow->SetParent(rightHand);
 
 
 	//shield = new Shield();
@@ -151,6 +158,13 @@ Player::Player()
 	//
 	//leftHand = new Transform();
 	//shield->SetParent(leftHand);
+
+
+	//ebonybow = new EbonyBow();
+	//ebonybow->Load();
+	//
+	//leftHand = new Transform();
+	//ebonybow->SetParent(leftHand);
 
 
 	ironshield = new IronShield("ironshield",
@@ -163,12 +177,18 @@ Player::Player()
 	ironshield->SetParent(leftHand);
 
 
-	//ebonyquiver = new EbonyQuiver();
+	//shield = new Shield();
 	//shield->Load();
 	//
 	//leftHand = new Transform();
-	//ebonyquiver->SetParent(back);
+	//shield->SetParent(back);
 
+
+	ebonyquiver = new EbonyQuiver();
+	ebonyquiver->Load();
+	
+	back = new Transform();
+	ebonyquiver->SetParent(back);
 
 
 
@@ -273,7 +293,7 @@ Player::~Player()
 	delete collider;
 	delete rightHand;
 	delete leftHand;
-	delete back;
+	//delete back;
 
 
 	//delete ironquiver;
@@ -284,6 +304,8 @@ Player::~Player()
 	//delete dragonshield;
 
 
+	//delete ebonybow;
+	delete ebonyarrow;
 	//delete ebonybattleaxe;
 	//delete ebonyclaymore;
 	//delete ebonydagger;
@@ -292,13 +314,15 @@ Player::~Player()
 	//delete ebonywaraxe;
 	//delete ebonywarhammer;
 
+	//delete ironbow;
+	//delete ironarrow;
 	//delete ironbattleaxe;
 	//delete ironclaymore;
 	//delete irondagger;
 	//delete ironlongsword;
 	//delete ironmace;
 	//delete ironwaraxe;
-	delete ironwarhammer;
+	//delete ironwarhammer;
 }
 
 void Player::Update()
@@ -320,6 +344,8 @@ void Player::Update()
 	//ebonymace->Update();
 	//ebonywaraxe->Update();
 	//ebonywarhammer->Update();
+	ebonyarrow->UpdateWorld();
+	
 
 	//ironbattleaxe->Update();
 	//ironclaymore->Update();
@@ -327,18 +353,26 @@ void Player::Update()
 	//ironlongsword->Update();
 	//ironmace->Update();
 	//ironwaraxe->Update();
-	ironwarhammer->Update();
+	//ironwarhammer->Update();
+	//ironarrow->UpdateWorld();
+	
+
+
 
 
 	leftHand->SetWorld(GetTransformByNode(119));
 	ironshield->Update();
 
+
+
 	headCollider->UpdateWorld();
 	head->SetWorld(GetTransformByNode(48));
+	//head->SetWorld(GetTransformByNode(nodeIndex1));
 
 
-	//back->SetWorld(GetTransformByNode(133));
-	//ebonyquiver->Update();
+	back->SetWorld(GetTransformByNode(133));
+	ebonyquiver->Update();
+	//ironquiver->Update();
 
 
 	if (isInvincible)
@@ -359,11 +393,13 @@ void Player::Render()
 	//bladeSword->Render();
 	//shield->Render();
 	
-	//ironshield->Render();
+	ironshield->Render();
 	//dragonshield->Render();
 
 	// Weapon
 	// Ebony
+	//ebonybow->Render();
+	ebonyarrow->Render();
 	//ebonybattleaxe->Render();
 	//ebonyclaymore->Render();
 	//ebonydagger->Render();
@@ -373,17 +409,19 @@ void Player::Render()
 	//ebonywarhammer->Render();
 
 	// Iron
+	//ironbow->Render();
+	//ironarrow->Render();
 	//ironbattleaxe->Render();
 	//ironclaymore->Render();
 	//irondagger->Render();
 	//ironlongsword->Render();
 	//ironmace->Render();
 	//ironwaraxe->Render();
-	ironwarhammer->Render();
+	//ironwarhammer->Render();
 
 
 
-	//ebonyquiver->Render();
+	ebonyquiver->Render();
 	//ironquiver->Render();
 
 
@@ -399,10 +437,12 @@ void Player::GUIRender()
 	//Armor
 	//Shield
 	//dragonshield->GUIRender();
-	//ironshield->GUIRender();
+	ironshield->GUIRender();
 
 	// Weapon
 	// Ebony
+	//ebonybow->GUIRender();
+	ebonyarrow->GUIRender();
 	//ebonybattleaxe->GUIRender();
 	//ebonyclaymore->GUIRender();
 	//ebonydagger->GUIRender();
@@ -417,10 +457,10 @@ void Player::GUIRender()
 	//irondagger->GUIRender();
 	//ironlongsword->GUIRender();
 	//ironmace->GUIRender();
-	ironwarhammer->GUIRender();
+	//ironwarhammer->GUIRender();
 
 
-	//ebonyquiver->GUIRender();
+	ebonyquiver->GUIRender();
 	//ironquiver->GUIRender();
 
 	//ebonyshield->GUIRender();

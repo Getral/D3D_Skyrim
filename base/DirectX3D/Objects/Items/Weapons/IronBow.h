@@ -1,8 +1,16 @@
 #pragma once
 
-class IronBow : public Model
+class IronBow : public ModelAnimator
 {
 public:
+
+    enum EbonyBowAction
+    {
+        DRAW,
+        DRAW_IDLE,
+        RELEASE
+    };
+
     IronBow();
     ~IronBow();
 

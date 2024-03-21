@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "ironwaraxe";
+    string name = "ironbow";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     string clipName;
@@ -12,17 +12,55 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMaterial();
     exporter->ExportMesh();
     delete exporter;
-
-
-    //string name1 = "ironshield";
-    //string file1 = "Models/FBX/" + name1 + ".fbx";
-    //ModelExporter* exporter1;
-    //string clipName1;
     //
+    //clipName = "iron_bow_draw";
+    //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    //exporter = new ModelExporter(name, file);
+    //exporter->ExportClip(clipName);
+    //delete exporter;
+    //
+    //clipName = "iron_bow_draw_idle";
+    //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    //exporter = new ModelExporter(name, file);
+    //exporter->ExportClip(clipName);
+    //delete exporter;
+    //
+    //clipName = "iron_bow_release";
+    //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    //exporter = new ModelExporter(name, file);
+    //exporter->ExportClip(clipName);
+    //delete exporter;
+
+
+
+    string name1 = "ebonybow";
+    string file1 = "Models/FBX/" + name1 + ".fbx";
+    ModelExporter* exporter1;
+    string clipName1;
+    
+    exporter1 = new ModelExporter(name1, file1);
+    exporter1->ExportMaterial();
+    exporter1->ExportMesh();
+    delete exporter1;
+    //
+    //clipName1 = "ebony_bow_draw";
+    //file1 = "Models/Animations/" + name1 + "/" + clipName1 + ".fbx";
     //exporter1 = new ModelExporter(name1, file1);
-    //exporter1->ExportMaterial();
-    //exporter1->ExportMesh();
+    //exporter1->ExportClip(clipName1);
     //delete exporter1;
+    //
+    //clipName1 = "ebony_bow_draw_idle";
+    //file1 = "Models/Animations/" + name1 + "/" + clipName1 + ".fbx";
+    //exporter1 = new ModelExporter(name1, file1);
+    //exporter1->ExportClip(clipName1);
+    //delete exporter1;
+    //
+    //clipName1 = "ebony_bow_release";
+    //file1 = "Models/Animations/" + name1 + "/" + clipName1 + ".fbx";
+    //exporter1 = new ModelExporter(name1, file1);
+    //exporter1->ExportClip(clipName1);
+    //delete exporter1;
+
 
 
     //string name = "shield";

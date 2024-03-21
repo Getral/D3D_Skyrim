@@ -1,8 +1,16 @@
 #pragma once
 
-class EbonyBow : public Model
+class EbonyBow : public ModelAnimator
 {
 public:
+
+    enum EbonyBowAction
+    {
+        DRAW,
+        DRAW_IDLE,
+        RELEASE
+    };
+
     EbonyBow();
     ~EbonyBow();
 
@@ -16,7 +24,7 @@ public:
     void ColliderManager(bool isWeaponColl);
 
 private:
-    Model* ebonybow;
+    ModelAnimator* ebonybow;
     BoxCollider* collider;
     bool isWeapon = true;
 };

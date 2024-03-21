@@ -1,8 +1,13 @@
 #include "Framework.h"
 
-IronBow::IronBow() : Model("IronBow")
+IronBow::IronBow() : ModelAnimator("IronBow")
 {
 	SetTag("IronBow");
+
+	ReadClip("iron_bow_draw");
+	ReadClip("iron_bow_draw_idle");
+	ReadClip("iron_bow_release");
+
 	Pos().x += -0;
 	Pos().y += 0;
 	Pos().z += 0;

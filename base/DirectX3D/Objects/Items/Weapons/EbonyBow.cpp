@@ -1,8 +1,13 @@
 #include "Framework.h"
 
-EbonyBow::EbonyBow() : Model("EbonyBow")
+EbonyBow::EbonyBow() : ModelAnimator("EbonyBow")
 {
 	SetTag("EbonyBow");
+
+	//ReadClip("ebony_bow_draw");
+	//ReadClip("ebony_bow_draw_idle");
+	//ReadClip("ebony_bow_release");
+
 	Pos().x += -27.0f;
 	Pos().y += 0;
 	Pos().z += 1.6f;
@@ -48,13 +53,13 @@ void EbonyBow::Update()
 
 void EbonyBow::Render()
 {
-	Model::Render();
+	ModelAnimator::Render();
 	collider->Render();
 }
 
 void EbonyBow::GUIRender()
 {
-	Model::GUIRender();
+	ModelAnimator::GUIRender();
 	collider->GUIRender();
 }
 

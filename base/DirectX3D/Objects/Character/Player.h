@@ -146,7 +146,7 @@ protected:
 	//Transform* body;
 	//Transform* foot;
 	//Transform* hands;
-
+	CapsuleCollider* backCollider;
 	CapsuleCollider* headCollider;
 
 	Status status;
