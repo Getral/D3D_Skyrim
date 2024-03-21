@@ -21,8 +21,5 @@ private:
 
 	vector<BoxCollider*> structures_col;
 	vector<BoxCollider*> items_col;
-
-	BlendState* blendState[2];
-
 };
 
