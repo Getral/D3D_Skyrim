@@ -2,6 +2,8 @@
 
 class IronArrow : public Arrow
 {
+public:
+
 	IronArrow(string name, int type, int weight, int value,
 		int arrow_type, int atk);
 	~IronArrow();
@@ -32,6 +34,5 @@ private:
 
 	BoxCollider* collider;
 	Model* ironarrow;
-	Player* player;
 };
 

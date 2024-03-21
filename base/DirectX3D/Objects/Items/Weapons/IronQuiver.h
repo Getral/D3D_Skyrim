@@ -1,6 +1,7 @@
 #pragma once
 class IronQuiver : public Model
 {
+public:
     IronQuiver();
     ~IronQuiver();
 

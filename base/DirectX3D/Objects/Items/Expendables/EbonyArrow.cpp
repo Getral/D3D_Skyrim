@@ -14,16 +14,16 @@ EbonyArrow::EbonyArrow(string name, int type, int weight,
 
 	collider = new BoxCollider();
 	collider->Pos().x += 1.0f;
-	collider->Pos().y += 1.0f;
-	collider->Pos().z += 1.0f;
-	
+	collider->Pos().y += 25.0;
+	collider->Pos().z += 2.0f;
+
 	collider->Rot().x += 0.0f;
 	collider->Rot().y += 0.0f;
 	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 1.0f;
-	collider->Scale().y *= 1.0f;
-	collider->Scale().z *= 1.0f;
+	collider->Scale().x *= 4.0f;
+	collider->Scale().y *= 65.0f;
+	collider->Scale().z *= 5.0f;
 
 
 	collider->SetTag("EbonyArrowCollider");

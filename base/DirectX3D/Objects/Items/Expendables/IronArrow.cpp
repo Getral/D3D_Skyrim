@@ -8,7 +8,7 @@ IronArrow::IronArrow(string name, int type, int weight,
 	SetTag("EbonyArrow");
 
 	Pos().x += 0.0f;
-	Pos().y += 38.0f;
+	Pos().y += 41.0f;
 	Pos().z += 0.0f;
 
 	Rot().x += 0;
@@ -20,16 +20,16 @@ IronArrow::IronArrow(string name, int type, int weight,
 	Scale().z *= 1.0f;
 
 	collider = new BoxCollider();
-	collider->Pos().x += 0.0f;
-	collider->Pos().y += 0.0;
-	collider->Pos().z += 0.0f;
+	collider->Pos().x += 1.0f;
+	collider->Pos().y += 25.0;
+	collider->Pos().z += 2.0f;
 
 	collider->Rot().x += 0.0f;
 	collider->Rot().y += 0.0f;
 	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 5.0f;
-	collider->Scale().y *= 5.0f;
+	collider->Scale().x *= 4.0f;
+	collider->Scale().y *= 65.0f;
 	collider->Scale().z *= 5.0f;
 
 

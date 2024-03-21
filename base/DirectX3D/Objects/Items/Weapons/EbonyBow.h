@@ -6,6 +6,7 @@ public:
 
     enum EbonyBowAction
     {
+        IDLE,
         DRAW,
         DRAW_IDLE,
         RELEASE
@@ -18,13 +19,17 @@ public:
     void Render();
     void GUIRender();
 
-    bool GetIsWeapon() { return isWeapon; }
-    void SetIsCollider(bool value) { isWeapon = value; }
+    //bool GetIsWeapon() { return isWeapon; }
+    //void SetIsCollider(bool value) { isWeapon = value; }
 
-    void ColliderManager(bool isWeaponColl);
+    //void ColliderManager(bool isWeaponColl);
+
+    void SetState(EbonyBowAction action);
 
 private:
     ModelAnimator* ebonybow;
     BoxCollider* collider;
-    bool isWeapon = true;
+    //bool isWeapon = true;
+
+    EbonyBowAction curState = IDLE;
 };
