@@ -10,7 +10,7 @@ public:
 	void GUIRender();
 
 	Structure* GetStructure(string inname);
-	void Create(Vector3 pos, string inname);
+	void Create(Vector3 pos, float Rot_y, string inname);
 
 private:
 	vector<Structure*> structures;

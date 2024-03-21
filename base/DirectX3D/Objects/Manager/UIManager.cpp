@@ -254,11 +254,19 @@ void UIManager::PostRender()
 	SP_bar_background->Render();
 	SP_bar->Render();
 
-	enemy_HP_bar_background->Render();
-	enemy_HP_bar->Render();
+	if (curEnemy->GetStatus().curHp > 0)
+	{
+		enemy_HP_bar_background->Render();
+		enemy_HP_bar->Render();
+
+		if (curEnemy->GetName() == "Bear")
+			enemyName_bear->Render();
+		else if (curEnemy->GetName() == "Wolf")
+			enemyName_wolf->Render();
+	}
 	
-	//if(curEnemy->g)
-	enemyName_bear->Render();
+	
+	
 
 	if (isInven)
 		invenUI->Render();
