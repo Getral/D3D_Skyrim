@@ -20,7 +20,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	TailCollider = new CapsuleCollider(90.0f, 10.0f);
 	TailCollider->SetParent(transform);
 
-	breathCollider = new BoxCollider({ 200,100,300 });
+	breathCollider = new BoxCollider({ 150,50,200 });
 
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
@@ -146,8 +146,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	GetClip(INHALE)->SetEvent(bind(&alduin::InhaleStart, this), 0.0f);
 	GetClip(INHALE)->SetEvent(bind(&alduin::Inhale, this), 0.9f);
 
-	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.0f);
-
+	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.5f);
 	GetClip(BREATH)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 
 
@@ -460,9 +459,8 @@ void alduin::Inhale()
 
 void alduin::InhaleStart()
 {
-	tempPos = transform->Pos();
-	tempPos += {0, 0, -30};
-	tempRot = transform->Rot();
+	tempPos = Pos();
+	tempRot = Rot();
 
 	BreathParticle->Play(tempPos, tempRot);
 }
@@ -472,9 +470,10 @@ void alduin::BreathAttack()
 {
 	//브레스 공격이 나가야 되는 시점에서 실행할 내용들
 
-	breathCollider->SetActive(true);
+		breathCollider->SetActive(true);
 
 }
+
 
 
 void alduin::Attacking()
@@ -537,6 +536,7 @@ void alduin::EndAction()
 	SetState(FORWARD);
 	Pos().y = 0;
 	CoolingTime = 0.0f;
+	breathDelay = 1.0f;
 
 	breathCollider->SetActive(false);
 
@@ -584,7 +584,7 @@ void alduin::SleepWake()
 void alduin::Dying()
 {
 	tempPos = Pos();
-	tempPos += {0, 30, 0};
+	tempPos += {0, 15, 0};
 	DeathParticle->Play(tempPos);
 	
 	//파티클 재생
