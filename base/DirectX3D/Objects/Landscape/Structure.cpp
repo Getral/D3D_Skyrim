@@ -25,6 +25,8 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 
 	FOR(2) blendState[i] = new BlendState();
 	blendState[1]->AlphaToCoverage(true);
+
+	collider->Pos().z -= colliderSize.z * 0.5f;
 }
 
 Structure::~Structure()

@@ -31,5 +31,5 @@ void MonsterScene::PostRender()
 
 void MonsterScene::GUIRender()
 {
-	SpawnManager::Get()->GUIRender();
+	//SpawnManager::Get()->GUIRender();
 }

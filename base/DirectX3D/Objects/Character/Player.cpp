@@ -8,9 +8,9 @@ Player::Player()
 
 	ModelAnimator::Scale() *= 0.0001f;
 
-	Pos().x = 200.0f;
+	Pos().x = 250.0f;
 	Pos().y = 500.0f;
-	Pos().z = 200.0f;
+	Pos().z = 290.0f;
 
 	ReadClip("male_1hm_idle");
 	ReadClip("male_jump");
@@ -507,7 +507,7 @@ void Player::Rotate()
 {
 	//Vector3 delta = mousePos - Vector3(clientCenterPos.x, clientCenterPos.y);
 	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);		
-	//
+	
 	//Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
 	//prevMousePos = mousePos;
 	//
@@ -517,27 +517,27 @@ void Player::Rotate()
 	//CAM->Rot().x -= delta.y * rotSpeed * DELTA;
 	//Rot().y = CAM->Rot().y;
 	//Rot().x = CAM->Rot().x;
-	//
-	//
+	
+	
 	//if (KEY_DOWN(VK_MBUTTON))
 	//{
 	//	CAM->Rot().x = 0;
 	//}
 
-	//if (KEY_PRESS('Q'))
-	//{
-	//	Rot().y -= DELTA * rotSpeed;
-	//}
-
-	//if (KEY_PRESS('E'))
-	//{
-	//	Rot().y += DELTA * rotSpeed;
-	//}
-
-	if (KEY_DOWN(VK_MBUTTON))
+	if (KEY_PRESS('Q'))
 	{
-		CAM->Rot().x = 0;
+		Rot().y -= DELTA * rotSpeed;
 	}
+
+	if (KEY_PRESS('E'))
+	{
+		Rot().y += DELTA * rotSpeed;
+	}
+
+	//if (KEY_DOWN(VK_MBUTTON))
+	//{
+	//	CAM->Rot().x = 0;
+	//}
 
 }
 

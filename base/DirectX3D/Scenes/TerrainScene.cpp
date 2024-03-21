@@ -5,43 +5,40 @@ TerrainScene::TerrainScene()
 {
 	TerrainManager::Get();
 
-	testModel = new Model("rock_large4");
-	testModel->Scale() *= 0.05f;
-
 	FOR(objectName.size())
 		for (int j = 0; j < objectPos[i].size(); j++)
 			ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
 
+	skyBox = new SkyBox(L"Textures/Landscape/BlueSky.dds");
 }
 
 TerrainScene::~TerrainScene()
 {
-
+	delete skyBox;
 }
 
 void TerrainScene::Update()
 {
 	TerrainManager::Get()->Update();
-	testModel->UpdateWorld();
 }
 
 void TerrainScene::PreRender()
 {
+	
 }
 
 void TerrainScene::Render()
 {
+	skyBox->Render();
 	TerrainManager::Get()->Render();
-	
-	//testModel->Render();
 }
 
 void TerrainScene::PostRender()
 {
+	
 }
 
 void TerrainScene::GUIRender()
 {
 	TerrainManager::Get()->GUIRender();
-	testModel->GUIRender();
 }
