@@ -15,11 +15,13 @@ ObjectManager::ObjectManager()
 	structures.push_back(new Structure("rock_medium4", 0.05f, { 10,10,10 }, "Structure"));
 	structures.push_back(new Structure("rock_small1", 0.05f, { 10,10,10 }, "Structure"));
 	structures.push_back(new Structure("rock_small2", 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("tree", 0.05f, { 10,10,10 }, "Structure",true));
-
+	structures.push_back(new Structure("tree", 0.05f, { 10,10,10 }, "Structure"));
 
 
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
+
+	FOR(2) blendState[i] = new BlendState();
+	blendState[1]->AlphaToCoverage(true);
 }
 
 ObjectManager::~ObjectManager()
@@ -109,8 +111,14 @@ void ObjectManager::Update(Player* player)
 
 void ObjectManager::Render()
 {
+	blendState[1]->SetState();
 	for (Structure* structure : world_structures)
+	{
+		
 		structure->Render();
+	}
+	blendState[0]->SetState();
+		
 	for (Structure* item : world_items)
 		item->Render();
 }

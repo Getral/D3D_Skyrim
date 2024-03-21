@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "Structure.h"
 
-Structure::Structure(string modelName, float scale, Vector3 colliderSize, string tag, bool isAlpha)
+Structure::Structure(string modelName, float scale, Vector3 colliderSize, string tag)
 	:modelName(modelName),scale(scale),colliderSize(colliderSize),tag(tag)
 {
 	model = new Model(modelName);
@@ -18,9 +18,6 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 	{
 	}
 
-	FOR(2) blendState[i] = new BlendState();
-	blendState[1]->AlphaToCoverage(true);
-	
 	
 	collider = new BoxCollider(colliderSize);
 	collider->SetParent(model);
@@ -38,9 +35,9 @@ void Structure::Update()
 
 void Structure::Render()
 {
-	blendState[1]->SetState();
+
 	model->Render();
-	blendState[0]->SetState();
+
 	collider->Render();
 }
 

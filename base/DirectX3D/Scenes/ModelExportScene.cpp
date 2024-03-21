@@ -14,7 +14,7 @@ ModelExportScene::ModelExportScene()
     {
         L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
         L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
-        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree01"
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree02"
     };
 
     //string name = "rock_large2";

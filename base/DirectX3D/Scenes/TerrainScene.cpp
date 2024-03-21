@@ -11,6 +11,7 @@ TerrainScene::TerrainScene()
 	FOR(objectName.size())
 		for (int j = 0; j < objectPos[i].size(); j++)
 			ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
+
 }
 
 TerrainScene::~TerrainScene()
@@ -31,6 +32,7 @@ void TerrainScene::PreRender()
 void TerrainScene::Render()
 {
 	TerrainManager::Get()->Render();
+	
 	//testModel->Render();
 }
 

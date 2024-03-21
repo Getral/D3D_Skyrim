@@ -2,7 +2,7 @@
 class Structure
 {
 public:
-	Structure(string modelName,float scale, Vector3 colliderSize, string tag, bool isAlpha = false);
+	Structure(string modelName,float scale, Vector3 colliderSize, string tag);
 	~Structure();
 
 	string GetmodelName() { return modelName; }
@@ -19,13 +19,11 @@ public:
 private:
 	Model* model;
 	BoxCollider* collider;
-	vector<BlendState*> blendState;
 
 	string modelName;
 	float scale;
 	Vector3 colliderSize;
 	string tag;
 
-	bool isAlpha;
 };
 
