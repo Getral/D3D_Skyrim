@@ -21,6 +21,7 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 	
 	collider = new BoxCollider(colliderSize);
 	collider->SetParent(model);
+	collider->Pos().z -= colliderSize.z * 0.5f;
 }
 
 Structure::~Structure()
