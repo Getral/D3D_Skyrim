@@ -13,6 +13,12 @@ ModelExportScene::ModelExportScene()
     exporter->ExportMesh();
     delete exporter;
 
+    clipName = "male_jump";
+    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
+    exporter = new ModelExporter(name, file);
+    exporter->ExportClip(clipName);
+    delete exporter;
+
     //string name = "dragonboneshield";
     //string file = "Models/FBX/" + name + ".fbx";
     //ModelExporter* exporter;
@@ -54,12 +60,6 @@ ModelExportScene::ModelExportScene()
     //delete exporter;
 
     //clipName = "male_1hm_equip";
-    //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportClip(clipName);
-    //delete exporter;
-
-    //clipName = "male_1hm_unequip";
     //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     //exporter = new ModelExporter(name, file);
     //exporter->ExportClip(clipName);
