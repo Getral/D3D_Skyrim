@@ -36,10 +36,10 @@ ModelExporter::~ModelExporter()
     delete importer;
 }
 
-void ModelExporter::ExportMaterial()
+void ModelExporter::ExportMaterial(wstring texture)
 {
     ReadMaterial();
-    WriteMaterial();
+    WriteMaterial(texture);
 }
 
 void ModelExporter::ExportMesh()
@@ -101,7 +101,7 @@ void ModelExporter::ReadMaterial()
     }
 }
 
-void ModelExporter::WriteMaterial()
+void ModelExporter::WriteMaterial(wstring texture)
 {
     string savePath = "Models/Materials/" + name + "/";
     string file = name + ".mats";
@@ -115,6 +115,7 @@ void ModelExporter::WriteMaterial()
     for (Material* material : materials)
     {
         string path = savePath + material->GetName() + ".mat";
+        material->SetDiffuseMap(texture);
         material->Save(path);
 
         writer->String(path);

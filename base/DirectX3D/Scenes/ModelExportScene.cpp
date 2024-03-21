@@ -10,6 +10,13 @@ ModelExportScene::ModelExportScene()
         "rock_small1", "rock_small2"
     };
 
+    vector<wstring> textures =
+    {
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01"
+    };
+
     //string name = "rock_large2";
     //string file = "Models/FBX/" + name + ".fbx";
     //string clipName;
@@ -17,9 +24,10 @@ ModelExportScene::ModelExportScene()
     FOR(modelName.size())
     {
         string file = "Models/FBX/" + modelName[i] + ".fbx";
+        wstring textureFile = L"Textures/" + textures[i] + L".png";
         ModelExporter* exporter;
         exporter = new ModelExporter(modelName[i], file);
-        exporter->ExportMaterial();
+        exporter->ExportMaterial(textureFile);
         exporter->ExportMesh();
         delete exporter;
     }
