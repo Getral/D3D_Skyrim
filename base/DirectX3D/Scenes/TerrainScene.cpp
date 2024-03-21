@@ -31,7 +31,7 @@ void TerrainScene::PreRender()
 void TerrainScene::Render()
 {
 	TerrainManager::Get()->Render();
-	testModel->Render();
+	//testModel->Render();
 }
 
 void TerrainScene::PostRender()

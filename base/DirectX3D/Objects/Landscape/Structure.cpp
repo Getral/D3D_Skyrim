@@ -1,11 +1,10 @@
 #include "Framework.h"
 #include "Structure.h"
 
-Structure::Structure(string modelName, Vector3 pos, float scale, Vector3 colliderSize, string tag)
-	:modelName(modelName),pos(pos),scale(scale),colliderSize(colliderSize),tag(tag)
+Structure::Structure(string modelName, float scale, Vector3 colliderSize, string tag)
+	:modelName(modelName),scale(scale),colliderSize(colliderSize),tag(tag)
 {
 	model = new Model(modelName);
-	model->Pos() = pos;
 	model->SetTag(tag);
 	model->SetName(modelName);
 	model->Scale() *= scale;
@@ -13,12 +12,10 @@ Structure::Structure(string modelName, Vector3 pos, float scale, Vector3 collide
 	if (tag == "Structure")
 	{
 		model->Rot().x += XM_PI / 2;
-		//model->Scale() *= 0.07f;
 	}
 	
 	else if (tag == "Item")
 	{
-		//model->Scale() *= 0.1f;
 	}
 	
 	

@@ -524,7 +524,6 @@ void Player::Rotate()
 	//	CAM->Rot().x = 0;
 	//}
 
-
 	//if (KEY_PRESS('Q'))
 	//{
 	//	Rot().y -= DELTA * rotSpeed;
@@ -534,6 +533,11 @@ void Player::Rotate()
 	//{
 	//	Rot().y += DELTA * rotSpeed;
 	//}
+
+	if (KEY_DOWN(VK_MBUTTON))
+	{
+		CAM->Rot().x = 0;
+	}
 
 }
 

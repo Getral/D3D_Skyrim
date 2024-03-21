@@ -2,21 +2,21 @@
 
 ObjectManager::ObjectManager()
 {
-	structures.push_back(new Structure("farmhouse", { 0,0,0 }, 0.01f, { 1350,650,1250 }, "Structure"));
-	structures.push_back(new Structure("farmhouse2", { 0,0,0 }, 0.07f, { 1350,650,1250 }, "Structure"));
-	structures.push_back(new Structure("rock_large1", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large2", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large3", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large4", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_large5", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium1", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium2", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium3", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_medium4", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_small1", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
-	structures.push_back(new Structure("rock_small2", { 0,0,0 }, 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("farmhouse", 0.01f, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("farmhouse2", 0.07f, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("rock_large1", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large2", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large3", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large4", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_large5", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium1", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium2", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium3", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_medium4", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_small1", 0.05f, { 10,10,10 }, "Structure"));
+	structures.push_back(new Structure("rock_small2", 0.05f, { 10,10,10 }, "Structure"));
 
-	items.push_back(new Structure("ebonydagger", { 0,0,0 }, 0.1f, { 10,10,10 }, "Item"));
+	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
 }
 
 ObjectManager::~ObjectManager()
@@ -117,20 +117,22 @@ void ObjectManager::GUIRender()
 
 }
 
-void ObjectManager::Create(Vector3 pos, string inname)
+void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 {
 	if (GetStructure(inname)->GetModel()->GetTag() == "Structure")
 	{
-		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetPos(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
 		world_structures.push_back(temp);
 		world_structures.back()->GetModel()->Pos() = pos;
+		world_structures.back()->GetModel()->Rot().y = Rot_y;
 	}
 		
 	if (GetStructure(inname)->GetModel()->GetTag() == "Item")
 	{
-		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetPos(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
 		world_items.push_back(temp);
 		world_items.back()->GetModel()->Pos() = pos;
+		world_items.back()->GetModel()->Rot().y = Rot_y;
 	}
 }
 
