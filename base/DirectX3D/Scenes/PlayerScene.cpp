@@ -11,9 +11,9 @@ PlayerScene::PlayerScene()
 	aldu->GetTransform()->Pos() = {280, 0, 123};
 	
 
-	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("Skyrim2");
-	CAM->LookAtTarget(); 
+	//CAM->SetTarget(player); 
+	//CAM->TargetOptionLoad("Skyrim2");
+	//CAM->LookAtTarget(); 
 
 	
 }

@@ -10,7 +10,7 @@ TerrainScene::TerrainScene()
 
 	FOR(objectName.size())
 		for (int j = 0; j < objectPos[i].size(); j++)
-			ObjectManager::Get()->Create(objectPos[i][j], objectName[i]);
+			ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
 }
 
 TerrainScene::~TerrainScene()

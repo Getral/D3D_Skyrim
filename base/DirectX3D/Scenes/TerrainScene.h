@@ -31,6 +31,21 @@ private:
 		{ Vector3(0, 0, 0) } // rock_small2
 	};
 
+	vector<vector<float>> objectRot =
+	{
+		{ 0, 0, 0, 0, 0, 0, 0 }, // rock_large1
+		{ 0, 0, 0, 0, 0, 0, 0, 0 }, // rock_large2
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // rock_large3
+		{ 0, 0, 0, -87, -52, 53, 53, -53, 158 }, // rock_large4
+		{ 0 }, // rock_large5
+		{ 0 }, // rock_medium1
+		{ 0 }, // rock_medium2
+		{ 0 }, // rock_medium3
+		{ 0 }, // rock_medium4
+		{ 0 }, // rock_small1
+		{ 0 } // rock_small2
+	};
+
 public:
 	TerrainScene();
 	~TerrainScene();
