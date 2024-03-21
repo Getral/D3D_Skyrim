@@ -4,6 +4,9 @@
 alduin::alduin() :  ModelAnimator("alduin")
 {
 	transform = new Transform();
+	//transform->SetParent(this);
+
+	//transform->Rot().SetY(this->Rot().y);
 	FireAttackTransform = new Transform();
 
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
@@ -51,34 +54,36 @@ alduin::alduin() :  ModelAnimator("alduin")
 	Acollider_F = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_F->Pos().SetZ(-32);
 	Acollider_F->SetParent(transform);
-	Acollider_F->Scale() *= 0.1;
+	Acollider_F->Scale() *= 0.2;
 	Acollider_F->SetActive(false);
 
 	Acollider_R = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_R->Pos().SetX(-25);
 	Acollider_R->SetParent(transform);
-	Acollider_R->Scale() *= 0.1;
+	Acollider_R->Scale() *= 0.2;
 	Acollider_R->SetActive(false);
 
 	Acollider_L = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_L->Pos().SetX(25);
 	Acollider_L->SetParent(transform);
-	Acollider_L->Scale() *= 0.1;
+	Acollider_L->Scale() *= 0.2;
 	Acollider_L->SetActive(false);
 
 	Acollider_B = new CapsuleCollider(90.0f, 0.1f);
 	Acollider_B->Pos().SetZ(25);
 	Acollider_B->SetParent(transform);
-	Acollider_B->Scale() *= 0.1;
+	Acollider_B->Scale() *= 0.2;
 	Acollider_B->SetActive(false);
-
 	
 	breathCollider->Pos().SetZ(-70);
 	breathCollider->SetParent(transform);
 	breathCollider->Scale() *= 0.2;
 	breathCollider->SetActive(false);
 
-
+	WakeUpCollider = new SphereCollider(2500.0f);
+	WakeUpCollider->SetParent(this);
+	WakeUpCollider->Scale() *= 50.0f;
+	WakeUpCollider->SetActive(true);
 
 	//fBallCollider->SetParent(transform);
 	//fBallCollider->SetActive(false);
@@ -111,10 +116,15 @@ alduin::alduin() :  ModelAnimator("alduin")
 	this->ReadClip("alduin_death");
 	this->ReadClip("alduin_turn_left");
 	this->ReadClip("alduin_turn_right");
-	Scale() *= 0.001f;
+	this->ReadClip("alduin_sleep");
+	this->ReadClip("alduin_wakeUp");
+	Scale() *= 0.0003f;
+	transform->Scale() *= 0.5f;
 
-	moveSpeed = 15.0f;
+	moveSpeed = 5.5f;
 
+
+	GetClip(WAKEUP)->SetEvent(bind(&alduin::WakeUp, this), 0.9f);
 
 	//일반 공격
 
@@ -155,10 +165,13 @@ alduin::alduin() :  ModelAnimator("alduin")
 	GetClip(HIT)->SetEvent(bind(&alduin::hit, this), 0.0f);
 	GetClip(HIT)->SetEvent(bind(&alduin::HitDelayEnd, this), 0.9f);
 
+	SetState(SLEEP);
+
 }
 
 alduin::~alduin()
 {
+	delete WakeUpCollider;
 	delete Acollider_F;
 	delete Acollider_R;
 	delete Acollider_L;
@@ -181,7 +194,13 @@ alduin::~alduin()
 void alduin::Update()
 {
 	
+	SleepWake();
+
 	ModelAnimator::Update(); 
+
+	WakeUpCollider->UpdateWorld();
+
+	if (isSleeping) return;
 
 	collider_F->UpdateWorld();
 	collider_R->UpdateWorld();
@@ -245,7 +264,7 @@ void alduin::Update()
 		{
 			isDescending = false;
 			SetState(LANDING_HARD);
-			moveSpeed = 15.0f;
+			moveSpeed = 5.5f;
 		}
 		
 	}
@@ -310,6 +329,8 @@ void alduin::Render()
 	if(ModelAnimator::Active())
 		ModelAnimator::Render();
 
+	WakeUpCollider->Render();
+
 	collider_F->Render();
 	collider_R->Render();
 	collider_L->Render();
@@ -321,6 +342,7 @@ void alduin::Render()
 	breathCollider->Render();
 	BreathParticle->Render();
 	DeathParticle->Render();
+
 
 	if (curState != DEATH)
 	{
@@ -382,7 +404,7 @@ void alduin::Move()
 
 	transform->Pos() += velocity.GetNormalized() * moveSpeed * DELTA;
 
-	if (cross.y < -20 && !isAttacking) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
+	if (cross.y < -10 && !isAttacking) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
@@ -394,7 +416,7 @@ void alduin::Move()
 		}
 			
 	}
-	else if (cross.y > 20 && !isAttacking) //반대의 경우
+	else if (cross.y > 10 && !isAttacking) //반대의 경우
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
@@ -406,17 +428,24 @@ void alduin::Move()
 		}
 			
 	}
-	else if (cross.y >= -0 && cross.y <= 20 && !isAttacking) //반대의 경우
+	else if (cross.y >= -10 && cross.y <= 10 && !isAttacking) //반대의 경우
 	{
 
 		if (Pos().y < 1.0f && velocity.Length() < 250)
 		{
 			SetState(FORWARD);
 			isMoving = true;
-			moveSpeed = 15.0f;
+			moveSpeed = 5.5f;
 		}
 			
 	}
+
+}
+
+void alduin::WakeUp()
+{
+	SetState(FORWARD);
+	isSleeping = false;
 
 }
 
@@ -486,7 +515,7 @@ void alduin::beginAproach()
 {
 	isDescending = true;
 	SetState(DIVE);
-	moveSpeed = 300.0f;
+	moveSpeed = 250.0f;
 }
 
 //void alduin::aproaching()
@@ -504,7 +533,7 @@ void alduin::EndAction()
 {
 	isAttacking = false;
 	isMoving = true;
-	moveSpeed = 15.0f;
+	moveSpeed = 5.5f;
 	SetState(FORWARD);
 	Pos().y = 0;
 	CoolingTime = 0.0f;
@@ -537,6 +566,19 @@ void alduin::HitDelayEnd()
 {
 	//HitDelay = 0.0f;
 	SetState(FORWARD);
+}
+
+void alduin::SleepWake()
+{
+	if (curState != SLEEP) return;
+
+	if (WakeUpCollider->IsCapsuleCollision(target->GetCollier()))
+	{
+		WakeUpCollider->SetActive(false);
+		SetState(WAKEUP);
+
+	}
+
 }
 
 void alduin::Dying()

@@ -8,7 +8,8 @@ TerrainScene::TerrainScene()
 	testModel = new Model("rock_large1");
 	testModel->Scale() *= 0.05f;
 
-	
+	ObjectManager::Get()->Create({ 178, 12, 200 }, "rock_large1");
+	//ObjectManager::Get()->Create({ 200, 12, 200 }, "rock_large1");
 }
 
 TerrainScene::~TerrainScene()
