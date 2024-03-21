@@ -3,34 +3,55 @@
 
 ModelExportScene::ModelExportScene()
 {
-    vector<string> modelName =
-    {
-        "rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
-        "rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4",
-        "rock_small1", "rock_small2","tree"
-    };
+    // Export With Texture
+     
+    //vector<string> modelName =
+    //{
+    //    "rock_small1", "rock_small2"
+    //};
+    //
+    //vector<wstring> textures =
+    //{
+    //    L"Landscape/rocksgrass01", L"Landscape/rocksgrass01"
+    //};
 
-    vector<wstring> textures =
-    {
-        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
-        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
-        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree02"
-    };
+    ////string name = "rock_large2";
+    ////string file = "Models/FBX/" + name + ".fbx";
+    ////string clipName;
 
-    //string name = "rock_large2";
+    //FOR(modelName.size())
+    //{
+    //    string file = "Models/FBX/" + modelName[i] + ".fbx";
+    //    wstring textureFile = L"Textures/" + textures[i] + L".png";
+    //    ModelExporter* exporter;
+    //    exporter = new ModelExporter(modelName[i], file);
+    //    exporter->ExportMaterial(textureFile);
+    //    exporter->ExportMesh();
+    //    delete exporter;
+    //}
+
+    ///////////////////////////////////
+
+    // Export Without Texture
+
+    string name = "alduin";
+    string file = "Models/FBX/" + name + ".fbx";
+    ModelExporter* exporter;
+    
+    exporter = new ModelExporter(name, file);
+    exporter->ExportMaterial();
+    exporter->ExportMesh();
+    delete exporter;
+
+
+    //string name = "farmhouse2";
     //string file = "Models/FBX/" + name + ".fbx";
-    //string clipName;
+    //ModelExporter* exporter;
 
-    FOR(modelName.size())
-    {
-        string file = "Models/FBX/" + modelName[i] + ".fbx";
-        wstring textureFile = L"Textures/" + textures[i] + L".png";
-        ModelExporter* exporter;
-        exporter = new ModelExporter(modelName[i], file);
-        exporter->ExportMaterial(textureFile);
-        exporter->ExportMesh();
-        delete exporter;
-    }
+    //exporter = new ModelExporter(name, file);
+    //exporter->ExportMaterial();
+    //exporter->ExportMesh();
+    //delete exporter;
 
     //string name = "dragonboneshield";
     //string file = "Models/FBX/" + name + ".fbx";

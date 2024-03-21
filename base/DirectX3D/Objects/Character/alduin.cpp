@@ -20,7 +20,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	TailCollider = new CapsuleCollider(90.0f, 10.0f);
 	TailCollider->SetParent(transform);
 
-	breathCollider = new BoxCollider({ 150,50,200 });
+	breathCollider = new BoxCollider({ 150,50,300 });
 
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
@@ -75,7 +75,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	Acollider_B->Scale() *= 0.2;
 	Acollider_B->SetActive(false);
 	
-	breathCollider->Pos().SetZ(-70);
+	breathCollider->Pos().SetZ(-50);
 	breathCollider->SetParent(transform);
 	breathCollider->Scale() *= 0.2;
 	breathCollider->SetActive(false);
@@ -146,7 +146,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	GetClip(INHALE)->SetEvent(bind(&alduin::InhaleStart, this), 0.0f);
 	GetClip(INHALE)->SetEvent(bind(&alduin::Inhale, this), 0.9f);
 
-	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.5f);
+	GetClip(BREATH)->SetEvent(bind(&alduin::BreathAttack, this), 0.2f);
 	GetClip(BREATH)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 
 
@@ -457,7 +457,7 @@ void alduin::Inhale()
 
 void alduin::InhaleStart()
 {
-	tempPos = Pos();
+	tempPos = Pos() + Back() * 10;
 	tempRot = Rot();
 
 	BreathParticle->Play(tempPos, tempRot);

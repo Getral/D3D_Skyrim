@@ -7,6 +7,7 @@ public:
     ~ModelExporter();
 
     void ExportMaterial(wstring texture);
+    void ExportMaterial();
     void ExportMesh();
     void ExportClip(string clipName);
 
@@ -14,6 +15,7 @@ private:
     //Material
     void ReadMaterial();
     void WriteMaterial(wstring texture);
+    void WriteMaterial();
     string CreateTexture(string file);
 
     //Mesh
