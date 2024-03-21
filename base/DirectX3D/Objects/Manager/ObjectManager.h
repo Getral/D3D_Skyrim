@@ -9,11 +9,8 @@ public:
 	void Render();
 	void GUIRender();
 
-	vector<Structure*>& GetsStructures() { return world_structures; }
-	vector<BoxCollider*> GetItemsCol() { return items_col; }
-
 	Structure* GetStructure(string inname);
-	void Create(Vector3 pos, string inname);
+	void Create(Vector3 pos, float Rot_y, string inname);
 
 private:
 	vector<Structure*> structures;

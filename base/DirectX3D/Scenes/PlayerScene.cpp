@@ -54,5 +54,4 @@ void PlayerScene::GUIRender()
 	player->GUIRender();
 	aldu->GUIRender();
 
-	ObjectManager::Get()->GUIRender();
 }

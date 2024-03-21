@@ -15,6 +15,7 @@ public:
 
 	void TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies, alduin* alduin);
 
+	void GetClosestEnemy(Player* player, vector<EnemySpawn*> enemies);
 	//float GetEnemyDegree() { return final_angle; }
 
 private:
@@ -22,7 +23,7 @@ private:
 	vector<Quad*> compass_dir;
 	vector<Quad*> enemies_dir;
 
-	Quad* enemy_dir;
+	Quad* boss_dir;
 	Quad* bossQuest_dir;
 
 	Quad* HP_bar_background;
@@ -37,6 +38,8 @@ private:
 	ProgressBar* enemy_HP_bar;
 
 	Quad* enemyName_bear;
+	Quad* enemyName_wolf;
+	Quad* enemyName_alduin;
 
 	float tmp_N;
 	float tmp_S;
@@ -46,6 +49,9 @@ private:
 	float dirX_tmp[4];
 
 	vector<float> final_angles;
+	vector<float> distances;
+
+	Character* curEnemy;
 
 	int monsterCount = 0;
 
@@ -55,5 +61,7 @@ private:
 	bool isInven = false;
 
 	ItemStatus* itemstatus;
+
+	int timer = 0;
 };
 
