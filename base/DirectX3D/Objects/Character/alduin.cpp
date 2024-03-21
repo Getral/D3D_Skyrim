@@ -30,47 +30,47 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 
 	//공격 인식
-	collider_F = new CapsuleCollider(90.0f, 0.1f);
-	collider_F->Pos().SetZ(-30);
+	collider_F = new CapsuleCollider(60.0f, 0.1f);
+	collider_F->Pos().SetZ(-22);
 	collider_F->SetParent(transform);
 	collider_F->Scale() *= 0.2;
 
-	collider_R = new CapsuleCollider(90.0f, 0.1f);
-	collider_R->Pos().SetX(-30);
+	collider_R = new CapsuleCollider(70.0f, 0.1f);
+	collider_R->Pos().SetX(-25);
 	collider_R->SetParent(transform);
 	collider_R->Scale() *= 0.2;
 
-	collider_L = new CapsuleCollider(90.0f, 0.1f);
-	collider_L->Pos().SetX(30);
+	collider_L = new CapsuleCollider(70.0f, 0.1f);
+	collider_L->Pos().SetX(25);
 	collider_L->SetParent(transform);
 	collider_L->Scale() *= 0.2;
 
-	collider_B = new CapsuleCollider(90.0f, 0.1f);
+	collider_B = new CapsuleCollider(110.0f, 0.1f);
 	collider_B->Pos().SetZ(30);
 	collider_B->SetParent(transform);
 	collider_B->Scale() *= 0.2;
 
 	//공격 범위
-	Acollider_F = new CapsuleCollider(90.0f, 0.1f);
-	Acollider_F->Pos().SetZ(-32);
+	Acollider_F = new CapsuleCollider(60.0f, 0.1f);
+	Acollider_F->Pos().SetZ(-22);
 	Acollider_F->SetParent(transform);
 	Acollider_F->Scale() *= 0.2;
 	Acollider_F->SetActive(false);
 
-	Acollider_R = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_R = new CapsuleCollider(70.0f, 0.1f);
 	Acollider_R->Pos().SetX(-25);
 	Acollider_R->SetParent(transform);
 	Acollider_R->Scale() *= 0.2;
 	Acollider_R->SetActive(false);
 
-	Acollider_L = new CapsuleCollider(90.0f, 0.1f);
+	Acollider_L = new CapsuleCollider(70.0f, 0.1f);
 	Acollider_L->Pos().SetX(25);
 	Acollider_L->SetParent(transform);
 	Acollider_L->Scale() *= 0.2;
 	Acollider_L->SetActive(false);
 
-	Acollider_B = new CapsuleCollider(90.0f, 0.1f);
-	Acollider_B->Pos().SetZ(25);
+	Acollider_B = new CapsuleCollider(120.0f, 0.1f);
+	Acollider_B->Pos().SetZ(30);
 	Acollider_B->SetParent(transform);
 	Acollider_B->Scale() *= 0.2;
 	Acollider_B->SetActive(false);
@@ -135,8 +135,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 	}
 
 	GetClip(ATTACK_F)->SetEvent(bind(&alduin::Attacking2, this), 0.5f);
-	GetClip(ATTACK_R)->SetEvent(bind(&alduin::Attacking2, this), 0.3f);
-	GetClip(ATTACK_L)->SetEvent(bind(&alduin::Attacking2, this), 0.3f);
+	GetClip(ATTACK_R)->SetEvent(bind(&alduin::Attacking2, this), 0.15f);
+	GetClip(ATTACK_L)->SetEvent(bind(&alduin::Attacking2, this), 0.15f);
 	GetClip(ATTACK_B)->SetEvent(bind(&alduin::Attacking2, this), 0.5f);
 
 
@@ -367,8 +367,6 @@ void alduin::SetTarget(Player* target)
 {
 	this->target = target;
 }
-
-
 
 void alduin::Move()
 {
@@ -601,12 +599,12 @@ void alduin::Dead()
 
 
 
-void alduin::SetState(State state)
+void alduin::SetState(State state,float Scale)
 {
 	if (curState == state) return;
 
 	curState = state;
-	this->PlayClip((int)state);
+	this->PlayClip((int)state,Scale);
 }
 
 void alduin::Patterns() //지상패턴
@@ -617,15 +615,15 @@ void alduin::Patterns() //지상패턴
 	
 	if (collider_F->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_F);
+		SetState(ATTACK_F, 1.5f);
 	}
 	else if (collider_R->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_R);
+		SetState(ATTACK_R, 0.7f);
 	}
 	else if (collider_L->IsCapsuleCollision(this->target->GetCollier()))
 	{
-		SetState(ATTACK_L);
+		SetState(ATTACK_L, 0.7f);
 	}
 	else if (collider_B->IsCapsuleCollision(this->target->GetCollier()))
 	{

@@ -55,7 +55,7 @@ public:
 private:
 
 	//void SetAnimation();
-	void SetState(State state);
+	void SetState(State state, float Scale = 1.0f);
 	void Move();
 
 	void Inhale();
