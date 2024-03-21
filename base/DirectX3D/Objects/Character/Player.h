@@ -105,15 +105,44 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
+	// Armor
+	IronShield* ironshield;
+	DragonShield* dragonshield;
+
 	// Weapon
 	//  Ebony
 	EbonyBattleAxe* ebonybattleaxe;
+	EbonyClaymore* ebonyclaymore;
+	EbonyDagger* ebonydagger;
+	EbonyLongSword* ebonylongsword;
+	EbonyMace* ebonymace;
+	EbonyWarAxe* ebonywaraxe;
+	EbonyWarHammer* ebonywarhammer;
+
+	EbonyBow* ebonybow;
+	EbonyQuiver* ebonyquiver;
+	EbonyArrow* ebonyarrow;
+
+	// Iron
+	IronBattleAxe* ironbattleaxe;
+	IronClaymore* ironclaymore;
+	IronDagger* irondagger;
+	IronLongSword* ironlongsword;
+	IronMace* ironmace;
+	IronWarAxe* ironwaraxe;
+	IronWarHammer* ironwarhammer;
+
+	IronBow* ironbow;
+	IronQuiver* ironquiver;
+	IronArrow* ironarrow;
 
 
 
 	Transform* rightHand;
 	Transform* leftHand;
 	Transform* head;
+	Transform* back;
+
 	//Transform* body;
 	//Transform* foot;
 	//Transform* hands;
@@ -161,5 +190,6 @@ protected:
 	int weight;
 	int value;
 	int atk;
+	int def;
 };
 

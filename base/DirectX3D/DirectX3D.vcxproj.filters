@@ -417,7 +417,7 @@
     <ClInclude Include="Objects\Items\Weapons\EbonyLongSword.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Items\Weapons\Ebonymace1.h">
+    <ClInclude Include="Objects\Items\Weapons\EbonyMace.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Items\Weapons\EbonyQuiver.h">
@@ -857,7 +857,7 @@
     <ClCompile Include="Objects\Items\Weapons\EbonyLongSword.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Items\Weapons\Ebonymace1.cpp">
+    <ClCompile Include="Objects\Items\Weapons\EbonyMace.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Items\Weapons\EbonyQuiver.cpp">

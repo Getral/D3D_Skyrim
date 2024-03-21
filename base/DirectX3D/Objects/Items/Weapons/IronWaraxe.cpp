@@ -1,14 +1,18 @@
 #include "Framework.h"
 
-IronWarAxe::IronWarAxe() : Model("IronWarAxe")
+IronWarAxe::IronWarAxe(string name, int type,
+	int weight, int value, int weapon_class,
+	int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class,
+		weapon_type, atk)
 {
 	SetTag("IronWarAxe");
 	Pos().x += 0;
-	Pos().y += 25;
+	Pos().y += 25.0f;
 	Pos().z += 0;
 
 	Rot().x += 0;
-	Rot().y += 180;
+	Rot().y += XM_PI;
 	Rot().z += 0;
 
 	Scale().x *= 1.0f;
@@ -24,9 +28,9 @@ IronWarAxe::IronWarAxe() : Model("IronWarAxe")
 	collider->Rot().y += 0.0f;
 	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 8.9f;
-	collider->Scale().y *= 17.2f;
-	collider->Scale().z *= 2;
+	collider->Scale().x *= 12.0f;
+	collider->Scale().y *= 27.6f;
+	collider->Scale().z *= 3.0f;
 
 
 	collider->SetTag("IronWarAxeCollider");

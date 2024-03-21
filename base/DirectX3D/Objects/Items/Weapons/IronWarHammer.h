@@ -1,8 +1,9 @@
 #pragma once
-class IronWarHammer : public Model
+class IronWarHammer : public Weapon
 {
 public:
-    IronWarHammer();
+    IronWarHammer(string name, int type, int weight, int value,
+        int weapon_class, int weapon_type, int atk);
     ~IronWarHammer();
 
     void Update();

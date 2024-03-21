@@ -161,7 +161,7 @@
     <ClInclude Include="Objects\Items\Weapons\EbonyClaymore.h" />
     <ClInclude Include="Objects\Items\Weapons\EbonyDagger.h" />
     <ClInclude Include="Objects\Items\Weapons\EbonyLongSword.h" />
-    <ClInclude Include="Objects\Items\Weapons\Ebonymace1.h" />
+    <ClInclude Include="Objects\Items\Weapons\EbonyMace.h" />
     <ClInclude Include="Objects\Items\Weapons\EbonyQuiver.h" />
     <ClInclude Include="Objects\Items\Weapons\EbonyWarAxe.h" />
     <ClInclude Include="Objects\Items\Weapons\EbonyWarHammer.h" />
@@ -321,7 +321,7 @@
     <ClCompile Include="Objects\Items\Weapons\EbonyClaymore.cpp" />
     <ClCompile Include="Objects\Items\Weapons\EbonyDagger.cpp" />
     <ClCompile Include="Objects\Items\Weapons\EbonyLongSword.cpp" />
-    <ClCompile Include="Objects\Items\Weapons\Ebonymace1.cpp" />
+    <ClCompile Include="Objects\Items\Weapons\EbonyMace.cpp" />
     <ClCompile Include="Objects\Items\Weapons\EbonyQuiver.cpp" />
     <ClCompile Include="Objects\Items\Weapons\EbonyWarAxe.cpp" />
     <ClCompile Include="Objects\Items\Weapons\EbonyWarHammer.cpp" />

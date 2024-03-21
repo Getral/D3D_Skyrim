@@ -1,4 +1,5 @@
 #pragma once
+
 class EbonyBattleAxe : public Weapon
 {
 public:
