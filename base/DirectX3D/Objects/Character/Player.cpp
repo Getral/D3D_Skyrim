@@ -9,7 +9,7 @@ Player::Player()
 	ModelAnimator::Scale() *= 0.0001f;
 
 	Pos().x = 200.0f;
-	Pos().y = 500.0f;
+	Pos().y = 10.0f;
 	Pos().z = 200.0f;
 
 	ReadClip("male_1hm_idle");
@@ -248,6 +248,10 @@ Player::Player()
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
+	
+	GetClip(JUMP)->SetEvent(bind(&Player::EndJump, this), 0.6f);
+
+
 
 	prevMousePos = mousePos;
 }
@@ -287,6 +291,16 @@ void Player::Update()
 
 	if (KEY_PRESS('H'))
 		this->status.curstamina -= 10 * DELTA;
+
+	if (isJump)
+		jumpForce -= DELTA * gravity;
+
+	if (jumpForce <= 0.0f)
+	{
+		jumpForce = 0.0f;
+		isJump = false;
+	}
+
 }
 
 void Player::Render()
@@ -504,7 +518,9 @@ void Player::Jump()
 {
 	if (isJump)
 	{
-		Pos().y += gravity * DELTA;
+		SetAction(JUMP);
+		Pos().y = 3.0f;
+		Pos().y += jumpForce * DELTA;
 	}
 
 	if (isJump) return;
@@ -1400,6 +1416,22 @@ void Player::Set2hmIdle()
 void Player::SetbowIdle()
 {
 	SetAction(BOW_IDLE);
+}
+
+void Player::EndJump()
+{
+	if (is1hm)
+	{
+		SetAction(OHM_IDLE);
+	}
+	if (is2hm)
+	{
+		SetAction(THM_IDLE);
+	}
+	if (isbow)
+	{
+		SetAction(BOW_IDLE);
+	}
 }
 
 

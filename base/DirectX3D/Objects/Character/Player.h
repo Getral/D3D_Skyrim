@@ -59,6 +59,7 @@ public:
 	CapsuleCollider* GetCollier() { return collider; }
 	BladeSword* GetSword() { return bladeSword; }
 	bool GetIsHit() { return isHit; }
+	bool GetIsJump() { return isJump; }
 	ACTION GetAction() { return curAction; }
 	bool GetIsInvincible() { return isInvincible; }
 
@@ -100,6 +101,8 @@ private:
 	void Set2hmIdle();
 	void SetbowIdle();
 	
+	void EndJump();
+
 	void DoNothing();
 
 protected:
@@ -143,8 +146,8 @@ protected:
 
 	Vector3 prevMousePos;
 
-	float jumpForce = 50.0f;
-	float gravity = 50.0f;
+	float jumpForce = 10.0f;
+	float gravity = 10.0f;
 	float attackCharge = 0.0f;
 	float invincibleCount = 0.0f; // 무적시간 재는 변수
 	float delay = 0.5f;

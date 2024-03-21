@@ -180,7 +180,7 @@ bool Terrain::ComputePicking(Vector3& pos, Transform* transform)
 
     structuredBuffer->Copy(outputs.data(), sizeof(OutputDesc) * triangleSize);
 
-    float minDistance = 10;
+    float minDistance = 5;
     int minIndex = -1;
 
     UINT index = 0;
@@ -199,7 +199,57 @@ bool Terrain::ComputePicking(Vector3& pos, Transform* transform)
 
     if (minIndex >= 0)
     {
-        //pos = pickingPos + transform->Down() * minDistance;
+        pos = pickingPos + transform->Down() * minDistance;
+        return true;
+    }
+
+    return false;
+}
+
+bool Terrain::ComputePicking(Vector3& pos, Transform* transform, bool isJump)
+{
+    if (isJump) return false;
+
+    Vector3 pickingPos = transform->Pos();
+    pickingPos.y += 3.0f;
+
+    rayBuffer->Get().pos = pickingPos;
+    rayBuffer->Get().dir = transform->Down();
+    rayBuffer->Get().triangleSize = triangleSize;
+
+    rayBuffer->SetCS(0);
+
+    DC->CSSetShaderResources(0, 1, &structuredBuffer->GetSRV());
+    DC->CSSetUnorderedAccessViews(0, 1, &structuredBuffer->GetUAV(), nullptr);
+
+    computeShader->Set();
+
+    UINT x = ceil((float)triangleSize / 64.0f);
+
+    DC->Dispatch(x, 1, 1);
+
+    structuredBuffer->Copy(outputs.data(), sizeof(OutputDesc) * triangleSize);
+
+    float minDistance = 1;
+    int minIndex = -1;
+
+    UINT index = 0;
+    for (OutputDesc output : outputs)
+    {
+        if (output.picked)
+        {
+            if (minDistance > output.distance)
+            {
+                minDistance = output.distance;
+                minIndex = index;
+            }
+        }
+        index++;
+    }
+
+    if (minIndex >= 0)
+    {
+        pos = pickingPos + transform->Down() * minDistance;
         return true;
     }
 
