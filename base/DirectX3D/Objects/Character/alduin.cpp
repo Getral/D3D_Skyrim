@@ -20,7 +20,7 @@ alduin::alduin() :  ModelAnimator("alduin")
 	TailCollider = new CapsuleCollider(90.0f, 10.0f);
 	TailCollider->SetParent(transform);
 
-	breathCollider = new BoxCollider({ 300,200,400 });
+	breathCollider = new BoxCollider({ 200,100,300 });
 
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
@@ -386,7 +386,7 @@ void alduin::Move()
 		return;
 	}
 
-	if (velocity.Length() > 250 && Pos().y < 1)
+	if (velocity.Length() > MAX_GROUND_ATK && Pos().y < 1)
 	{
 		SetState(TAKEOFF);
 		isMoving = false;
@@ -408,7 +408,7 @@ void alduin::Move()
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
-		if (Pos().y < 1.0f && velocity.Length() < 250)
+		if (Pos().y < 1.0f && velocity.Length() < MAX_GROUND_ATK)
 		{
 			SetState(TURN_R);
 			isMoving = true;
@@ -420,7 +420,7 @@ void alduin::Move()
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
-		if (Pos().y < 1.0f && velocity.Length() < 250)
+		if (Pos().y < 1.0f && velocity.Length() < MAX_GROUND_ATK)
 		{
 			SetState(TURN_L);
 			isMoving = true;
@@ -431,7 +431,7 @@ void alduin::Move()
 	else if (cross.y >= -10 && cross.y <= 10 && !isAttacking) //반대의 경우
 	{
 
-		if (Pos().y < 1.0f && velocity.Length() < 250)
+		if (Pos().y < 1.0f && velocity.Length() < MAX_GROUND_ATK)
 		{
 			SetState(FORWARD);
 			isMoving = true;
@@ -460,9 +460,9 @@ void alduin::Inhale()
 
 void alduin::InhaleStart()
 {
-	tempPos = Pos();
+	tempPos = transform->Pos();
 	tempPos += {0, 0, -30};
-	tempRot = Rot();
+	tempRot = transform->Rot();
 
 	BreathParticle->Play(tempPos, tempRot);
 }
