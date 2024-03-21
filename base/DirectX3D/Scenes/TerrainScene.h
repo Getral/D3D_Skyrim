@@ -9,7 +9,7 @@ private:
 	{
 		"rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
 		"rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4",
-		"rock_small1", "rock_small2"
+		"rock_small1", "rock_small2","tree"
 	};
 
 	vector<vector<Vector3>> objectPos =
@@ -28,7 +28,10 @@ private:
 		{ Vector3(0, 0, 0) }, // rock_medium3
 		{ Vector3(0, 0, 0) }, // rock_medium4
 		{ Vector3(0, 0, 0) }, // rock_small1
-		{ Vector3(0, 0, 0) } // rock_small2
+		{ Vector3(0, 0, 0) }, // rock_small2
+		{ Vector3(157, 18, 146), Vector3(159, 16, 113), Vector3(179, 9, 102), Vector3(162, 12, 184), Vector3(189, 10, 199),Vector3(214, 12, 199),
+			Vector3(233, 9, 217),Vector3(262, 6, 198), Vector3(292, 12, 164), Vector3(297, 17, 210), Vector3(299, 15, 231), Vector3(292, 6, 262), Vector3(239, 0, 305)}
+
 	};
 
 	vector<vector<float>> objectRot =
@@ -43,7 +46,8 @@ private:
 		{ 0 }, // rock_medium3
 		{ 0 }, // rock_medium4
 		{ 0 }, // rock_small1
-		{ 0 } // rock_small2
+		{ 0 }, // rock_small2
+		{ 0,0,0,0,0,0,0,0,0,0,0,0,0 }
 	};
 
 public:
