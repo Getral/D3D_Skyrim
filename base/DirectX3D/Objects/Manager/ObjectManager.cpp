@@ -3,7 +3,7 @@
 ObjectManager::ObjectManager()
 {
 	structures.push_back(new Structure("farmhouse", 0.01f, { 1350,650,1250 }, "Structure"));
-	structures.push_back(new Structure("farmhouse2", 0.07f, { 1350,650,1250 }, "Structure"));
+	structures.push_back(new Structure("farmhouse2", 0.01f, { 1350,650,1250 }, "Structure"));
 	structures.push_back(new Structure("rock_large1", 0.05f, { 250, 400, 250 }, "Structure"));
 	structures.push_back(new Structure("rock_large2", 0.05f, { 600, 490, 200 }, "Structure"));
 	structures.push_back(new Structure("rock_large3", 0.05f, { 400, 400, 150 }, "Structure"));
