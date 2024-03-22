@@ -21,7 +21,7 @@ PlayerScene::PlayerScene()
 
 PlayerScene::~PlayerScene()
 {
-	//delete aldu;
+	delete aldu;
 	delete player;
 }
 
