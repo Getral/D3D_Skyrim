@@ -485,8 +485,8 @@ void Player::GUIRender()
 void Player::Control()
 {
 	Rotate();
-	//Move();
-	//Attack();
+	Move();
+	Attack();
 	Block();
 	//WeaponChange();
 }

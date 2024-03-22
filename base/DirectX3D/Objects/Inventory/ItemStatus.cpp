@@ -35,10 +35,10 @@ ItemStatus::ItemStatus()
 	weapons.push_back(new Weapon("ebonybow",       Item::WEAPON, 16, 1440, Weapon::EBONY, Weapon::bow,       0));
 
 	arrows.push_back(new Arrow("ironarrow",   Item::ARROW, 0, 1, Arrow::IRON,       10));
-	arrows.push_back(new Arrow("dragonarrow", Item::ARROW, 0, 7, Arrow::EBONY,		20));
+	arrows.push_back(new Arrow("ebonyarrow", Item::ARROW, 0, 7, Arrow::EBONY,		20));
 
-	//potions.push_back(new Potion("hp_potion", Item::POTION, 1, 1, Potion::POTION_HP, 100));
-	//potions.push_back(new Potion("sp_potion", Item::POTION, 1, 1, Potion::POTION_SP, 100));
+	potions.push_back(new Potion("hp_potion", Item::POTION, 1, 1, Potion::POTION_HP, 100));
+	potions.push_back(new Potion("sp_potion", Item::POTION, 1, 1, Potion::POTION_SP, 100));
 
 	misces.push_back(new Misc("coin", Item::MISC, 1, 1));
 }
