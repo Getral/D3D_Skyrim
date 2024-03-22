@@ -171,7 +171,7 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 	boss_dir->Pos().x = final_angles.back() * compass->GetSize().x / 140;
 	boss_dir->UpdateWorld();
 
-	bossQuest_dir->Pos().x = enemies_dir.back()->Pos().x;
+	bossQuest_dir->Pos().x = boss_dir->Pos().x;
 	bossQuest_dir->UpdateWorld();
 
 
@@ -256,7 +256,7 @@ void UIManager::PostRender()
 	SP_bar_background->Render();
 	SP_bar->Render();
 
-	if ((curEnemy->GetStatus().curHp > 0 && curEnemy->IsBattle() == true) || aldu_isSleeping == false)
+	if (curEnemy->IsBattle() == true || aldu_isSleeping == false)
 	{
 		enemy_HP_bar_background->Render();
 		enemy_HP_bar->Render();
@@ -272,10 +272,14 @@ void UIManager::PostRender()
 	}
 	else
 	{
-		if (curEnemy->GetName() == "Bear")
-			enemyName_bear->Render();
-		else if (curEnemy->GetName() == "Wolf")
-			enemyName_wolf->Render();
+		if (curEnemy->IsBattle() == true)
+		{
+			if (curEnemy->GetName() == "Bear")
+				enemyName_bear->Render();
+			else if (curEnemy->GetName() == "Wolf")
+				enemyName_wolf->Render();
+		}
+		
 	}
 	
 
