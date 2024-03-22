@@ -5,9 +5,9 @@ TerrainScene::TerrainScene()
 {
 	TerrainManager::Get();
 
-	//FOR(objectName.size())
-	//	for (int j = 0; j < objectPos[i].size(); j++)
-	//		ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
+	FOR(objectName.size())
+		for (int j = 0; j < objectPos[i].size(); j++)
+			ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
 
 	skyBox = new SkyBox(L"Textures/Landscape/BlueSky.dds");
 }
