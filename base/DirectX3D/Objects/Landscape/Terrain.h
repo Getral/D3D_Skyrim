@@ -81,4 +81,5 @@ private:
     Texture* alphaMap;
     Texture* secondMap;
     Texture* thirdMap;
+
 };

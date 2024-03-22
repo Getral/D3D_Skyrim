@@ -1,4 +1,7 @@
 #pragma once
+
+#define MAX_GROUND_ATK 76
+
 class alduin : public ModelAnimator
 { 
 	
@@ -32,7 +35,9 @@ private:
 		HIT,
 		DEATH,
 		TURN_L,
-		TURN_R
+		TURN_R,
+		SLEEP,
+		WAKEUP
 	};
 public:
 
@@ -45,11 +50,14 @@ public:
 
 	void SetTarget(Player* target);
 	float GetHP() { return curHp; }
-
+	float GetMaxHP() { return maxHp; }
+	Transform* GetTransform() { return transform; }
+	
+	bool GetIsSleeping() { return isSleeping; }
 private:
 
 	//void SetAnimation();
-	void SetState(State state);
+	void SetState(State state, float Scale = 1.0f);
 	void Move();
 
 	void Inhale();
@@ -63,6 +71,10 @@ private:
 	void beginAproach();
 	void EndAction();
 	void HitDelayEnd();
+
+	void SleepWake();
+	void WakeUp();
+	
 
 	void hit();
 	void Dying();
@@ -90,6 +102,8 @@ private:
 	CapsuleCollider* Acollider_B;
 	BoxCollider* breathCollider;
 
+	SphereCollider* WakeUpCollider;
+
 	Transform* transform;
 	Transform* FireAttackTransform;
 	Player* target;
@@ -100,19 +114,22 @@ private:
 
 	UINT nodeIndex = 0;
 
+
 	float moveSpeed = 15.0f;
 	float rotSpeed = 0.25;
 	float altitude = 0.0f;
 	float deceleration = 5; //°¨¼Ó
 	float CoolingTime = 1.0f;
-	float HitDelay = 1.0f;
-	float fireBallDir = 0.0f;
+	float HitDelay = 0.0f;
+	float HitDelay2 = 0.7f;
+	float breathDelay = 1.0f;
 
 	bool isAscending = false;
 	bool isDescending = false;
 	bool isAttacking = false;
 	bool isFireAttack = false;
 	bool isMoving = false;
+	bool isSleeping = true;
 
 
 	Vector3 velocity;
@@ -120,8 +137,10 @@ private:
 	vector<map<float, Event>> totalEvent;
 	vector<map<float, Event>::iterator> eventIters;
 
-	float maxHp = 3000.0f;
-	float curHp = 3000.0f;
+	float maxHp = 300.0f;
+	float curHp = 300.0f;
+
+	
 
 
 };

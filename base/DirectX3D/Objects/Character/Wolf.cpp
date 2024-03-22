@@ -285,6 +285,7 @@ void Wolf::StartIdle()
 {
 	idleTime = Random(3, 6);
 	isTracking = false;
+	isBattle = false;
 }
 
 void Wolf::EndHowling()
@@ -292,6 +293,7 @@ void Wolf::EndHowling()
 	SetState(RUN);
 	SetTarget(nullptr);
 	isTracking = true;
+	isBattle = true;
 	idleTime = 0.0f;
 }
 

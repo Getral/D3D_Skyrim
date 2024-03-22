@@ -149,11 +149,13 @@ void Bear::EndStartSleep()
 {
 	isSleep = true;
 	isWakeUp = false;
+	isBattle = false;
 }
 
 void Bear::StartWakeUp()
 {
 	isWakeUp = true;
+	isBattle = true;
 }
 
 void Bear::EndWakeUp()

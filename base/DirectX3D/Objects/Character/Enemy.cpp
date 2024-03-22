@@ -79,6 +79,8 @@ void Enemy::Death()
 		colliderTransform->SetActive(false);
 	for (CapsuleCollider* collider : colliders)
 		collider->SetActive(false);
+
+	isBattle = false;
 }
 
 void Enemy::Track()

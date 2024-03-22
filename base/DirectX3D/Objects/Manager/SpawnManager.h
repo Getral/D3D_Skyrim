@@ -23,13 +23,13 @@ private:
 
 	vector<vector<Vector3>> posTable =
 	{
-		{ Vector3(10, 200, 10)/*, Vector3(-200, 2000, 300), Vector3(-100, 2000, -200)*/},
-		{ Vector3(20, 200, 20), Vector3(25, 200, 25), Vector3(22.5, 200, 22.5) }
+		{ Vector3(200, 10, 200), Vector3(180, 10, 200)/*, Vector3(-100, 2000, -200) */ },
+		{ Vector3(220, 10, 200)}
 	};
 
 	vector<Character::Status> statusTable =
 	{
-		Character::Status(15, 300, 200, 20, 2.5),
+		Character::Status(15, 30, 200, 20, 2.5),
 		Character::Status(10, 150, 100, 10, 3.5)
 	};
 

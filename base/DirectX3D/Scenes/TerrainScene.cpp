@@ -3,43 +3,18 @@
 
 TerrainScene::TerrainScene()
 {
-	/*for (int i = 0; i < height; i++)
-	{
-		vector<Terrain*> tmp;
-		for (int j = 1; j <= width; j++)
-		{
-			wstring index = L"";
-			if (j + i * 16 < 10)
-				index = L"00";
-			else if (j + i * 16 < 100)
-				index = L"0";
-			index += to_wstring(j + i * 16);
-			wstring file = L"Textures/HeightMaps/Tamriel/TamrielBeta_10_2016_01-" + index + L".png";
-			tmp.push_back(new Terrain(L"Textures/Landscape/tamriel.4.0.0.dds", file));
-		}
-		terrain.push_back(tmp);
-	}
+	TerrainManager::Get();
 
-	player = SpawnManager::Get()->GetPlayerData();
+	FOR(objectName.size())
+		for (int j = 0; j < objectPos[i].size(); j++)
+			ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
 
-	float size = 16.0f;
-	for (int i = 0; i < height; i++)
-	{
-		for (int j = 0; j < width; j++)
-		{
-			terrain[i][j]->Scale() *= size;
-			terrain[i][j]->Pos().SetX(terrain[i][j]->GetSize().x * size * 0.5f);
-			terrain[i][j]->Pos().SetY(-3200);
-			terrain[i][j]->Pos().SetZ(terrain[i][j]->GetSize().y * size * 0.5f);
-			terrain[i][j]->Rot().y = XM_PI;
-			terrain[i][j]->UpdateWorld();
-		}
-	}*/
+	skyBox = new SkyBox(L"Textures/Landscape/BlueSky.dds");
 }
 
 TerrainScene::~TerrainScene()
 {
-
+	delete skyBox;
 }
 
 void TerrainScene::Update()
@@ -49,15 +24,18 @@ void TerrainScene::Update()
 
 void TerrainScene::PreRender()
 {
+	
 }
 
 void TerrainScene::Render()
 {
+	skyBox->Render();
 	TerrainManager::Get()->Render();
 }
 
 void TerrainScene::PostRender()
 {
+	
 }
 
 void TerrainScene::GUIRender()

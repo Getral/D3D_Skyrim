@@ -5,6 +5,7 @@ TerrainManager::TerrainManager()
 {
 	wstring heightMap = L"Textures/HeightMaps/Tamriel.jpg";
 	//wstring heightMap = L"Textures/HeightMaps/TestMap.png";
+	//wstring heightMap = L"Textures/Color/Black.png";
 	terrain = new Terrain(L"Textures/Landscape/tamriel.4.0.0.dds", heightMap);
 
 	//float size = 2.0f;
@@ -23,11 +24,7 @@ TerrainManager::~TerrainManager()
 void TerrainManager::Update()
 {
 	playerData->Pos().y += -gravity * DELTA;
-
-	if (terrain->ComputePicking(playerData->Pos(), playerData))
-	{
-		playerData->Pos().y += (gravity + 2) * DELTA;
-	}
+	terrain->ComputePicking(playerData->Pos(), playerData);
 
 	//if (playerData->Pos().y <= 0.0f)
 	//	playerData->Pos().y = 200.0f;
