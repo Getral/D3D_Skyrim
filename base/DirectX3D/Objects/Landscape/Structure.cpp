@@ -4,7 +4,18 @@
 Structure::Structure(string modelName, float scale, Vector3 colliderSize, string tag, bool isAlpha)
 	:modelName(modelName),scale(scale),colliderSize(colliderSize),tag(tag),isAlpha(isAlpha)
 {
-	model = new Model(modelName);
+	if (modelName == "chest_armor_iron" ||
+		modelName == "chest_armor_dragon" ||
+		modelName == "chest_weapon_iron" ||
+		modelName == "chest_weapon_ebony" ||
+		modelName == "chest_potion")
+	{
+		model = new Model("chest");
+	}
+	else
+		model = new Model(modelName);
+
+
 	model->SetTag(tag);
 	model->SetName(modelName);
 	model->Scale() *= scale;
@@ -19,6 +30,7 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 	{
 	}
 
+	
 	
 	collider = new BoxCollider(colliderSize);
 	collider->SetParent(model);

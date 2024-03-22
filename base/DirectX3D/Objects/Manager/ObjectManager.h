@@ -17,6 +17,7 @@ private:
 	vector<Structure*> items;
 	
 	vector<Structure*> world_structures;
+	vector<Structure*> world_itemboxes;
 	vector<Structure*> world_items;
 
 	vector<BoxCollider*> structures_col;

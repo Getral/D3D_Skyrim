@@ -34,8 +34,6 @@ ObjectManager::~ObjectManager()
 	for (Structure* item : world_items)
 		delete item;
 
-	vector<BoxCollider*> structures_col;
-	vector<BoxCollider*> items_col;
 }
 
 void ObjectManager::Update(Player* player)
@@ -110,9 +108,10 @@ void ObjectManager::Update(Player* player)
 void ObjectManager::Render()
 {
 	for (Structure* structure : world_structures)
-	{
 		structure->Render();
-	}
+	
+	for (Structure* box : world_itemboxes)
+		box->Render();
 
 	for (Structure* item : world_items)
 		item->Render();
@@ -133,6 +132,7 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 		world_structures.back()->GetModel()->Rot().y = Rot_y;
 	}
 		
+
 	if (GetStructure(inname)->GetModel()->GetTag() == "Item")
 	{
 		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
@@ -140,6 +140,8 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 		world_items.back()->GetModel()->Pos() = pos;
 		world_items.back()->GetModel()->Rot().y = Rot_y;
 	}
+
+	
 }
 
 Structure* ObjectManager::GetStructure(string inname)
