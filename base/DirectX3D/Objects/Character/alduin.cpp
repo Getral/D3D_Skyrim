@@ -257,22 +257,22 @@ void alduin::Update()
 
 	if (breathCollider->Active() && breathCollider->IsCapsuleCollision(target->GetCollier()))
 	{
-		if (breathDelay <= 0.0f)
+		if (breathDelay <= 0.1f)
 		{
-			target->GetStatus().curHp -= (140.0f - target->GetStatus().def);
-			breathDelay = 1.0f;
+			target->GetStatus().curHp -= (14.0f - target->GetStatus().def);
+			breathDelay = 0.4f;
 		}
 		else breathDelay -= DELTA;
 
 	}
 
-	if (ApproachCollider->Active() && breathCollider->IsCapsuleCollision(target->GetCollier()))
+	if (ApproachCollider->Active() && ApproachCollider->IsCapsuleCollision(target->GetCollier()))
 	{
-		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
 
-		if (HitDelay <= 0.0f)
+		if (HitDelay <= 0.1f)
 		{
-			target->GetStatus().curHp -= (180.0f - target->GetStatus().def);
+			target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+			target->GetStatus().curHp -= (18.0f - target->GetStatus().def);
 			HitDelay = 1.0f;
 		}
 		else HitDelay -= DELTA;
