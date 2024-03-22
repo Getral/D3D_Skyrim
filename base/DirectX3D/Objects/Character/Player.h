@@ -121,7 +121,6 @@ protected:
 
 	EbonyBow* ebonybow;
 	EbonyQuiver* ebonyquiver;
-	EbonyArrow* ebonyarrow;
 
 	// Iron
 	IronBattleAxe* ironbattleaxe;
@@ -134,7 +133,6 @@ protected:
 
 	IronBow* ironbow;
 	IronQuiver* ironquiver;
-	IronArrow* ironarrow;
 
 
 

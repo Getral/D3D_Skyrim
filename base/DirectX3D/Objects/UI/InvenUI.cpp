@@ -836,7 +836,7 @@ void InvenUI::ListingItem()
 					Font::Get()->RenderText(inven_arrows[i]->GetStatus().name, { 275,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
 					if (inven_arrows[i]->GetType() == Arrow::IRON)
 						Font::Get()->RenderText("iron", { 400,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
-					if (inven_arrows[i]->GetType() == Arrow::DRAGONBONE)
+					if (inven_arrows[i]->GetType() == Arrow::EBONY)
 						Font::Get()->RenderText("dragonbone", { 400,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
 					Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
 					Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)(i + inven_armors.size() + inven_weapons.size())) });
@@ -1115,7 +1115,7 @@ void InvenUI::ListingItem()
 					Font::Get()->RenderText(to_string(inven_arrows[i]->GetCount()), { 350,WIN_HEIGHT - 100 - (20 * (float)i) });
 					if (inven_arrows[i]->GetType() == Arrow::IRON)
 						Font::Get()->RenderText("iron", { 400,WIN_HEIGHT - 100 - (20 * (float)i) });
-					if (inven_arrows[i]->GetType() == Arrow::DRAGONBONE)
+					if (inven_arrows[i]->GetType() == Arrow::EBONY)
 						Font::Get()->RenderText("dragonbone", { 400,WIN_HEIGHT - 100 - (20 * (float)i) });
 					Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().value), { 515,WIN_HEIGHT - 100 - (20 * (float)i) });
 					Font::Get()->RenderText(to_string(inven_arrows[i]->GetStatus().weight), { 555,WIN_HEIGHT - 100 - (20 * (float)i) });

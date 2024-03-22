@@ -8,14 +8,15 @@ ModelExportScene::ModelExportScene()
     vector<string> modelName =
     {
         "rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
-        "rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree", "chest"
+        "rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree", "chest",
+        "hp_potion", "sp_potion", "coin"
     };
     
     vector<wstring> textures =
     {
         L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
         L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree02",
-        L"Model/Chest/chest"
+        L"Model/Chest/chest", L"Model/Potion/genericpotion", L"Model/Potion/genericpotion", L"Model/Misc/coin"
     };
 
     
