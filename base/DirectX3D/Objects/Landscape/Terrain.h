@@ -51,6 +51,7 @@ public:
 
     Vector3 Picking();
     bool ComputePicking(Vector3& pos, Transform* transform);
+    bool ComputePicking(Vector3& pos, Transform* transform, bool isJump);
 
     Vector2 GetSize() { return Vector2(width, height); } //가로 세로를 직접 받을 수 있게 추가
 

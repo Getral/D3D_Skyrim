@@ -16,13 +16,13 @@ public:
 
 	enum ACTION
 	{
-		OHM_IDLE, JUMP, OHM_HIT_LIGHT, OHM_HIT_MEDIUM, OHM_HIT_LARGE, OHM_HIT_LARGEST, OHM_HIT_BLOCK,
+		OHM_IDLE, OHM_HIT_LIGHT, OHM_HIT_MEDIUM, OHM_HIT_LARGE, OHM_HIT_LARGEST, OHM_HIT_BLOCK,
 		OHM_WALK_F, OHM_WALK_FL, OHM_WALK_FR, OHM_WALK_B, OHM_WALK_BL, OHM_WALK_BR, OHM_WALK_L, OHM_WALK_R,
 		OHM_RUN_F, OHM_RUN_FL, OHM_RUN_FR, OHM_RUN_B, OHM_RUN_BL, OHM_RUN_BR, OHM_RUN_L, OHM_RUN_R,
 		CIDLE, CMOVE_F, CMOVE_FL, CMOVE_FR, CMOVE_B, CMOVE_BL, CMOVE_BR, CMOVE_L, CMOVE_R,
 		OHM_CATK_R, OHM_CATK_L, OHM_CATK_P, 
 		OHM_ATK_R, OHM_ATK_L, OHM_ATK_P,
-		OHM_BLOCK, OHM_PARRY_START, OHM_PARRY, 
+		OHM_BLOCK,
 		OHM_WALK_FW_ATK, OHM_WALK_BW_ATK, OHM_WALK_L_ATK, OHM_WALK_R_ATK, 
 		OHM_RUN_FW_ATK, OHM_RUN_BW_ATK, OHM_RUN_L_ATK, OHM_RUN_R_ATK,
 
@@ -70,7 +70,6 @@ public:
 private:
 	void Control();
 	void Move();
-	void Jump();
 	void Rotate();
 	void Attack();
 	void Block();
@@ -142,15 +141,11 @@ protected:
 
 	Vector3 prevMousePos;
 
-	float jumpVelocity = 0;
-	float jumpForce = 0.5f;
-	float gravityMult = 0.5f;
 	float attackCharge = 0.0f;
 	float invincibleCount = 0.0f; // 무적시간 재는 변수
 	float delay = 0.5f;
 
 	bool isInvincible = false; //무적인가?
-	bool isJump = false;
 	bool isBlock = false;
 	bool isHit = false;
 	bool isCombo = false;
