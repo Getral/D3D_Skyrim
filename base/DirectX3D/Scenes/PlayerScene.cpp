@@ -7,8 +7,8 @@ PlayerScene::PlayerScene()
 
 	aldu = new alduin();
 	aldu->SetTarget(player);
-	aldu->Pos() = { 280,0,200 };
-	aldu->GetTransform()->Pos() = {280, 0, 123};
+	aldu->Pos() = { 244,0,150 };
+	aldu->GetTransform()->Pos() = {244, 0, 150};
 	
 
 	CAM->SetTarget(player); 
@@ -20,7 +20,7 @@ PlayerScene::PlayerScene()
 
 PlayerScene::~PlayerScene()
 {
-	delete aldu;
+	//delete aldu;
 	delete player;
 }
 

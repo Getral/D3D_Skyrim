@@ -44,9 +44,8 @@ void Enemy::Update()
 	for (CapsuleCollider* collider : colliders)
 		collider->UpdateWorld();
 
-	transform->Pos().y -= gravity * DELTA;
-	if (TerrainManager::Get()->GetTerrain()->ComputePicking(transform->Pos(), transform))
-		transform->Pos().y += (gravity + 2) * DELTA;
+	if(!TerrainManager::Get()->GetTerrain()->ComputePicking(transform->Pos(), transform))
+		transform->Pos().y -= gravity * DELTA;
 }
 
 void Enemy::Render()

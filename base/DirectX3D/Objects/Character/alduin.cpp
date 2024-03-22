@@ -12,7 +12,6 @@ alduin::alduin() :  ModelAnimator("alduin")
 	alduinCollider2 = new CapsuleCollider(50.0f,25.0f);
 	alduinCollider2->SetParent(this->transform);
 
-
 	HeadCollider = new CapsuleCollider(90.0f,0.1f);
 	HeadCollider->SetParent(transform);
 	BodyCollider = new CapsuleCollider(110.0f, 350.0f);
@@ -24,7 +23,6 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
-	
 
 	//alduinCollider3 = new CapsuleCollider();
 
@@ -211,7 +209,6 @@ void alduin::Update()
 	Acollider_L->UpdateWorld();
 	Acollider_B->UpdateWorld();
 
-
 	breathCollider->UpdateWorld();
 	transform->UpdateWorld();
 	HeadCollider->UpdateWorld();
@@ -225,23 +222,38 @@ void alduin::Update()
 	
 	if (Acollider_F->Active() && Acollider_F->IsCapsuleCollision(target->GetCollier()))
 	{
-		//3 : OHM_HIT_MEDIUM
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= (150.0f - target->GetStatus().def);
 	}
 
 	else if (Acollider_R->Active() && Acollider_R->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= (142.0f - target->GetStatus().def);
 	}
 
 	else if (Acollider_L->Active() && Acollider_L->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= (142.0f - target->GetStatus().def);
 	}
 
 	else if (Acollider_B->Active() && Acollider_B->IsCapsuleCollision(target->GetCollier()))
 	{
 		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+		target->GetStatus().curHp -= (170.0f - target->GetStatus().def);
+	}
+
+
+	if (breathCollider->Active() && breathCollider->IsCapsuleCollision(target->GetCollier()))
+	{
+		if (breathDelay < 0)
+		{
+			target->GetStatus().curHp -= (140.0f - target->GetStatus().def);
+			breathDelay = 1.0f;
+		}
+		else breathDelay -= DELTA;
+
 	}
 
 
@@ -294,15 +306,15 @@ void alduin::Update()
 			|| TailCollider->IsCollision(target->GetSword()->GetCollider()))
 		{
 
-			if (curHp < 1000)
+			if (curHp < 100)
 				SetState(HIT);
 
-			else if (curHp >= 1000)
+			else if (curHp >= 100)
 			{
-				curHp -= 300;
+				curHp -= target->GetStatus().atk * 2;
 			}
 
-			HitDelay2 = 1.0f;
+			HitDelay2 = 0.7f;
 
 
 		}
@@ -470,6 +482,7 @@ void alduin::BreathAttack()
 
 		breathCollider->SetActive(true);
 
+
 }
 
 
@@ -555,7 +568,7 @@ void alduin::hit()
 {
 	//if (HitDelay > 0) return;
 
-	curHp -= 300;
+	curHp -= target->GetStatus().atk;
 	//HitDelay += DELTA;
 
 }
@@ -582,7 +595,7 @@ void alduin::SleepWake()
 void alduin::Dying()
 {
 	tempPos = Pos();
-	tempPos += {0, 15, 0};
+	tempPos += {0, 10, 0};
 	DeathParticle->Play(tempPos);
 	
 	//파티클 재생

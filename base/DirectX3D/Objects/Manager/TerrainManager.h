@@ -23,6 +23,6 @@ private:
 
 	int test = 0;
 
-	float gravity = 50.0f;
+	float gravity = 5.0f;
 };
 

@@ -13,7 +13,6 @@ Player::Player()
 	Pos().z = 290.0f;
 
 	ReadClip("male_1hm_idle");
-	ReadClip("male_jump");
 	ReadClip("male_1hm_stagger");
 	ReadClip("male_1hm_stagger_medium");
 	ReadClip("male_1hm_stagger_large");
@@ -51,8 +50,6 @@ Player::Player()
 	ReadClip("male_1hm_attack_left");
 	ReadClip("male_1hm_attack_power");
 	ReadClip("male_1hm_block_shield");
-	ReadClip("male_1hm_block_bash_intro_shield");
-	ReadClip("male_1hm_block_bash_shield");
 	ReadClip("male_1hm_walk_forward_attack");
 	ReadClip("male_1hm_walk_backward_attack");
 	ReadClip("male_1hm_walk_left_attack");
@@ -248,7 +245,7 @@ Player::Player()
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
-
+	
 	prevMousePos = mousePos;
 }
 
@@ -287,6 +284,7 @@ void Player::Update()
 
 	if (KEY_PRESS('H'))
 		this->status.curstamina -= 10 * DELTA;
+	
 }
 
 void Player::Render()
@@ -499,9 +497,6 @@ void Player::Move()
 	}
 }
 
-void Player::Jump()
-{
-}
 
 void Player::Rotate()
 {
@@ -1393,8 +1388,6 @@ void Player::SetbowIdle()
 {
 	SetAction(BOW_IDLE);
 }
-
-
 
 void Player::DoNothing()
 {
