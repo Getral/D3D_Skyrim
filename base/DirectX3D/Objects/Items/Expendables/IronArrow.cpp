@@ -69,3 +69,15 @@ void IronArrow::ColliderManager(bool isBowCollider)
 	else
 		collider->SetActive(false);
 }
+
+void IronArrow::Shoot(Vector3 pos, Vector3 dir)
+{
+	transform->SetActive(true);
+
+	transform->Pos() = pos;
+	direction = dir;
+
+	transform->Rot().y = atan2(dir.x, dir.z);
+
+	time = 0;
+}

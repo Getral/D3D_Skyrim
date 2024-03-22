@@ -4,13 +4,13 @@ EbonyBow::EbonyBow() : ModelAnimator("EbonyBow")
 {
 	SetTag("EbonyBow");
 
-	Pos().x += -27.0f;
-	Pos().y += 0;
-	Pos().z += 1.6f;
+	Pos().x += 0.0f;
+	Pos().y += -9.5;
+	Pos().z += 0.0f;
 
 	Rot().x += 0;
 	Rot().y += 0;
-	Rot().z += 0;
+	Rot().z += XM_PI;
 
 	Scale().x *= 0.01f;
 	Scale().y *= 0.01f;

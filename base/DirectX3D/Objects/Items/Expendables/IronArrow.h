@@ -24,6 +24,13 @@ public:
 	void SetIsCollider(bool value) { isBow = value; }
 	void ColliderManager(bool isBowCollider);
 
+	void Shoot(Vector3 pos, Vector3 dir);
+	Transform* GetTransform() { return transform; }
+	BoxCollider* GetCollider() { return collider; }
+
+private:
+	float LIFE_SPAN = 7;
+
 private:
 	int arrow_type;
 	int atk;
@@ -32,7 +39,13 @@ private:
 	bool isEquiped = false;
 	bool isBow = false;
 
-	BoxCollider* collider;
 	Model* ironarrow;
+	Transform* transform;
+	BoxCollider* collider;
+
+	float speed = 1000;
+	float time = 0;
+
+	Vector3 direction;
 };
 

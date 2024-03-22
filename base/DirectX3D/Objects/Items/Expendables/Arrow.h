@@ -6,7 +6,7 @@ public:
 	enum ArrowType
 	{
 		IRON,
-		DRAGONBONE
+		EBONY
 	};
 
 	Arrow(string name, int type, int weight, int value,

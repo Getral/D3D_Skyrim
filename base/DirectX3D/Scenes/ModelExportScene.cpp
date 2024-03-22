@@ -38,16 +38,6 @@ ModelExportScene::ModelExportScene()
     delete exporter;
 
 
-    string name2 = "ironquiver";
-    string file2 = "Models/FBX/" + name2 + ".fbx";
-    ModelExporter* exporter2;
-    string clipName2;
-
-    exporter2 = new ModelExporter(name2, file2);
-    exporter2->ExportMaterial();
-    exporter2->ExportMesh();
-    delete exporter2;
-    
 
     string name1 = "ebonybow";
     string file1 = "Models/FBX/" + name1 + ".fbx";
@@ -82,6 +72,29 @@ ModelExportScene::ModelExportScene()
     exporter1 = new ModelExporter(name1, file1);
     exporter1->ExportClip(clipName1);
     delete exporter1;
+
+
+
+    string name2 = "ironarrow";
+    string file2 = "Models/FBX/" + name2 + ".fbx";
+    ModelExporter* exporter2;
+    string clipName2;
+
+    exporter2 = new ModelExporter(name2, file2);
+    exporter2->ExportMaterial();
+    exporter2->ExportMesh();
+    delete exporter2;
+
+
+    string name3 = "ironarrow";
+    string file3 = "Models/FBX/" + name3 + ".fbx";
+    ModelExporter* exporter3;
+    string clipName3;
+
+    exporter3 = new ModelExporter(name3, file3);
+    exporter3->ExportMaterial();
+    exporter3->ExportMesh();
+    delete exporter3;
 
 
 

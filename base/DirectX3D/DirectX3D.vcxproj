@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scenes\ArrowManager.h" />
     <ClInclude Include="Objects\Items\Armors\DragonBoots.h" />
     <ClInclude Include="Objects\Items\Armors\DragonCuirassplate.h" />
     <ClInclude Include="Objects\Items\Armors\DragonGauntlets.h" />
@@ -302,6 +303,7 @@
     <ClInclude Include="Scenes\TerrainScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scenes\ArrowManager.cpp" />
     <ClCompile Include="Objects\Items\Armors\DragonBoots.cpp" />
     <ClCompile Include="Objects\Items\Armors\DragonCuirassplate.cpp" />
     <ClCompile Include="Objects\Items\Armors\DragonGauntlets.cpp" />
