@@ -26,11 +26,7 @@ void TerrainManager::Update()
 
 	if (terrain->ComputePicking(playerData->Pos(), playerData))
 	{
-		playerData->SetIsJump(false);
-	}
-	if (terrain->ComputePicking(playerData->Pos(), playerData, playerData->GetIsJump()))
-	{
-		playerData->Pos().y += (gravity + 7) * DELTA;
+		playerData->Pos().y += (gravity + 2) * DELTA;
 	}
 
 	//if (playerData->Pos().y <= 0.0f)

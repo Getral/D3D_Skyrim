@@ -13,7 +13,6 @@ Player::Player()
 	Pos().z = 200.0f;
 
 	ReadClip("male_1hm_idle");
-	ReadClip("male_jump");
 	ReadClip("male_1hm_stagger");
 	ReadClip("male_1hm_stagger_medium");
 	ReadClip("male_1hm_stagger_large");
@@ -51,8 +50,6 @@ Player::Player()
 	ReadClip("male_1hm_attack_left");
 	ReadClip("male_1hm_attack_power");
 	ReadClip("male_1hm_block_shield");
-	ReadClip("male_1hm_block_bash_intro_shield");
-	ReadClip("male_1hm_block_bash_shield");
 	ReadClip("male_1hm_walk_forward_attack");
 	ReadClip("male_1hm_walk_backward_attack");
 	ReadClip("male_1hm_walk_left_attack");
@@ -249,10 +246,6 @@ Player::Player()
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
 	
-	GetClip(JUMP)->SetEvent(bind(&Player::EndJump, this), 0.6f);
-
-
-
 	prevMousePos = mousePos;
 }
 
@@ -291,16 +284,7 @@ void Player::Update()
 
 	if (KEY_PRESS('H'))
 		this->status.curstamina -= 10 * DELTA;
-
-	if (isJump)
-		jumpForce -= DELTA * gravity;
-
-	if (jumpForce <= 0.0f)
-	{
-		jumpForce = 0.0f;
-		isJump = false;
-	}
-
+	
 }
 
 void Player::Render()
@@ -331,7 +315,6 @@ void Player::GUIRender()
 void Player::Control()
 {
 	Rotate();
-	Jump();
 	Move();
 	Attack();
 	Block();
@@ -514,22 +497,6 @@ void Player::Move()
 	}
 }
 
-void Player::Jump()
-{
-	if (isJump)
-	{
-		SetAction(JUMP);
-		Pos().y = 3.0f;
-		Pos().y += jumpForce * DELTA;
-	}
-
-	if (isJump) return;
-
-	if (KEY_DOWN(VK_SPACE))
-	{
-		isJump = true;
-	}
-}
 
 void Player::Rotate()
 {
@@ -1417,24 +1384,6 @@ void Player::SetbowIdle()
 {
 	SetAction(BOW_IDLE);
 }
-
-void Player::EndJump()
-{
-	if (is1hm)
-	{
-		SetAction(OHM_IDLE);
-	}
-	if (is2hm)
-	{
-		SetAction(THM_IDLE);
-	}
-	if (isbow)
-	{
-		SetAction(BOW_IDLE);
-	}
-}
-
-
 
 void Player::DoNothing()
 {
