@@ -6,11 +6,11 @@ public:
 	enum WeaponType
 	{
 		// 1hd
-		dagger,		// 단검
-		claymore,		// 한손검
+		dagger,		// 단검 
+		claymore,	// 한손검
 		waraxe,		// 한손도끼
-		mace,			// 한손둔기	
-		//2hd
+		mace,		// 한손둔기	
+		// 2hd
 		longsword,	// 양손검
 		battleaxe,	// 양손도끼
 		warhammer,	// 양손둔기
@@ -22,18 +22,27 @@ public:
 		IRON,
 		EBONY
 	};
-	Weapon(string name, int type, int weight, int value, int weapon_class ,int weapon_type, int atk);
+
+	Weapon(string name, int type, int weight, int value, 
+		int weapon_class ,int weapon_type, int atk);
 
 	
 	int GetWeaponClass() { return weapon_class; }
 	int GetAtk() { return atk; }
 	void ChangeEquipState() { isEquiped = !isEquiped; }
 	bool GetEquip() { return isEquiped; }
+
+
 private:
 	int weapon_class;
 	int weapon_type;
 	int atk;
 	bool isEquiped = false;
+	
+private:
+	BoxCollider* collider;
+	Model* model;
+	Transform* transfrom;
 };
 
 /*

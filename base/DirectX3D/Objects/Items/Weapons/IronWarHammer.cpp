@@ -1,6 +1,10 @@
 #include "Framework.h"
 
-IronWarHammer::IronWarHammer() : Model("IronWarHammer")
+IronWarHammer::IronWarHammer(string name, int type,
+	int weight, int value, int weapon_class,
+	int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class,
+		weapon_type, atk)
 {
 	SetTag("IronWarHammer");
 	Pos().x += 0;
@@ -8,7 +12,7 @@ IronWarHammer::IronWarHammer() : Model("IronWarHammer")
 	Pos().z += 0;
 
 	Rot().x += 0;
-	Rot().y += 180;
+	Rot().y += XM_PI;
 	Rot().z += 0;
 
 	Scale().x *= 1.0f;
@@ -24,9 +28,9 @@ IronWarHammer::IronWarHammer() : Model("IronWarHammer")
 	collider->Rot().y += 0.0f;
 	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 24.9f;
-	collider->Scale().y *= 15.1f;
-	collider->Scale().z *= 5;
+	collider->Scale().x *= 30.8f;
+	collider->Scale().y *= 18.3f;
+	collider->Scale().z *= 9.4f;
 
 
 	collider->SetTag("IronWarHammerCollider");

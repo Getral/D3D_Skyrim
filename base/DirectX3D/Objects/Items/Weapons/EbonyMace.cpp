@@ -1,10 +1,14 @@
 #include "Framework.h"
 
-EbonyMace1::EbonyMace1() : Model("EbonyMace1")
+EbonyMace::EbonyMace(string name, int type,
+	int weight, int value, int weapon_class,
+	int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class,
+		weapon_type, atk)
 {
-	SetTag("EbonyMace1");
+	SetTag("EbonyMace");
 	Pos().x += 0;
-	Pos().y += 1;
+	Pos().y += 12.0f;
 	Pos().z += 0;
 
 	Rot().x += 0;
@@ -17,7 +21,7 @@ EbonyMace1::EbonyMace1() : Model("EbonyMace1")
 
 	collider = new BoxCollider();
 	collider->Pos().x += 0.0f;
-	collider->Pos().y += 40;
+	collider->Pos().y += 0.0f;
 	collider->Pos().z += 0.0f;
 
 	collider->Rot().x += 0.0f;
@@ -29,36 +33,36 @@ EbonyMace1::EbonyMace1() : Model("EbonyMace1")
 	collider->Scale().z *= 15.0f;
 
 
-	collider->SetTag("EbonyMace1collider");
+	collider->SetTag("EbonyMaceCollider");
 	collider->SetParent(this);
 	collider->Load();
 }
 
-EbonyMace1::~EbonyMace1()
+EbonyMace::~EbonyMace()
 {
 	delete collider;
 }
 
-void EbonyMace1::Update()
+void EbonyMace::Update()
 {
 	UpdateWorld();
 	ColliderManager(isWeapon);
 	collider->UpdateWorld();
 }
 
-void EbonyMace1::Render()
+void EbonyMace::Render()
 {
 	Model::Render();
 	collider->Render();
 }
 
-void EbonyMace1::GUIRender()
+void EbonyMace::GUIRender()
 {
 	Model::GUIRender();
 	collider->GUIRender();
 }
 
-void EbonyMace1::ColliderManager(bool isWeaponColl)
+void EbonyMace::ColliderManager(bool isWeaponColl)
 {
 	if (isWeaponColl)
 	{

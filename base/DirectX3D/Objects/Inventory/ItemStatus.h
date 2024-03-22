@@ -13,8 +13,10 @@ public:
 	class Arrow* GetArrow(string inname);
 	class Potion* GetPotion(string inname);
 	class Misc* GetMisc(string inname);
+
 private:
 	int CheckType(string inname);
+
 private:
 	vector<class Armor*> armors;
 	vector<class Weapon*> weapons;

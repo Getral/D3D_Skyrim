@@ -163,20 +163,21 @@ using namespace GameMath;
 #include "Objects/Inventory/Item.h"
 #include "Objects/Inventory/ItemStatus.h"
 
-//#include "Objects/Items/Expendables/.h"
-#include "Objects/Items/Expendables/IronArrow.h"
-#include "Objects/Items/Expendables/EbonyArrow.h"
+
 
 #include "Objects/Items/Weapons/Kunai.h"
 #include "Objects/Items/Weapons/Crowbar.h"
 #include "Objects/Items/Weapons/BladeSword.h"
 #include "Objects/Items/Weapons/Shield.h"
 
+
 #include "Objects/Items/Weapons/Weapon.h"
 
 //Iron Weapon
-//1hd
 #include "Objects/Items/Weapons/IronBow.h"
+#include "Objects/Items/Weapons/IronQuiver.h"
+
+//1hd
 #include "Objects/Items/Weapons/IronDagger.h"
 #include "Objects/Items/Weapons/IronClaymore.h"
 #include "Objects/Items/Weapons/IronMace.h"
@@ -187,17 +188,19 @@ using namespace GameMath;
 #include "Objects/Items/Weapons/IronWarHammer.h"
 
 //Ebony Weapon
-//1hd
 #include "Objects/Items/Weapons/EbonyBow.h"
+#include "Objects/Items/Weapons/EbonyQuiver.h"
+
+//1hd
 #include "Objects/Items/Weapons/EbonyDagger.h"
 #include "Objects/Items/Weapons/EbonyClaymore.h"
-#include "Objects/Items/Weapons/Ebonymace1.h"
+#include "Objects/Items/Weapons/Ebonymace.h"
 #include "Objects/Items/Weapons/EbonyWarAxe.h"
 //2hd
 #include "Objects/Items/Weapons/EbonyLongSword.h"
 #include "Objects/Items/Weapons/EbonybattleAxe.h"
 #include "Objects/Items/Weapons/EbonyWarHammer.h"
-#include "Objects/Items/Weapons/EbonyQuiver.h"
+
 
 
 #include "Objects/Items/Armors/Armor.h"

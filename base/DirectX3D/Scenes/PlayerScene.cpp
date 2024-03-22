@@ -4,6 +4,7 @@
 PlayerScene::PlayerScene()
 {
 	player = new Player();
+	player->Scale() *= 0.1f;
 
 	aldu = new alduin();
 	aldu->SetTarget(player);

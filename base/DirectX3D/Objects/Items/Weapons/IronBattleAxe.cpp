@@ -1,6 +1,10 @@
 #include "Framework.h"
 
-IronBattleAxe::IronBattleAxe() : Model("IronBattleAxe")
+IronBattleAxe::IronBattleAxe(string name, int type,
+	int weight, int value, int weapon_class,
+	int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class,
+		weapon_type, atk)
 {
 	SetTag("IronBattleAxe");
 
@@ -25,9 +29,9 @@ IronBattleAxe::IronBattleAxe() : Model("IronBattleAxe")
 	collider->Rot().y += 0.0f;
 	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 38.7f;
-	collider->Scale().y *= 19.8;
-	collider->Scale().z *= 2.0f;
+	collider->Scale().x *= 45.0f;
+	collider->Scale().y *= 25.0f;
+	collider->Scale().z *= 7.0f;
 
 
 	collider->SetTag("IronBattleAxeCollider");

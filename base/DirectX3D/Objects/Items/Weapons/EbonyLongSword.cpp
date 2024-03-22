@@ -1,32 +1,36 @@
 #include "Framework.h"
 
-EbonyLongSword::EbonyLongSword() : Model("EbonyLongSword")
+EbonyLongSword::EbonyLongSword(string name, int type,
+	int weight, int value, int weapon_class,
+	int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class,
+		weapon_type, atk)
 {
 	SetTag("EbonyLongSword");
-	Pos().x *= 0;
-	Pos().y *= 23.8;
-	Pos().z *= 0;
+	Pos().x += 1.5f;
+	Pos().y += 12.0f;
+	Pos().z += 0;
 
 	Rot().x += 90;
 	Rot().y += 0;
 	Rot().z += 0;
 
-	Scale().x *= 2;
-	Scale().y *= 2;
-	Scale().z *= 3;
+	Scale().x *= 2.5f;
+	Scale().y *= 2.5f;
+	Scale().z *= 3.0f;
 
 	collider = new BoxCollider();
-	collider->Pos().x *= -0.3f;
-	collider->Pos().y *= 0;
-	collider->Pos().z *= -9.2f;
+	collider->Pos().x += 0;
+	collider->Pos().y += 0;
+	collider->Pos().z += -9.2f;
 
-	collider->Rot().x *= 90;
-	collider->Rot().y *= 0.0f;
-	collider->Rot().z *= 0.0f;
+	collider->Rot().x += 90;
+	collider->Rot().y += 0.0f;
+	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 1.2f;
-	collider->Scale().y *= 21.3f;
-	collider->Scale().z *= 1;
+	collider->Scale().x *= 2.0f;
+	collider->Scale().y *= 23.0f;
+	collider->Scale().z *= 2.0f;
 
 
 	collider->SetTag("EbonyLongSwordCollider");

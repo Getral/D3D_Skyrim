@@ -105,22 +105,50 @@ protected:
 	BladeSword* bladeSword;
 	Shield* shield;
 
-	//Dragonboneboots* dragonboneboots;
-	//Dragonbonecuirassplate* dragonbonecuirassplate;
-	//Dragonbonegauntlets* dragonbonegauntlets;
-	//Dragonbonehelmet* dragonbonehelmet;
-	//Dragonboneshield* dragonboneshield;
-	//IronArmor* armor;
+	// Armor
+	IronShield* ironshield;
+	DragonShield* dragonshield;
+
+	// Weapon
+	//  Ebony
+	EbonyBattleAxe* ebonybattleaxe;
+	EbonyClaymore* ebonyclaymore;
+	EbonyDagger* ebonydagger;
+	EbonyLongSword* ebonylongsword;
+	EbonyMace* ebonymace;
+	EbonyWarAxe* ebonywaraxe;
+	EbonyWarHammer* ebonywarhammer;
+
+	EbonyBow* ebonybow;
+	EbonyQuiver* ebonyquiver;
+	EbonyArrow* ebonyarrow;
+
+	// Iron
+	IronBattleAxe* ironbattleaxe;
+	IronClaymore* ironclaymore;
+	IronDagger* irondagger;
+	IronLongSword* ironlongsword;
+	IronMace* ironmace;
+	IronWarAxe* ironwaraxe;
+	IronWarHammer* ironwarhammer;
+
+	IronBow* ironbow;
+	IronQuiver* ironquiver;
+	IronArrow* ironarrow;
+
+
 
 	POINT clientCenterPos = { WIN_WIDTH / 2, WIN_HEIGHT / 2 };
 
 	Transform* rightHand;
 	Transform* leftHand;
 	Transform* head;
+	Transform* back;
+
 	//Transform* body;
 	//Transform* foot;
 	//Transform* hands;
-
+	CapsuleCollider* backCollider;
 	CapsuleCollider* headCollider;
 
 	Status status;
@@ -157,6 +185,12 @@ protected:
 	bool isbowdrawn = false;
 
 
-	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값
+	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값 
+
+
+	int weight;
+	int value;
+	int atk;
+	int def;
 };
 

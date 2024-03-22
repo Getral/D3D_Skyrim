@@ -1,19 +1,20 @@
 #include "Framework.h"
 
-IronBow::IronBow() : Model("IronBow")
+IronBow::IronBow() : ModelAnimator("IronBow")
 {
 	SetTag("IronBow");
-	Pos().x += -0;
+
+	Pos().x += -0.5;
 	Pos().y += 0;
 	Pos().z += 0;
 
-	Rot().x += 0;
-	Rot().y += 0;
+	Rot().x += XM_PI/2;
+	Rot().y += XM_PI;
 	Rot().z += 0;
 
-	Scale().x *= 1.0f;
-	Scale().y *= 1.0f;
-	Scale().z *= 1.0f;
+	Scale().x *= 0.01f;
+	Scale().y *= 0.01f;
+	Scale().z *= 0.01f;
 
 	collider = new BoxCollider();
 	collider->Pos().x += -5.3f;
@@ -32,7 +33,16 @@ IronBow::IronBow() : Model("IronBow")
 	collider->SetTag("IronBowCollider");
 	collider->SetParent(this);
 	collider->Load();
-}
+
+
+
+	this->ReadClip("iron_bow_idle");
+	this->ReadClip("iron_bow_draw");
+	this->ReadClip("iron_bow_draw_idle");
+	this->ReadClip("iron_bow_draw_release");
+
+	SetState(IDLE);
+}     
 
 IronBow::~IronBow()
 {
@@ -42,31 +52,40 @@ IronBow::~IronBow()
 void IronBow::Update()
 {
 	UpdateWorld();
-	ColliderManager(isWeapon);
+	//ColliderManager(isWeapon);
 	collider->UpdateWorld();
 }
 
 void IronBow::Render()
 {
-	Model::Render();
+	ModelAnimator::Render();
 	collider->Render();
 }
 
 void IronBow::GUIRender()
 {
-	Model::GUIRender();
+	ModelAnimator::GUIRender();
 	collider->GUIRender();
+
 }
 
-void IronBow::ColliderManager(bool isWeaponColl)
+void IronBow::SetState(IronBowAction action)
 {
-	if (isWeaponColl)
-	{
-		collider->SetActive(true);
-	}
-	else
-	{
-		collider->SetActive(false);
-	}
+	if (curState == action) return;
 
+	curState = action;
+	this->PlayClip((int)action);
 }
+
+//void IronBow::ColliderManager(bool isWeaponColl)
+//{
+//	if (isWeaponColl)
+//	{
+//		collider->SetActive(true);
+//	}
+//	else
+//	{
+//		collider->SetActive(false);
+//	}
+//
+//}

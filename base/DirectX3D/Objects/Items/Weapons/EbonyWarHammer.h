@@ -1,8 +1,10 @@
 #pragma once
-class EbonyWarHammer : public Model
+
+class EbonyWarHammer : public Weapon
 {
 public:
-    EbonyWarHammer();
+    EbonyWarHammer(string name, int type, int weight, int value,
+        int weapon_class, int weapon_type, int atk);
     ~EbonyWarHammer();
 
     void Update();
@@ -15,7 +17,7 @@ public:
     void ColliderManager(bool isWeaponColl);
 
 private:
-    Model* ebonyhammer;
+    Model* ebonywarhammer;
     BoxCollider* collider;
     bool isWeapon = true;
 };
