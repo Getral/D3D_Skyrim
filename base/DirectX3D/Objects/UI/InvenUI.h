@@ -38,6 +38,8 @@ public:
 
 	void ListingDetailed();
 
+	class ItemStatus* GetItemstatus() { return itemstatus; }
+
 private:
 	Quad* frame;
 	Quad* framebar;

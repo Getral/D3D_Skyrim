@@ -3,10 +3,16 @@
 Player::Player()
 	: ModelAnimator("male_dragonbone")
 {
-	ModelAnimator::Scale() *= 0.001;
+	ClientToScreen(hWnd, &clientCenterPos);
+	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+
+	ModelAnimator::Scale() *= 0.0001f;
+
+	Pos().x = 250.0f;
+	Pos().y = 500.0f;
+	Pos().z = 290.0f;
 
 	ReadClip("male_1hm_idle");
-	ReadClip("male_jump");
 	ReadClip("male_1hm_stagger");
 	ReadClip("male_1hm_stagger_medium");
 	ReadClip("male_1hm_stagger_large");
@@ -44,8 +50,6 @@ Player::Player()
 	ReadClip("male_1hm_attack_left");
 	ReadClip("male_1hm_attack_power");
 	ReadClip("male_1hm_block_shield");
-	ReadClip("male_1hm_block_bash_intro_shield");
-	ReadClip("male_1hm_block_bash_shield");
 	ReadClip("male_1hm_walk_forward_attack");
 	ReadClip("male_1hm_walk_backward_attack");
 	ReadClip("male_1hm_walk_left_attack");
@@ -124,14 +128,16 @@ Player::Player()
 	ReadClip("male_bow_unequip");
 	//ReadClip("male_death");
 
-
 	collider = new CapsuleCollider(2, 6);
 	collider->Scale() *= 1000;
 	collider->Pos().y = 5000;
 	collider->Pos().z = -600;
 	collider->SetParent(this);
 
+	CAM->Rot().x = 0;
+
 	SpawnManager::Get()->SetPlayerData(this);
+	TerrainManager::Get()->SetPlayerData(this);
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
@@ -279,11 +285,14 @@ Player::Player()
 	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
 
 	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::ShootArrow, this), 0.1f);
 	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
 
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
+	
+	prevMousePos = mousePos;
 }
 
 Player::~Player()
@@ -384,6 +393,7 @@ void Player::Update()
 
 	if (KEY_PRESS('H'))
 		this->status.curstamina -= 10 * DELTA;
+	
 }
 
 void Player::Render()
@@ -473,6 +483,8 @@ void Player::GUIRender()
 	//bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
+	ImGui::Text("Win_width : %d", clientCenterPos.x);
+	ImGui::Text("Win_height : %d", clientCenterPos.y);
 	ImGui::SliderInt("nodeIndex1", (int*)&nodeIndex1, 1, 200);
 	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
 }
@@ -662,22 +674,21 @@ void Player::Move()
 	}
 }
 
-void Player::Jump()
-{
-}
 
 void Player::Rotate()
-{
-	if (KEY_PRESS('Q'))
+{	
+	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
+	prevMousePos = mousePos;
+	
+	Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
+	
+	CAM->Rot().x -= delta.y * rotSpeed * DELTA;
+	
+	
+	if (KEY_DOWN(VK_MBUTTON))
 	{
-		Rot().y -= DELTA * rotSpeed;
+		CAM->Rot().x = 0;
 	}
-
-	if (KEY_PRESS('E'))
-	{
-		Rot().y += DELTA * rotSpeed;
-	}
-
 }
 
 void Player::Attack()
@@ -1481,6 +1492,12 @@ void Player::SetBowDrawn()
 	SetAction(BOW_DRAW_IDLE);
 }
 
+void Player::ShootArrow()
+{
+
+
+}
+
 void Player::EndBowDrawn()
 {
 	SetAction(BOW_IDLE);
@@ -1526,8 +1543,6 @@ void Player::SetbowIdle()
 {
 	SetAction(BOW_IDLE);
 }
-
-
 
 void Player::DoNothing()
 {

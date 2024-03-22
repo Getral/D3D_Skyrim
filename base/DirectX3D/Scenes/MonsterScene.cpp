@@ -13,7 +13,7 @@ MonsterScene::~MonsterScene()
 
 void MonsterScene::Update()
 {
-	//SpawnManager::Get()->Update();
+	SpawnManager::Get()->Update();
 }
 
 void MonsterScene::PreRender()
@@ -22,7 +22,7 @@ void MonsterScene::PreRender()
 
 void MonsterScene::Render()
 {
-	//SpawnManager::Get()->Render();
+	SpawnManager::Get()->Render();
 }
 
 void MonsterScene::PostRender()

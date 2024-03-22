@@ -36,6 +36,12 @@ ModelExporter::~ModelExporter()
     delete importer;
 }
 
+void ModelExporter::ExportMaterial(wstring texture)
+{
+    ReadMaterial();
+    WriteMaterial(texture);
+}
+
 void ModelExporter::ExportMaterial()
 {
     ReadMaterial();
@@ -99,6 +105,33 @@ void ModelExporter::ReadMaterial()
 
         materials.push_back(material);
     }
+}
+
+void ModelExporter::WriteMaterial(wstring texture)
+{
+    string savePath = "Models/Materials/" + name + "/";
+    string file = name + ".mats";
+
+    CreateFolders(savePath);
+
+    BinaryWriter* writer = new BinaryWriter(savePath + file);
+
+    writer->UInt(materials.size());
+
+    for (Material* material : materials)
+    {
+        string path = savePath + material->GetName() + ".mat";
+        material->SetDiffuseMap(texture);
+        material->Save(path);
+
+        writer->String(path);
+
+        delete material;
+    }
+
+    materials.clear();
+
+    delete writer;
 }
 
 void ModelExporter::WriteMaterial()

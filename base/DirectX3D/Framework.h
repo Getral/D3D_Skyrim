@@ -236,6 +236,7 @@ using namespace GameMath;
 #include "Objects/Landscape/QuadTreeTerrain.h"
 #include "Objects/Landscape/TerrainLOD.h"
 #include "Objects/Landscape/Water.h"
+#include "Objects/Landscape/Structure.h"
 
 #include "Objects/Algorithm/DNode.h"
 #include "Objects/Algorithm/Dijkstra.h"
@@ -268,6 +269,7 @@ using namespace GameMath;
 #include "Objects/Manager/EnemySpawn.h"
 #include "Objects/Manager/SpawnManager.h"
 #include "Objects/Manager/UIManager.h"
+#include "Objects/Manager/TerrainManager.h"
 #include "Objects/Manager/ObjectManager.h"
 
 //Scene Header

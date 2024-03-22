@@ -3,121 +3,46 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "ironbow";
-    string file = "Models/FBX/" + name + ".fbx";
-    ModelExporter* exporter;
-    string clipName;
+    // Export With Texture
+    // 
+    vector<string> modelName =
+    {
+        "rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
+        "rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree"
+    };
     
-    exporter = new ModelExporter(name, file);
-    exporter->ExportMaterial();
-    exporter->ExportMesh();
-    delete exporter;
+    vector<wstring> textures =
+    {
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree02"
+    };
 
-    clipName = "iron_bow_idle";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-
-    clipName = "iron_bow_draw";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
     
-    clipName = "iron_bow_draw_idle";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
-    
-    clipName = "iron_bow_draw_release";
-    file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    exporter = new ModelExporter(name, file);
-    exporter->ExportClip(clipName);
-    delete exporter;
 
+    FOR(modelName.size())
+    {
+        string file = "Models/FBX/" + modelName[i] + ".fbx";
+        wstring textureFile = L"Textures/" + textures[i] + L".png";
+        ModelExporter* exporter;
+        exporter = new ModelExporter(modelName[i], file);
+        exporter->ExportMaterial(textureFile);
+        exporter->ExportMesh();
+        delete exporter;
+    }
 
+    ///////////////////////////////////
 
-    string name1 = "ebonybow";
-    string file1 = "Models/FBX/" + name1 + ".fbx";
-    ModelExporter* exporter1;
-    string clipName1;
-    
-    exporter1 = new ModelExporter(name1, file1);
-    exporter1->ExportMaterial();
-    exporter1->ExportMesh();
-    delete exporter1;    
+    // Export Without Texture
 
-    clipName1 = "ebony_bow_idle";
-    file1 = "Models/Animations/" + name1 + "/" + clipName1 + ".fbx";
-    exporter1 = new ModelExporter(name1, file1);
-    exporter1->ExportClip(clipName1);
-    delete exporter1;
-
-    clipName1 = "ebony_bow_draw";
-    file1 = "Models/Animations/" + name1 + "/" + clipName1 + ".fbx";
-    exporter1 = new ModelExporter(name1, file1);
-    exporter1->ExportClip(clipName1);
-    delete exporter1;
-    
-    clipName1 = "ebony_bow_draw_idle";
-    file1 = "Models/Animations/" + name1 + "/" + clipName1 + ".fbx";
-    exporter1 = new ModelExporter(name1, file1);
-    exporter1->ExportClip(clipName1);
-    delete exporter1;
-    
-    clipName1 = "ebony_bow_release";
-    file1 = "Models/Animations/" + name1 + "/" + clipName1 + ".fbx";
-    exporter1 = new ModelExporter(name1, file1);
-    exporter1->ExportClip(clipName1);
-    delete exporter1;
-
-
-
-    string name2 = "ironarrow";
-    string file2 = "Models/FBX/" + name2 + ".fbx";
-    ModelExporter* exporter2;
-    string clipName2;
-
-    exporter2 = new ModelExporter(name2, file2);
-    exporter2->ExportMaterial();
-    exporter2->ExportMesh();
-    delete exporter2;
-
-
-    string name3 = "ironarrow";
-    string file3 = "Models/FBX/" + name3 + ".fbx";
-    ModelExporter* exporter3;
-    string clipName3;
-
-    exporter3 = new ModelExporter(name3, file3);
-    exporter3->ExportMaterial();
-    exporter3->ExportMesh();
-    delete exporter3;
-
-
-
-    //string name = "shield";
+    //string name = "tree";
     //string file = "Models/FBX/" + name + ".fbx";
     //ModelExporter* exporter;
-    //string clipName;
     //
     //exporter = new ModelExporter(name, file);
     //exporter->ExportMaterial();
     //exporter->ExportMesh();
     //delete exporter;
 
-
-    //string name = "farmhouse";
-    //string file = "Models/FBX/" + name + ".fbx";
-    //ModelExporter* exporter;
-    //string clipName;
-    //
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportMaterial();
-    //exporter->ExportMesh();
-    //delete exporter;
 
     //string name = "dragonboneshield";
     //string file = "Models/FBX/" + name + ".fbx";
@@ -165,12 +90,6 @@ ModelExportScene::ModelExportScene()
     //exporter->ExportClip(clipName);
     //delete exporter;
 
-    //clipName = "male_1hm_unequip";
-    //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportClip(clipName);
-    //delete exporter;
-
     //clipName = "male_2hm_equip";
     //file = "Models/Animations/" + name + "/" + clipName + ".fbx";
     //exporter = new ModelExporter(name, file);
@@ -194,212 +113,6 @@ ModelExportScene::ModelExportScene()
     //exporter = new ModelExporter(name, file);
     //exporter->ExportClip(clipName);
     //delete exporter;
-
-
-
-
-
-//알두인
-
-//string name = "alduin";
-//string file = "Models/FBX/" + name + ".fbx";
-//ModelExporter* exporter;
-//string clipName;
-//
-//exporter = new ModelExporter(name, file);
-//exporter->ExportMaterial();
-//exporter->ExportMesh();
-//delete exporter;
-//
-//
-//clipName = "alduin_aproach";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_ascend";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_backward";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_bite";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_bite_left";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_bite_right";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_bleedidle";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_climb";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_descend";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_exhale_breath";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_exhale_fireball";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_flight_forward";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_flight_hit";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_fly";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_forward";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_hover";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_idle";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_inhale";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_injured";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_pain";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_pain2";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_rotate_left";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_rotate_right";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_tailwhip";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_takeoff";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_timetravel";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_wingswip_left";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
-//clipName = "alduin_wingswip_right";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-
-
-//플레이어(드래곤본 통짜)
-
-//string name = "male_dragonbone";
-//string file = "Models/FBX/" + name + ".fbx";
-//ModelExporter* exporter;
-//string clipName;
-//
-//exporter = new ModelExporter(name, file);
-//exporter->ExportMaterial();
-//exporter->ExportMesh();
-//delete exporter;
-//
-//
-//clipName = "male_1hm_idle";
-//file = "Models/Animations/" + name + "/" + clipName + ".fbx";
-//exporter = new ModelExporter(name, file);
-//exporter->ExportClip(clipName);
-//delete exporter;
-//
 
    
 }

@@ -37,7 +37,7 @@ Bear::Bear(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstan
 	colliders.push_back(new CapsuleCollider(25.0f)); // HEAD
 
 	trackRange = 75000.f;
-	attackRange = trackRange * 0.25f;
+	attackRange = trackRange * 0.15f;
 
 	SetEvent(STARTSLEEP, bind(&Bear::StartStartSleep, this), 0.0f);
 	SetEvent(STARTSLEEP, bind(&Bear::EndStartSleep, this), 0.95f);
@@ -149,11 +149,13 @@ void Bear::EndStartSleep()
 {
 	isSleep = true;
 	isWakeUp = false;
+	isBattle = false;
 }
 
 void Bear::StartWakeUp()
 {
 	isWakeUp = true;
+	isBattle = true;
 }
 
 void Bear::EndWakeUp()
@@ -190,7 +192,7 @@ void Bear::EndAttackTrigger()
 
 void Bear::EndAttack()
 {
-	SetState(RUN);
+	SetState(COMBATIDLE);
 }
 
 void Bear::StartHit()
@@ -265,6 +267,7 @@ void Bear::Behavior()
 			attackCollider->SetActive(true);
 			SetState(RUN);
 		}
+		return;
 	}
 
 	if (curState == ATTACK || curState == ATTACK2 || curState == ATTACK3 || curState == HIT) return;

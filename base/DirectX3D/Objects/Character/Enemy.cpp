@@ -43,6 +43,9 @@ void Enemy::Update()
 
 	for (CapsuleCollider* collider : colliders)
 		collider->UpdateWorld();
+
+	if(!TerrainManager::Get()->GetTerrain()->ComputePicking(transform->Pos(), transform))
+		transform->Pos().y -= gravity * DELTA;
 }
 
 void Enemy::Render()
@@ -75,6 +78,8 @@ void Enemy::Death()
 		colliderTransform->SetActive(false);
 	for (CapsuleCollider* collider : colliders)
 		collider->SetActive(false);
+
+	isBattle = false;
 }
 
 void Enemy::Track()

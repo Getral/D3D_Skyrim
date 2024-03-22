@@ -36,6 +36,8 @@ public:
 	SphereCollider* GetCollider() { return collider; }
 	string GetName() { return name; }
 
+	bool IsBattle() { return isBattle; }
+
 	void Spawn();
 
 protected:
@@ -44,5 +46,7 @@ protected:
 	Transform* transform;
 	SphereCollider* collider;
 	Vector3 spawnPos;
+
+	bool isBattle = false;
 };
 

@@ -183,9 +183,9 @@ void Wolf::Behavior()
 	{
 		if (collider->IsCollision(playerData->GetCollier()) && attackTrigger)
 		{
-			//playerData->SetAction(Player::OHM_HIT_MEDIUM);
-			//playerData->SetIsHit(true);
-			//break;
+			playerData->SetAction(Player::OHM_HIT_MEDIUM);
+			playerData->SetIsHit(true);
+			break;
 		}
 	}
 
@@ -285,6 +285,7 @@ void Wolf::StartIdle()
 {
 	idleTime = Random(3, 6);
 	isTracking = false;
+	isBattle = false;
 }
 
 void Wolf::EndHowling()
@@ -292,6 +293,7 @@ void Wolf::EndHowling()
 	SetState(RUN);
 	SetTarget(nullptr);
 	isTracking = true;
+	isBattle = true;
 	idleTime = 0.0f;
 }
 
@@ -303,7 +305,7 @@ void Wolf::StartRun()
 void Wolf::StartAttack()
 {
 	attackCollider->SetActive(false);
-	attackDelay = 5.0f;
+	attackDelay = 2.5f;
 }
 
 void Wolf::StartAttackTrigger()
@@ -318,7 +320,7 @@ void Wolf::EndAttackTrigger()
 
 void Wolf::EndAttack()
 {
-	SetState(RUN);
+	SetState(COMBATIDLE);
 }
 
 void Wolf::EndCombatIdle()

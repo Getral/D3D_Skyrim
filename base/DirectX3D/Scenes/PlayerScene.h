@@ -13,10 +13,7 @@ public:
 	virtual void GUIRender() override;
 
 private:
-	Terrain* terrain;
 	Player* player;
 	alduin* aldu;
-
-	Model* test;
 };
 
