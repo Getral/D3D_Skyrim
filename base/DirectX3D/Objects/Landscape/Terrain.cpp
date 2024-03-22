@@ -35,7 +35,7 @@ Terrain::Terrain(wstring mapFile, wstring heightmap)
 {
     material->SetDiffuseMap(mapFile);
     //material->SetSpecularMap(L"Textures/Landscape/Fieldstone_SM.tga");
-    //material->SetNormalMap(L"Textures/Landscape/Fieldstone_NM.tga");
+    material->SetNormalMap(L"Textures/Landscape/tamriel.4.0.0_n.dds");
 
     heightMap = Texture::Add(heightmap);
     //heightMap = Texture::Add(L"Textures/HeightMaps/TestMap.png");
