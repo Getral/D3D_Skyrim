@@ -141,7 +141,8 @@ Player::Player()
 
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
-
+	bladeSword = new BladeSword();
+	bladeSword->Load();
 
 	//ironwarhammer = new IronWarHammer("ironwarhammer",
 	//	Weapon::Type::WEAPON, weight, value, Weapon::WeaponClass::EBONY, 
@@ -150,13 +151,9 @@ Player::Player()
 	//
 	//rightHand = new Transform();
 	//ironwarhammer->SetParent(rightHand);
-
-	ironarrow = new IronArrow("ironarrow",
-		Arrow::Type::ARROW, weight, value, Arrow::ArrowType::IRON, atk);
-	ironarrow->Load();
 	
 	rightHand = new Transform();
-	ironarrow->SetParent(rightHand);
+	bladeSword->SetParent(rightHand);
 
 
 	//shield = new Shield();
@@ -166,11 +163,11 @@ Player::Player()
 	//shield->SetParent(leftHand);
 
 
-	ebonybow = new EbonyBow();
-	ebonybow->Load();
+	//ebonybow = new EbonyBow();
+	//ebonybow->Load();
 	
 	leftHand = new Transform();
-	ebonybow->SetParent(leftHand);
+	//ebonybow->SetParent(leftHand);
 
 
 	//ironshield = new IronShield("ironshield",
@@ -190,11 +187,11 @@ Player::Player()
 	//shield->SetParent(back);
 
 
-	ironquiver = new IronQuiver();
-	ironquiver->Load();
+	//ironquiver = new IronQuiver();
+	//ironquiver->Load();
 	
 	back = new Transform();
-	ironquiver->SetParent(back);
+	//ironquiver->SetParent(back);
 
 
 
@@ -297,7 +294,7 @@ Player::Player()
 
 Player::~Player()
 {
-	//delete bladeSword;
+	delete bladeSword;
 	//delete shield;
 	delete collider;
 	delete rightHand;
@@ -305,7 +302,7 @@ Player::~Player()
 	delete back;
 
 
-	delete ironquiver;
+	//delete ironquiver;
 	//delete ebonyquiver;
 
 
@@ -313,7 +310,7 @@ Player::~Player()
 	//delete dragonshield;
 
 
-	delete ebonybow;
+	//delete ebonybow;
 	//delete ebonyarrow;
 	//delete ebonybattleaxe;
 	//delete ebonyclaymore;
@@ -324,7 +321,6 @@ Player::~Player()
 	//delete ebonywarhammer;
 
 	//delete ironbow;
-	delete ironarrow;
 	//delete ironbattleaxe;
 	//delete ironclaymore;
 	//delete irondagger;
@@ -346,6 +342,7 @@ void Player::Update()
 
 
 	rightHand->SetWorld(GetTransformByNode(82));
+	bladeSword->Update();
 	//ebonybattleaxe->Update();
 	//ebonyclaymore->Update();
 	//ebonydagger->Update();
@@ -363,7 +360,6 @@ void Player::Update()
 	//ironmace->Update();
 	//ironwaraxe->Update();
 	//ironwarhammer->Update();
-	ironarrow->Update();
 	
 
 
@@ -371,7 +367,7 @@ void Player::Update()
 
 	leftHand->SetWorld(GetTransformByNode(119));
 	//ironbow->Update();
-	ebonybow->Update();
+	//ebonybow->Update();
 
 
 
@@ -381,7 +377,7 @@ void Player::Update()
 
 
 	back->SetWorld(GetTransformByNode(133));
-	ironquiver->Update();
+	//ironquiver->Update();
 	//ironquiver->Update();
 
 
@@ -400,8 +396,7 @@ void Player::Render()
 {
 	ModelAnimator::Render();
 	collider->Render();
-
-	//bladeSword->Render();
+	bladeSword->Render();
 	//shield->Render();
 	
 	//ironshield->Render();
@@ -409,7 +404,7 @@ void Player::Render()
 
 	// Weapon
 	// Ebony
-	ebonybow->Render();
+	//ebonybow->Render();
 	//ebonyarrow->Render();
 	//ebonybattleaxe->Render();
 	//ebonyclaymore->Render();
@@ -421,7 +416,6 @@ void Player::Render()
 
 	// Iron
 	//ironbow->Render();
-	ironarrow->Render();
 	//ironbattleaxe->Render();
 	//ironclaymore->Render();
 	//irondagger->Render();
@@ -433,7 +427,7 @@ void Player::Render()
 
 
 	//ebonyquiver->Render();
-	ironquiver->Render();
+	//ironquiver->Render();
 
 
 	headCollider->Render();
@@ -452,7 +446,7 @@ void Player::GUIRender()
 
 	// Weapon
 	// Ebony
-	ebonybow->GUIRender();
+	//ebonybow->GUIRender();
 	//ebonyarrow->GUIRender();
 	//ebonybattleaxe->GUIRender();
 	//ebonyclaymore->GUIRender();
@@ -464,7 +458,6 @@ void Player::GUIRender()
 
 	//Iron
 	//ironbow->GUIRender();
-	ironarrow->GUIRender();
 	//ironbattleaxe->GUIRender();
 	//ironclaymore->GUIRender();
 	//irondagger->GUIRender();
@@ -474,7 +467,7 @@ void Player::GUIRender()
 
 
 	//ebonyquiver->GUIRender();
-	ironquiver->GUIRender();
+	//ironquiver->GUIRender();
 
 	//ebonyshield->GUIRender();
 	//ironshield->GUIRender();
