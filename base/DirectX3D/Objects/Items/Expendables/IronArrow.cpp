@@ -5,7 +5,7 @@ IronArrow::IronArrow(string name, int type, int weight,
 	int value, int arrow_type, int atk)
 	: Arrow(name, type, weight, value, arrow_type, atk)
 {
-	SetTag("EbonyArrow");
+	SetTag("IronArrow");
 
 	Pos().x += 0.0f;
 	Pos().y += 41.0f;
@@ -33,7 +33,7 @@ IronArrow::IronArrow(string name, int type, int weight,
 	collider->Scale().z *= 5.0f;
 
 
-	collider->SetTag("EbonyArrowCollider");
+	collider->SetTag("IronArrowCollider");
 	collider->SetParent(this);
 	collider->Load();
 }

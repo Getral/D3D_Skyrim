@@ -22,7 +22,8 @@ ArrowManager::ArrowManager()
     {
         Transform* transform = arrowInstancing->Add();
         transform->SetActive(false);
-        EbonyArrow* arrow = new EbonyArrow(transform);
+        EbonyArrow* arrow = new EbonyArrow("arrow", Arrow::Type::ARROW, weight, value,
+            Arrow::ArrowType::EBONY,  atk);
         arrows.push_back(arrow);
     }
 }

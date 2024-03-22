@@ -34,5 +34,9 @@ private:
 	//vector<ModelInstancing*> arrowInstancing;
 	ModelInstancing* arrowInstancing;
 	vector<EbonyArrow*> arrows;
+
+	int weight;
+	int value;
+	int atk;
 };
 
