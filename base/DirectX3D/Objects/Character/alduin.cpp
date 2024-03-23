@@ -21,6 +21,9 @@ alduin::alduin() :  ModelAnimator("alduin")
 
 	breathCollider = new BoxCollider({ 150,50,300 });
 
+	ApproachCollider = new BoxCollider({ 150,100,300 });
+
+
 	DeathParticle = new ParticleSystem("Textures/alduin_death.fx");
 	BreathParticle = new ParticleSystem("Textures/alduin_breath.fx");
 
@@ -77,6 +80,10 @@ alduin::alduin() :  ModelAnimator("alduin")
 	breathCollider->SetParent(transform);
 	breathCollider->Scale() *= 0.2;
 	breathCollider->SetActive(false);
+
+	ApproachCollider->SetParent(transform);
+	ApproachCollider->Scale() *= 0.2;
+	ApproachCollider->SetActive(false);
 
 	WakeUpCollider = new SphereCollider(2500.0f);
 	WakeUpCollider->SetParent(this);
@@ -153,7 +160,8 @@ alduin::alduin() :  ModelAnimator("alduin")
 	GetClip(TAKEOFF)->SetEvent(bind(&alduin::EndTakeoff, this), 0.9f);
 
 	GetClip(APROACH)->SetEvent(bind(&alduin::beginAproach, this), 0.9f);
-	//GetClip(FLIGHT_FOR)->SetEvent(bind(&alduin::aproaching, this), 0.0f);
+
+	GetClip(LANDING_HARD)->SetEvent(bind(&alduin::EndLanding, this), 0.0f);
 	GetClip(LANDING_HARD)->SetEvent(bind(&alduin::EndAction, this), 0.9f);
 
 	GetClip(DEATH)->SetEvent(bind(&alduin::Dying, this), 0.5f);
@@ -176,6 +184,7 @@ alduin::~alduin()
 	delete BreathParticle;
 	delete DeathParticle;
 	delete breathCollider;
+	delete ApproachCollider;
 	delete collider_B;
 	delete collider_L;
 	delete collider_R;
@@ -210,6 +219,7 @@ void alduin::Update()
 	Acollider_B->UpdateWorld();
 
 	breathCollider->UpdateWorld();
+	ApproachCollider->UpdateWorld();
 	transform->UpdateWorld();
 	HeadCollider->UpdateWorld();
 	BodyCollider->UpdateWorld();
@@ -247,12 +257,26 @@ void alduin::Update()
 
 	if (breathCollider->Active() && breathCollider->IsCapsuleCollision(target->GetCollier()))
 	{
-		if (breathDelay < 0)
+		if (breathDelay <= 0.1f)
 		{
-			target->GetStatus().curHp -= (140.0f - target->GetStatus().def);
-			breathDelay = 1.0f;
+			target->GetStatus().curHp -= (14.0f - target->GetStatus().def);
+			breathDelay = 0.4f;
 		}
 		else breathDelay -= DELTA;
+
+	}
+
+	if (ApproachCollider->Active() && ApproachCollider->IsCapsuleCollision(target->GetCollier()))
+	{
+
+		if (HitDelay <= 0.1f)
+		{
+			target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
+			target->GetStatus().curHp -= (18.0f - target->GetStatus().def);
+			HitDelay = 1.0f;
+		}
+		else HitDelay -= DELTA;
+
 
 	}
 
@@ -342,15 +366,16 @@ void alduin::Render()
 
 	WakeUpCollider->Render();
 
-	collider_F->Render();
-	collider_R->Render();
-	collider_L->Render();
-	collider_B->Render();
+	//collider_F->Render();
+	//collider_R->Render();
+	//collider_L->Render();
+	//collider_B->Render();
 	Acollider_F->Render();
 	Acollider_R->Render();
 	Acollider_L->Render();
 	Acollider_B->Render();
 	breathCollider->Render();
+	ApproachCollider->Render();
 	BreathParticle->Render();
 	DeathParticle->Render();
 
@@ -550,6 +575,7 @@ void alduin::EndAction()
 	breathDelay = 1.0f;
 
 	breathCollider->SetActive(false);
+	ApproachCollider->SetActive(false);
 
 	Acollider_F->SetActive(false);
 	Acollider_R->SetActive(false);
@@ -562,6 +588,12 @@ void alduin::EndAction()
 	}
 	
 	
+}
+
+void alduin::EndLanding()
+{
+	ApproachCollider->SetActive(true);
+
 }
 
 void alduin::hit()

@@ -70,6 +70,7 @@ private:
 	void EndTakeoff();
 	void beginAproach();
 	void EndAction();
+	void EndLanding();
 	void HitDelayEnd();
 
 	void SleepWake();
@@ -101,6 +102,7 @@ private:
 	CapsuleCollider* Acollider_L;
 	CapsuleCollider* Acollider_B;
 	BoxCollider* breathCollider;
+	BoxCollider* ApproachCollider;
 
 	SphereCollider* WakeUpCollider;
 
@@ -122,7 +124,7 @@ private:
 	float CoolingTime = 1.0f;
 	float HitDelay = 0.0f;
 	float HitDelay2 = 0.7f;
-	float breathDelay = 1.0f;
+	float breathDelay = 0.0f;
 
 	bool isAscending = false;
 	bool isDescending = false;
