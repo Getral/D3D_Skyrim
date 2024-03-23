@@ -25,8 +25,6 @@ ObjectManager::ObjectManager()
 
 
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
-
-	
 }
 
 ObjectManager::~ObjectManager()
