@@ -167,7 +167,7 @@ protected:
 
 	Vector3 prevMousePos;
 
-	float attackCharge = 0.0f;
+	float attackCharge = 1.0f;
 	float invincibleCount = 0.0f; // 무적시간 재는 변수
 	float delay = 0.5f;
 
@@ -175,6 +175,7 @@ protected:
 	bool isBlock = false;
 	bool isHit = false;
 	bool isCombo = false;
+	bool isPAttack = false;
 
 	bool is1hm = true;
 	bool is2hm = false;
