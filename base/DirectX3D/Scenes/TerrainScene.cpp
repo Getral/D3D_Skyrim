@@ -15,6 +15,16 @@ TerrainScene::TerrainScene()
 
 	ObjectManager::Get()->Create({ 350,0,200 }, 0, "chest_armor_iron");
 
+	for (int i = 290; i <= 400; i += 10)
+		ObjectManager::Get()->Create({ (float)i,0,400 }, 0, "rock_large4");
+	
+	for (int i = 400; i >= 0; i -= 10)
+		ObjectManager::Get()->Create({ 400,0,(float)i }, 0, "rock_large4");
+	
+	for (int i = 400; i >= 200; i -= 10)
+		ObjectManager::Get()->Create({ (float)i,0,0 }, 0, "rock_large4");
+	
+
 	skyBox = new SkyBox(L"Textures/Landscape/BlueSky.dds");
 }
 
