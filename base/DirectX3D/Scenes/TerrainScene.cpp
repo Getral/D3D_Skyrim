@@ -13,6 +13,8 @@ TerrainScene::TerrainScene()
 	ObjectManager::Get()->Create({ 243,0,300 }, 125, "farmhouse");
 	ObjectManager::Get()->Create({ 260,0,300 }, 26, "farmhouse2");
 
+	ObjectManager::Get()->Create({ 350,0,200 }, 0, "chest_armor_iron");
+
 	skyBox = new SkyBox(L"Textures/Landscape/BlueSky.dds");
 }
 

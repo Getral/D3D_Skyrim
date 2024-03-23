@@ -11,9 +11,9 @@ PlayerScene::PlayerScene()
 	aldu->GetTransform()->Pos() = {244, 0, 150};
 	
 
-	CAM->SetTarget(player); 
-	CAM->TargetOptionLoad("Skyrim2");
-	CAM->LookAtTarget(); 
+	//CAM->SetTarget(player); 
+	//CAM->TargetOptionLoad("Skyrim2");
+	//CAM->LookAtTarget(); 
 
 	
 }
@@ -26,11 +26,12 @@ PlayerScene::~PlayerScene()
 
 void PlayerScene::Update()
 {
-	player->Update();
-	aldu->Update();
+	//player->Update();
+	//aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
 
+	
 }
 
 void PlayerScene::PreRender()
@@ -39,8 +40,8 @@ void PlayerScene::PreRender()
 
 void PlayerScene::Render()
 {
-	player->Render();
-	aldu->Render();
+	//player->Render();
+	//aldu->Render();
 	ObjectManager::Get()->Render();
 	
 	
@@ -50,12 +51,14 @@ void PlayerScene::PostRender()
 {
 	UIManager::Get()->PostRender();
 
+	ObjectManager::Get()->PostRender(player);
+
 }
 
 void PlayerScene::GUIRender()
 {
-	player->GUIRender();
-	aldu->GUIRender();
+	//player->GUIRender();
+	//aldu->GUIRender();
 	UIManager::Get()->GUIRender();
 	
 }
