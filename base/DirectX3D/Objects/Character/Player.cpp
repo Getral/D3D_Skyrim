@@ -144,19 +144,62 @@ Player::Player()
 	bladeSword = new BladeSword();
 	bladeSword->Load();
 
+	//ironwarhammer = new IronWarHammer("ironwarhammer",
+	//	Weapon::Type::WEAPON, weight, value, Weapon::WeaponClass::EBONY, 
+	//	Weapon::WeaponType::claymore, atk);
+	//ironwarhammer->Load();
+	//
+	//rightHand = new Transform();
+	//ironwarhammer->SetParent(rightHand);
+	
 	rightHand = new Transform();
 	bladeSword->SetParent(rightHand);
 
-	shield = new Shield();
-	shield->Load();
 
+	//shield = new Shield();
+	//shield->Load();
+	//
+	//leftHand = new Transform();
+	//shield->SetParent(leftHand);
+
+
+	//ebonybow = new EbonyBow();
+	//ebonybow->Load();
+	
 	leftHand = new Transform();
-	shield->SetParent(leftHand);
+	//ebonybow->SetParent(leftHand);
+
+
+	//ironshield = new IronShield("ironshield",
+	//	Item::Type::ARMOR, weight, value,
+	//	Armor::ArmorType::shield,
+	//	Armor::ArmorClass::DRAGONBONE, def);
+	//ironshield->Load();
+	//
+	//leftHand = new Transform();
+	//ironshield->SetParent(leftHand);
+
+
+	//shield = new Shield();
+	//shield->Load();
+	//
+	//leftHand = new Transform();
+	//shield->SetParent(back);
+
+
+	//ironquiver = new IronQuiver();
+	//ironquiver->Load();
+	
+	back = new Transform();
+	//ironquiver->SetParent(back);
+
+
 
 	headCollider = new CapsuleCollider(10);
 
 	head = new Transform();
 	headCollider->SetParent(head);
+
 
 	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
 	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
@@ -252,10 +295,39 @@ Player::Player()
 Player::~Player()
 {
 	delete bladeSword;
-	delete shield;
+	//delete shield;
 	delete collider;
 	delete rightHand;
 	delete leftHand;
+	delete back;
+
+
+	//delete ironquiver;
+	//delete ebonyquiver;
+
+
+	//delete ironshield;
+	//delete dragonshield;
+
+
+	//delete ebonybow;
+	//delete ebonyarrow;
+	//delete ebonybattleaxe;
+	//delete ebonyclaymore;
+	//delete ebonydagger;
+	//delete ebonylongsword;
+	//delete ebonymace;
+	//delete ebonywaraxe;
+	//delete ebonywarhammer;
+
+	//delete ironbow;
+	//delete ironbattleaxe;
+	//delete ironclaymore;
+	//delete irondagger;
+	//delete ironlongsword;
+	//delete ironmace;
+	//delete ironwaraxe;
+	//delete ironwarhammer;
 }
 
 void Player::Update()
@@ -267,13 +339,46 @@ void Player::Update()
 	ModelAnimator::Update();
 
 	collider->UpdateWorld();
+
+
 	rightHand->SetWorld(GetTransformByNode(82));
 	bladeSword->Update();
+	//ebonybattleaxe->Update();
+	//ebonyclaymore->Update();
+	//ebonydagger->Update();
+	//ebonylongsword->Update();
+	//ebonymace->Update();
+	//ebonywaraxe->Update();
+	//ebonywarhammer->Update();
+	//ebonyarrow->Update();
+	
+
+	//ironbattleaxe->Update();
+	//ironclaymore->Update();
+	//irondagger->Update();
+	//ironlongsword->Update();
+	//ironmace->Update();
+	//ironwaraxe->Update();
+	//ironwarhammer->Update();
+	
+
+
+
+
 	leftHand->SetWorld(GetTransformByNode(119));
-	shield->Update();	
+	//ironbow->Update();
+	//ebonybow->Update();
+
+
 
 	headCollider->UpdateWorld();
 	head->SetWorld(GetTransformByNode(48));
+	//head->SetWorld(GetTransformByNode(nodeIndex1));
+
+
+	back->SetWorld(GetTransformByNode(133));
+	//ironquiver->Update();
+	//ironquiver->Update();
 
 
 	if (isInvincible)
@@ -293,6 +398,37 @@ void Player::Render()
 	collider->Render();
 	bladeSword->Render();
 	//shield->Render();
+	
+	//ironshield->Render();
+	//dragonshield->Render();
+
+	// Weapon
+	// Ebony
+	//ebonybow->Render();
+	//ebonyarrow->Render();
+	//ebonybattleaxe->Render();
+	//ebonyclaymore->Render();
+	//ebonydagger->Render();
+	//ebonylongsword->Render();
+	//ebonymace->Render();
+	//ebonywaraxe->Render();
+	//ebonywarhammer->Render();
+
+	// Iron
+	//ironbow->Render();
+	//ironbattleaxe->Render();
+	//ironclaymore->Render();
+	//irondagger->Render();
+	//ironlongsword->Render();
+	//ironmace->Render();
+	//ironwaraxe->Render();
+	//ironwarhammer->Render();
+
+
+
+	//ebonyquiver->Render();
+	//ironquiver->Render();
+
 
 	headCollider->Render();
 }
@@ -303,7 +439,41 @@ void Player::PostRender()
 
 void Player::GUIRender()
 {
-	bladeSword->GUIRender();
+	//Armor
+	//Shield
+	//dragonshield->GUIRender();
+	//ironshield->GUIRender();
+
+	// Weapon
+	// Ebony
+	//ebonybow->GUIRender();
+	//ebonyarrow->GUIRender();
+	//ebonybattleaxe->GUIRender();
+	//ebonyclaymore->GUIRender();
+	//ebonydagger->GUIRender();
+	//ebonylongsword->GUIRender();
+	//ebonymace->GUIRender();
+	//ebonywaraxe->GUIRender();
+	//ebonywarhammer->GUIRender();
+
+	//Iron
+	//ironbow->GUIRender();
+	//ironbattleaxe->GUIRender();
+	//ironclaymore->GUIRender();
+	//irondagger->GUIRender();
+	//ironlongsword->GUIRender();
+	//ironmace->GUIRender();
+	//ironwarhammer->GUIRender();
+
+
+	//ebonyquiver->GUIRender();
+	//ironquiver->GUIRender();
+
+	//ebonyshield->GUIRender();
+	//ironshield->GUIRender();
+
+
+	//bladeSword->GUIRender();
 	collider->GUIRender();
 	ModelAnimator::GUIRender();
 	ImGui::Text("Win_width : %d", clientCenterPos.x);
@@ -318,7 +488,7 @@ void Player::Control()
 	Move();
 	Attack();
 	Block();
-	WeaponChange();
+	//WeaponChange();
 }
 
 void Player::Move()
@@ -499,41 +669,19 @@ void Player::Move()
 
 
 void Player::Rotate()
-{
-	//Vector3 delta = mousePos - Vector3(clientCenterPos.x, clientCenterPos.y);
-	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);		
+{	
+	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
+	prevMousePos = mousePos;
 	
-	//Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
-	//prevMousePos = mousePos;
-	//
-	//Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
-	//Rot().x -= delta.y * rotSpeed * DELTA; // 카메라 상하회전
-	//
-	//CAM->Rot().x -= delta.y * rotSpeed * DELTA;
-	//Rot().y = CAM->Rot().y;
-	//Rot().x = CAM->Rot().x;
+	Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
+	
+	CAM->Rot().x -= delta.y * rotSpeed * DELTA;
 	
 	
-	//if (KEY_DOWN(VK_MBUTTON))
-	//{
-	//	CAM->Rot().x = 0;
-	//}
-
-	if (KEY_PRESS('Q'))
+	if (KEY_DOWN(VK_MBUTTON))
 	{
-		Rot().y -= DELTA * rotSpeed;
+		CAM->Rot().x = 0;
 	}
-
-	if (KEY_PRESS('E'))
-	{
-		Rot().y += DELTA * rotSpeed;
-	}
-
-	//if (KEY_DOWN(VK_MBUTTON))
-	//{
-	//	CAM->Rot().x = 0;
-	//}
-
 }
 
 void Player::Attack()

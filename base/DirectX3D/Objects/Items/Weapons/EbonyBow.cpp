@@ -1,19 +1,20 @@
 #include "Framework.h"
 
-EbonyBow::EbonyBow() : Model("EbonyBow")
+EbonyBow::EbonyBow() : ModelAnimator("EbonyBow")
 {
 	SetTag("EbonyBow");
-	Pos().x += -27.0f;
-	Pos().y += 0;
-	Pos().z += 1.6f;
+
+	Pos().x += 0.0f;
+	Pos().y += -9.5;
+	Pos().z += 0.0f;
 
 	Rot().x += 0;
 	Rot().y += 0;
-	Rot().z += 0;
+	Rot().z += XM_PI;
 
-	Scale().x *= 1.0f;
-	Scale().y *= 1.0f;
-	Scale().z *= 1.0f;
+	Scale().x *= 0.01f;
+	Scale().y *= 0.01f;
+	Scale().z *= 0.01f;
 
 	collider = new BoxCollider();
 	collider->Pos().x += 21.0f;
@@ -32,6 +33,16 @@ EbonyBow::EbonyBow() : Model("EbonyBow")
 	collider->SetTag("EbonyBowCollider");
 	collider->SetParent(this);
 	collider->Load();
+
+
+
+	ReadClip("ebony_bow_idle");
+	ReadClip("ebony_bow_draw");
+	ReadClip("ebony_bow_draw_idle");
+	ReadClip("ebony_bow_release");
+
+	SetState(IDLE);
+
 }
 
 EbonyBow::~EbonyBow()
@@ -42,31 +53,39 @@ EbonyBow::~EbonyBow()
 void EbonyBow::Update()
 {
 	UpdateWorld();
-	ColliderManager(isWeapon);
+	//ColliderManager(isWeapon);
 	collider->UpdateWorld();
 }
 
 void EbonyBow::Render()
 {
-	Model::Render();
+	ModelAnimator::Render();
 	collider->Render();
 }
 
 void EbonyBow::GUIRender()
 {
-	Model::GUIRender();
+	ModelAnimator::GUIRender();
 	collider->GUIRender();
 }
 
-void EbonyBow::ColliderManager(bool isWeaponColl)
+void EbonyBow::SetState(EbonyBowAction action)
 {
-	if (isWeaponColl)
-	{
-		collider->SetActive(true);
-	}
-	else
-	{
-		collider->SetActive(false);
-	}
+	if (curState == action) return;
 
+	curState = action;
+	this->PlayClip((int)action);
 }
+
+//void EbonyBow::ColliderManager(bool isWeaponColl)
+//{
+//	if (isWeaponColl)
+//	{
+//		collider->SetActive(true);
+//	}
+//	else
+//	{
+//		collider->SetActive(false);
+//	}
+//
+//}

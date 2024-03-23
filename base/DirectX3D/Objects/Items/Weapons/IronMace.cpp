@@ -1,11 +1,15 @@
 #include "Framework.h"
 #include "IronMace.h"
 
-IronMace::IronMace() : Model("IronMace")
+IronMace::IronMace(string name, int type,
+	int weight, int value, int weapon_class,
+	int weapon_type, int atk)
+	: Weapon(name, type, weight, value, weapon_class,
+		weapon_type, atk)
 {
 	SetTag("IronMace");
 	Pos().x += 0;
-	Pos().y += 1;
+	Pos().y += -6.6f;
 	Pos().z += 0;
 
 	Rot().x += 0;
@@ -25,9 +29,9 @@ IronMace::IronMace() : Model("IronMace")
 	collider->Rot().y += 0.0f;
 	collider->Rot().z += 0.0f;
 
-	collider->Scale().x *= 15.0f;
-	collider->Scale().y *= 15.0f;
-	collider->Scale().z *= 15.0f;
+	collider->Scale().x *= 17.0f;
+	collider->Scale().y *= 17.0f;
+	collider->Scale().z *= 17.0f;
 
 
 	collider->SetTag("IronMaceCollider");

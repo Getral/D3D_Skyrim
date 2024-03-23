@@ -1,8 +1,10 @@
 #pragma once
-class EbonyWarAxe : public Model
+
+class EbonyWarAxe : public Weapon
 {
 public:
-    EbonyWarAxe();
+    EbonyWarAxe(string name, int type, int weight, int value,
+        int weapon_class, int weapon_type, int atk);
     ~EbonyWarAxe();
 
     void Update();

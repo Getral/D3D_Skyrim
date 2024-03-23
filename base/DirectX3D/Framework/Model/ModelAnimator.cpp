@@ -45,7 +45,7 @@ void ModelAnimator::GUIRender()
 {
     int clip = frameBuffer->Get().cur.clip;
     ImGui::SliderInt("Clip", &frameBuffer->Get().cur.clip, 0, clips.size() - 1);
-    ImGui::SliderInt("Frame", (int*) & frameBuffer->Get().cur.curFrame,
+    ImGui::SliderInt("Frame", (int*) &frameBuffer->Get().cur.curFrame,
         0, clips[clip]->frameCount - 1);
     ImGui::SliderFloat("Scale", &frameBuffer->Get().cur.scale, 0, 10.0f);
 

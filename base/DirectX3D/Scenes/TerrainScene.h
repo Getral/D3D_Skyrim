@@ -8,7 +8,7 @@ private:
 	vector<string> objectName =
 	{
 		"rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
-		"rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree"
+		"rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree", "chest"
 	};
 
 	vector<vector<Vector3>> objectPos =
@@ -49,8 +49,8 @@ private:
 		{ Vector3(157, 18, 146), Vector3(159, 16, 113), Vector3(179, 9, 102), Vector3(162, 12, 184), Vector3(189, 10, 199),Vector3(214, 12, 199),
 			Vector3(233, 9, 217),Vector3(262, 6, 198), Vector3(292, 12, 164), Vector3(297, 17, 210), Vector3(299, 15, 231), Vector3(292, 6, 262), Vector3(239, 0, 305),
 			Vector3(148, 7, 163), Vector3(168, 8, 129),Vector3(217, 2, 91),Vector3(141, 18, 175),Vector3(180, 6, 181),Vector3(228, 6, 204),Vector3(246, 11, 226),
-	Vector3(271, 0, 254),Vector3(290, 10, 308),Vector3(262, 10, 324),Vector3(208, 4, 285),Vector3(204, 12, 262),Vector3(215, 14, 241),Vector3(206, 6, 327),Vector3(168, 33, 265)}//Tree
-
+			Vector3(271, 0, 254),Vector3(290, 10, 308),Vector3(262, 10, 324),Vector3(208, 4, 285),Vector3(204, 12, 262),Vector3(215, 14, 241),Vector3(206, 6, 327),Vector3(168, 33, 265)}, //Tree
+		{ Vector3(350, 0, 150) }
 	};
 
 	vector<vector<float>> objectRot =
@@ -69,7 +69,8 @@ private:
 		{ 104, 35, -2, -121, -174, -119, -67 }, // rock_medium4
 		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 		  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		  0, 0, 0, 0, 0, 0, 0, 0, 0 }
+		  0, 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 0 }
 	};
 
 public:

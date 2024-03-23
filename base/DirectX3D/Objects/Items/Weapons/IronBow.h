@@ -1,8 +1,17 @@
 #pragma once
 
-class IronBow : public Model
+class IronBow : public ModelAnimator
 {
 public:
+
+    enum IronBowAction
+    {
+        IDLE,
+        DRAW,
+        DRAW_IDLE,
+        RELEASE
+    };
+        
     IronBow();
     ~IronBow();
 
@@ -12,11 +21,15 @@ public:
 
     bool GetIsWeapon() { return isWeapon; }
     void SetIsCollider(bool value) { isWeapon = value; }
-
+    
     void ColliderManager(bool isWeaponColl);
 
+    void SetState(IronBowAction action);
+
 private:
-    Model* ironbow;
+    ModelAnimator* ironbow;
     BoxCollider* collider;
     bool isWeapon = true;
+
+    IronBowAction curState = IDLE;
 };

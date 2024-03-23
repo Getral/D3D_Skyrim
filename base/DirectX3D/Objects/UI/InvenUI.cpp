@@ -93,12 +93,12 @@ InvenUI::InvenUI()
 
 	FOR(4)
 	{
-		player_armors.push_back(new Armor("none", -1, -1, -1, -1, -1, 0));
+		player_armors.push_back(itemstatus->GetArmor("dragoncuirass"));
 	}
 
-	player_shield = new Armor("none", -1, -1, -1, -1, -1, 0);
-	player_weapon = new Weapon("none", -1, -1, -1, -1, -1, 0);
-	player_arrow = new Arrow("none", -1, -1, -1, -1, -1);
+	player_shield = new Armor(*itemstatus->GetArmor("dragonshield"));
+	player_weapon = new Weapon(*itemstatus->GetWeapon("ebonydagger"));
+	player_arrow = new Arrow(*itemstatus->GetArrow("ironarrow"));
 }
 
 InvenUI::~InvenUI()
