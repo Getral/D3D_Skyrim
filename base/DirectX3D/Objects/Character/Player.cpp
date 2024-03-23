@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 Player::Player()
-	: ModelAnimator("male_dragonbone")
+	: ModelAnimator("male_normal")
 {
 	ClientToScreen(hWnd, &clientCenterPos);
 	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
@@ -154,6 +154,8 @@ Player::Player()
 	
 	rightHand = new Transform();
 	bladeSword->SetParent(rightHand);
+
+
 
 
 	//shield = new Shield();
@@ -710,24 +712,24 @@ void Player::Attack()
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_RUN_FW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else 
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_WALK_FW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
@@ -739,24 +741,24 @@ void Player::Attack()
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_RUN_BW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_WALK_BW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
@@ -766,24 +768,24 @@ void Player::Attack()
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_RUN_L_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_WALK_L_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
@@ -793,170 +795,196 @@ void Player::Attack()
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_RUN_R_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else 
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(OHM_WALK_R_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
-
-		else if (KEY_PRESS(VK_CONTROL)) return;
 
 		else 
 		{
 			if (KEY_PRESS(VK_LBUTTON))
 			{
-				attackCharge += DELTA;
+				attackCharge -= DELTA;
 			}
-			if (KEY_UP(VK_LBUTTON))
+
+			if (attackCharge <= 0.0f && KEY_PRESS(VK_CONTROL) && !isPAttack)
 			{
-				if (attackCharge > 1.0f)
+				SetAction(OHM_CATK_P);
+				isPAttack = true;
+			}
+
+			if (KEY_UP(VK_LBUTTON) && KEY_PRESS(VK_CONTROL) && !isPAttack)
+			{
+				if (!isCombo)				
+				{				
+					SetAction(OHM_CATK_R);				
+					isCombo = true;			
+				}			
+				else				
+				{			
+					SetAction(OHM_CATK_L);			
+					isCombo = false;			
+				}		
+				attackCharge = 1.0f;		
+			}
+
+			if (attackCharge <= 0.0f && !KEY_PRESS(VK_CONTROL) && !isPAttack)
+			{
+				SetAction(OHM_ATK_P);
+				isPAttack = true;
+			}
+
+			if (KEY_UP(VK_LBUTTON) && !KEY_PRESS(VK_CONTROL) && !isPAttack)
+			{
+				if (!isCombo)
 				{
-					SetAction(OHM_ATK_P);
+					SetAction(OHM_ATK_R);
+					isCombo = true;
 				}
 				else
 				{
-					if (!isCombo)
-					{
-						SetAction(OHM_ATK_R);
-						isCombo = true;
-					}
-					else
-					{
-						SetAction(OHM_ATK_L);
-						isCombo = false;
-					}
+					SetAction(OHM_ATK_L);
+					isCombo = false;
 				}
-				attackCharge = 0.0f;
+				
+				attackCharge = 1.0f;
 			}
+			if (KEY_UP(VK_LBUTTON) && isPAttack)
+			{
+				attackCharge = 1.0f;
+				isPAttack = false;
+			}
+
 		}		
 	}
 
-	if (is2hm)
+	if (is2hm && !KEY_PRESS(VK_CONTROL))
 	{
 		if (velocity.z < -0.1f && velocity.x < -0.1f ||
-			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
+			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f)
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_RUN_FW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_WALK_FW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
 
 		else if (velocity.z < -0.1f && velocity.x < -0.1f ||
-			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
+			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f)
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_RUN_BW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_WALK_BW_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
-		else if (velocity.x < -0.1f && !KEY_PRESS(VK_CONTROL))
+		else if (velocity.x < -0.1f)
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_RUN_L_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_WALK_L_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
-		else if (velocity.x > 0.1f && !KEY_PRESS(VK_CONTROL))
+		else if (velocity.x > 0.1f)
 		{
 			if (KEY_PRESS(VK_SHIFT))
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_RUN_R_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
-					attackCharge += DELTA;
+					attackCharge -= DELTA;
 				}
 				if (KEY_UP(VK_LBUTTON))
 				{
 					SetAction(THM_WALK_R_ATK);
-					attackCharge = 0.0f;
+					attackCharge = 1.0f;
 				}
 			}
 		}
@@ -965,49 +993,56 @@ void Player::Attack()
 		{
 			if (KEY_PRESS(VK_LBUTTON))
 			{
-				attackCharge += DELTA;
+				attackCharge -= DELTA;
 			}
-			if (KEY_UP(VK_LBUTTON))
+
+			if (attackCharge <= 0.0f && !isPAttack)
 			{
-				if (attackCharge > 1.0f)
+				SetAction(THM_ATK_P);
+				isPAttack = true;
+			}
+
+			if (KEY_UP(VK_LBUTTON) && !isPAttack)
+			{						 
+				if (!isCombo)
 				{
-					SetAction(THM_ATK_P);
+					SetAction(THM_ATK_R);
+					isCombo = true;
 				}
 				else
 				{
-					if (!isCombo)
-					{
-						SetAction(THM_ATK_R);
-						isCombo = true;
-					}
-					else
-					{
-						SetAction(THM_ATK_L);
-						isCombo = false;
-					}
-				}
-				attackCharge = 0.0f;
+					SetAction(THM_ATK_L);
+					isCombo = false;
+				}			
+				attackCharge = 1.0f;
 			}
+
+			if (KEY_UP(VK_LBUTTON) && isPAttack)
+			{
+				attackCharge = 1.0f;
+				isPAttack = false;
+			}
+
 		}
 	}
 
 	if (isbow)
 	{
-		if (KEY_DOWN(VK_LBUTTON))
+		if (KEY_DOWN(VK_LBUTTON) && !KEY_PRESS(VK_CONTROL))
 		{
 			SetAction(BOW_DRAW_INTRO);
 		}
 		if (KEY_PRESS(VK_LBUTTON))
 		{
-			attackCharge += DELTA;
-			if (attackCharge > 1.0f)
+			attackCharge -= DELTA;
+			if (attackCharge < 0.0f)
 			{
 				isbowdrawn = true;
 			}
 		}
 		if (KEY_UP(VK_LBUTTON))
 		{
-			if (attackCharge > 1.0f)
+			if (attackCharge < 0.0f)
 			{
 				SetAction(BOW_RELEASE);
 			}
@@ -1016,7 +1051,7 @@ void Player::Attack()
 				SetAction(BOW_IDLE);
 			}
 			isbowdrawn = false;
-			attackCharge = 0.0f;
+			attackCharge = 1.0f;
 		}
 	}
 
