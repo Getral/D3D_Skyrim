@@ -19,5 +19,5 @@ public:
 private:
     Model* ironmace;
     BoxCollider* collider;
-    bool isWeapon = true;
+    bool isWeapon = false;
 };

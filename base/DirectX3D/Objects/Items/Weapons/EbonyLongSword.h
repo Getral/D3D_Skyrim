@@ -19,5 +19,5 @@ public:
 private:
     Model* ebonylongsword;
     BoxCollider* collider;
-    bool isWeapon = true;
+    bool isWeapon = false;
 };
