@@ -3,7 +3,7 @@
 Wolf::Wolf(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstancing, Transform* transform, Vector3 spawnPos)
 	: Enemy(name, index, modelAnimatorInstancing, transform, spawnPos)
 {
-	//transform->Scale() *= 0.9f;
+	transform->Scale() *= 0.9f;
 
 	colliders.push_back(new CapsuleCollider(20.0f)); // HIP
 	colliders.push_back(new CapsuleCollider(20.0f)); // BELLY
@@ -122,17 +122,7 @@ void Wolf::Track()
 		velocity = target->GlobalPos() - transform->GlobalPos();
 		transform->Pos() += velocity.GetNormalized() * this->status.speed * DELTA;
 
-		Vector3 forward = transform->Forward();
-		Vector3 cross = Cross(forward, velocity);
-
-		if (cross.y < 0)
-		{
-			transform->Rot().y += rotSpeed * DELTA;
-		}
-		else if (cross.y > 0)
-		{
-			transform->Rot().y -= rotSpeed * DELTA;
-		}
+		transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
 	}
 }
 

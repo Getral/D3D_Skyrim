@@ -24,13 +24,13 @@ private:
 	vector<vector<Vector3>> posTable =
 	{
 		{ Vector3(290, 0, 365)/*, Vector3(180, 10, 200), Vector3(-100, 2000, -200) */},
-		{ Vector3(220, 10, 200)}
+		{ Vector3(370, 0, 90)}
 	};
 
 	vector<Character::Status> statusTable =
 	{
-		Character::Status(15, 30, 200, 20, 2.5),
-		Character::Status(10, 150, 100, 10, 3.5)
+		Character::Status(15, 100, 200, 20, 2.5),
+		Character::Status(10, 75, 100, 10, 3.5)
 	};
 
 	UINT MONSTER_SIZE = 2;

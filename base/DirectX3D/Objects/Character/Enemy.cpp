@@ -3,6 +3,8 @@
 Enemy::Enemy(string name, UINT index, ModelAnimatorInstancing * modelAnimatorInstancing, Transform* transform, Vector3 spawnPos)
 	: Character(transform, name, spawnPos), index(index), instancing(modelAnimatorInstancing)
 {
+	this->transform->SetTag("Enemy");
+
 	rigidbody = new BoxCollider();
 	rigidbody->SetParent(transform);
 
