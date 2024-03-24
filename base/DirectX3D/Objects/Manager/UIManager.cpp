@@ -143,6 +143,8 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 {
 	// 나침반 동서남북
 #pragma region compass_dir
+	int flag;
+
 	tmp_N = XMConvertToDegrees(player->Rot().y);
 	tmp_S = tmp_N + 180;
 	tmp_W = tmp_N + 90;
@@ -168,6 +170,8 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 
 	for (Quad* dir : compass_dir)
 		dir->UpdateWorld();
+
+		
 #pragma endregion
 
 #pragma region enemy_dir
