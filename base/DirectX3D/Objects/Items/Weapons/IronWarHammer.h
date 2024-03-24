@@ -10,12 +10,13 @@ public:
     void Render();
     void GUIRender();
 
+    BoxCollider* GetCollider() { return collider; }
     bool GetIsWeapon() { return isWeapon; }
     void SetIsCollider(bool value) { isWeapon = value; }
 
     void ColliderManager(bool isWeaponColl);
 
-private:
+private: 
     Model* ironwarhammer;
     BoxCollider* collider;
     bool isWeapon = true;

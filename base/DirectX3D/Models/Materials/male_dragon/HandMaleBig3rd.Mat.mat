@@ -1,6 +1,6 @@
 <Material Name="HandMaleBig3rd.Mat">
     <Shader Vertex="" Pixel=""/>
-    <Texture Diffuse="Textures/Color/White.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
+    <Texture Diffuse="Textures/Model/male_dragon/malehead.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
     <Property Shininess="36" HasNormalMap="0">
         <Diffuse R="0.76639789" G="0.80034703" B="0" A="1"/>
         <Specular R="0.76639789" G="0.80034703" B="0" A="1"/>

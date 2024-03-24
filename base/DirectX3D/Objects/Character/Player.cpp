@@ -344,7 +344,7 @@ void Player::Update()
 
 
 	rightHand->SetWorld(GetTransformByNode(82));
-	bladeSword->Update();
+	//bladeSword->Update();
 	//ebonybattleaxe->Update();
 	//ebonyclaymore->Update();
 	//ebonydagger->Update();
@@ -402,7 +402,7 @@ void Player::Render()
 		collider->Render();
 		headCollider->Render();
 	}
-	bladeSword->Render();
+	//bladeSword->Render();
 	//shield->Render();
 	
 	//ironshield->Render();
