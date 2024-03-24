@@ -22,16 +22,11 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 
 	if(isAlpha)
 		model->SetShader(L"Basic/Texture.hlsl");
+
 	if (tag == "Structure" || tag == "ItemBox")
 	{
 		model->Rot().x += XM_PI / 2;
 	}
-	
-	else if (tag == "Item")
-	{
-	}
-
-	
 	
 	collider = new BoxCollider(colliderSize);
 	collider->SetParent(model);
@@ -39,7 +34,8 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 	FOR(2) blendState[i] = new BlendState();
 	blendState[1]->AlphaToCoverage(true);
 
-	collider->Pos().z -= colliderSize.z * 0.5f;
+	if(modelName != "coin")
+		collider->Pos().z -= colliderSize.z * 0.5f;
 }
 
 Structure::~Structure()
@@ -48,6 +44,9 @@ Structure::~Structure()
 
 void Structure::Update()
 {
+	if (tag == "Item")
+		model->Rot().y += 10 * DELTA;
+
 	model->UpdateWorld();
 	
 	collider->UpdateWorld();

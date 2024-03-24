@@ -13,11 +13,11 @@ TerrainScene::TerrainScene()
 	ObjectManager::Get()->Create({ 243,0,300 }, 125, "farmhouse");
 	ObjectManager::Get()->Create({ 260,0,300 }, 26, "farmhouse2");
 
-	ObjectManager::Get()->Create({ 250	,0	,275	}, 70, "chest_armor_iron");
-	ObjectManager::Get()->Create({ 252.5,0	,272.5	}, 35, "chest_armor_dragon");
+	ObjectManager::Get()->Create({ 260	,0	,275	}, -XM_PIDIV4, "chest_potion");
+	ObjectManager::Get()->Create({ 257.5,0	,272.5	}, -XM_PIDIV4 / 2, "chest_weapon_ebony");
 	ObjectManager::Get()->Create({ 255	,0	,270	}, 0, "chest_weapon_iron");
-	ObjectManager::Get()->Create({ 257.5,0	,272.5	}, 215, "chest_weapon_ebony");
-	ObjectManager::Get()->Create({ 260	,0	,275	}, 250, "chest_potion");
+	ObjectManager::Get()->Create({ 252.5,0	,272.5	}, XM_PIDIV4 / 2, "chest_armor_dragon");
+	ObjectManager::Get()->Create({ 250	,0	,275	}, XM_PIDIV4, "chest_armor_iron");
 
 	for (int i = 290; i <= 400; i += 10)
 		ObjectManager::Get()->Create({ (float)i,0,400 }, 0, "rock_large4");
