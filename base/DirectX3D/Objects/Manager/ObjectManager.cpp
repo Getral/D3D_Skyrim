@@ -25,6 +25,8 @@ ObjectManager::ObjectManager()
 
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
 	items.push_back(new Structure("coin", 0.01f, { 50, 50, 50 }, "Item"));
+
+	signs.push_back(new Structure("sign", 0.01f, { 200, 200, 300 }, "Sign"));
 }
 
 ObjectManager::~ObjectManager()
@@ -39,6 +41,10 @@ ObjectManager::~ObjectManager()
 	for (Structure* item : world_items)
 		delete item;
 
+	for (Structure* sign : signs)
+		delete sign;
+	for (Structure* sign : world_signs)
+		delete sign;
 }
 
 void ObjectManager::Update(Player* player)
@@ -62,6 +68,13 @@ void ObjectManager::Update(Player* player)
 		item->GetIsColRender() = this->GetIsColRender();
 		items_col.push_back(item->GetCollider());
 		item->Update();
+	}
+
+	for (Structure* sign : world_signs)
+	{
+		sign->GetIsColRender() = this->GetIsColRender();
+		signs_col.push_back(sign->GetCollider());
+		sign->Update();
 	}
 
 	FOR(world_structures.size())
@@ -141,7 +154,7 @@ void ObjectManager::Update(Player* player)
 				UIManager::Get()->GetInvenUI()->AddItem("ironbattleaxe");
 				UIManager::Get()->GetInvenUI()->AddItem("ironwarhammer");
 				UIManager::Get()->GetInvenUI()->AddItem("ironbow");
-				for(int j = 0; j < 10; j++)
+				for (int j = 0; j < 10; j++)
 					UIManager::Get()->GetInvenUI()->AddItem("ironarrow");
 			}
 
@@ -178,26 +191,39 @@ void ObjectManager::Update(Player* player)
 			world_items.erase(world_items.begin() + i);
 		}
 	}
+
+	FOR(world_signs.size())
+	{
+		if (player->GetCollier()->IsCollision(world_signs[i]->GetCollider()) && KEY_DOWN('E'))
+		{
+			if (!UIManager::Get()->IsQuestFinished())
+				UIManager::Get()->StartQuest();
+			else
+				UIManager::Get()->StartOuttro();
+		}
+	}
 }
 
 void ObjectManager::Render()
 {
 	for (Structure* structure : world_structures)
 	{
-		
 		structure->Render();
 	}
-	
+
 	for (Structure* box : world_itemboxes)
 	{
-		
 		box->Render();
 	}
 
 	for (Structure* item : world_items)
 	{
-		
 		item->Render();
+	}
+
+	for (Structure* sign : world_signs)
+	{
+		sign->Render();
 	}
 }
 
@@ -229,7 +255,7 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 {
 	if (GetStructure(inname)->GetModel()->GetTag() == "Structure")
 	{
-		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag(),GetStructure(inname)->GetIsAlpha());
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag(), GetStructure(inname)->GetIsAlpha());
 		world_structures.push_back(temp);
 		world_structures.back()->GetModel()->Pos() = pos;
 		world_structures.back()->GetModel()->Rot().y = Rot_y;
@@ -251,6 +277,13 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 		world_items.back()->GetModel()->Rot().y = Rot_y;
 	}
 
+	if (GetStructure(inname)->GetModel()->GetTag() == "Sign")
+	{
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		world_signs.push_back(temp);
+		world_signs.back()->GetModel()->Pos() = pos;
+		world_signs.back()->GetModel()->Rot().y = Rot_y;
+	}
 }
 
 Structure* ObjectManager::GetStructure(string inname)
@@ -276,6 +309,14 @@ Structure* ObjectManager::GetStructure(string inname)
 		if (item->GetModel()->GetName() == inname)
 		{
 			return item;
+		}
+	}
+
+	for (Structure* sign : signs)
+	{
+		if (sign->GetModel()->GetName() == inname)
+		{
+			return sign;
 		}
 	}
 }

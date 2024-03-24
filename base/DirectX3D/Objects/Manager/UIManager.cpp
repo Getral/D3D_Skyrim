@@ -120,6 +120,35 @@ UIManager::UIManager()
 
 	outtro_backGround = new Quad(L"Textures/UI/Intro/Background.jpg");
 	outtro_backGround->Pos() = { CENTER_X, CENTER_Y };
+
+	journal_frame = new Quad(L"Textures/UI/journal_frame.png");
+	journal_frame->GetMaterial()->SetShader(L"UI/EditAlpha.hlsl");
+	journal_frame->Pos() = { CENTER_X, CENTER_Y };
+	journal_frame->Scale() *= 0.1f;
+
+	journal_frame_bar = new Quad(L"Textures/UI/journal_bar.png");
+	journal_frame_bar->Pos() = { CENTER_X - 200.0f, CENTER_Y - 25.0f };
+	journal_frame_bar->Scale() *= 0.1f;
+
+	journal_frame_bar2 = new Quad(L"Textures/UI/journal_bar2.png");
+	journal_frame_bar2->Pos() = { CENTER_X + 150.0f, CENTER_Y - 50.0f };
+	journal_frame_bar2->Scale() *= 0.1f;
+
+	journal_quest_select_icon = new Quad(L"Textures/UI/journal_arrow.png");
+	journal_quest_select_icon->Pos() = { CENTER_X - 230.0f, CENTER_Y - 30.0f };
+	journal_quest_select_icon->Scale() *= 0.1f;
+
+	journal_quest_bar = new Quad(L"Textures/UI/quest_bar.png");
+	journal_quest_bar->Pos() = { CENTER_X + 150.0f, CENTER_Y + 180.0f };
+	journal_quest_bar->Scale() *= 0.1f;
+
+	quest_icon_finished = new Quad(L"Textures/UI/quest_finished.png");
+	quest_icon_finished->Pos() = { CENTER_X - 100.0f, CENTER_Y - 80.0f };
+	quest_icon_finished->Scale() *= 0.1f;
+
+	quest_icon_unfinished = new Quad(L"Textures/UI/quest_unfinished.png");
+	quest_icon_unfinished->Pos() = { CENTER_X - 100.0f, CENTER_Y - 80.0f };
+	quest_icon_unfinished->Scale() *= 0.1f;
 }
 
 UIManager::~UIManager()
@@ -137,6 +166,10 @@ UIManager::~UIManager()
 
 	delete intro_title;
 	delete intro_backGround;
+
+	delete outtro_backGround;
+
+	delete journal_frame;
 }
 
 void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* alduin)
@@ -272,6 +305,28 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 		if (KEY_DOWN(VK_LBUTTON))
 			exit(0);
 	}
+
+	if (KEY_DOWN('J'))
+		isOpenQuest = !isOpenQuest;
+
+	if (isOpenQuest)
+	{
+		journal_frame->UpdateWorld();
+		journal_frame_bar->UpdateWorld();
+		if (isQuest)
+		{
+			journal_quest_select_icon->UpdateWorld();
+			journal_quest_bar->UpdateWorld();
+			journal_frame_bar2->UpdateWorld();
+			if (!isQuestFinished)
+				quest_icon_unfinished->UpdateWorld();
+			else
+				quest_icon_finished->UpdateWorld();
+		}
+	}
+
+	if (questTextTime > 0.0f)
+		questTextTime -= DELTA;
 }
 
 void UIManager::Render()
@@ -375,6 +430,45 @@ void UIManager::PostRender()
 		Font::Get()->SetStyle("Futura_outtro");
 		Font::Get()->RenderText("THANK YOU!", { CENTER_X - 375.0f, CENTER_Y + 100.0f });
 		Font::Get()->SetStyle("Futura");
+	}
+
+	if (isOpenQuest)
+	{
+		journal_frame->Render();
+		journal_frame_bar->Render();
+		Font::Get()->RenderText("퀘스트", { CENTER_X - 30.0f, CENTER_Y + 260.0f });
+		if (isQuest)
+		{
+			journal_quest_select_icon->Render();
+			journal_quest_bar->Render();
+			journal_frame_bar2->Render();
+			Font::Get()->RenderText("알두인 사냥", { CENTER_X - 350.0f, CENTER_Y - 25.0f });
+			Font::Get()->RenderText("알두인 사냥", { CENTER_X + 90.0f, CENTER_Y + 185.0f });
+			Font::Get()->RenderText("드래곤본의 목표는 모든 드래곤을 잡아야 하는 것이다. 이제 마지막 남은 드래곤은 알두인이다. 알두인을 잡아라!", 
+				{ CENTER_X - 150.0f, CENTER_Y + 60.0f }, { 500.0f, 200.0f });
+			Font::Get()->RenderText("목록", { CENTER_X + 125.0f, CENTER_Y - 45.0f });
+			Font::Get()->RenderText("알두인 사냥하기", { CENTER_X - 75.0f, CENTER_Y - 75.0f });
+			if (!isQuestFinished)
+				quest_icon_unfinished->Render();
+			else
+				quest_icon_finished->Render();
+		}
+	}
+
+	if (questTextTime > 0.0f)
+	{
+		if (!isQuestFinished)
+		{
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->RenderText("시 작 :  알 두 인  사 냥", { CENTER_X - 120.0f, WIN_HEIGHT * 0.85f });
+			Font::Get()->SetStyle("Futura");
+		}
+		else
+		{
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->RenderText("퀘 스 트 완 료 :  알 두 인  사 냥", { CENTER_X - 180.0f, WIN_HEIGHT * 0.85f });
+			Font::Get()->SetStyle("Futura");
+		}
 	}
 }
 
@@ -484,4 +578,16 @@ void UIManager::GetClosestEnemy(Player* player, vector<EnemySpawn*> enemies)
 void UIManager::StartOuttro()
 {
 	isOuttro = true;
+}
+
+void UIManager::StartQuest()
+{
+	isQuest = true;
+	questTextTime = 2.0f;
+}
+
+void UIManager::EndQuest()
+{
+	isQuestFinished = true;
+	questTextTime = 2.0f;
 }

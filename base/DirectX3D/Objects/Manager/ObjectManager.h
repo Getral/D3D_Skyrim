@@ -19,14 +19,17 @@ private:
 	vector<Structure*> structures;
 	vector<Structure*> itemboxes;
 	vector<Structure*> items;
+	vector<Structure*> signs;
 	
 	vector<Structure*> world_structures;
 	vector<Structure*> world_itemboxes;
 	vector<Structure*> world_items;
+	vector<Structure*> world_signs;
 
 	vector<BoxCollider*> structures_col;
 	vector<BoxCollider*> itemboxes_col;
 	vector<BoxCollider*> items_col;
+	vector<BoxCollider*> signs_col;
 
 	bool isColRender = true;
 };

@@ -25,6 +25,8 @@ void TerrainManager::Update()
 {
 	playerData->Pos().y += -gravity * DELTA;
 	terrain->ComputePicking(playerData->Pos(), playerData);
+	if (playerData->Pos().y <= -0.5f)
+		playerData->Pos().y = 0.5f;
 
 	//if (playerData->Pos().y <= 0.0f)
 	//	playerData->Pos().y = 200.0f;

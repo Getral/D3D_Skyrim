@@ -23,7 +23,7 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 	if(isAlpha)
 		model->SetShader(L"Basic/Texture.hlsl");
 
-	if (tag == "Structure" || tag == "ItemBox")
+	if (tag == "Structure" || tag == "ItemBox" || tag == "Sign")
 	{
 		model->Rot().x += XM_PI / 2;
 	}

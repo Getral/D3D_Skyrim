@@ -47,6 +47,13 @@ void PlayerScene::Update()
 			player_dragon->SetisCollRend() = !player_dragon->SetisCollRend();
 			player_iron->SetisCollRend() = !player_iron->SetisCollRend();
 		}
+		if (KEY_DOWN('Q'))
+		{
+			if (!UIManager::Get()->IsQuestStarted())
+				UIManager::Get()->StartQuest();
+			else
+				UIManager::Get()->EndQuest();
+		}
 	}
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 }
@@ -69,9 +76,6 @@ void PlayerScene::Render()
 
 		aldu->Render();
 		ObjectManager::Get()->Render();
-
-		if (KEY_DOWN(VK_ESCAPE))
-			UIManager::Get()->StartOuttro();
 	}
 }
 
