@@ -19,6 +19,8 @@ public:
 	void GetClosestEnemy(Player* player, vector<EnemySpawn*> enemies);
 	//float GetEnemyDegree() { return final_angle; }
 
+	void StartOuttro();
+
 private:
 	Quad* compass;
 	vector<Quad*> compass_dir;
@@ -72,5 +74,8 @@ private:
 	bool isIntro = true;
 	bool isHoverPlay = false;
 	bool isHoverExit = false;
+
+	Quad* outtro_backGround;
+	bool isOuttro = false;
 };
 

@@ -117,6 +117,9 @@ UIManager::UIManager()
 
 	intro_backGround = new Quad(L"Textures/UI/Intro/Background.jpg");
 	intro_backGround->Pos() = { CENTER_X, CENTER_Y };
+
+	outtro_backGround = new Quad(L"Textures/UI/Intro/Background.jpg");
+	outtro_backGround->Pos() = { CENTER_X, CENTER_Y };
 }
 
 UIManager::~UIManager()
@@ -258,6 +261,13 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 		if (isHoverExit && KEY_DOWN(VK_LBUTTON))
 			exit(0);
 	}
+
+	if (isOuttro)
+	{
+		outtro_backGround->UpdateWorld();
+		if (KEY_DOWN(VK_LBUTTON))
+			exit(0);
+	}
 }
 
 void UIManager::Render()
@@ -352,6 +362,14 @@ void UIManager::PostRender()
 			Font::Get()->RenderText("PLAY", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.25f });
 			Font::Get()->RenderText("EXIT", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.175f });
 		}
+		Font::Get()->SetStyle("Futura");
+	}
+
+	if (isOuttro)
+	{
+		outtro_backGround->Render();
+		Font::Get()->SetStyle("Futura_outtro");
+		Font::Get()->RenderText("THANK YOU!", { CENTER_X - 375.0f, CENTER_Y + 100.0f });
 		Font::Get()->SetStyle("Futura");
 	}
 }
@@ -457,4 +475,9 @@ void UIManager::GetClosestEnemy(Player* player, vector<EnemySpawn*> enemies)
 	curEnemy = closestEnemy;
 	
 	
+}
+
+void UIManager::StartOuttro()
+{
+	isOuttro = true;
 }

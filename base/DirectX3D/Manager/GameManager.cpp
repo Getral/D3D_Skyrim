@@ -33,6 +33,7 @@ GameManager::GameManager()
     Font::Get()->AddStyle("Futura", L"Futura", 20.0f);
     Font::Get()->AddStyle("Futura_big", L"Futura", 30.0f);
     Font::Get()->AddStyle("Futura_more_big", L"Futura", 40.0f);
+    Font::Get()->AddStyle("Futura_outtro", L"Futura", 200.0f);
 
     Font::Get()->SetColor("Gray");
     Font::Get()->SetStyle("Futura");

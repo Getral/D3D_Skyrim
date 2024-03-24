@@ -69,6 +69,9 @@ void PlayerScene::Render()
 
 		aldu->Render();
 		ObjectManager::Get()->Render();
+
+		if (KEY_DOWN(VK_ESCAPE))
+			UIManager::Get()->StartOuttro();
 	}
 }
 
