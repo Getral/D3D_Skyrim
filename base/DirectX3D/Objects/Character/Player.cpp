@@ -1175,17 +1175,17 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('X'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
 			is1hm = false;
 			is2hm = true;
-			SetAction(OHM_UNEQUIP);
+			//SetAction(OHM_UNEQUIP);
 		}
 		if (KEY_DOWN('C'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
 			is1hm = false;
 			isbow = true;
-			SetAction(OHM_UNEQUIP);
+			//SetAction(OHM_UNEQUIP);
 		}
 	}
 	
@@ -1193,17 +1193,17 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('Z'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			is2hm = false;
 			is1hm = true;
-			SetAction(THM_UNEQUIP);
+			//SetAction(THM_UNEQUIP);
 		}
 		if (KEY_DOWN('C'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
 			is2hm = false;
 			isbow = true;
-			SetAction(THM_UNEQUIP);
+			//SetAction(THM_UNEQUIP);
 		}
 	}
 	
@@ -1211,17 +1211,17 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('Z'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			isbow = false;
 			is1hm = true;
-			SetAction(BOW_UNEQUIP);
+			//SetAction(BOW_UNEQUIP);
 		}
 		if (KEY_DOWN('X'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
 			isbow = false;
 			is2hm = true;
-			SetAction(BOW_UNEQUIP);
+			//SetAction(BOW_UNEQUIP);
 		}
 	}
 

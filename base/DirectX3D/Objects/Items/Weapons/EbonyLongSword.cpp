@@ -7,11 +7,11 @@ EbonyLongSword::EbonyLongSword(string name, int type,
 		weapon_type, atk)
 {
 	SetTag("EbonyLongSword");
-	Pos().x += 1.5f;
+	Pos().x += 2.0f;
 	Pos().y += 12.0f;
-	Pos().z += 0;
+	Pos().z += 1.3f;
 
-	Rot().x += 90;
+	Rot().x += XM_PIDIV2;
 	Rot().y += 0;
 	Rot().z += 0;
 
