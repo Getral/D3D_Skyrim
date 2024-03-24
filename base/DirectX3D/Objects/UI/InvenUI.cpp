@@ -93,10 +93,10 @@ InvenUI::InvenUI()
 
 	FOR(4)
 	{
-		player_armors.push_back(itemstatus->GetArmor("dragoncuirass"));
+		player_armors.push_back(itemstatus->GetArmor("chest"));
 	}
 
-	player_shield = new Armor(*itemstatus->GetArmor("dragonshield"));
+	player_shield = new Armor(*itemstatus->GetArmor("chest"));
 	player_weapon = new Weapon(*itemstatus->GetWeapon("ebonydagger"));
 	player_arrow = new Arrow(*itemstatus->GetArrow("ironarrow"));
 }
@@ -1357,4 +1357,9 @@ void InvenUI::ListingDetailed()
 		Font::Get()->RenderText(to_string(inven_potions[selectedItemNum]->GetStatus().value), { item_detail_frame->Pos().x + 100,item_detail_frame->Pos().y - 30 });
 		Font::Get()->SetStyle("Futura");
 	}
+}
+
+int InvenUI::GetHelmetClass()
+{
+	return player_armors[0]->GetArmorClass();
 }

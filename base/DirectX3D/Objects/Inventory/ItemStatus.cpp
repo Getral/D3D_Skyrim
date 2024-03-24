@@ -3,6 +3,8 @@
 ItemStatus::ItemStatus()
 {
 	// 이름,타이틀타입,무게,가치,아이템타입,아이템부위,방어력
+	armors.push_back(new Armor("chest",  Item::ARMOR, 0, 0, Armor::NONE,  Armor::helmet,  0));
+
 	armors.push_back(new Armor("ironcuirass",  Item::ARMOR, 30, 125, Armor::IRON,  Armor::cuirass,  25));
 	armors.push_back(new Armor("irongauntlets", Item::ARMOR, 5, 25,   Armor::IRON,  Armor::gauntlet, 10));
 	armors.push_back(new Armor("ironboots",    Item::ARMOR, 6, 25,   Armor::IRON,  Armor::boots,    10));
