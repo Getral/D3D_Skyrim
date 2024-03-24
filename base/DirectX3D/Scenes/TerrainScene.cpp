@@ -5,13 +5,13 @@ TerrainScene::TerrainScene()
 {
 	TerrainManager::Get();
 
-	//FOR(objectName.size())
-	//	for (int j = 0; j < objectPos[i].size(); j++)
-	//		ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
-	//
-	//
-	//ObjectManager::Get()->Create({ 243,0,300 }, 125, "farmhouse");
-	//ObjectManager::Get()->Create({ 260,0,300 }, 26, "farmhouse2");
+	FOR(objectName.size())
+		for (int j = 0; j < objectPos[i].size(); j++)
+			ObjectManager::Get()->Create(objectPos[i][j], objectRot[i][j], objectName[i]);
+	
+	
+	ObjectManager::Get()->Create({ 243,0,300 }, 125, "farmhouse");
+	ObjectManager::Get()->Create({ 260,0,300 }, 26, "farmhouse2");
 
 	skyBox = new SkyBox(L"Textures/Landscape/BlueSky.dds");
 }
