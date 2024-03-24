@@ -87,7 +87,9 @@ void PlayerScene::GUIRender()
 	//player_dragon->GUIRender();
 	player_iron->GUIRender();
 	//aldu->GUIRender();
-	//UIManager::Get()->GUIRender();	
+	UIManager::Get()->GUIRender();	
 
-	ImGui::Text("bool : %d", ObjectManager::Get()->GetIsColRender());
+	//ImGui::Text("bool : %d", ObjectManager::Get()->GetIsColRender());
+
+	// test->GUIRender();
 }

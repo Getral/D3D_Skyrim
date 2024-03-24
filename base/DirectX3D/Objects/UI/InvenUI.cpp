@@ -83,8 +83,6 @@ InvenUI::InvenUI()
 	equiped_icon_arrow->Scale() *= 0.9f;
 	equiped_icon_arrow->SetActive(false);
 
-
-
 	itemstatus = new ItemStatus();
 
 	item_detail_frame = new Quad(L"Textures/UI/Item_detail_frame.png");
@@ -97,8 +95,10 @@ InvenUI::InvenUI()
 	}
 
 	player_shield = new Armor(*itemstatus->GetArmor("chest"));
-	player_weapon = new Weapon(*itemstatus->GetWeapon("ebonydagger"));
-	player_arrow = new Arrow(*itemstatus->GetArrow("ironarrow"));
+	player_weapon = new Weapon(*itemstatus->GetWeapon("chest"));
+	player_arrow = new Arrow(*itemstatus->GetArrow("chest"));
+	
+
 }
 
 InvenUI::~InvenUI()
@@ -151,7 +151,7 @@ void InvenUI::Update(Player* player)
 	if (KEY_DOWN('1'))
 	{
 		AddItem("ironcuirass");
-		AddItem("irongauntlet");
+		AddItem("irongauntlets");
 		AddItem("dragonhelmet");
 		AddItem("ironboots");
 		AddItem("dragonshield");
@@ -161,7 +161,7 @@ void InvenUI::Update(Player* player)
 		AddItem("ironhelmet");
 		AddItem("ironshield");
 		AddItem("dragoncuirass");
-		AddItem("dragongauntlet");
+		AddItem("dragongauntlets");
 		AddItem("dragonboots");
 	}
 	if (KEY_DOWN('3'))
@@ -223,16 +223,6 @@ void InvenUI::GUIRender()
 	ImGui::Text(player_weapon->GetStatus().name.c_str());
 	ImGui::Text("player arrow");
 	ImGui::Text(player_arrow->GetStatus().name.c_str());
-
-	if (inven_arrows.size() > 1)
-	{
-		ImGui::Text("arrow_equip render %d", inven_arrows[0]->GetEquip());
-		ImGui::Text("arrow_icon render %d", equiped_icon_arrow->ActiveSelf());	
-	}
-	
-	
-
-	equiped_icon_arrow->GUIRender();
 }
 
 // 아이템 타입 선택
@@ -690,9 +680,31 @@ void InvenUI::UseItem(Player* player, string inname)
 		{
 			if (inven_weapons[i]->GetStatus().name == inname)
 			{
+				if (inname == "ironmace")
+				{
+					player->Getis1hm() = true;
+					player->Getis2hm() = false;
+					player->Getisbow() = false;
+				}
+
+				else if (inname == "ebonylongsword")
+				{
+					player->Getis1hm() = false;
+					player->Getis2hm() = true;
+					player->Getisbow() = false;
+				}
+
+				else if (inname == "ironbow")
+				{
+					player->Getis1hm() = false;
+					player->Getis2hm() = false;
+					player->Getisbow() = true;
+				}
+
+
 				player_weapon->ChangeEquipState();
 				inven_weapons[i]->ChangeEquipState();
-
+				
 				player->GetStatus().atk -= player_weapon->GetAtk();
 				player->GetStatus().atk += inven_weapons[i]->GetAtk();
 
@@ -1362,4 +1374,9 @@ void InvenUI::ListingDetailed()
 int InvenUI::GetHelmetClass()
 {
 	return player_armors[0]->GetArmorClass();
+}
+
+string InvenUI::GetWeaponName()
+{
+	return player_weapon->GetStatus().name;
 }

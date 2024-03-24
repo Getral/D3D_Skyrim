@@ -17,5 +17,7 @@ private:
 	Player_Dragon* player_dragon;
 	Player_Iron* player_iron;
 	alduin* aldu;
+
+	Model* test;
 };
 
