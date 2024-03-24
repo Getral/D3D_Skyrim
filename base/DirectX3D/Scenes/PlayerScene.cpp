@@ -83,7 +83,9 @@ void PlayerScene::PostRender()
 
 void PlayerScene::GUIRender()
 {
-	player->GUIRender();
+	//player->GUIRender();
+	//player_dragon->GUIRender();
+	player_iron->GUIRender();
 	//aldu->GUIRender();
 	//UIManager::Get()->GUIRender();	
 

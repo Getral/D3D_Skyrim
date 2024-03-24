@@ -182,7 +182,7 @@ protected:
 
 	bool is1hm = true;
 	bool is2hm = false;
-	bool isbow = false;
+	bool isunarmed = true;
 
 
 
