@@ -124,19 +124,8 @@ void Bear::Track()
 	{
 		velocity = target->GlobalPos() - transform->GlobalPos();
 		transform->Pos() += velocity.GetNormalized() * this->status.speed * DELTA;
-		//transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
 
-		Vector3 forward = transform->Forward(); //모델 기준으로 앞 따오기
-		Vector3 cross = Cross(forward, velocity);
-
-		if (cross.y < 0) // 법선이 밑이다 = 내가 목적 방향보다 오른쪽을 보는 중이다
-		{
-			transform->Rot().y += rotSpeed * DELTA;
-		}
-		else if (cross.y > 0) //반대의 경우
-		{
-			transform->Rot().y -= rotSpeed * DELTA;
-		}
+		transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
 	}
 }
 

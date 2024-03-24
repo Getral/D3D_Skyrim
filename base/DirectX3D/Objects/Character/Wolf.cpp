@@ -122,17 +122,7 @@ void Wolf::Track()
 		velocity = target->GlobalPos() - transform->GlobalPos();
 		transform->Pos() += velocity.GetNormalized() * this->status.speed * DELTA;
 
-		Vector3 forward = transform->Forward();
-		Vector3 cross = Cross(forward, velocity);
-
-		if (cross.y < 0)
-		{
-			transform->Rot().y += rotSpeed * DELTA;
-		}
-		else if (cross.y > 0)
-		{
-			transform->Rot().y -= rotSpeed * DELTA;
-		}
+		transform->Rot().y = atan2(velocity.x, velocity.z) + XM_PI;
 	}
 }
 
@@ -168,7 +158,23 @@ void Wolf::Behavior()
 
 	for (CapsuleCollider* collider : colliders)
 	{
+		if (collider->IsCollision(playerData->GetMace()->GetCollider()))
+		{
+			this->status.curHp -= playerData->GetStatus().atk;
+			hitDelay = 1.0f;
+			if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+				SetState(HIT);
+			break;
+		}
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
+		{
+			this->status.curHp -= playerData->GetStatus().atk;
+			hitDelay = 1.0f;
+			if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+				SetState(HIT);
+			break;
+		}
+		if (collider->IsCollision(playerData->GetArrow()->GetCollider()))
 		{
 			this->status.curHp -= playerData->GetStatus().atk;
 			hitDelay = 1.0f;
@@ -259,7 +265,9 @@ void Wolf::Behavior()
 
 void Wolf::Walk()
 {
-	if ((transform->GlobalPos() - tmpPos).Length() < 40.0f)
+	if ((transform->GlobalPos() - tmpPos).Length() < 15.0f &&
+		(transform->GlobalPos().x < 395 && transform->GlobalPos().x > 0 && 
+			transform->GlobalPos().z < 395 && transform->GlobalPos().z > 0))
 	{
 		velocity = randPos - transform->GlobalPos();
 		transform->Pos() += velocity.GetNormalized() * this->status.speed * DELTA;

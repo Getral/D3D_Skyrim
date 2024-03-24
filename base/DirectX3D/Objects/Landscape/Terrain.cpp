@@ -202,7 +202,8 @@ bool Terrain::ComputePicking(Vector3& pos, Transform* transform)
 
     if (minIndex >= 0)
     {
-        pos = pickingPos + transform->Down() * minDistance;
+        if (transform->GetTag() != "Enemy")
+            pos = pickingPos + transform->Down() * minDistance;
         return true;
     }
 

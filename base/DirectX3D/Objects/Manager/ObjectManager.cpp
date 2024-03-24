@@ -23,8 +23,8 @@ ObjectManager::ObjectManager()
 	itemboxes.push_back(new Structure("chest_weapon_ebony", 0.015f, { 140, 70, 70 }, "ItemBox"));
 	itemboxes.push_back(new Structure("chest_potion", 0.015f, { 140, 70, 70 }, "ItemBox"));
 
-
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
+	items.push_back(new Structure("coin", 0.01f, { 50, 50, 50 }, "Item"));
 }
 
 ObjectManager::~ObjectManager()
@@ -172,7 +172,7 @@ void ObjectManager::Update(Player* player)
 
 	FOR(world_items.size())
 	{
-		if (player->GetCollier()->IsCollision(world_items[i]->GetCollider()))
+		if (player->GetCollier()->IsCollision(world_items[i]->GetCollider()) && KEY_DOWN('E'))
 		{
 			UIManager::Get()->GetInvenUI()->AddItem(world_items[i]->GetModel()->GetName());
 			world_items.erase(world_items.begin() + i);
@@ -210,6 +210,14 @@ void ObjectManager::PostRender(Player* player)
 			Font::Get()->RenderText(world_itemboxes[i]->GetmodelName().c_str(), { CENTER_X - 50,CENTER_Y + 300 });
 		}
 	}
+
+	FOR(world_items.size())
+	{
+		if (player->GetCollier()->IsCollision(world_items[i]->GetCollider()))
+		{
+			Font::Get()->RenderText(world_items[i]->GetmodelName().c_str(), { CENTER_X - 50,CENTER_Y + 300 });
+		}
+	}
 }
 
 void ObjectManager::GUIRender()
@@ -243,7 +251,6 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 		world_items.back()->GetModel()->Rot().y = Rot_y;
 	}
 
-	
 }
 
 Structure* ObjectManager::GetStructure(string inname)
