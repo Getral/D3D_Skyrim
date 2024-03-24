@@ -49,6 +49,7 @@ Structure::~Structure()
 void Structure::Update()
 {
 	model->UpdateWorld();
+	
 	collider->UpdateWorld();
 }
 
@@ -62,7 +63,9 @@ void Structure::Render()
 	}
 	else
 		model->Render();
-	collider->Render();
+
+	if (isColRender)
+		collider->Render();
 }
 
 void Structure::GUIRender()

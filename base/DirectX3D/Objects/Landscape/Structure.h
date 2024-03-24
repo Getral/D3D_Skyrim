@@ -17,6 +17,8 @@ public:
 
 	BoxCollider* GetCollider() { return collider; }
 	Model*& GetModel() { return model; }
+
+	bool& GetIsColRender() { return isColRender; }
 private:
 	Model* model;
 	BoxCollider* collider;
@@ -28,5 +30,7 @@ private:
 	BlendState* blendState[2];
 
 	bool isAlpha = false;
+
+	bool isColRender = true;
 };
 

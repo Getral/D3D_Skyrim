@@ -45,18 +45,21 @@ void ObjectManager::Update(Player* player)
 {
 	for (Structure* structure : world_structures)
 	{
+		structure->GetIsColRender() = this->GetIsColRender();
 		structures_col.push_back(structure->GetCollider());
 		structure->Update();
 	}
 
 	for (Structure* box : world_itemboxes)
 	{
+		box->GetIsColRender() = this->GetIsColRender();
 		itemboxes_col.push_back(box->GetCollider());
 		box->Update();
 	}
 
 	for (Structure* item : world_items)
 	{
+		item->GetIsColRender() = this->GetIsColRender();
 		items_col.push_back(item->GetCollider());
 		item->Update();
 	}
@@ -180,13 +183,22 @@ void ObjectManager::Update(Player* player)
 void ObjectManager::Render()
 {
 	for (Structure* structure : world_structures)
+	{
+		
 		structure->Render();
+	}
 	
 	for (Structure* box : world_itemboxes)
+	{
+		
 		box->Render();
+	}
 
 	for (Structure* item : world_items)
+	{
+		
 		item->Render();
+	}
 }
 
 void ObjectManager::PostRender(Player* player)

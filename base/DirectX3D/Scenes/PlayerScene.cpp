@@ -38,12 +38,8 @@ void PlayerScene::Update()
 	aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
-
-	if (KEY_DOWN('R'))
-		equipState++;
-
-	if (equipState > DRAGON)
-		equipState = NORMAL;
+	if (KEY_DOWN('T'))
+		ObjectManager::Get()->GetIsColRender() = !ObjectManager::Get()->GetIsColRender();
 }
 
 void PlayerScene::PreRender()
@@ -75,4 +71,6 @@ void PlayerScene::GUIRender()
 	//player->GUIRender();
 	//aldu->GUIRender();
 	//UIManager::Get()->GUIRender();	
+
+	ImGui::Text("bool : %d", ObjectManager::Get()->GetIsColRender());
 }

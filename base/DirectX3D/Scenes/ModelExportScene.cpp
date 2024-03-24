@@ -65,7 +65,7 @@ ModelExportScene::ModelExportScene()
 
     // Export Without Texture
 
-    string name = "male_iron";
+    string name = "male_dragon";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     
