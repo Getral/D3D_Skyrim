@@ -151,6 +151,7 @@ Player::Player()
 	ironmace->SetParent(rightHand);
 
 	dragonshield = new DragonShield("dragonshield",
+
 		Item::Type::ARMOR, weight, value,
 		Armor::ArmorType::shield,
 		Armor::ArmorClass::DRAGONBONE, def);
@@ -371,35 +372,6 @@ void Player::Update()
 	ironquiver->Update();
 	//ironquiver->Update();
 
-	if (is1hm)
-	{
-		ironmace->SetActive(true);
-		dragonshield->SetActive(true);
-		ebonylongsword->SetActive(false);
-		ironarrow->SetActive(false);		
-		ironbow->SetActive(false);
-		ironquiver->SetActive(false);
-	}
-	if (is2hm)
-	{
-		ironmace->SetActive(false);
-		dragonshield->SetActive(false);
-		ebonylongsword->SetActive(true);
-		ironarrow->SetActive(false);
-		ironbow->SetActive(false);
-		ironquiver->SetActive(false);
-	}
-	if (isbow)
-	{
-		ironmace->SetActive(false);
-		dragonshield->SetActive(false);
-		ebonylongsword->SetActive(false);
-		ironarrow->SetActive(true);
-		ironbow->SetActive(true);
-		ironquiver->SetActive(true);
-	}
-
-
 	if (isInvincible)
 	{
 		invincibleCount += DELTA;
@@ -419,11 +391,27 @@ void Player::Render()
 		collider->Render();
 		headCollider->Render();
 	}
+
+	if (is1hm)
+	{
+		ironmace->Render();
+		dragonshield->Render();
+	}
+	if (is2hm)
+	{
+		ebonylongsword->Render();
+	}
+	if (isbow)
+	{
+		ironarrow->Render();
+		ironbow->Render();
+		ironquiver->Render();
+	}
 	//bladeSword->Render();
 	//shield->Render();
 	
 	//ironshield->Render();
-	dragonshield->Render();
+	//dragonshield->Render();
 
 	// Weapon
 	// Ebony
@@ -432,26 +420,26 @@ void Player::Render()
 	//ebonybattleaxe->Render();
 	//ebonyclaymore->Render();
 	//ebonydagger->Render();
-	ebonylongsword->Render();
+	//ebonylongsword->Render();
 	//ebonymace->Render();
 	//ebonywaraxe->Render();
 	//ebonywarhammer->Render();
 
 	// Iron
-	ironbow->Render();
-	ironarrow->Render();
+	//ironbow->Render();
+	//ironarrow->Render();
 	//ironbattleaxe->Render();
 	//ironclaymore->Render();
 	//irondagger->Render();
 	//ironlongsword->Render();
-	ironmace->Render();
+	//ironmace->Render();
 	//ironwaraxe->Render();
 	//ironwarhammer->Render();
 
 
 
 	//ebonyquiver->Render();
-	ironquiver->Render();
+
 
 }
 
@@ -460,10 +448,10 @@ void Player::PostRender()
 }
 
 void Player::GUIRender()
-{
+{ 
 	//Armor
 	//Shield
-	//dragonshield->GUIRender();
+	dragonshield->GUIRender();
 	//ironshield->GUIRender();
 
 	// Weapon
@@ -473,7 +461,7 @@ void Player::GUIRender()
 	//ebonybattleaxe->GUIRender();
 	//ebonyclaymore->GUIRender();
 	//ebonydagger->GUIRender();
-	//ebonylongsword->GUIRender();
+	ebonylongsword->GUIRender();
 	//ebonymace->GUIRender();
 	//ebonywaraxe->GUIRender();
 	//ebonywarhammer->GUIRender();
@@ -484,7 +472,7 @@ void Player::GUIRender()
 	//ironclaymore->GUIRender();
 	//irondagger->GUIRender();
 	//ironlongsword->GUIRender();
-	//ironmace->GUIRender();
+	ironmace->GUIRender();
 	//ironwarhammer->GUIRender();
 
 
@@ -510,7 +498,36 @@ void Player::Control()
 	Move();
 	Attack();
 	Block();
-	//WeaponChange();
+	WeaponChange();
+
+	//if (is1hm)
+	//{
+	//	ironmace->SetActive(true);
+	//	dragonshield->SetActive(true);
+	//	ebonylongsword->SetActive(false);
+	//	ironarrow->SetActive(false);
+	//	ironbow->SetActive(false);
+	//	ironquiver->SetActive(false);
+	//}
+	//if (is2hm)
+	//{
+	//	ironmace->SetActive(false);
+	//	dragonshield->SetActive(false);
+	//	ebonylongsword->SetActive(true);
+	//	ironarrow->SetActive(false);
+	//	ironbow->SetActive(false);
+	//	ironquiver->SetActive(false);
+	//}
+	//if (isbow)
+	//{
+	//	ironmace->SetActive(false);
+	//	dragonshield->SetActive(false);
+	//	ebonylongsword->SetActive(false);
+	//	ironarrow->SetActive(true);
+	//	ironbow->SetActive(true);
+	//	ironquiver->SetActive(true);
+	//}
+
 }
 
 void Player::Move()
@@ -1156,55 +1173,55 @@ void Player::WeaponChange()
 
 	if (is1hm)
 	{
-		if (KEY_DOWN('x'))
+		if (KEY_DOWN('X'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
 			is1hm = false;
 			is2hm = true;
-			SetAction(OHM_UNEQUIP);
+			//SetAction(OHM_UNEQUIP);
 		}
-		if (KEY_DOWN('c'))
+		if (KEY_DOWN('C'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
 			is1hm = false;
 			isbow = true;
-			SetAction(OHM_UNEQUIP);
+			//SetAction(OHM_UNEQUIP);
 		}
 	}
 	
 	if (is2hm)
 	{
-		if (KEY_DOWN('z'))
+		if (KEY_DOWN('Z'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			is2hm = false;
 			is1hm = true;
-			SetAction(THM_UNEQUIP);
+			//SetAction(THM_UNEQUIP);
 		}
-		if (KEY_DOWN('c'))
+		if (KEY_DOWN('C'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
 			is2hm = false;
 			isbow = true;
-			SetAction(THM_UNEQUIP);
+			//SetAction(THM_UNEQUIP);
 		}
 	}
 	
 	if (isbow)
 	{
-		if (KEY_DOWN('z'))
+		if (KEY_DOWN('Z'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			isbow = false;
 			is1hm = true;
-			SetAction(BOW_UNEQUIP);
+			//SetAction(BOW_UNEQUIP);
 		}
-		if (KEY_DOWN('x'))
+		if (KEY_DOWN('X'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
 			isbow = false;
 			is2hm = true;
-			SetAction(BOW_UNEQUIP);
+			//SetAction(BOW_UNEQUIP);
 		}
 	}
 
