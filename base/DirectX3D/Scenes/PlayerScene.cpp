@@ -19,8 +19,6 @@ PlayerScene::PlayerScene()
 	player->Render();
 	player_iron->Render();
 	player_dragon->Render();
-
-	test = new Model("sign");
 }
 
 PlayerScene::~PlayerScene()
@@ -31,26 +29,26 @@ PlayerScene::~PlayerScene()
 
 void PlayerScene::Update()
 {
-	player->Update();
-	player_dragon->Pos() = player->Pos();
-	player_dragon->Update();
-	player_iron->Pos() = player->Pos();
-	player_iron->Update();
-
-	aldu->Update();
-	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
-	ObjectManager::Get()->Update(player);
-	if (KEY_DOWN('T'))
+	if (!UIManager::Get()->IsIntro())
 	{
-		ObjectManager::Get()->GetIsColRender() = !ObjectManager::Get()->GetIsColRender();
-		aldu->SetIsColliderRend() = !aldu->SetIsColliderRend();
-		player->SetisCollRend() = !player->SetisCollRend();
-		player_dragon->SetisCollRend() = !player_dragon->SetisCollRend();
-		player_iron->SetisCollRend() = !player_iron->SetisCollRend();
+		player->Update();
+		player_dragon->Pos() = player->Pos();
+		player_dragon->Update();
+
+		player_iron->Pos() = player->Pos();
+		player_iron->Update();
+		aldu->Update();
+		ObjectManager::Get()->Update(player);
+		if (KEY_DOWN('T'))
+		{
+			ObjectManager::Get()->GetIsColRender() = !ObjectManager::Get()->GetIsColRender();
+			aldu->SetIsColliderRend() = !aldu->SetIsColliderRend();
+			player->SetisCollRend() = !player->SetisCollRend();
+			player_dragon->SetisCollRend() = !player_dragon->SetisCollRend();
+			player_iron->SetisCollRend() = !player_iron->SetisCollRend();
+		}
 	}
-
-	test->UpdateWorld();
-
+	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 }
 
 void PlayerScene::PreRender()
@@ -59,17 +57,22 @@ void PlayerScene::PreRender()
 
 void PlayerScene::Render()
 {
-	if(UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::NONE)
-		player->Render();
-	//else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::IRON)
-	//	player_iron->Render();
-	//else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::DRAGONBONE)
-	//	player_dragon->Render();
+	if (!UIManager::Get()->IsIntro())
+	{
+		if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::NONE)
+			player->Render();
+		else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::IRON)
+			player_iron->Render();
+		else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::DRAGONBONE)
+			player_dragon->Render();
 
-	//aldu->Render();
-	ObjectManager::Get()->Render();
 
-	test->Render();
+		aldu->Render();
+		ObjectManager::Get()->Render();
+
+		if (KEY_DOWN(VK_ESCAPE))
+			UIManager::Get()->StartOuttro();
+	}
 }
 
 void PlayerScene::PostRender()
@@ -81,6 +84,8 @@ void PlayerScene::PostRender()
 void PlayerScene::GUIRender()
 {
 	//player->GUIRender();
+	//player_dragon->GUIRender();
+	player_iron->GUIRender();
 	//aldu->GUIRender();
 	UIManager::Get()->GUIRender();	
 

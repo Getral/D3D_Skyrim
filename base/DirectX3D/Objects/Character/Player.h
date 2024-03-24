@@ -183,9 +183,9 @@ protected:
 	bool isCombo = false;
 	bool isPAttack = false;
 
-	bool is1hm = true;
+	bool is1hm = false;
 	bool is2hm = false;
-	bool isbow = false;
+	bool isunarmed = true;
 
 	bool isbowdrawn = false;
 	bool isCollRender = true;

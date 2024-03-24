@@ -345,7 +345,7 @@ void Player::Update()
 	//ebonywaraxe->Update();
 	//ebonywarhammer->Update();
 	//ebonyarrow->Update();
-	
+
 
 	//ironbattleaxe->Update();
 	//ironclaymore->Update();
@@ -354,11 +354,11 @@ void Player::Update()
 	ironmace->Update();
 	//ironwaraxe->Update();
 	//ironwarhammer->Update();
-	ironarrow->Update();
-	
+	//ironarrow->Update();
+
 
 	leftHand->SetWorld(GetTransformByNode(119));
-	ironbow->Update();
+	//ironbow->Update();
 	//ebonybow->Update();
 	dragonshield->Update();
 
@@ -372,6 +372,7 @@ void Player::Update()
 	ironquiver->Update();
 	//ironquiver->Update();
 
+
 	if (isInvincible)
 	{
 		invincibleCount += DELTA;
@@ -380,7 +381,7 @@ void Player::Update()
 
 	if (KEY_PRESS('H'))
 		this->status.curstamina -= 10 * DELTA;
-	
+
 }
 
 void Player::Render()
@@ -416,7 +417,7 @@ void Player::Render()
 	}
 	//bladeSword->Render();
 	//shield->Render();
-	
+
 	//ironshield->Render();
 	//dragonshield->Render();
 
@@ -442,12 +443,7 @@ void Player::Render()
 	//ironmace->Render();
 	//ironwaraxe->Render();
 	//ironwarhammer->Render();
-
-
-
 	//ebonyquiver->Render();
-
-
 }
 
 void Player::PostRender()
@@ -673,7 +669,7 @@ void Player::Move()
 			velocity.x = 0.0f;
 		}
 	}
-		
+
 
 	//방향을 구하고 정규화
 	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
@@ -712,7 +708,6 @@ void Player::Move()
 		Pos() += direction * status.speed * 0.7f * DELTA * -1;
 	}
 }
-
 
 void Player::Rotate()
 {	
@@ -1099,9 +1094,6 @@ void Player::Attack()
 		}
 	}
 
-	
-}
-
 void Player::Block()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
@@ -1197,7 +1189,7 @@ void Player::WeaponChange()
 			//SetAction(OHM_UNEQUIP);
 		}
 	}
-	
+
 	if (is2hm)
 	{
 		if (KEY_DOWN('1'))
@@ -1443,7 +1435,6 @@ void Player::SetAnimation()
 
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
 
-
 		else SetAction(BOW_IDLE);
 	}
 
@@ -1510,10 +1501,6 @@ void Player::WeaponCollider()
 	if (!ebonylongsword->GetIsWeapon())
 	{
 		ebonylongsword->SetIsCollider(true);
-	}
-	if (!ironarrow->GetIsBow())
-	{
-		ironarrow->SetIsCollider(true);
 	}
 }
 

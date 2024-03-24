@@ -111,6 +111,15 @@ UIManager::UIManager()
 
 	itemstatus = new ItemStatus();
 
+	intro_title = new Quad(L"Textures/UI/Intro/Logo.jpg");
+	intro_title->Pos() = { WIN_WIDTH * 0.25f, WIN_HEIGHT * 0.6f };
+	intro_title->Scale() *= 0.5f;
+
+	intro_backGround = new Quad(L"Textures/UI/Intro/Background.jpg");
+	intro_backGround->Pos() = { CENTER_X, CENTER_Y };
+
+	outtro_backGround = new Quad(L"Textures/UI/Intro/Background.jpg");
+	outtro_backGround->Pos() = { CENTER_X, CENTER_Y };
 }
 
 UIManager::~UIManager()
@@ -125,6 +134,9 @@ UIManager::~UIManager()
 
 	delete SP_bar_background;
 	delete SP_bar;
+
+	delete intro_title;
+	delete intro_backGround;
 }
 
 void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* alduin)
@@ -220,6 +232,42 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 		invenUI->Update(player);
 	if (KEY_DOWN('I'))
 		isInven = !isInven;
+
+	if (isIntro)
+	{
+		intro_title->UpdateWorld();
+		intro_backGround->UpdateWorld();
+
+		if ((mousePos.x < WIN_WIDTH * 0.9f && mousePos.x > WIN_WIDTH * 0.8f) &&
+			(mousePos.y < WIN_HEIGHT * 0.275f && mousePos.y > WIN_HEIGHT * 0.225f))
+		{
+			isHoverPlay = true;
+			isHoverExit = false;
+		}
+		else if ((mousePos.x < WIN_WIDTH * 0.9f && mousePos.x > WIN_WIDTH * 0.8f) &&
+			(mousePos.y < WIN_HEIGHT * 0.2f && mousePos.y > WIN_HEIGHT * 0.15f))
+		{
+			isHoverPlay = false;
+			isHoverExit = true;
+		}
+		else
+		{
+			isHoverPlay = false;
+			isHoverExit = false;
+		}
+
+		if (isHoverPlay && KEY_DOWN(VK_LBUTTON))
+			isIntro = false;
+		if (isHoverExit && KEY_DOWN(VK_LBUTTON))
+			exit(0);
+	}
+
+	if (isOuttro)
+	{
+		outtro_backGround->UpdateWorld();
+		if (KEY_DOWN(VK_LBUTTON))
+			exit(0);
+	}
 }
 
 void UIManager::Render()
@@ -285,6 +333,45 @@ void UIManager::PostRender()
 
 	if (isInven)
 		invenUI->Render();
+
+	if (isIntro)
+	{
+		intro_backGround->Render();
+		intro_title->Render();
+		Font::Get()->SetStyle("Futura_big");
+		if (isHoverPlay)
+		{
+			Font::Get()->SetStyle("Futura_more_big");
+			Font::Get()->SetColor("White");
+			Font::Get()->RenderText("PLAY", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.25f });
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->SetColor("Gray");
+			Font::Get()->RenderText("EXIT", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.175f });
+		}
+		else if (isHoverExit)
+		{
+			Font::Get()->SetStyle("Futura_big");
+			Font::Get()->RenderText("PLAY", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.25f });
+			Font::Get()->SetStyle("Futura_more_big");
+			Font::Get()->SetColor("White");
+			Font::Get()->RenderText("EXIT", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.175f });
+			Font::Get()->SetColor("Gray");
+		}
+		else
+		{
+			Font::Get()->RenderText("PLAY", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.25f });
+			Font::Get()->RenderText("EXIT", { WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.175f });
+		}
+		Font::Get()->SetStyle("Futura");
+	}
+
+	if (isOuttro)
+	{
+		outtro_backGround->Render();
+		Font::Get()->SetStyle("Futura_outtro");
+		Font::Get()->RenderText("THANK YOU!", { CENTER_X - 375.0f, CENTER_Y + 100.0f });
+		Font::Get()->SetStyle("Futura");
+	}
 }
 
 void UIManager::GUIRender()
@@ -388,4 +475,9 @@ void UIManager::GetClosestEnemy(Player* player, vector<EnemySpawn*> enemies)
 	curEnemy = closestEnemy;
 	
 	
+}
+
+void UIManager::StartOuttro()
+{
+	isOuttro = true;
 }
