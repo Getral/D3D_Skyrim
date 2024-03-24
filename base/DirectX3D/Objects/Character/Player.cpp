@@ -391,11 +391,27 @@ void Player::Render()
 		collider->Render();
 		headCollider->Render();
 	}
+
+	if (is1hm)
+	{
+		ironmace->Render();
+		dragonshield->Render();
+	}
+	if (is2hm)
+	{
+		ebonylongsword->Render();
+	}
+	if (isbow)
+	{
+		ironarrow->Render();
+		ironbow->Render();
+		ironquiver->Render();
+	}
 	//bladeSword->Render();
 	//shield->Render();
 	
 	//ironshield->Render();
-	dragonshield->Render();
+	//dragonshield->Render();
 
 	// Weapon
 	// Ebony
@@ -404,26 +420,26 @@ void Player::Render()
 	//ebonybattleaxe->Render();
 	//ebonyclaymore->Render();
 	//ebonydagger->Render();
-	ebonylongsword->Render();
+	//ebonylongsword->Render();
 	//ebonymace->Render();
 	//ebonywaraxe->Render();
 	//ebonywarhammer->Render();
 
 	// Iron
-	ironbow->Render();
-	ironarrow->Render();
+	//ironbow->Render();
+	//ironarrow->Render();
 	//ironbattleaxe->Render();
 	//ironclaymore->Render();
 	//irondagger->Render();
 	//ironlongsword->Render();
-	ironmace->Render();
+	//ironmace->Render();
 	//ironwaraxe->Render();
 	//ironwarhammer->Render();
 
 
 
 	//ebonyquiver->Render();
-	ironquiver->Render();
+
 
 }
 
@@ -484,33 +500,33 @@ void Player::Control()
 	Block();
 	WeaponChange();
 
-	if (is1hm)
-	{
-		ironmace->SetActive(true);
-		dragonshield->SetActive(true);
-		ebonylongsword->SetActive(false);
-		ironarrow->SetActive(false);
-		ironbow->SetActive(false);
-		ironquiver->SetActive(false);
-	}
-	if (is2hm)
-	{
-		ironmace->SetActive(false);
-		dragonshield->SetActive(false);
-		ebonylongsword->SetActive(true);
-		ironarrow->SetActive(false);
-		ironbow->SetActive(false);
-		ironquiver->SetActive(false);
-	}
-	if (isbow)
-	{
-		ironmace->SetActive(false);
-		dragonshield->SetActive(false);
-		ebonylongsword->SetActive(false);
-		ironarrow->SetActive(true);
-		ironbow->SetActive(true);
-		ironquiver->SetActive(true);
-	}
+	//if (is1hm)
+	//{
+	//	ironmace->SetActive(true);
+	//	dragonshield->SetActive(true);
+	//	ebonylongsword->SetActive(false);
+	//	ironarrow->SetActive(false);
+	//	ironbow->SetActive(false);
+	//	ironquiver->SetActive(false);
+	//}
+	//if (is2hm)
+	//{
+	//	ironmace->SetActive(false);
+	//	dragonshield->SetActive(false);
+	//	ebonylongsword->SetActive(true);
+	//	ironarrow->SetActive(false);
+	//	ironbow->SetActive(false);
+	//	ironquiver->SetActive(false);
+	//}
+	//if (isbow)
+	//{
+	//	ironmace->SetActive(false);
+	//	dragonshield->SetActive(false);
+	//	ebonylongsword->SetActive(false);
+	//	ironarrow->SetActive(true);
+	//	ironbow->SetActive(true);
+	//	ironquiver->SetActive(true);
+	//}
 
 }
 
