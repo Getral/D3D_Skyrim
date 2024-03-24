@@ -164,23 +164,23 @@ Player_Dragon::Player_Dragon()
 	ebonylongsword->SetParent(rightHand);
 
 	//bow
-	ironbow = new IronBow();
-	ironbow->Load();
+	//ironbow = new IronBow();
+	//ironbow->Load();
 
 	//leftHand = new Transform();
-	ironbow->SetParent(leftHand);
+	//ironbow->SetParent(leftHand);
 
-	ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
-		Arrow::ArrowType::IRON, atk);
-	ironarrow->Load();
+	//ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
+	//	Arrow::ArrowType::IRON, atk);
+	//ironarrow->Load();
 
-	ironarrow->SetParent(rightHand);
+	//ironarrow->SetParent(rightHand);
 
-	ironquiver = new IronQuiver();
-	ironquiver->Load();
+	//ironquiver = new IronQuiver();
+	//ironquiver->Load();
 
-	back = new Transform();
-	ironquiver->SetParent(back);
+	//back = new Transform();
+	//ironquiver->SetParent(back);
 
 
 
@@ -291,7 +291,7 @@ Player_Dragon::~Player_Dragon()
 	delete back;
 
 
-	delete ironquiver;
+	//delete ironquiver;
 	//delete ebonyquiver;
 
 
@@ -309,8 +309,8 @@ Player_Dragon::~Player_Dragon()
 	//delete ebonywaraxe;
 	//delete ebonywarhammer;
 
-	delete ironbow;
-	delete ironarrow;
+	//delete ironbow;
+	//delete ironarrow;
 	//delete ironbattleaxe;
 	//delete ironclaymore;
 	//delete irondagger;
@@ -352,11 +352,11 @@ void Player_Dragon::Update()
 	ironmace->Update();
 	//ironwaraxe->Update();
 	//ironwarhammer->Update();
-	ironarrow->Update();
+	//ironarrow->Update();
 
 
 	leftHand->SetWorld(GetTransformByNode(119));
-	ironbow->Update();
+	//ironbow->Update();
 	//ebonybow->Update();
 	dragonshield->Update();
 
@@ -366,8 +366,8 @@ void Player_Dragon::Update()
 	//head->SetWorld(GetTransformByNode(nodeIndex1));
 
 
-	back->SetWorld(GetTransformByNode(133));
-	ironquiver->Update();
+	//back->SetWorld(GetTransformByNode(133));
+	//ironquiver->Update();
 	//ironquiver->Update();
 
 
@@ -400,11 +400,11 @@ void Player_Dragon::Render()
 	{
 		ebonylongsword->Render();
 	}
-	if (isbow)
+	if (isunarmed)
 	{
-		ironarrow->Render();
-		ironbow->Render();
-		ironquiver->Render();
+		//ironarrow->Render();
+		//ironbow->Render();
+		//ironquiver->Render();
 	}
 	//bladeSword->Render();
 	//shield->Render();
@@ -434,12 +434,7 @@ void Player_Dragon::Render()
 	//ironmace->Render();
 	//ironwaraxe->Render();
 	//ironwarhammer->Render();
-
-
-
 	//ebonyquiver->Render();
-
-
 }
 
 void Player_Dragon::PostRender()
@@ -517,7 +512,7 @@ void Player_Dragon::Control()
 	//	ironbow->SetActive(false);
 	//	ironquiver->SetActive(false);
 	//}
-	//if (isbow)
+	//if (isunarmed)
 	//{
 	//	ironmace->SetActive(false);
 	//	dragonshield->SetActive(false);
@@ -546,7 +541,7 @@ void Player_Dragon::Move()
 	bool isMoveZ = false;
 	bool isMoveX = false;
 
-	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn) //달리기
+	if (KEY_PRESS(VK_SHIFT)) //달리기
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -586,7 +581,7 @@ void Player_Dragon::Move()
 		}
 	}
 
-	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn) //앉아서 이동
+	else if (KEY_PRESS(VK_CONTROL)) //앉아서 이동
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -668,11 +663,11 @@ void Player_Dragon::Move()
 		
 
 	//방향을 구하고 정규화
-	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
+	if (KEY_PRESS(VK_SHIFT))
 	{
 		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 5.0f;
 	}
-	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
+	else if (KEY_PRESS(VK_CONTROL))
 	{
 		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 2.5f;
 	}
@@ -691,11 +686,11 @@ void Player_Dragon::Move()
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
 
-	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
+	if (KEY_PRESS(VK_SHIFT))
 	{
 		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
-	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
+	else if (KEY_PRESS(VK_CONTROL))
 	{
 		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
@@ -738,6 +733,7 @@ void Player_Dragon::Attack()
 		return;
 	if (isBlock) return;
 	if (isHit) return;
+	if (isunarmed) return;
 
 	if (is1hm)
 	{
@@ -1062,42 +1058,13 @@ void Player_Dragon::Attack()
 		}
 	}
 
-	if (isbow)
-	{
-		if (KEY_DOWN(VK_LBUTTON) && !KEY_PRESS(VK_CONTROL))
-		{
-			SetAction(BOW_DRAW_INTRO);
-		}
-		if (KEY_PRESS(VK_LBUTTON))
-		{
-			attackCharge -= DELTA;
-			if (attackCharge < 0.0f)
-			{
-				isbowdrawn = true;
-			}
-		}
-		if (KEY_UP(VK_LBUTTON))
-		{
-			if (attackCharge < 0.0f)
-			{
-				SetAction(BOW_RELEASE);
-			}
-			else
-			{
-				SetAction(BOW_IDLE);
-			}
-			isbowdrawn = false;
-			attackCharge = 1.0f;
-		}
-	}
-
-	
+			
 }
 
 void Player_Dragon::Block()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
-	if (isbow) return;
+	if (isunarmed) return;
 	if (isHit) return;
 
 	if (is1hm)
@@ -1134,7 +1101,7 @@ void Player_Dragon::GetHit()
 {
 	if (!isHit) return;
 	if (isInvincible) return;
-	if (isbow) return;
+	if (isunarmed) return;
 
 	if (is1hm)
 	{
@@ -1183,7 +1150,7 @@ void Player_Dragon::WeaponChange()
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Changebow, this), 0.7f, true);
 			is1hm = false;
-			isbow = true;
+			isunarmed = true;
 			//SetAction(OHM_UNEQUIP);
 		}
 	}
@@ -1201,24 +1168,24 @@ void Player_Dragon::WeaponChange()
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Changebow, this), 0.7f, true);
 			is2hm = false;
-			isbow = true;
+			isunarmed = true;
 			//SetAction(THM_UNEQUIP);
 		}
 	}
 
-	if (isbow)
+	if (isunarmed)
 	{
 		if (KEY_DOWN('Z'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change1hm, this), 0.7f, true);
-			isbow = false;
+			isunarmed = false;
 			is1hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
 		if (KEY_DOWN('X'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change2hm, this), 0.7f, true);
-			isbow = false;
+			isunarmed = false;
 			is2hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
@@ -1370,7 +1337,7 @@ void Player_Dragon::SetAnimation()
 		else SetAction(THM_IDLE);
 	}
 
-	if (isbow && !isbowdrawn)
+	if (isunarmed)
 	{
 		if (velocity.z < -0.1f && velocity.x < -0.1f)
 		{
@@ -1430,54 +1397,8 @@ void Player_Dragon::SetAnimation()
 
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
 
-
 		else SetAction(BOW_IDLE);
 	}
-
-	if (isbow && isbowdrawn)
-	{
-		if (velocity.z < -0.1f && velocity.x < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_FL);
-		}
-
-		else if (velocity.z > 0.1f && velocity.x > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_FR);
-		}
-
-		else if (velocity.z < -0.1f && velocity.x < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_BL);
-		}
-
-		else if (velocity.z < -0.1f && velocity.x > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_BR);
-		}
-
-		else if (velocity.z > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_F);
-		}
-
-		else if (velocity.z < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_B);
-		}
-
-		else if (velocity.x < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_L);
-		}
-
-		else if (velocity.x > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_R);
-		}
-		else SetAction(BOW_DRAW_IDLE);
-	}
-
 }
 
 void Player_Dragon::SetAction(ACTION action)
@@ -1497,10 +1418,6 @@ void Player_Dragon::WeaponCollider()
 	if (!ebonylongsword->GetIsWeapon())
 	{
 		ebonylongsword->SetIsCollider(true);
-	}
-	if (!ironarrow->GetIsBow())
-	{
-		ironarrow->SetIsCollider(true);
 	}
 }
 

@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 Player_Iron::Player_Iron()
-	: ModelAnimator("male_iron")
+	: ModelAnimator("male_dragon")
 {
 	//ClientToScreen(hWnd, &clientCenterPos);
 	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
@@ -164,23 +164,25 @@ Player_Iron::Player_Iron()
 	ebonylongsword->SetParent(rightHand);
 
 	//bow
-	ironbow = new IronBow();
-	ironbow->Load();
+	//ironbow = new IronBow();
+	//ironbow->Load();
 
 	//leftHand = new Transform();
-	ironbow->SetParent(leftHand);
+	//ironbow->SetParent(leftHand);
 
-	ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
-		Arrow::ArrowType::IRON, atk);
-	ironarrow->Load();
+	//ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
+	//	Arrow::ArrowType::IRON, atk);
+	//ironarrow->Load();
 
-	ironarrow->SetParent(rightHand);
+	//ironarrow->SetParent(rightHand);
 
-	ironquiver = new IronQuiver();
-	ironquiver->Load();
+	//ironquiver = new IronQuiver();
+	//ironquiver->Load();
 
-	back = new Transform();
-	ironquiver->SetParent(back);
+	//back = new Transform();
+	//ironquiver->SetParent(back);
+
+
 
 	headCollider = new CapsuleCollider(10);
 
@@ -228,12 +230,12 @@ Player_Iron::Player_Iron()
 
 	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
 	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
-	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
-	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),   0.2f);
-	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),   0.2f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
 
 	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
 	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
@@ -249,7 +251,7 @@ Player_Iron::Player_Iron()
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Iron::EndHit, this), 0.8f);
 	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player_Iron::EndHit, this), 0.9f);
 	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player_Iron::EndBlockHit, this), 0.5f);
-	
+
 	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
@@ -261,7 +263,7 @@ Player_Iron::Player_Iron()
 	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Iron::EndHit, this), 0.8f);
 	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player_Iron::EndHit, this), 0.9f);
 	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player_Iron::EndBlockHit, this), 0.5f);
-	
+
 	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
 	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
 	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
@@ -275,7 +277,7 @@ Player_Iron::Player_Iron()
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player_Iron::Set1hmIdle, this), 0.7f);
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player_Iron::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player_Iron::SetbowIdle, this), 0.7f);
-	
+
 	prevMousePos = mousePos;
 }
 
@@ -289,7 +291,7 @@ Player_Iron::~Player_Iron()
 	delete back;
 
 
-	delete ironquiver;
+	//delete ironquiver;
 	//delete ebonyquiver;
 
 
@@ -307,8 +309,8 @@ Player_Iron::~Player_Iron()
 	//delete ebonywaraxe;
 	//delete ebonywarhammer;
 
-	delete ironbow;
-	delete ironarrow;
+	//delete ironbow;
+	//delete ironarrow;
 	//delete ironbattleaxe;
 	//delete ironclaymore;
 	//delete irondagger;
@@ -325,6 +327,9 @@ void Player_Iron::Update()
 	SetAnimation();
 
 	ModelAnimator::Update();
+
+	collider->UpdateWorld();
+
 
 	collider->UpdateWorld();
 
@@ -347,11 +352,11 @@ void Player_Iron::Update()
 	ironmace->Update();
 	//ironwaraxe->Update();
 	//ironwarhammer->Update();
-	ironarrow->Update();
+	//ironarrow->Update();
 
 
 	leftHand->SetWorld(GetTransformByNode(119));
-	ironbow->Update();
+	//ironbow->Update();
 	//ebonybow->Update();
 	dragonshield->Update();
 
@@ -361,9 +366,10 @@ void Player_Iron::Update()
 	//head->SetWorld(GetTransformByNode(nodeIndex1));
 
 
-	back->SetWorld(GetTransformByNode(133));
-	ironquiver->Update();
+	//back->SetWorld(GetTransformByNode(133));
 	//ironquiver->Update();
+	//ironquiver->Update();
+
 
 	if (isInvincible)
 	{
@@ -373,7 +379,7 @@ void Player_Iron::Update()
 
 	if (KEY_PRESS('H'))
 		this->status.curstamina -= 10 * DELTA;
-	
+
 }
 
 void Player_Iron::Render()
@@ -394,11 +400,11 @@ void Player_Iron::Render()
 	{
 		ebonylongsword->Render();
 	}
-	if (isbow)
+	if (isunarmed)
 	{
-		ironarrow->Render();
-		ironbow->Render();
-		ironquiver->Render();
+		//ironarrow->Render();
+		//ironbow->Render();
+		//ironquiver->Render();
 	}
 	//bladeSword->Render();
 	//shield->Render();
@@ -428,12 +434,7 @@ void Player_Iron::Render()
 	//ironmace->Render();
 	//ironwaraxe->Render();
 	//ironwarhammer->Render();
-
-
-
 	//ebonyquiver->Render();
-
-
 }
 
 void Player_Iron::PostRender()
@@ -511,7 +512,7 @@ void Player_Iron::Control()
 	//	ironbow->SetActive(false);
 	//	ironquiver->SetActive(false);
 	//}
-	//if (isbow)
+	//if (isunarmed)
 	//{
 	//	ironmace->SetActive(false);
 	//	dragonshield->SetActive(false);
@@ -540,7 +541,7 @@ void Player_Iron::Move()
 	bool isMoveZ = false;
 	bool isMoveX = false;
 
-	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn) //달리기
+	if (KEY_PRESS(VK_SHIFT)) //달리기
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -580,7 +581,7 @@ void Player_Iron::Move()
 		}
 	}
 
-	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn) //앉아서 이동
+	else if (KEY_PRESS(VK_CONTROL)) //앉아서 이동
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -659,14 +660,14 @@ void Player_Iron::Move()
 			velocity.x = 0.0f;
 		}
 	}
-		
+
 
 	//방향을 구하고 정규화
-	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
+	if (KEY_PRESS(VK_SHIFT))
 	{
 		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 5.0f;
 	}
-	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
+	else if (KEY_PRESS(VK_CONTROL))
 	{
 		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 2.5f;
 	}
@@ -685,11 +686,11 @@ void Player_Iron::Move()
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
 
-	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
+	if (KEY_PRESS(VK_SHIFT))
 	{
 		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
-	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
+	else if (KEY_PRESS(VK_CONTROL))
 	{
 		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
@@ -701,15 +702,15 @@ void Player_Iron::Move()
 
 
 void Player_Iron::Rotate()
-{	
+{
 	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
 	prevMousePos = mousePos;
-	
+
 	Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
-	
+
 	CAM->Rot().x -= delta.y * rotSpeed * DELTA;
-	
-	
+
+
 	if (KEY_DOWN(VK_MBUTTON))
 	{
 		CAM->Rot().x = 0;
@@ -718,8 +719,8 @@ void Player_Iron::Rotate()
 
 void Player_Iron::Attack()
 {
-	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
-		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
 		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
 		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
 		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == OHM_CATK_R ||
@@ -732,10 +733,11 @@ void Player_Iron::Attack()
 		return;
 	if (isBlock) return;
 	if (isHit) return;
+	if (isunarmed) return;
 
 	if (is1hm)
 	{
-		if (velocity.z < -0.1f && velocity.x < -0.1f || 
+		if (velocity.z < -0.1f && velocity.x < -0.1f ||
 			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
@@ -750,7 +752,7 @@ void Player_Iron::Attack()
 					attackCharge = 1.0f;
 				}
 			}
-			else 
+			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
@@ -764,7 +766,7 @@ void Player_Iron::Attack()
 			}
 		}
 
-		else if (velocity.z < -0.1f && velocity.x < -0.1f || 
+		else if (velocity.z < -0.1f && velocity.x < -0.1f ||
 			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
@@ -833,7 +835,7 @@ void Player_Iron::Attack()
 					attackCharge = 1.0f;
 				}
 			}
-			else 
+			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
@@ -847,7 +849,7 @@ void Player_Iron::Attack()
 			}
 		}
 
-		else 
+		else
 		{
 			if (KEY_PRESS(VK_LBUTTON))
 			{
@@ -862,17 +864,17 @@ void Player_Iron::Attack()
 
 			if (KEY_UP(VK_LBUTTON) && KEY_PRESS(VK_CONTROL) && !isPAttack)
 			{
-				if (!isCombo)				
-				{				
-					SetAction(OHM_CATK_R);				
-					isCombo = true;			
-				}			
-				else				
-				{			
-					SetAction(OHM_CATK_L);			
-					isCombo = false;			
-				}		
-				attackCharge = 1.0f;		
+				if (!isCombo)
+				{
+					SetAction(OHM_CATK_R);
+					isCombo = true;
+				}
+				else
+				{
+					SetAction(OHM_CATK_L);
+					isCombo = false;
+				}
+				attackCharge = 1.0f;
 			}
 
 			if (attackCharge <= 0.0f && !KEY_PRESS(VK_CONTROL) && !isPAttack)
@@ -893,7 +895,7 @@ void Player_Iron::Attack()
 					SetAction(OHM_ATK_L);
 					isCombo = false;
 				}
-				
+
 				attackCharge = 1.0f;
 			}
 			if (KEY_UP(VK_LBUTTON) && isPAttack)
@@ -902,7 +904,7 @@ void Player_Iron::Attack()
 				isPAttack = false;
 			}
 
-		}		
+		}
 	}
 
 	if (is2hm && !KEY_PRESS(VK_CONTROL))
@@ -1033,7 +1035,7 @@ void Player_Iron::Attack()
 			}
 
 			if (KEY_UP(VK_LBUTTON) && !isPAttack)
-			{						 
+			{
 				if (!isCombo)
 				{
 					SetAction(THM_ATK_R);
@@ -1043,7 +1045,7 @@ void Player_Iron::Attack()
 				{
 					SetAction(THM_ATK_L);
 					isCombo = false;
-				}			
+				}
 				attackCharge = 1.0f;
 			}
 
@@ -1056,42 +1058,13 @@ void Player_Iron::Attack()
 		}
 	}
 
-	if (isbow)
-	{
-		if (KEY_DOWN(VK_LBUTTON) && !KEY_PRESS(VK_CONTROL))
-		{
-			SetAction(BOW_DRAW_INTRO);
-		}
-		if (KEY_PRESS(VK_LBUTTON))
-		{
-			attackCharge -= DELTA;
-			if (attackCharge < 0.0f)
-			{
-				isbowdrawn = true;
-			}
-		}
-		if (KEY_UP(VK_LBUTTON))
-		{
-			if (attackCharge < 0.0f)
-			{
-				SetAction(BOW_RELEASE);
-			}
-			else
-			{
-				SetAction(BOW_IDLE);
-			}
-			isbowdrawn = false;
-			attackCharge = 1.0f;
-		}
-	}
 
-	
 }
 
 void Player_Iron::Block()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
-	if (isbow) return;
+	if (isunarmed) return;
 	if (isHit) return;
 
 	if (is1hm)
@@ -1128,17 +1101,17 @@ void Player_Iron::GetHit()
 {
 	if (!isHit) return;
 	if (isInvincible) return;
-	if (isbow) return;
+	if (isunarmed) return;
 
 	if (is1hm)
 	{
 		if (isBlock)
-		{			
-				SetAction(OHM_HIT_BLOCK);
+		{
+			SetAction(OHM_HIT_BLOCK);
 		}
 		else
 		{
-				SetAction(OHM_HIT_LIGHT);
+			SetAction(OHM_HIT_LIGHT);
 		}
 	}
 
@@ -1146,14 +1119,14 @@ void Player_Iron::GetHit()
 	{
 		if (isBlock)
 		{
-				SetAction(THM_HIT_BLOCK);
+			SetAction(THM_HIT_BLOCK);
 		}
 		else
 		{
-				SetAction(THM_HIT_LIGHT);
+			SetAction(THM_HIT_LIGHT);
 		}
 	}
-	
+
 }
 
 void Player_Iron::WeaponChange()
@@ -1177,7 +1150,7 @@ void Player_Iron::WeaponChange()
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Iron::Changebow, this), 0.7f, true);
 			is1hm = false;
-			isbow = true;
+			isunarmed = true;
 			//SetAction(OHM_UNEQUIP);
 		}
 	}
@@ -1195,24 +1168,24 @@ void Player_Iron::WeaponChange()
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Iron::Changebow, this), 0.7f, true);
 			is2hm = false;
-			isbow = true;
+			isunarmed = true;
 			//SetAction(THM_UNEQUIP);
 		}
 	}
 
-	if (isbow)
+	if (isunarmed)
 	{
 		if (KEY_DOWN('Z'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Iron::Change1hm, this), 0.7f, true);
-			isbow = false;
+			isunarmed = false;
 			is1hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
 		if (KEY_DOWN('X'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Iron::Change2hm, this), 0.7f, true);
-			isbow = false;
+			isunarmed = false;
 			is2hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
@@ -1224,15 +1197,15 @@ void Player_Iron::SetAnimation()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
 		curAction == OHM_BLOCK || curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM ||
-		curAction == OHM_HIT_LARGE || curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK || 
+		curAction == OHM_HIT_LARGE || curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK ||
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
 		curAction == THM_BLOCK || curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM ||
-		curAction == THM_HIT_LARGE || curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK||
+		curAction == THM_HIT_LARGE || curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK ||
 		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
 		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
 		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == THM_WALK_FW_ATK ||
 		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
-		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK||
+		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
 		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
 		return;
@@ -1364,7 +1337,7 @@ void Player_Iron::SetAnimation()
 		else SetAction(THM_IDLE);
 	}
 
-	if (isbow && !isbowdrawn)
+	if (isunarmed)
 	{
 		if (velocity.z < -0.1f && velocity.x < -0.1f)
 		{
@@ -1424,54 +1397,8 @@ void Player_Iron::SetAnimation()
 
 		else if (KEY_PRESS(VK_CONTROL)) SetAction(CIDLE);
 
-
 		else SetAction(BOW_IDLE);
 	}
-
-	if (isbow && isbowdrawn)
-	{
-		if (velocity.z < -0.1f && velocity.x < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_FL);
-		}
-
-		else if (velocity.z > 0.1f && velocity.x > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_FR);
-		}
-
-		else if (velocity.z < -0.1f && velocity.x < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_BL);
-		}
-
-		else if (velocity.z < -0.1f && velocity.x > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_BR);
-		}
-
-		else if (velocity.z > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_F);
-		}
-
-		else if (velocity.z < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_B);
-		}
-
-		else if (velocity.x < -0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_L);
-		}
-
-		else if (velocity.x > 0.1f)
-		{
-			SetAction(BOW_DRAWN_WALK_R);
-		}
-		else SetAction(BOW_DRAW_IDLE);
-	}
-
 }
 
 void Player_Iron::SetAction(ACTION action)
@@ -1491,10 +1418,6 @@ void Player_Iron::WeaponCollider()
 	if (!ebonylongsword->GetIsWeapon())
 	{
 		ebonylongsword->SetIsCollider(true);
-	}
-	if (!ironarrow->GetIsBow())
-	{
-		ironarrow->SetIsCollider(true);
 	}
 }
 
@@ -1558,7 +1481,7 @@ void Player_Iron::EndBlockHit()
 }
 
 void Player_Iron::SetBowDrawn()
-{	
+{
 	SetAction(BOW_DRAW_IDLE);
 }
 
@@ -1575,7 +1498,7 @@ void Player_Iron::EndBowDrawn()
 
 void Player_Iron::SetInvincible()
 {
-	isInvincible = true;	
+	isInvincible = true;
 }
 
 void Player_Iron::EndInvincible()
