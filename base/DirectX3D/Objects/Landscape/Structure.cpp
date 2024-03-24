@@ -19,9 +19,10 @@ Structure::Structure(string modelName, float scale, Vector3 colliderSize, string
 	model->SetTag(tag);
 	model->SetName(modelName);
 	model->Scale() *= scale;
+
 	if(isAlpha)
 		model->SetShader(L"Basic/Texture.hlsl");
-	if (tag == "Structure")
+	if (tag == "Structure" || tag == "ItemBox")
 	{
 		model->Rot().x += XM_PI / 2;
 	}

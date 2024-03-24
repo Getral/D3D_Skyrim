@@ -7,6 +7,7 @@ public:
 
 	void Update(Player* player);
 	void Render();
+	void PostRender(Player* player);
 	void GUIRender();
 
 	Structure* GetStructure(string inname);
@@ -14,6 +15,7 @@ public:
 
 private:
 	vector<Structure*> structures;
+	vector<Structure*> itemboxes;
 	vector<Structure*> items;
 	
 	vector<Structure*> world_structures;
@@ -21,6 +23,7 @@ private:
 	vector<Structure*> world_items;
 
 	vector<BoxCollider*> structures_col;
+	vector<BoxCollider*> itemboxes_col;
 	vector<BoxCollider*> items_col;
 };
 

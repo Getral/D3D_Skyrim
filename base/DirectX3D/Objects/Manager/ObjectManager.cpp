@@ -16,12 +16,15 @@ ObjectManager::ObjectManager()
 
 	structures.push_back(new Structure("tree", 0.025f, { 10,10,10 }, "Structure", true));
 
-	structures.push_back(new Structure("chest", 0.015f, { 10, 10, 10 }, "Structure"));
+	itemboxes.push_back(new Structure("chest", 0.015f, { 10, 10, 10 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_armor_iron", 0.015f, { 140, 70, 70 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_armor_dragon", 0.015f, { 140, 70, 70 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_weapon_iron", 0.015f, { 140, 70, 70 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_weapon_ebony", 0.015f, { 140, 70, 70 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_potion", 0.015f, { 140, 70, 70 }, "ItemBox"));
 
 
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
-
-	
 }
 
 ObjectManager::~ObjectManager()
@@ -44,6 +47,12 @@ void ObjectManager::Update(Player* player)
 	{
 		structures_col.push_back(structure->GetCollider());
 		structure->Update();
+	}
+
+	for (Structure* box : world_itemboxes)
+	{
+		itemboxes_col.push_back(box->GetCollider());
+		box->Update();
 	}
 
 	for (Structure* item : world_items)
@@ -97,6 +106,67 @@ void ObjectManager::Update(Player* player)
 		}
 	}
 
+	FOR(world_itemboxes.size())
+	{
+		if (player->GetCollier()->IsCollision(world_itemboxes[i]->GetCollider()) && KEY_DOWN('E'))
+		{
+			if (world_itemboxes[i]->GetmodelName() == "chest_armor_iron")
+			{
+				UIManager::Get()->GetInvenUI()->AddItem("ironcuirass");
+				UIManager::Get()->GetInvenUI()->AddItem("irongauntlets");
+				UIManager::Get()->GetInvenUI()->AddItem("ironboots");
+				UIManager::Get()->GetInvenUI()->AddItem("ironhelmet");
+				UIManager::Get()->GetInvenUI()->AddItem("ironshield");
+			}
+
+			if (world_itemboxes[i]->GetmodelName() == "chest_armor_dragon")
+			{
+				UIManager::Get()->GetInvenUI()->AddItem("dragoncuirass");
+				UIManager::Get()->GetInvenUI()->AddItem("dragongauntlets");
+				UIManager::Get()->GetInvenUI()->AddItem("dragonboots");
+				UIManager::Get()->GetInvenUI()->AddItem("dragonhelmet");
+				UIManager::Get()->GetInvenUI()->AddItem("dragonshield");
+			}
+
+			if (world_itemboxes[i]->GetmodelName() == "chest_weapon_iron")
+			{
+				UIManager::Get()->GetInvenUI()->AddItem("irondagger");
+				UIManager::Get()->GetInvenUI()->AddItem("ironclaymore");
+				UIManager::Get()->GetInvenUI()->AddItem("ironwaraxe");
+				UIManager::Get()->GetInvenUI()->AddItem("ironmace");
+				UIManager::Get()->GetInvenUI()->AddItem("ironlongsword");
+				UIManager::Get()->GetInvenUI()->AddItem("ironbattleaxe");
+				UIManager::Get()->GetInvenUI()->AddItem("ironwarhammer");
+				UIManager::Get()->GetInvenUI()->AddItem("ironbow");
+				for(int j = 0; j < 10; j++)
+					UIManager::Get()->GetInvenUI()->AddItem("ironarrow");
+			}
+
+			if (world_itemboxes[i]->GetmodelName() == "chest_weapon_ebony")
+			{
+				UIManager::Get()->GetInvenUI()->AddItem("ebonydagger");
+				UIManager::Get()->GetInvenUI()->AddItem("ebonyclaymore");
+				UIManager::Get()->GetInvenUI()->AddItem("ebonywaraxe");
+				UIManager::Get()->GetInvenUI()->AddItem("ebonymace");
+				UIManager::Get()->GetInvenUI()->AddItem("ebonylongsword");
+				UIManager::Get()->GetInvenUI()->AddItem("ebonybattleaxe");
+				UIManager::Get()->GetInvenUI()->AddItem("ebonywarhammer");
+				UIManager::Get()->GetInvenUI()->AddItem("ebonybow");
+				for (int j = 0; j < 10; j++)
+					UIManager::Get()->GetInvenUI()->AddItem("ebonyarrow");
+			}
+
+			if (world_itemboxes[i]->GetmodelName() == "chest_potion")
+			{
+				for (int j = 0; j < 10; j++)
+				{
+					UIManager::Get()->GetInvenUI()->AddItem("hp_potion");
+					UIManager::Get()->GetInvenUI()->AddItem("sp_potion");
+				}
+			}
+		}
+	}
+
 	FOR(world_items.size())
 	{
 		if (player->GetCollier()->IsCollision(world_items[i]->GetCollider()))
@@ -119,6 +189,17 @@ void ObjectManager::Render()
 		item->Render();
 }
 
+void ObjectManager::PostRender(Player* player)
+{
+	FOR(world_itemboxes.size())
+	{
+		if (player->GetCollier()->IsCollision(world_itemboxes[i]->GetCollider()))
+		{
+			Font::Get()->RenderText(world_itemboxes[i]->GetmodelName().c_str(), { CENTER_X - 50,CENTER_Y + 300 });
+		}
+	}
+}
+
 void ObjectManager::GUIRender()
 {
 
@@ -133,7 +214,14 @@ void ObjectManager::Create(Vector3 pos, float Rot_y, string inname)
 		world_structures.back()->GetModel()->Pos() = pos;
 		world_structures.back()->GetModel()->Rot().y = Rot_y;
 	}
-		
+
+	if (GetStructure(inname)->GetModel()->GetTag() == "ItemBox")
+	{
+		Structure* temp = new Structure(GetStructure(inname)->GetmodelName(), GetStructure(inname)->GetScale(), GetStructure(inname)->GetColliderSize(), GetStructure(inname)->GetTag());
+		world_itemboxes.push_back(temp);
+		world_itemboxes.back()->GetModel()->Pos() = pos;
+		world_itemboxes.back()->GetModel()->Rot().y = Rot_y;
+	}
 
 	if (GetStructure(inname)->GetModel()->GetTag() == "Item")
 	{
@@ -153,6 +241,14 @@ Structure* ObjectManager::GetStructure(string inname)
 		if (structure->GetModel()->GetName() == inname)
 		{
 			return structure;
+		}
+	}
+
+	for (Structure* box : itemboxes)
+	{
+		if (box->GetModel()->GetName() == inname)
+		{
+			return box;
 		}
 	}
 
