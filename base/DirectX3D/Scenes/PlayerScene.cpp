@@ -14,16 +14,12 @@ PlayerScene::PlayerScene()
 	CAM->TargetOptionLoad("Skyrim2");
 	CAM->LookAtTarget(); 
 
-	test = new Model("rock_large4");
-	test->Scale() *= 0.05f;
-	test->Rot().x += XM_PI / 2;
-
-	test->Pos() = { 400,0,0 };
+	
 }
 
 PlayerScene::~PlayerScene()
 {
-	delete aldu;
+	//delete aldu;
 	delete player;
 }
 
@@ -33,7 +29,7 @@ void PlayerScene::Update()
 	//aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
-	test->UpdateWorld();
+
 }
 
 void PlayerScene::PreRender()
@@ -45,7 +41,8 @@ void PlayerScene::Render()
 	player->Render();
 	//aldu->Render();
 	ObjectManager::Get()->Render();
-	test->Render();
+	
+	
 }
 
 void PlayerScene::PostRender()
@@ -59,5 +56,5 @@ void PlayerScene::GUIRender()
 	//player->GUIRender();
 	//aldu->GUIRender();
 	//UIManager::Get()->GUIRender();
-	test->GUIRender();
+	
 }
