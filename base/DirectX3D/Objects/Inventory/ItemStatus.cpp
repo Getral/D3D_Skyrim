@@ -27,7 +27,7 @@ ItemStatus::ItemStatus()
 
 	weapons.push_back(new Weapon("ebonydagger",    Item::WEAPON, 5,  290,  Weapon::EBONY, Weapon::dagger,    10));
 	weapons.push_back(new Weapon("ebonyclaymore",  Item::WEAPON, 15, 720,  Weapon::EBONY, Weapon::claymore,  13));
-	weapons.push_back(new Weapon("ebonywarAxe",    Item::WEAPON, 17, 865,  Weapon::EBONY, Weapon::waraxe,    14));
+	weapons.push_back(new Weapon("ebonywaraxe",    Item::WEAPON, 17, 865,  Weapon::EBONY, Weapon::waraxe,    14));
 	weapons.push_back(new Weapon("ebonymace",      Item::WEAPON, 19, 1000, Weapon::EBONY, Weapon::mace,      15));
 	weapons.push_back(new Weapon("ebonylongsword", Item::WEAPON, 22, 1440, Weapon::EBONY, Weapon::longsword, 22));
 	weapons.push_back(new Weapon("ebonybattleaxe", Item::WEAPON, 26, 1485, Weapon::EBONY, Weapon::battleaxe, 23));

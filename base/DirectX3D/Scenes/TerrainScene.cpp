@@ -14,6 +14,10 @@ TerrainScene::TerrainScene()
 	ObjectManager::Get()->Create({ 260,0,300 }, 26, "farmhouse2");
 
 	ObjectManager::Get()->Create({ 350,0,200 }, 0, "chest_armor_iron");
+	ObjectManager::Get()->Create({ 350,0,220 }, 0, "chest_armor_dragon");
+	ObjectManager::Get()->Create({ 350,0,240 }, 0, "chest_weapon_iron");
+	ObjectManager::Get()->Create({ 350,0,260 }, 0, "chest_weapon_ebony");
+	ObjectManager::Get()->Create({ 350,0,280 }, 0, "chest_potion");
 
 	for (int i = 290; i <= 400; i += 10)
 		ObjectManager::Get()->Create({ (float)i,0,400 }, 0, "rock_large4");

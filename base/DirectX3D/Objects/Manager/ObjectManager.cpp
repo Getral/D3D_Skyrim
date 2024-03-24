@@ -18,10 +18,10 @@ ObjectManager::ObjectManager()
 
 	itemboxes.push_back(new Structure("chest", 0.015f, { 10, 10, 10 }, "ItemBox"));
 	itemboxes.push_back(new Structure("chest_armor_iron", 0.015f, { 140, 70, 70 }, "ItemBox"));
-	itemboxes.push_back(new Structure("chest_armor_dragon", 0.015f, { 10, 10, 10 }, "ItemBox"));
-	itemboxes.push_back(new Structure("chest_weapon_iron", 0.015f, { 10, 10, 10 }, "ItemBox"));
-	itemboxes.push_back(new Structure("chest_weapon_ebony", 0.015f, { 10, 10, 10 }, "ItemBox"));
-	itemboxes.push_back(new Structure("chest_potion", 0.015f, { 10, 10, 10 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_armor_dragon", 0.015f, { 140, 70, 70 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_weapon_iron", 0.015f, { 140, 70, 70 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_weapon_ebony", 0.015f, { 140, 70, 70 }, "ItemBox"));
+	itemboxes.push_back(new Structure("chest_potion", 0.015f, { 140, 70, 70 }, "ItemBox"));
 
 
 	items.push_back(new Structure("ebonydagger", 0.1f, { 10,10,10 }, "Item"));
@@ -195,7 +195,7 @@ void ObjectManager::PostRender(Player* player)
 	{
 		if (player->GetCollier()->IsCollision(world_itemboxes[i]->GetCollider()))
 		{
-			Font::Get()->RenderText(world_itemboxes[i]->GetmodelName().c_str(), { CENTER_X - 50,CENTER_Y - 250 });
+			Font::Get()->RenderText(world_itemboxes[i]->GetmodelName().c_str(), { CENTER_X - 50,CENTER_Y + 300 });
 		}
 	}
 }
