@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 Player::Player()
-	: ModelAnimator("male_normal")
+	: ModelAnimator("male_dragon")
 {
 	ClientToScreen(hWnd, &clientCenterPos);
 	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
