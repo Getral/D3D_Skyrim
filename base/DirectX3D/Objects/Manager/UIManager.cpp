@@ -290,21 +290,21 @@ void UIManager::PostRender()
 void UIManager::GUIRender()
 {
 	//ImGui::Text("enemy_angle : %f", final_angle);
-	ImGui::Text("enemy_angle : %f", final_angles[monsterCount]);
+	//ImGui::Text("enemy_angle : %f", final_angles[monsterCount]);
 
 	//ImGui::Text("enemy_angle : %f", final_angles[1]);
 	//
-	ImGui::Text("enemy_pos0 : %f", enemies_dir[0]->Pos().x);
-	Vector3 dist = Vector3(1, 2, 3) - Vector3(4, 5, 6);
-	ImGui::Text("enemy_pos0 : %f", dist.Length());
-	ImGui::Text("bool : %d", curEnemy->IsBattle());
+	//ImGui::Text("enemy_pos0 : %f", enemies_dir[0]->Pos().x);
+	//Vector3 dist = Vector3(1, 2, 3) - Vector3(4, 5, 6);
+	//ImGui::Text("enemy_pos0 : %f", dist.Length());
+	//ImGui::Text("bool : %d", curEnemy->IsBattle());
 	//ImGui::Text("enemy_angle : %f", enemies_dir[1]->Pos().x);
 
 	//ImGui::Text("weight : %d", itemstatus->GetArmor("armor1")->GetStatus().weight);
 	//ImGui::Text("weight : %d", itemstatus->GetItem("armor1").weight);
 
 
-	//invenUI->GUIRender();
+	invenUI->GUIRender();
 }
 
 void UIManager::TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies, alduin* alduin)

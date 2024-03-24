@@ -394,18 +394,25 @@ void Player::Render()
 
 	if (is1hm)
 	{
-		ironmace->Render();
-		dragonshield->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ironmace")
+		{
+			ironmace->Render();
+			dragonshield->Render();
+		}
 	}
 	if (is2hm)
 	{
-		ebonylongsword->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ebonylongsword")
+			ebonylongsword->Render();
 	}
 	if (isbow)
 	{
-		ironarrow->Render();
-		ironbow->Render();
-		ironquiver->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ironbow")
+		{
+			ironarrow->Render();
+			ironbow->Render();
+			ironquiver->Render();
+		}
 	}
 	//bladeSword->Render();
 	//shield->Render();
@@ -1173,16 +1180,18 @@ void Player::WeaponChange()
 
 	if (is1hm)
 	{
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			UIManager::Get()->GetInvenUI()->UseItem(this,"ebonylongsword");
 			is1hm = false;
 			is2hm = true;
 			//SetAction(OHM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ebonybow");
 			is1hm = false;
 			isbow = true;
 			//SetAction(OHM_UNEQUIP);
@@ -1191,16 +1200,18 @@ void Player::WeaponChange()
 	
 	if (is2hm)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
 			is2hm = false;
 			is1hm = true;
 			//SetAction(THM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ironbow");
 			is2hm = false;
 			isbow = true;
 			//SetAction(THM_UNEQUIP);
@@ -1209,22 +1220,23 @@ void Player::WeaponChange()
 	
 	if (isbow)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
 			isbow = false;
 			is1hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ebonylongsword");
 			isbow = false;
 			is2hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
 	}
-
 }
 
 void Player::SetAnimation()

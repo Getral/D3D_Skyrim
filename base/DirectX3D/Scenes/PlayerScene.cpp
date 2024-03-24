@@ -19,6 +19,8 @@ PlayerScene::PlayerScene()
 	player->Render();
 	player_iron->Render();
 	player_dragon->Render();
+
+	test = new Model("sign");
 }
 
 PlayerScene::~PlayerScene()
@@ -32,9 +34,9 @@ void PlayerScene::Update()
 	player->Update();
 	player_dragon->Pos() = player->Pos();
 	player_dragon->Update();
-
 	player_iron->Pos() = player->Pos();
 	player_iron->Update();
+
 	aldu->Update();
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
@@ -46,6 +48,9 @@ void PlayerScene::Update()
 		player_dragon->SetisCollRend() = !player_dragon->SetisCollRend();
 		player_iron->SetisCollRend() = !player_iron->SetisCollRend();
 	}
+
+	test->UpdateWorld();
+
 }
 
 void PlayerScene::PreRender()
@@ -56,14 +61,15 @@ void PlayerScene::Render()
 {
 	if(UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::NONE)
 		player->Render();
-	else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::IRON)
-		player_iron->Render();
-	else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::DRAGONBONE)
-		player_dragon->Render();
+	//else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::IRON)
+	//	player_iron->Render();
+	//else if (UIManager::Get()->GetInvenUI()->GetHelmetClass() == Armor::DRAGONBONE)
+	//	player_dragon->Render();
 
-
-	aldu->Render();
+	//aldu->Render();
 	ObjectManager::Get()->Render();
+
+	test->Render();
 }
 
 void PlayerScene::PostRender()
@@ -74,9 +80,11 @@ void PlayerScene::PostRender()
 
 void PlayerScene::GUIRender()
 {
-	player->GUIRender();
+	//player->GUIRender();
 	//aldu->GUIRender();
-	//UIManager::Get()->GUIRender();	
+	UIManager::Get()->GUIRender();	
 
-	ImGui::Text("bool : %d", ObjectManager::Get()->GetIsColRender());
+	//ImGui::Text("bool : %d", ObjectManager::Get()->GetIsColRender());
+
+	// test->GUIRender();
 }

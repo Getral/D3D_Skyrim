@@ -45,8 +45,6 @@ public:
 	};
 
 public:
-
-
 	Player();
 	~Player();
 
@@ -70,6 +68,10 @@ public:
 	void SetIsHit(bool value) { isHit = value; }
 	void SetIsInvincible(bool value) { isInvincible = value; }
 	bool& SetisCollRend() { return isCollRender; }
+
+	bool& Getis1hm() { return is1hm; }
+	bool& Getis2hm() { return is2hm; }
+	bool& Getisbow() { return isbow; }
 
 private:
 	void Control();
@@ -105,7 +107,6 @@ private:
 	void DoNothing();
 
 protected:
-
 	BladeSword* bladeSword;
 	Shield* shield;
 
@@ -186,8 +187,6 @@ protected:
 	bool is2hm = false;
 	bool isbow = false;
 
-
-
 	bool isbowdrawn = false;
 	bool isCollRender = true;
 
@@ -196,4 +195,3 @@ protected:
 	int atk;
 	int def;
 };
-
