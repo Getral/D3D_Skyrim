@@ -7,34 +7,48 @@ ModelExportScene::ModelExportScene()
      
     vector<string> modelName =
     {
-        //"rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
-        //"rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree",
+        //object
+        "rock_large1", "rock_large2", "rock_large3", "rock_large4", "rock_large5",
+        "rock_medium1", "rock_medium2", "rock_medium3", "rock_medium4", "tree",
+
+        "farmhouse", "farmhouse2",
         
+        //player
         //Armor
-        //"dragonboots", "dragoncuirass", "dragongauntlets", "dragonhelmet", 
-        //"ironboots", "ironcuirass", "irongauntlets", "ironhelmet",
-        //"dragonshield","ironshield",
+        "dragonboots", "dragoncuirass", "dragongauntlets", "dragonhelmet", 
+        "ironboots", "ironcuirass", "irongauntlets", "ironhelmet",
+        "dragonshield","ironshield",
     
         //Weapon
         "ebonybattleaxe", "ebonybow", "ebonyclaymore", "ebonydagger", "ebonylongsword", "ebonymace", "ebonyquiver", "ebonywaraxe", "ebonywarhammer", "ebonyarrow",
         "ironbattleaxe", "ironbow", "ironclaymore", "irondagger", "ironlongsword", "ironmace", "ironquiver", "ironwaraxe", "ironwarhammer", "ironarrow",
     
+        "male_normal", "male_iron", "male_dragon",
+
+
         "chest", "hp_potion", "sp_potion", "coin",
-        "male_normal"
+        
+        //monster
+        "alduin"
+        //, "Wolf", "Bear"
     };
     
     vector<wstring> textures =
     {
-        //L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
-        //L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree02",
-        //
-        ////Armor
+        // object
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01",
+        L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/rocksgrass01", L"Landscape/tree02",
+
+        L"Model/farmhouse/farm01_01", L"Model/farmhouse2/farm02_01",
+        
+        //player
+        //Armor
         // Dragong
-        //L"Model/Armor/dragonboots", L"Model/Armor/dragoncuirass", L"Model/Armor/dragongauntlets", L"Model/Armor/dragonhelmet", 
-        //L"Model/Armor/dragonshield",
+        L"Model/Armor/dragonboots", L"Model/Armor/dragoncuirass", L"Model/Armor/dragongauntlets", L"Model/Armor/dragonhelmet", 
+        L"Model/Armor/dragonshield",
         // Iron
-        //L"Model/Armor/ironboots", L"Model/Armor/ironcuirass", L"Model/Armor/irongauntlets", L"Model/Armor/ironhelmet", 
-        //L"Model/Armor/ironshield",
+        L"Model/Armor/ironboots", L"Model/Armor/ironcuirass", L"Model/Armor/irongauntlets", L"Model/Armor/ironhelmet", 
+        L"Model/Armor/ironshield",
     
         //Weapon
         // Ebony
@@ -44,8 +58,14 @@ ModelExportScene::ModelExportScene()
         L"Model/Weapon/ironarrow", L"Model/Weapon/ironbattleaxe", L"Model/Weapon/ironbow", L"Model/Weapon/ironclaymore", L"Model/Weapon/irondagger",
         L"Model/Weapon/ironlongsword", L"Model/Weapon/ironmace", L"Model/Weapon/ironquiver", L"Model/Weapon/ironwaraxe", L"Model/Weapon/ironwarhammer",
     
+        L"Model/male_normal/malehead", L"Model/male_iron/malehead", L"Model/male_dragon/malehead",
+
+
         L"Model/Chest/chest", L"Model/Potion/genericpotion", L"Model/Potion/genericpotion", L"Model/Misc/coin",
-        L"Model/male_normal/malehead"
+
+
+        //monster
+        L"Model/alduin/alduin"
     };
     
     
@@ -65,7 +85,7 @@ ModelExportScene::ModelExportScene()
 
     // Export Without Texture
 
-    //string name = "ebonyclaymore";
+    //string name = "farmhouse";
     //string file = "Models/FBX/" + name + ".fbx";
     //ModelExporter* exporter;
     //
@@ -73,6 +93,27 @@ ModelExportScene::ModelExportScene()
     //exporter->ExportMaterial();
     //exporter->ExportMesh();
     //delete exporter;
+    //
+    //
+    //string name1 = "farmhouse2";
+    //string file1 = "Models/FBX/" + name1 + ".fbx";
+    //ModelExporter* exporter1;
+    //
+    //exporter1 = new ModelExporter(name1, file1);
+    //exporter1->ExportMaterial();
+    //exporter1->ExportMesh();
+    //delete exporter1;
+    //
+    //string name2 = "alduin";
+    //string file2 = "Models/FBX/" + name2 + ".fbx";
+    //ModelExporter* exporter2;
+    //
+    //exporter2 = new ModelExporter(name2, file2);
+    //exporter2->ExportMaterial();
+    //exporter2->ExportMesh();
+    //delete exporter2;
+
+
 
     //string name = "dragonboneshield";
     //string file = "Models/FBX/" + name + ".fbx";
