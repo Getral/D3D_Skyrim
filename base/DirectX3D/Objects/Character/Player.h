@@ -57,7 +57,10 @@ public:
 
 	Status& GetStatus() { return status; }
 	CapsuleCollider* GetCollier() { return collider; }
-	BladeSword* GetSword() { return bladeSword; }
+	IronMace* GetMace() { return ironmace; }
+	EbonyLongSword* GetSword() { return ebonylongsword; }
+	IronArrow* GetArrow() { return ironarrow; }
+
 	bool GetIsHit() { return isHit; }
 	ACTION GetAction() { return curAction; }
 	bool GetIsInvincible() { return isInvincible; }
@@ -134,6 +137,7 @@ protected:
 
 	IronBow* ironbow;
 	IronQuiver* ironquiver;
+	IronArrow* ironarrow;
 
 
 
@@ -182,13 +186,10 @@ protected:
 	bool is2hm = false;
 	bool isbow = false;
 
+
+
 	bool isbowdrawn = false;
 	bool isCollRender = true;
-
-
-
-	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값 
-
 
 	int weight;
 	int value;

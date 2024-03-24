@@ -235,7 +235,29 @@ void Bear::Behavior()
 
 	for (CapsuleCollider* collider : colliders)
 	{
+		if (collider->IsCollision(playerData->GetMace()->GetCollider()))
+		{
+			if (hitDelay == 0.0f)
+			{
+				this->status.curHp -= playerData->GetStatus().atk;
+				hitDelay = 1.0f;
+				if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+					SetState(HIT);
+				break;
+			}
+		}
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
+		{
+			if (hitDelay == 0.0f)
+			{
+				this->status.curHp -= playerData->GetStatus().atk;
+				hitDelay = 1.0f;
+				if (!isHit && playerData->GetAction() == Player::THM_ATK_P)
+					SetState(HIT);
+				break;
+			}
+		}
+		if (collider->IsCollision(playerData->GetArrow()->GetCollider()))
 		{
 			if (hitDelay == 0.0f)
 			{
