@@ -82,6 +82,8 @@ void Enemy::Death()
 		collider->SetActive(false);
 
 	isBattle = false;
+
+	ObjectManager::Get()->Create({ transform->GlobalPos().x, 0.5f, transform->GlobalPos().z }, 0, "coin");
 }
 
 void Enemy::Track()

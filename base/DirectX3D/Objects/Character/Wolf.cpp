@@ -3,7 +3,7 @@
 Wolf::Wolf(string name, UINT index, ModelAnimatorInstancing* modelAnimatorInstancing, Transform* transform, Vector3 spawnPos)
 	: Enemy(name, index, modelAnimatorInstancing, transform, spawnPos)
 {
-	transform->Scale() *= 0.9f;
+	//transform->Scale() *= 0.9f;
 
 	colliders.push_back(new CapsuleCollider(20.0f)); // HIP
 	colliders.push_back(new CapsuleCollider(20.0f)); // BELLY
@@ -158,7 +158,23 @@ void Wolf::Behavior()
 
 	for (CapsuleCollider* collider : colliders)
 	{
+		if (collider->IsCollision(playerData->GetMace()->GetCollider()))
+		{
+			this->status.curHp -= playerData->GetStatus().atk;
+			hitDelay = 1.0f;
+			if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+				SetState(HIT);
+			break;
+		}
 		if (collider->IsCollision(playerData->GetSword()->GetCollider()))
+		{
+			this->status.curHp -= playerData->GetStatus().atk;
+			hitDelay = 1.0f;
+			if (!isHit && playerData->GetAction() == Player::OHM_ATK_P)
+				SetState(HIT);
+			break;
+		}
+		if (collider->IsCollision(playerData->GetArrow()->GetCollider()))
 		{
 			this->status.curHp -= playerData->GetStatus().atk;
 			hitDelay = 1.0f;
@@ -249,7 +265,7 @@ void Wolf::Behavior()
 
 void Wolf::Walk()
 {
-	if ((transform->GlobalPos() - tmpPos).Length() < 20.0f &&
+	if ((transform->GlobalPos() - tmpPos).Length() < 15.0f &&
 		(transform->GlobalPos().x < 395 && transform->GlobalPos().x > 0 && 
 			transform->GlobalPos().z < 395 && transform->GlobalPos().z > 0))
 	{
