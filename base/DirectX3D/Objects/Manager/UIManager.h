@@ -12,6 +12,7 @@ public:
 
 	
 	InvenUI* GetInvenUI() { return invenUI; }
+	bool IsIntro() { return isIntro; }
 
 	void TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies, alduin* alduin);
 
@@ -65,5 +66,11 @@ private:
 	int timer = 0;
 
 	bool aldu_isSleeping = true;
+	
+	Quad* intro_title;
+	Quad* intro_backGround;
+	bool isIntro = true;
+	bool isHoverPlay = false;
+	bool isHoverExit = false;
 };
 
