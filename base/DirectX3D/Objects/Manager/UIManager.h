@@ -82,6 +82,7 @@ private:
 	int timer = 0;
 
 	bool aldu_isSleeping = true;
+	float aldu_curHp;
 	
 	Quad* intro_title;
 	Quad* intro_backGround;

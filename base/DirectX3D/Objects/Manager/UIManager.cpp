@@ -265,6 +265,9 @@ void UIManager::Update(Player* player, vector<EnemySpawn*> enemies, alduin* aldu
 	enemy_HP_bar->UpdateWorld();
 
 	aldu_isSleeping = alduin->GetIsSleeping(); // Render조건에 사용
+	aldu_curHp = alduin->GetHP();
+
+
 	if (isInven)
 		invenUI->Update(player);
 	if (KEY_DOWN('I'))
@@ -351,10 +354,8 @@ void UIManager::PostRender()
 
 	if (boss_dir->Pos().x >= -60 * compass->GetSize().x / 140 && boss_dir->Pos().x <= +60 * compass->GetSize().x / 140)
 	{
-	    if (isQuest)
+	    if (isQuest && aldu_curHp > 0)
 	        bossQuest_dir->Render();
-	    else
-	        boss_dir->Render();
 	}
 
 	HP_bar_background->Render();
@@ -363,18 +364,14 @@ void UIManager::PostRender()
 	SP_bar_background->Render();
 	SP_bar->Render();
 
-	if (curEnemy->IsBattle() == true || aldu_isSleeping == false)
+	if (curEnemy->IsBattle() == true || (aldu_isSleeping == false && aldu_curHp > 0))
 	{
 		enemy_HP_bar_background->Render();
 		enemy_HP_bar->Render();
 	}
 	
-
-
-
-	if (aldu_isSleeping == false)
+	if (aldu_isSleeping == false && aldu_curHp > 0)
 	{
-
 		enemyName_alduin->Render();
 	}
 	else
