@@ -249,7 +249,9 @@ void Wolf::Behavior()
 
 void Wolf::Walk()
 {
-	if ((transform->GlobalPos() - tmpPos).Length() < 40.0f)
+	if ((transform->GlobalPos() - tmpPos).Length() < 20.0f &&
+		(transform->GlobalPos().x < 395 && transform->GlobalPos().x > 0 && 
+			transform->GlobalPos().z < 395 && transform->GlobalPos().z > 0))
 	{
 		velocity = randPos - transform->GlobalPos();
 		transform->Pos() += velocity.GetNormalized() * this->status.speed * DELTA;

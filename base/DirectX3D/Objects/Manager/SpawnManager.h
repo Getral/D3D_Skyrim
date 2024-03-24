@@ -24,7 +24,7 @@ private:
 	vector<vector<Vector3>> posTable =
 	{
 		{ Vector3(290, 0, 365)/*, Vector3(180, 10, 200), Vector3(-100, 2000, -200) */},
-		{ Vector3(370, 0, 90)}
+		{ Vector3(350, 0, 350)}
 	};
 
 	vector<Character::Status> statusTable =
