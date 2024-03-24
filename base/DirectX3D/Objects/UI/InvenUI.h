@@ -1,4 +1,5 @@
 #pragma once
+
 class InvenUI
 {
 private:
@@ -41,6 +42,7 @@ public:
 	class ItemStatus* GetItemstatus() { return itemstatus; }
 
 	int GetHelmetClass();
+	string GetWeaponName();
 private:
 	Quad* frame;
 	Quad* framebar;

@@ -1,6 +1,6 @@
 <Material Name="MaleUnderwear_1.Mat">
     <Shader Vertex="" Pixel=""/>
-    <Texture Diffuse="Textures/Model/male_normal/malehead.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
+    <Texture Diffuse="Textures/Color/White.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
     <Property Shininess="36" HasNormalMap="0">
         <Diffuse R="0.80000746" G="0.43566751" B="0.40870327" A="1"/>
         <Specular R="0.80000746" G="0.43566751" B="0.40870327" A="1"/>

@@ -5,7 +5,7 @@ class Player : public ModelAnimator
 public:
 	struct Status
 	{
-		float curHp = 100;
+		float curHp = 10;
 		float maxHp = 100;
 		float curstamina = 10;
 		float maxstamina = 100;
@@ -45,8 +45,6 @@ public:
 	};
 
 public:
-
-
 	Player();
 	~Player();
 
@@ -70,6 +68,10 @@ public:
 	void SetIsHit(bool value) { isHit = value; }
 	void SetIsInvincible(bool value) { isInvincible = value; }
 	bool& SetisCollRend() { return isCollRender; }
+
+	bool& Getis1hm() { return is1hm; }
+	bool& Getis2hm() { return is2hm; }
+	bool& Getisbow() { return isbow; }
 
 private:
 	void Control();
@@ -105,7 +107,6 @@ private:
 	void DoNothing();
 
 protected:
-
 	BladeSword* bladeSword;
 	Shield* shield;
 
@@ -182,11 +183,9 @@ protected:
 	bool isCombo = false;
 	bool isPAttack = false;
 
-	bool is1hm = false;
+	bool is1hm = true;
 	bool is2hm = false;
-	bool isunarmed = true;
-
-
+	bool isbow = false;
 
 	bool isbowdrawn = false;
 	bool isCollRender = true;
@@ -196,4 +195,3 @@ protected:
 	int atk;
 	int def;
 };
-
