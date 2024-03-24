@@ -40,6 +40,7 @@ public:
 
 	class ItemStatus* GetItemstatus() { return itemstatus; }
 
+	int GetHelmetClass();
 private:
 	Quad* frame;
 	Quad* framebar;

@@ -257,6 +257,8 @@ using namespace GameMath;
 #include "Objects/Character/FoxD.h"
 #include "Objects/Character/Fox.h"
 #include "Objects/Character/Player.h"
+#include "Objects/Character/Player_Dragon.h"
+#include "Objects/Character/Player_Iron.h"
 #include "Objects/Character/Character.h"
 #include "Objects/Character/Enemy.h"
 #include "Objects/Character/alduin.h"

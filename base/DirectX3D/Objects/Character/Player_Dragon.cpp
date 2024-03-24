@@ -1,16 +1,13 @@
 #include "Framework.h"
 
-Player::Player()
-	: ModelAnimator("male_normal")
+Player_Dragon::Player_Dragon()
+	: ModelAnimator("male_dragon")
 {
-	ClientToScreen(hWnd, &clientCenterPos);
-	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+	//ClientToScreen(hWnd, &clientCenterPos);
+	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
 
 	ModelAnimator::Scale() *= 0.0001f;
 
-	Pos().x = 250.0f;
-	Pos().y = 500.0f;
-	Pos().z = 290.0f;
 
 	ReadClip("male_1hm_idle");
 	ReadClip("male_1hm_stagger");
@@ -136,9 +133,6 @@ Player::Player()
 
 	CAM->Rot().x = 0;
 
-	SpawnManager::Get()->SetPlayerData(this);
-	TerrainManager::Get()->SetPlayerData(this);
-
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	bladeSword = new BladeSword();
@@ -203,98 +197,98 @@ Player::Player()
 	headCollider->SetParent(head);
 
 
-	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_R)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_L)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_P)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_R)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_L)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_P)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
 
-	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_CATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_R)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_L)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_P)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.1f);
 
-	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_CATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_R)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_L)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_P)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.7f);
 
-	GetClip(THM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
 
-	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
-	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),   0.2f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),   0.2f);
 
-	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
 
-	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
-	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
-	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.7f);
+	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.7f);
+	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.8f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.9f);
+	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player_Dragon::EndBlockHit, this), 0.5f);
 	
-	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
 
-	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
-	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
-	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.7f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.7f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.8f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.9f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player_Dragon::EndBlockHit, this), 0.5f);
 	
-	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
 
-	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
-	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::ShootArrow, this), 0.1f);
-	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
+	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player_Dragon::SetBowDrawn, this), 0.7f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player_Dragon::ShootArrow, this), 0.1f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player_Dragon::EndBowDrawn, this), 0.5f);
 
-	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
-	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
-	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
+	GetClip(OHM_EQUIP)->SetEvent(bind(&Player_Dragon::Set1hmIdle, this), 0.7f);
+	GetClip(THM_EQUIP)->SetEvent(bind(&Player_Dragon::Set2hmIdle, this), 0.7f);
+	GetClip(BOW_EQUIP)->SetEvent(bind(&Player_Dragon::SetbowIdle, this), 0.7f);
 	
 	prevMousePos = mousePos;
 }
 
-Player::~Player()
+Player_Dragon::~Player_Dragon()
 {
 	delete bladeSword;
 	//delete shield;
@@ -332,7 +326,7 @@ Player::~Player()
 	//delete ironwarhammer;
 }
 
-void Player::Update()
+void Player_Dragon::Update()
 {
 	Control();
 	GetHit();
@@ -394,7 +388,7 @@ void Player::Update()
 	
 }
 
-void Player::Render()
+void Player_Dragon::Render()
 {
 	ModelAnimator::Render();
 	collider->Render();
@@ -435,11 +429,11 @@ void Player::Render()
 	headCollider->Render();
 }
 
-void Player::PostRender()
+void Player_Dragon::PostRender()
 {
 }
 
-void Player::GUIRender()
+void Player_Dragon::GUIRender()
 {
 	//Armor
 	//Shield
@@ -484,7 +478,7 @@ void Player::GUIRender()
 	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
 }
 
-void Player::Control()
+void Player_Dragon::Control()
 {
 	Rotate();
 	Move();
@@ -493,7 +487,7 @@ void Player::Control()
 	//WeaponChange();
 }
 
-void Player::Move()
+void Player_Dragon::Move()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
@@ -670,7 +664,7 @@ void Player::Move()
 }
 
 
-void Player::Rotate()
+void Player_Dragon::Rotate()
 {	
 	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
 	prevMousePos = mousePos;
@@ -686,7 +680,7 @@ void Player::Rotate()
 	}
 }
 
-void Player::Attack()
+void Player_Dragon::Attack()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
@@ -1058,7 +1052,7 @@ void Player::Attack()
 	
 }
 
-void Player::Block()
+void Player_Dragon::Block()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
 	if (isbow) return;
@@ -1094,7 +1088,7 @@ void Player::Block()
 
 }
 
-void Player::GetHit()
+void Player_Dragon::GetHit()
 {
 	if (!isHit) return;
 	if (isInvincible) return;
@@ -1126,7 +1120,7 @@ void Player::GetHit()
 	
 }
 
-void Player::WeaponChange()
+void Player_Dragon::WeaponChange()
 {
 	if (curAction != OHM_IDLE && curAction != THM_IDLE && curAction != BOW_IDLE) return;
 	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
@@ -1138,14 +1132,14 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('2'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change2hm, this), 0.7f, true);
 			is1hm = false;
 			is2hm = true;
 			SetAction(OHM_UNEQUIP);
 		}
 		if (KEY_DOWN('3'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Changebow, this), 0.7f, true);
 			is1hm = false;
 			isbow = true;
 			SetAction(OHM_UNEQUIP);
@@ -1156,14 +1150,14 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('1'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change1hm, this), 0.7f, true);
 			is2hm = false;
 			is1hm = true;
 			SetAction(THM_UNEQUIP);
 		}
 		if (KEY_DOWN('3'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Changebow, this), 0.7f, true);
 			is2hm = false;
 			isbow = true;
 			SetAction(THM_UNEQUIP);
@@ -1174,14 +1168,14 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('1'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change1hm, this), 0.7f, true);
 			isbow = false;
 			is1hm = true;
 			SetAction(BOW_UNEQUIP);
 		}
 		if (KEY_DOWN('2'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change2hm, this), 0.7f, true);
 			isbow = false;
 			is2hm = true;
 			SetAction(BOW_UNEQUIP);
@@ -1190,7 +1184,7 @@ void Player::WeaponChange()
 
 }
 
-void Player::SetAnimation()
+void Player_Dragon::SetAnimation()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
 		curAction == OHM_BLOCK || curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM ||
@@ -1444,7 +1438,7 @@ void Player::SetAnimation()
 
 }
 
-void Player::SetAction(ACTION action)
+void Player_Dragon::SetAction(ACTION action)
 {
 	if (action == curAction) return;
 
@@ -1452,7 +1446,7 @@ void Player::SetAction(ACTION action)
 	PlayClip((int)action);
 }
 
-void Player::WeaponCollider()
+void Player_Dragon::WeaponCollider()
 {
 	if (!bladeSword->GetIsWeapon())
 	{
@@ -1460,7 +1454,7 @@ void Player::WeaponCollider()
 	}
 }
 
-void Player::EndAttack()
+void Player_Dragon::EndAttack()
 {
 	if (bladeSword->GetIsWeapon())
 	{
@@ -1476,7 +1470,7 @@ void Player::EndAttack()
 	} 
 }
 
-void Player::EndBlock()
+void Player_Dragon::EndBlock()
 {
 	if (is1hm)
 	{
@@ -1489,7 +1483,7 @@ void Player::EndBlock()
 	isBlock = false;
 }
 
-void Player::EndHit()
+void Player_Dragon::EndHit()
 {
 	if (is1hm)
 	{
@@ -1502,7 +1496,7 @@ void Player::EndHit()
 	isHit = false;
 }
 
-void Player::EndBlockHit()
+void Player_Dragon::EndBlockHit()
 {
 	if (is1hm)
 	{
@@ -1515,64 +1509,64 @@ void Player::EndBlockHit()
 	isHit = false;
 }
 
-void Player::SetBowDrawn()
+void Player_Dragon::SetBowDrawn()
 {	
 	SetAction(BOW_DRAW_IDLE);
 }
 
-void Player::ShootArrow()
+void Player_Dragon::ShootArrow()
 {
 
 
 }
 
-void Player::EndBowDrawn()
+void Player_Dragon::EndBowDrawn()
 {
 	SetAction(BOW_IDLE);
 }
 
-void Player::SetInvincible()
+void Player_Dragon::SetInvincible()
 {
 	isInvincible = true;	
 }
 
-void Player::EndInvincible()
+void Player_Dragon::EndInvincible()
 {
 	isInvincible = false;
 	invincibleCount = 0.0f;
 }
 
-void Player::Change1hm()
+void Player_Dragon::Change1hm()
 {
 	SetAction(OHM_EQUIP);
 }
 
-void Player::Change2hm()
+void Player_Dragon::Change2hm()
 {
 	SetAction(THM_EQUIP);
 }
 
-void Player::Changebow()
+void Player_Dragon::Changebow()
 {
 	SetAction(BOW_EQUIP);
 }
 
-void Player::Set1hmIdle()
+void Player_Dragon::Set1hmIdle()
 {
 	SetAction(OHM_IDLE);
 }
 
-void Player::Set2hmIdle()
+void Player_Dragon::Set2hmIdle()
 {
 	SetAction(THM_IDLE);
 }
 
-void Player::SetbowIdle()
+void Player_Dragon::SetbowIdle()
 {
 	SetAction(BOW_IDLE);
 }
 
-void Player::DoNothing()
+void Player_Dragon::DoNothing()
 {
 	return;
 }

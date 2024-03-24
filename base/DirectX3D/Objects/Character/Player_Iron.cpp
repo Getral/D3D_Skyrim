@@ -1,16 +1,13 @@
 #include "Framework.h"
 
-Player::Player()
-	: ModelAnimator("male_normal")
+Player_Iron::Player_Iron()
+	: ModelAnimator("male_iron")
 {
-	ClientToScreen(hWnd, &clientCenterPos);
-	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+	//ClientToScreen(hWnd, &clientCenterPos);
+	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
 
 	ModelAnimator::Scale() *= 0.0001f;
 
-	Pos().x = 250.0f;
-	Pos().y = 500.0f;
-	Pos().z = 290.0f;
 
 	ReadClip("male_1hm_idle");
 	ReadClip("male_1hm_stagger");
@@ -136,9 +133,6 @@ Player::Player()
 
 	CAM->Rot().x = 0;
 
-	SpawnManager::Get()->SetPlayerData(this);
-	TerrainManager::Get()->SetPlayerData(this);
-
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	bladeSword = new BladeSword();
@@ -203,98 +197,98 @@ Player::Player()
 	headCollider->SetParent(head);
 
 
-	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_R)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_L)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_P)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_ATK_R)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_L)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_ATK_P)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
 
-	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_CATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
-	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_R)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_L)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
+	GetClip(OHM_CATK_P)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.1f);
 
-	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_CATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_CATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
-	GetClip(OHM_CATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_FW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_BW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_L_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_WALK_R_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_FW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_BW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_L_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_RUN_R_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_R)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_L)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
+	GetClip(OHM_CATK_P)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.7f);
 
-	GetClip(THM_ATK_R)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_L)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_P)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_ATK_R)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_ATK_L)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_ATK_P)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_ATK_R)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_L)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_ATK_P)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
 
-	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this), 0.2f);
-	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
-	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::WeaponCollider, this),   0.2f);
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),  0.2f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),   0.2f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Iron::WeaponCollider, this),   0.2f);
 
-	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
-	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Iron::EndAttack, this), 0.8f);
 
-	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
-	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
-	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player_Iron::EndHit, this), 0.7f);
+	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player_Iron::EndHit, this), 0.7f);
+	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Iron::EndHit, this), 0.8f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player_Iron::EndHit, this), 0.9f);
+	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player_Iron::EndBlockHit, this), 0.5f);
 	
-	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
 
-	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::EndHit, this), 0.7f);
-	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::EndHit, this), 0.8f);
-	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::EndHit, this), 0.9f);
-	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::EndBlockHit, this), 0.5f);
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player_Iron::EndHit, this), 0.7f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player_Iron::EndHit, this), 0.7f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Iron::EndHit, this), 0.8f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player_Iron::EndHit, this), 0.9f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player_Iron::EndBlockHit, this), 0.5f);
 	
-	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
-	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
+	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player_Iron::SetInvincible, this), 0.0f);
 
-	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player::SetBowDrawn, this), 0.7f);
-	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::ShootArrow, this), 0.1f);
-	GetClip(BOW_RELEASE)->SetEvent(bind(&Player::EndBowDrawn, this), 0.5f);
+	GetClip(BOW_DRAW_INTRO)->SetEvent(bind(&Player_Iron::SetBowDrawn, this), 0.7f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player_Iron::ShootArrow, this), 0.1f);
+	GetClip(BOW_RELEASE)->SetEvent(bind(&Player_Iron::EndBowDrawn, this), 0.5f);
 
-	GetClip(OHM_EQUIP)->SetEvent(bind(&Player::Set1hmIdle, this), 0.7f);
-	GetClip(THM_EQUIP)->SetEvent(bind(&Player::Set2hmIdle, this), 0.7f);
-	GetClip(BOW_EQUIP)->SetEvent(bind(&Player::SetbowIdle, this), 0.7f);
+	GetClip(OHM_EQUIP)->SetEvent(bind(&Player_Iron::Set1hmIdle, this), 0.7f);
+	GetClip(THM_EQUIP)->SetEvent(bind(&Player_Iron::Set2hmIdle, this), 0.7f);
+	GetClip(BOW_EQUIP)->SetEvent(bind(&Player_Iron::SetbowIdle, this), 0.7f);
 	
 	prevMousePos = mousePos;
 }
 
-Player::~Player()
+Player_Iron::~Player_Iron()
 {
 	delete bladeSword;
 	//delete shield;
@@ -332,7 +326,7 @@ Player::~Player()
 	//delete ironwarhammer;
 }
 
-void Player::Update()
+void Player_Iron::Update()
 {
 	Control();
 	GetHit();
@@ -394,7 +388,7 @@ void Player::Update()
 	
 }
 
-void Player::Render()
+void Player_Iron::Render()
 {
 	ModelAnimator::Render();
 	collider->Render();
@@ -435,11 +429,11 @@ void Player::Render()
 	headCollider->Render();
 }
 
-void Player::PostRender()
+void Player_Iron::PostRender()
 {
 }
 
-void Player::GUIRender()
+void Player_Iron::GUIRender()
 {
 	//Armor
 	//Shield
@@ -484,7 +478,7 @@ void Player::GUIRender()
 	ImGui::SliderInt("nodeIndex2", (int*)&nodeIndex2, 1, 200);
 }
 
-void Player::Control()
+void Player_Iron::Control()
 {
 	Rotate();
 	Move();
@@ -493,7 +487,7 @@ void Player::Control()
 	//WeaponChange();
 }
 
-void Player::Move()
+void Player_Iron::Move()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
@@ -670,7 +664,7 @@ void Player::Move()
 }
 
 
-void Player::Rotate()
+void Player_Iron::Rotate()
 {	
 	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
 	prevMousePos = mousePos;
@@ -686,7 +680,7 @@ void Player::Rotate()
 	}
 }
 
-void Player::Attack()
+void Player_Iron::Attack()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
@@ -1058,7 +1052,7 @@ void Player::Attack()
 	
 }
 
-void Player::Block()
+void Player_Iron::Block()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
 	if (isbow) return;
@@ -1094,7 +1088,7 @@ void Player::Block()
 
 }
 
-void Player::GetHit()
+void Player_Iron::GetHit()
 {
 	if (!isHit) return;
 	if (isInvincible) return;
@@ -1126,7 +1120,7 @@ void Player::GetHit()
 	
 }
 
-void Player::WeaponChange()
+void Player_Iron::WeaponChange()
 {
 	if (curAction != OHM_IDLE && curAction != THM_IDLE && curAction != BOW_IDLE) return;
 	if (curAction == OHM_EQUIP || curAction == OHM_UNEQUIP || curAction == THM_EQUIP ||
@@ -1138,14 +1132,14 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('2'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Iron::Change2hm, this), 0.7f, true);
 			is1hm = false;
 			is2hm = true;
 			SetAction(OHM_UNEQUIP);
 		}
 		if (KEY_DOWN('3'))
 		{
-			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Iron::Changebow, this), 0.7f, true);
 			is1hm = false;
 			isbow = true;
 			SetAction(OHM_UNEQUIP);
@@ -1156,14 +1150,14 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('1'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Iron::Change1hm, this), 0.7f, true);
 			is2hm = false;
 			is1hm = true;
 			SetAction(THM_UNEQUIP);
 		}
 		if (KEY_DOWN('3'))
 		{
-			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
+			GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Iron::Changebow, this), 0.7f, true);
 			is2hm = false;
 			isbow = true;
 			SetAction(THM_UNEQUIP);
@@ -1174,14 +1168,14 @@ void Player::WeaponChange()
 	{
 		if (KEY_DOWN('1'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Iron::Change1hm, this), 0.7f, true);
 			isbow = false;
 			is1hm = true;
 			SetAction(BOW_UNEQUIP);
 		}
 		if (KEY_DOWN('2'))
 		{
-			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
+			GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Iron::Change2hm, this), 0.7f, true);
 			isbow = false;
 			is2hm = true;
 			SetAction(BOW_UNEQUIP);
@@ -1190,7 +1184,7 @@ void Player::WeaponChange()
 
 }
 
-void Player::SetAnimation()
+void Player_Iron::SetAnimation()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
 		curAction == OHM_BLOCK || curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM ||
@@ -1444,7 +1438,7 @@ void Player::SetAnimation()
 
 }
 
-void Player::SetAction(ACTION action)
+void Player_Iron::SetAction(ACTION action)
 {
 	if (action == curAction) return;
 
@@ -1452,7 +1446,7 @@ void Player::SetAction(ACTION action)
 	PlayClip((int)action);
 }
 
-void Player::WeaponCollider()
+void Player_Iron::WeaponCollider()
 {
 	if (!bladeSword->GetIsWeapon())
 	{
@@ -1460,7 +1454,7 @@ void Player::WeaponCollider()
 	}
 }
 
-void Player::EndAttack()
+void Player_Iron::EndAttack()
 {
 	if (bladeSword->GetIsWeapon())
 	{
@@ -1476,7 +1470,7 @@ void Player::EndAttack()
 	} 
 }
 
-void Player::EndBlock()
+void Player_Iron::EndBlock()
 {
 	if (is1hm)
 	{
@@ -1489,7 +1483,7 @@ void Player::EndBlock()
 	isBlock = false;
 }
 
-void Player::EndHit()
+void Player_Iron::EndHit()
 {
 	if (is1hm)
 	{
@@ -1502,7 +1496,7 @@ void Player::EndHit()
 	isHit = false;
 }
 
-void Player::EndBlockHit()
+void Player_Iron::EndBlockHit()
 {
 	if (is1hm)
 	{
@@ -1515,64 +1509,64 @@ void Player::EndBlockHit()
 	isHit = false;
 }
 
-void Player::SetBowDrawn()
+void Player_Iron::SetBowDrawn()
 {	
 	SetAction(BOW_DRAW_IDLE);
 }
 
-void Player::ShootArrow()
+void Player_Iron::ShootArrow()
 {
 
 
 }
 
-void Player::EndBowDrawn()
+void Player_Iron::EndBowDrawn()
 {
 	SetAction(BOW_IDLE);
 }
 
-void Player::SetInvincible()
+void Player_Iron::SetInvincible()
 {
 	isInvincible = true;	
 }
 
-void Player::EndInvincible()
+void Player_Iron::EndInvincible()
 {
 	isInvincible = false;
 	invincibleCount = 0.0f;
 }
 
-void Player::Change1hm()
+void Player_Iron::Change1hm()
 {
 	SetAction(OHM_EQUIP);
 }
 
-void Player::Change2hm()
+void Player_Iron::Change2hm()
 {
 	SetAction(THM_EQUIP);
 }
 
-void Player::Changebow()
+void Player_Iron::Changebow()
 {
 	SetAction(BOW_EQUIP);
 }
 
-void Player::Set1hmIdle()
+void Player_Iron::Set1hmIdle()
 {
 	SetAction(OHM_IDLE);
 }
 
-void Player::Set2hmIdle()
+void Player_Iron::Set2hmIdle()
 {
 	SetAction(THM_IDLE);
 }
 
-void Player::SetbowIdle()
+void Player_Iron::SetbowIdle()
 {
 	SetAction(BOW_IDLE);
 }
 
-void Player::DoNothing()
+void Player_Iron::DoNothing()
 {
 	return;
 }
