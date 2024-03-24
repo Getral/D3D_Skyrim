@@ -358,7 +358,7 @@ void Player::Update()
 
 
 	leftHand->SetWorld(GetTransformByNode(119));
-	//ironbow->Update();
+	ironbow->Update();
 	//ebonybow->Update();
 	dragonshield->Update();
 
@@ -379,9 +379,14 @@ void Player::Update()
 		if (invincibleCount > 1.0f) EndInvincible();
 	}
 
-	if (KEY_PRESS('H'))
-		this->status.curstamina -= 10 * DELTA;
+	//if (KEY_PRESS('H'))
+	//	this->status.curstamina -= 10 * DELTA;
 
+	if (KEY_PRESS('H'))
+		this->status.curHp += 10 * DELTA;
+
+	if (status.curHp > status.maxHp)
+		status.curHp = status.maxHp;
 }
 
 void Player::Render()
@@ -727,8 +732,8 @@ void Player::Rotate()
 
 void Player::Attack()
 {
-	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
-		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
 		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
 		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
 		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == OHM_CATK_R ||
@@ -744,7 +749,7 @@ void Player::Attack()
 
 	if (is1hm)
 	{
-		if (velocity.z < -0.1f && velocity.x < -0.1f || 
+		if (velocity.z < -0.1f && velocity.x < -0.1f ||
 			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
@@ -759,7 +764,7 @@ void Player::Attack()
 					attackCharge = 1.0f;
 				}
 			}
-			else 
+			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
@@ -773,7 +778,7 @@ void Player::Attack()
 			}
 		}
 
-		else if (velocity.z < -0.1f && velocity.x < -0.1f || 
+		else if (velocity.z < -0.1f && velocity.x < -0.1f ||
 			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
@@ -842,7 +847,7 @@ void Player::Attack()
 					attackCharge = 1.0f;
 				}
 			}
-			else 
+			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
@@ -856,7 +861,7 @@ void Player::Attack()
 			}
 		}
 
-		else 
+		else
 		{
 			if (KEY_PRESS(VK_LBUTTON))
 			{
@@ -871,17 +876,17 @@ void Player::Attack()
 
 			if (KEY_UP(VK_LBUTTON) && KEY_PRESS(VK_CONTROL) && !isPAttack)
 			{
-				if (!isCombo)				
-				{				
-					SetAction(OHM_CATK_R);				
-					isCombo = true;			
-				}			
-				else				
-				{			
-					SetAction(OHM_CATK_L);			
-					isCombo = false;			
-				}		
-				attackCharge = 1.0f;		
+				if (!isCombo)
+				{
+					SetAction(OHM_CATK_R);
+					isCombo = true;
+				}
+				else
+				{
+					SetAction(OHM_CATK_L);
+					isCombo = false;
+				}
+				attackCharge = 1.0f;
 			}
 
 			if (attackCharge <= 0.0f && !KEY_PRESS(VK_CONTROL) && !isPAttack)
@@ -902,7 +907,7 @@ void Player::Attack()
 					SetAction(OHM_ATK_L);
 					isCombo = false;
 				}
-				
+
 				attackCharge = 1.0f;
 			}
 			if (KEY_UP(VK_LBUTTON) && isPAttack)
@@ -911,7 +916,7 @@ void Player::Attack()
 				isPAttack = false;
 			}
 
-		}		
+		}
 	}
 
 	if (is2hm && !KEY_PRESS(VK_CONTROL))
@@ -1042,7 +1047,7 @@ void Player::Attack()
 			}
 
 			if (KEY_UP(VK_LBUTTON) && !isPAttack)
-			{						 
+			{
 				if (!isCombo)
 				{
 					SetAction(THM_ATK_R);
@@ -1052,7 +1057,7 @@ void Player::Attack()
 				{
 					SetAction(THM_ATK_L);
 					isCombo = false;
-				}			
+				}
 				attackCharge = 1.0f;
 			}
 
@@ -1093,6 +1098,7 @@ void Player::Attack()
 			attackCharge = 1.0f;
 		}
 	}
+}
 
 void Player::Block()
 {
@@ -1183,7 +1189,8 @@ void Player::WeaponChange()
 		if (KEY_DOWN('3'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
-			UIManager::Get()->GetInvenUI()->UseItem(this, "ebonybow");
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ironbow");
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ironarrow");
 			is1hm = false;
 			isbow = true;
 			//SetAction(OHM_UNEQUIP);
@@ -1196,6 +1203,7 @@ void Player::WeaponChange()
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
+			UIManager::Get()->GetInvenUI()->UseItem(this, "dragonshield");
 			is2hm = false;
 			is1hm = true;
 			//SetAction(THM_UNEQUIP);
@@ -1204,6 +1212,7 @@ void Player::WeaponChange()
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
 			UIManager::Get()->GetInvenUI()->UseItem(this, "ironbow");
+			UIManager::Get()->GetInvenUI()->UseItem(this, "ironarrow");
 			is2hm = false;
 			isbow = true;
 			//SetAction(THM_UNEQUIP);
@@ -1216,6 +1225,7 @@ void Player::WeaponChange()
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
+			UIManager::Get()->GetInvenUI()->UseItem(this, "dragonshield");
 			isbow = false;
 			is1hm = true;
 			//SetAction(BOW_UNEQUIP);

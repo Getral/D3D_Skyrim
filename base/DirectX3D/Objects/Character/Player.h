@@ -5,7 +5,7 @@ class Player : public ModelAnimator
 public:
 	struct Status
 	{
-		float curHp = 100;
+		float curHp = 10;
 		float maxHp = 100;
 		float curstamina = 10;
 		float maxstamina = 100;
@@ -183,9 +183,9 @@ protected:
 	bool isCombo = false;
 	bool isPAttack = false;
 
-	bool is1hm = false;
+	bool is1hm = true;
 	bool is2hm = false;
-	bool isunarmed = true;
+	bool isbow = false;
 
 	bool isbowdrawn = false;
 	bool isCollRender = true;

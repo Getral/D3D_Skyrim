@@ -85,7 +85,7 @@ ModelExportScene::ModelExportScene()
 
     // Export Without Texture
 
-    string name = "sign";
+    string name = "male_normal";
     string file = "Models/FBX/" + name + ".fbx";
     ModelExporter* exporter;
     
