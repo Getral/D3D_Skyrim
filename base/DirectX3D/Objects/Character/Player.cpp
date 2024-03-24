@@ -351,7 +351,7 @@ void Player::Update()
 	//ironclaymore->Update();
 	//irondagger->Update();
 	//ironlongsword->Update();
-	ironmace->Update();
+	//ironmace->Update();
 	//ironwaraxe->Update();
 	//ironwarhammer->Update();
 	ironarrow->Update();
@@ -360,7 +360,7 @@ void Player::Update()
 	leftHand->SetWorld(GetTransformByNode(119));
 	ironbow->Update();
 	//ebonybow->Update();
-	dragonshield->Update();
+	//dragonshield->Update();
 
 
 	headCollider->UpdateWorld();
@@ -394,8 +394,8 @@ void Player::Render()
 
 	if (is1hm)
 	{
-		ironmace->Render();
-		dragonshield->Render();
+		//ironmace->Render();
+		//dragonshield->Render();
 	}
 	if (is2hm)
 	{
@@ -1173,14 +1173,14 @@ void Player::WeaponChange()
 
 	if (is1hm)
 	{
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
 			is1hm = false;
 			is2hm = true;
 			//SetAction(OHM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
 			is1hm = false;
@@ -1191,14 +1191,14 @@ void Player::WeaponChange()
 	
 	if (is2hm)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			is2hm = false;
 			is1hm = true;
 			//SetAction(THM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player::Changebow, this), 0.7f, true);
 			is2hm = false;
@@ -1209,14 +1209,14 @@ void Player::WeaponChange()
 	
 	if (isbow)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change1hm, this), 0.7f, true);
 			isbow = false;
 			is1hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player::Change2hm, this), 0.7f, true);
 			isbow = false;

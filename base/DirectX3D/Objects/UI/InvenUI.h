@@ -1,4 +1,5 @@
 #pragma once
+
 class InvenUI
 {
 private:
@@ -41,6 +42,9 @@ public:
 	class ItemStatus* GetItemstatus() { return itemstatus; }
 
 	int GetHelmetClass();
+
+
+
 private:
 	Quad* frame;
 	Quad* framebar;
@@ -84,4 +88,9 @@ private:
 	Arrow* player_arrow;
 
 	class ItemStatus* itemstatus;
+
+
+
+	vector<Model*> models;
+	
 };

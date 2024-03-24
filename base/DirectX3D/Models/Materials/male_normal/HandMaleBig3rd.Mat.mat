@@ -2,8 +2,8 @@
     <Shader Vertex="" Pixel=""/>
     <Texture Diffuse="Textures/Model/male_normal/malehead.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
     <Property Shininess="36" HasNormalMap="0">
-        <Diffuse R="0.80041564" G="0" B="0.0091331536" A="1"/>
-        <Specular R="0.80041564" G="0" B="0.0091331536" A="1"/>
+        <Diffuse R="0.80008584" G="0.50922012" B="0.77357823" A="1"/>
+        <Specular R="0.80008584" G="0.50922012" B="0.77357823" A="1"/>
         <Ambient R="0" G="0" B="0" A="1"/>
         <Emissive R="0" G="0" B="0" A="1"/>
     </Property>
