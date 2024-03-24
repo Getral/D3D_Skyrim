@@ -14,7 +14,7 @@ GameManager::GameManager()
     Create();
 
     SceneManager::Get()->Create("Grid", new GridScene());
-    //SceneManager::Get()->Create("ModelExport", new ModelExportScene());
+    SceneManager::Get()->Create("ModelExport", new ModelExportScene());
     //SceneManager::Get()->Create("ParticleConfig", new ParticleConfigScene());
     //SceneManager::Get()->Create("Particle", new ParticleScene());
     SceneManager::Get()->Create("Terrain", new TerrainScene());
@@ -22,15 +22,18 @@ GameManager::GameManager()
     SceneManager::Get()->Create("Player", new PlayerScene());
 
     SceneManager::Get()->Add("Grid");
-    //SceneManager::Get()->Add("ModelExport");     
+    SceneManager::Get()->Add("ModelExport");     
     //SceneManager::Get()->Add("ParticleConfig");
     SceneManager::Get()->Add("Terrain");
     SceneManager::Get()->Add("Monster");
     SceneManager::Get()->Add("Player");
 
     Font::Get()->AddColor("Gray", 185.0f / 255.0f, 185.0f / 255.0f, 185.0f / 255.0f);
-    Font::Get()->AddStyle("Futura", L"Futura",20.0f);
+    Font::Get()->AddColor("White", 1, 1, 1);
+    Font::Get()->AddStyle("Futura", L"Futura", 20.0f);
     Font::Get()->AddStyle("Futura_big", L"Futura", 30.0f);
+    Font::Get()->AddStyle("Futura_more_big", L"Futura", 40.0f);
+    Font::Get()->AddStyle("Futura_outtro", L"Futura", 200.0f);
 
     Font::Get()->SetColor("Gray");
     Font::Get()->SetStyle("Futura");

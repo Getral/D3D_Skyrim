@@ -18,6 +18,8 @@ ItemStatus::ItemStatus()
 	armors.push_back(new Armor("dragonshield",   Item::ARMOR, 14, 750,  Armor::DRAGONBONE ,Armor::shield,   32));
 
 	// 이름,타이틀타입,무게,가치,아이템타입,아이템부위,공격력
+	weapons.push_back(new Weapon("chest",    Item::WEAPON, 0,  0, Weapon::IRON ,Weapon::dagger,    0));  // 단검
+
 	weapons.push_back(new Weapon("irondagger",    Item::WEAPON, 2,  10, Weapon::IRON ,Weapon::dagger,    4));  // 단검
 	weapons.push_back(new Weapon("ironclaymore",  Item::WEAPON, 9,  25, Weapon::IRON ,Weapon::claymore,  7));  // 한손검
 	weapons.push_back(new Weapon("ironwaraxe",    Item::WEAPON, 11, 30, Weapon::IRON ,Weapon::waraxe,    8));  // 한손도끼
@@ -36,6 +38,7 @@ ItemStatus::ItemStatus()
 	weapons.push_back(new Weapon("ebonywarhammer", Item::WEAPON, 30, 1725, Weapon::EBONY, Weapon::warhammer, 25));
 	weapons.push_back(new Weapon("ebonybow",       Item::WEAPON, 16, 1440, Weapon::EBONY, Weapon::bow,       0));
 
+	arrows.push_back(new Arrow("chest",  Item::ARROW, 0, 0, Arrow::IRON,  0));
 	arrows.push_back(new Arrow("ironarrow",  Item::ARROW, 0, 1, Arrow::IRON,  10));
 	arrows.push_back(new Arrow("ebonyarrow", Item::ARROW, 0, 7, Arrow::EBONY, 20));
 
