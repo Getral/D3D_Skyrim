@@ -391,7 +391,11 @@ void Player_Dragon::Update()
 void Player_Dragon::Render()
 {
 	ModelAnimator::Render();
-	collider->Render();
+	if (isCollRender)
+	{
+		collider->Render();
+		headCollider->Render();
+	}
 	bladeSword->Render();
 	//shield->Render();
 	
@@ -425,8 +429,6 @@ void Player_Dragon::Render()
 	//ebonyquiver->Render();
 	//ironquiver->Render();
 
-
-	headCollider->Render();
 }
 
 void Player_Dragon::PostRender()

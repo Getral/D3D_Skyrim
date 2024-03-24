@@ -363,29 +363,35 @@ void alduin::Render()
 
 	if(ModelAnimator::Active())
 		ModelAnimator::Render();
-
-	WakeUpCollider->Render();
-
-	//collider_F->Render();
-	//collider_R->Render();
-	//collider_L->Render();
-	//collider_B->Render();
-	Acollider_F->Render();
-	Acollider_R->Render();
-	Acollider_L->Render();
-	Acollider_B->Render();
-	breathCollider->Render();
-	ApproachCollider->Render();
 	BreathParticle->Render();
 	DeathParticle->Render();
 
-
-	if (curState != DEATH)
+	if (isColliderRend)
 	{
-		HeadCollider->Render();
-		BodyCollider->Render();
-		TailCollider->Render();
+		WakeUpCollider->Render();
+
+		collider_F->Render();
+		collider_R->Render();
+		collider_L->Render();
+		collider_B->Render();
+		Acollider_F->Render();
+		Acollider_R->Render();
+		Acollider_L->Render();
+		Acollider_B->Render();
+		breathCollider->Render();
+		ApproachCollider->Render();
+
+
+		if (curState != DEATH)
+		{
+			HeadCollider->Render();
+			BodyCollider->Render();
+			TailCollider->Render();
+		}
+
 	}
+
+	
 	
 
 }

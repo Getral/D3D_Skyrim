@@ -54,6 +54,7 @@ public:
 	Transform* GetTransform() { return transform; }
 	
 	bool GetIsSleeping() { return isSleeping; }
+	bool& SetIsColliderRend() { return isColliderRend; }
 private:
 
 	//void SetAnimation();
@@ -84,6 +85,8 @@ private:
 	void Patterns();
 	void PatternFire();
 	void PatternsAir();
+
+
 
 	State curState = IDLE;
 	CapsuleCollider* alduinCollider2;
@@ -132,6 +135,7 @@ private:
 	bool isFireAttack = false;
 	bool isMoving = false;
 	bool isSleeping = true;
+	bool isColliderRend = true;
 
 
 	Vector3 velocity;

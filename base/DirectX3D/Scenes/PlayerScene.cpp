@@ -39,7 +39,13 @@ void PlayerScene::Update()
 	UIManager::Get()->Update(player, SpawnManager::Get()->GetMonsterSpawnManager(),aldu);
 	ObjectManager::Get()->Update(player);
 	if (KEY_DOWN('T'))
+	{
 		ObjectManager::Get()->GetIsColRender() = !ObjectManager::Get()->GetIsColRender();
+		aldu->SetIsColliderRend() = !aldu->SetIsColliderRend();
+		player->SetisCollRend() = !player->SetisCollRend();
+		player_dragon->SetisCollRend() = !player_dragon->SetisCollRend();
+		player_iron->SetisCollRend() = !player_iron->SetisCollRend();
+	}
 }
 
 void PlayerScene::PreRender()

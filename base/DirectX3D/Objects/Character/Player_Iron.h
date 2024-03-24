@@ -64,6 +64,7 @@ public:
 	void SetAction(ACTION action);
 	void SetIsHit(bool value) { isHit = value; }
 	void SetIsInvincible(bool value) { isInvincible = value; }
+	bool& SetisCollRend() { return isCollRender; }
 
 private:
 	void Control();
@@ -183,6 +184,7 @@ protected:
 
 
 	bool isTorch = false; // 나중에 횃불 추가하면 사용할 bool값 
+	bool isCollRender = true;
 
 
 	int weight;

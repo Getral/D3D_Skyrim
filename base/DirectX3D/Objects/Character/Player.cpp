@@ -397,7 +397,11 @@ void Player::Update()
 void Player::Render()
 {
 	ModelAnimator::Render();
-	collider->Render();
+	if (isCollRender)
+	{
+		collider->Render();
+		headCollider->Render();
+	}
 	bladeSword->Render();
 	//shield->Render();
 	
@@ -431,8 +435,6 @@ void Player::Render()
 	//ebonyquiver->Render();
 	//ironquiver->Render();
 
-
-	headCollider->Render();
 }
 
 void Player::PostRender()
