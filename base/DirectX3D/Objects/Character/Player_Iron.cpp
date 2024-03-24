@@ -1,13 +1,16 @@
 #include "Framework.h"
 
 Player_Iron::Player_Iron()
-	: ModelAnimator("male_dragon")
+	: ModelAnimator("male_iron")
 {
-	//ClientToScreen(hWnd, &clientCenterPos);
-	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+	ClientToScreen(hWnd, &clientCenterPos);
+	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
 
 	ModelAnimator::Scale() *= 0.0001f;
 
+	Pos().x = 250.0f;
+	Pos().y = 500.0f;
+	Pos().z = 290.0f;
 
 	ReadClip("male_1hm_idle");
 	ReadClip("male_1hm_stagger");
@@ -133,6 +136,9 @@ Player_Iron::Player_Iron()
 
 	CAM->Rot().x = 0;
 
+	//SpawnManager::Get()->SetPlayer_IronData(this);
+	//TerrainManager::Get()->SetPlayer_IronData(this);
+
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	//1hm
@@ -164,25 +170,23 @@ Player_Iron::Player_Iron()
 	ebonylongsword->SetParent(rightHand);
 
 	//bow
-	//ironbow = new IronBow();
-	//ironbow->Load();
+	ironbow = new IronBow();
+	ironbow->Load();
 
 	//leftHand = new Transform();
-	//ironbow->SetParent(leftHand);
+	ironbow->SetParent(leftHand);
 
-	//ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
-	//	Arrow::ArrowType::IRON, atk);
-	//ironarrow->Load();
+	ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
+		Arrow::ArrowType::IRON, atk);
+	ironarrow->Load();
 
-	//ironarrow->SetParent(rightHand);
+	ironarrow->SetParent(rightHand);
 
-	//ironquiver = new IronQuiver();
-	//ironquiver->Load();
+	ironquiver = new IronQuiver();
+	ironquiver->Load();
 
-	//back = new Transform();
-	//ironquiver->SetParent(back);
-
-
+	back = new Transform();
+	ironquiver->SetParent(back);
 
 	headCollider = new CapsuleCollider(10);
 
@@ -291,7 +295,7 @@ Player_Iron::~Player_Iron()
 	delete back;
 
 
-	//delete ironquiver;
+	delete ironquiver;
 	//delete ebonyquiver;
 
 
@@ -309,8 +313,8 @@ Player_Iron::~Player_Iron()
 	//delete ebonywaraxe;
 	//delete ebonywarhammer;
 
-	//delete ironbow;
-	//delete ironarrow;
+	delete ironbow;
+	delete ironarrow;
 	//delete ironbattleaxe;
 	//delete ironclaymore;
 	//delete irondagger;
@@ -330,8 +334,6 @@ void Player_Iron::Update()
 
 	collider->UpdateWorld();
 
-
-	collider->UpdateWorld();
 
 	rightHand->SetWorld(GetTransformByNode(82));
 	//bladeSword->Update();
@@ -356,7 +358,7 @@ void Player_Iron::Update()
 
 
 	leftHand->SetWorld(GetTransformByNode(119));
-	//ironbow->Update();
+	ironbow->Update();
 	//ebonybow->Update();
 	dragonshield->Update();
 
@@ -366,8 +368,8 @@ void Player_Iron::Update()
 	//head->SetWorld(GetTransformByNode(nodeIndex1));
 
 
-	//back->SetWorld(GetTransformByNode(133));
-	//ironquiver->Update();
+	back->SetWorld(GetTransformByNode(133));
+	ironquiver->Update();
 	//ironquiver->Update();
 
 
@@ -377,9 +379,14 @@ void Player_Iron::Update()
 		if (invincibleCount > 1.0f) EndInvincible();
 	}
 
-	if (KEY_PRESS('H'))
-		this->status.curstamina -= 10 * DELTA;
+	//if (KEY_PRESS('H'))
+	//	this->status.curstamina -= 10 * DELTA;
 
+	if (KEY_PRESS('H'))
+		this->status.curHp += 10 * DELTA;
+
+	if (status.curHp > status.maxHp)
+		status.curHp = status.maxHp;
 }
 
 void Player_Iron::Render()
@@ -393,18 +400,25 @@ void Player_Iron::Render()
 
 	if (is1hm)
 	{
-		ironmace->Render();
-		dragonshield->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ironmace")
+		{
+			ironmace->Render();
+			dragonshield->Render();
+		}
 	}
 	if (is2hm)
 	{
-		ebonylongsword->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ebonylongsword")
+			ebonylongsword->Render();
 	}
-	if (isunarmed)
+	if (isbow)
 	{
-		//ironarrow->Render();
-		//ironbow->Render();
-		//ironquiver->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ironbow")
+		{
+			ironarrow->Render();
+			ironbow->Render();
+			ironquiver->Render();
+		}
 	}
 	//bladeSword->Render();
 	//shield->Render();
@@ -445,7 +459,7 @@ void Player_Iron::GUIRender()
 {
 	//Armor
 	//Shield
-	//dragonshield->GUIRender();
+	dragonshield->GUIRender();
 	//ironshield->GUIRender();
 
 	// Weapon
@@ -455,7 +469,7 @@ void Player_Iron::GUIRender()
 	//ebonybattleaxe->GUIRender();
 	//ebonyclaymore->GUIRender();
 	//ebonydagger->GUIRender();
-	//ebonylongsword->GUIRender();
+	ebonylongsword->GUIRender();
 	//ebonymace->GUIRender();
 	//ebonywaraxe->GUIRender();
 	//ebonywarhammer->GUIRender();
@@ -466,7 +480,7 @@ void Player_Iron::GUIRender()
 	//ironclaymore->GUIRender();
 	//irondagger->GUIRender();
 	//ironlongsword->GUIRender();
-	//ironmace->GUIRender();
+	ironmace->GUIRender();
 	//ironwarhammer->GUIRender();
 
 
@@ -512,7 +526,7 @@ void Player_Iron::Control()
 	//	ironbow->SetActive(false);
 	//	ironquiver->SetActive(false);
 	//}
-	//if (isunarmed)
+	//if (isbow)
 	//{
 	//	ironmace->SetActive(false);
 	//	dragonshield->SetActive(false);
@@ -541,7 +555,7 @@ void Player_Iron::Move()
 	bool isMoveZ = false;
 	bool isMoveX = false;
 
-	if (KEY_PRESS(VK_SHIFT)) //달리기
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn) //달리기
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -581,7 +595,7 @@ void Player_Iron::Move()
 		}
 	}
 
-	else if (KEY_PRESS(VK_CONTROL)) //앉아서 이동
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn) //앉아서 이동
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -663,11 +677,11 @@ void Player_Iron::Move()
 
 
 	//방향을 구하고 정규화
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
 		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 5.0f;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
 		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 2.5f;
 	}
@@ -686,11 +700,11 @@ void Player_Iron::Move()
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
 
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
@@ -699,7 +713,6 @@ void Player_Iron::Move()
 		Pos() += direction * status.speed * 0.7f * DELTA * -1;
 	}
 }
-
 
 void Player_Iron::Rotate()
 {
@@ -733,7 +746,6 @@ void Player_Iron::Attack()
 		return;
 	if (isBlock) return;
 	if (isHit) return;
-	if (isunarmed) return;
 
 	if (is1hm)
 	{
@@ -1058,13 +1070,40 @@ void Player_Iron::Attack()
 		}
 	}
 
-
+	if (isbow)
+	{
+		if (KEY_DOWN(VK_LBUTTON) && !KEY_PRESS(VK_CONTROL))
+		{
+			SetAction(BOW_DRAW_INTRO);
+		}
+		if (KEY_PRESS(VK_LBUTTON))
+		{
+			attackCharge -= DELTA;
+			if (attackCharge < 0.0f)
+			{
+				isbowdrawn = true;
+			}
+		}
+		if (KEY_UP(VK_LBUTTON))
+		{
+			if (attackCharge < 0.0f)
+			{
+				SetAction(BOW_RELEASE);
+			}
+			else
+			{
+				SetAction(BOW_IDLE);
+			}
+			isbowdrawn = false;
+			attackCharge = 1.0f;
+		}
+	}
 }
 
 void Player_Iron::Block()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
-	if (isunarmed) return;
+	if (isbow) return;
 	if (isHit) return;
 
 	if (is1hm)
@@ -1101,7 +1140,7 @@ void Player_Iron::GetHit()
 {
 	if (!isHit) return;
 	if (isInvincible) return;
-	if (isunarmed) return;
+	if (isbow) return;
 
 	if (is1hm)
 	{
@@ -1139,58 +1178,67 @@ void Player_Iron::WeaponChange()
 
 	if (is1hm)
 	{
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Iron::Change2hm, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ebonylongsword");
 			is1hm = false;
 			is2hm = true;
 			//SetAction(OHM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Iron::Changebow, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironbow");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironarrow");
 			is1hm = false;
-			isunarmed = true;
+			isbow = true;
 			//SetAction(OHM_UNEQUIP);
 		}
 	}
 
 	if (is2hm)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Iron::Change1hm, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "dragonshield");
 			is2hm = false;
 			is1hm = true;
 			//SetAction(THM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Iron::Changebow, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironbow");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironarrow");
 			is2hm = false;
-			isunarmed = true;
+			isbow = true;
 			//SetAction(THM_UNEQUIP);
 		}
 	}
 
-	if (isunarmed)
+	if (isbow)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Iron::Change1hm, this), 0.7f, true);
-			isunarmed = false;
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "dragonshield");
+			isbow = false;
 			is1hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Iron::Change2hm, this), 0.7f, true);
-			isunarmed = false;
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ebonylongsword");
+			isbow = false;
 			is2hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
 	}
-
 }
 
 void Player_Iron::SetAnimation()
@@ -1337,7 +1385,7 @@ void Player_Iron::SetAnimation()
 		else SetAction(THM_IDLE);
 	}
 
-	if (isunarmed)
+	if (isbow && !isbowdrawn)
 	{
 		if (velocity.z < -0.1f && velocity.x < -0.1f)
 		{
@@ -1399,6 +1447,51 @@ void Player_Iron::SetAnimation()
 
 		else SetAction(BOW_IDLE);
 	}
+
+	if (isbow && isbowdrawn)
+	{
+		if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FL);
+		}
+
+		else if (velocity.z > 0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FR);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BL);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BR);
+		}
+
+		else if (velocity.z > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_F);
+		}
+
+		else if (velocity.z < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_B);
+		}
+
+		else if (velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_L);
+		}
+
+		else if (velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_R);
+		}
+		else SetAction(BOW_DRAW_IDLE);
+	}
+
 }
 
 void Player_Iron::SetAction(ACTION action)

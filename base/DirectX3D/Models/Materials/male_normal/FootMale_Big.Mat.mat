@@ -1,6 +1,6 @@
 <Material Name="FootMale_Big.Mat">
     <Shader Vertex="" Pixel=""/>
-    <Texture Diffuse="Textures/Color/White.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
+    <Texture Diffuse="Textures/Model/male_normal/malehead.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
     <Property Shininess="36" HasNormalMap="0">
         <Diffuse R="0.78263474" G="0.80007058" B="0.57617986" A="1"/>
         <Specular R="0.78263474" G="0.80007058" B="0.57617986" A="1"/>

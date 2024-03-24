@@ -3,11 +3,14 @@
 Player_Dragon::Player_Dragon()
 	: ModelAnimator("male_dragon")
 {
-	//ClientToScreen(hWnd, &clientCenterPos);
-	//SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+	ClientToScreen(hWnd, &clientCenterPos);
+	SetCursorPos(clientCenterPos.x, clientCenterPos.y);
 
 	ModelAnimator::Scale() *= 0.0001f;
 
+	Pos().x = 250.0f;
+	Pos().y = 500.0f;
+	Pos().z = 290.0f;
 
 	ReadClip("male_1hm_idle");
 	ReadClip("male_1hm_stagger");
@@ -133,6 +136,9 @@ Player_Dragon::Player_Dragon()
 
 	CAM->Rot().x = 0;
 
+	//SpawnManager::Get()->SetPlayer_DragonData(this);
+	//TerrainManager::Get()->SetPlayer_DragonData(this);
+
 	action = (ACTION)frameBuffer->Get().cur.clip;
 
 	//1hm
@@ -164,25 +170,23 @@ Player_Dragon::Player_Dragon()
 	ebonylongsword->SetParent(rightHand);
 
 	//bow
-	//ironbow = new IronBow();
-	//ironbow->Load();
+	ironbow = new IronBow();
+	ironbow->Load();
 
 	//leftHand = new Transform();
-	//ironbow->SetParent(leftHand);
+	ironbow->SetParent(leftHand);
 
-	//ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
-	//	Arrow::ArrowType::IRON, atk);
-	//ironarrow->Load();
+	ironarrow = new IronArrow("ironarrow", Arrow::Type::ARROW, weight, value,
+		Arrow::ArrowType::IRON, atk);
+	ironarrow->Load();
 
-	//ironarrow->SetParent(rightHand);
+	ironarrow->SetParent(rightHand);
 
-	//ironquiver = new IronQuiver();
-	//ironquiver->Load();
+	ironquiver = new IronQuiver();
+	ironquiver->Load();
 
-	//back = new Transform();
-	//ironquiver->SetParent(back);
-
-
+	back = new Transform();
+	ironquiver->SetParent(back);
 
 	headCollider = new CapsuleCollider(10);
 
@@ -230,12 +234,12 @@ Player_Dragon::Player_Dragon()
 
 	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
 	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
-	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
-	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),  0.2f);
-	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),   0.2f);
-	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this),   0.2f);
+	GetClip(THM_WALK_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_WALK_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_FW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_BW_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_L_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
+	GetClip(THM_RUN_R_ATK)->SetEvent(bind(&Player_Dragon::WeaponCollider, this), 0.2f);
 
 	GetClip(THM_WALK_FW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
 	GetClip(THM_WALK_BW_ATK)->SetEvent(bind(&Player_Dragon::EndAttack, this), 0.8f);
@@ -251,7 +255,7 @@ Player_Dragon::Player_Dragon()
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.8f);
 	GetClip(OHM_HIT_LARGEST)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.9f);
 	GetClip(OHM_HIT_BLOCK)->SetEvent(bind(&Player_Dragon::EndBlockHit, this), 0.5f);
-	
+
 	GetClip(OHM_HIT_LIGHT)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_MEDIUM)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
 	GetClip(OHM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
@@ -263,7 +267,7 @@ Player_Dragon::Player_Dragon()
 	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.8f);
 	GetClip(THM_HIT_LARGEST)->SetEvent(bind(&Player_Dragon::EndHit, this), 0.9f);
 	GetClip(THM_HIT_BLOCK)->SetEvent(bind(&Player_Dragon::EndBlockHit, this), 0.5f);
-	
+
 	GetClip(THM_HIT_LIGHT)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
 	GetClip(THM_HIT_MEDIUM)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
 	GetClip(THM_HIT_LARGE)->SetEvent(bind(&Player_Dragon::SetInvincible, this), 0.0f);
@@ -277,7 +281,7 @@ Player_Dragon::Player_Dragon()
 	GetClip(OHM_EQUIP)->SetEvent(bind(&Player_Dragon::Set1hmIdle, this), 0.7f);
 	GetClip(THM_EQUIP)->SetEvent(bind(&Player_Dragon::Set2hmIdle, this), 0.7f);
 	GetClip(BOW_EQUIP)->SetEvent(bind(&Player_Dragon::SetbowIdle, this), 0.7f);
-	
+
 	prevMousePos = mousePos;
 }
 
@@ -291,7 +295,7 @@ Player_Dragon::~Player_Dragon()
 	delete back;
 
 
-	//delete ironquiver;
+	delete ironquiver;
 	//delete ebonyquiver;
 
 
@@ -309,8 +313,8 @@ Player_Dragon::~Player_Dragon()
 	//delete ebonywaraxe;
 	//delete ebonywarhammer;
 
-	//delete ironbow;
-	//delete ironarrow;
+	delete ironbow;
+	delete ironarrow;
 	//delete ironbattleaxe;
 	//delete ironclaymore;
 	//delete irondagger;
@@ -330,8 +334,6 @@ void Player_Dragon::Update()
 
 	collider->UpdateWorld();
 
-
-	collider->UpdateWorld();
 
 	rightHand->SetWorld(GetTransformByNode(82));
 	//bladeSword->Update();
@@ -356,7 +358,7 @@ void Player_Dragon::Update()
 
 
 	leftHand->SetWorld(GetTransformByNode(119));
-	//ironbow->Update();
+	ironbow->Update();
 	//ebonybow->Update();
 	dragonshield->Update();
 
@@ -366,8 +368,8 @@ void Player_Dragon::Update()
 	//head->SetWorld(GetTransformByNode(nodeIndex1));
 
 
-	//back->SetWorld(GetTransformByNode(133));
-	//ironquiver->Update();
+	back->SetWorld(GetTransformByNode(133));
+	ironquiver->Update();
 	//ironquiver->Update();
 
 
@@ -377,9 +379,14 @@ void Player_Dragon::Update()
 		if (invincibleCount > 1.0f) EndInvincible();
 	}
 
+	//if (KEY_PRESS('H'))
+	//	this->status.curstamina -= 10 * DELTA;
+
 	if (KEY_PRESS('H'))
-		this->status.curstamina -= 10 * DELTA;
-	
+		this->status.curHp += 10 * DELTA;
+
+	if (status.curHp > status.maxHp)
+		status.curHp = status.maxHp;
 }
 
 void Player_Dragon::Render()
@@ -393,18 +400,25 @@ void Player_Dragon::Render()
 
 	if (is1hm)
 	{
-		ironmace->Render();
-		dragonshield->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ironmace")
+		{
+			ironmace->Render();
+			dragonshield->Render();
+		}
 	}
 	if (is2hm)
 	{
-		ebonylongsword->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ebonylongsword")
+			ebonylongsword->Render();
 	}
-	if (isunarmed)
+	if (isbow)
 	{
-		//ironarrow->Render();
-		//ironbow->Render();
-		//ironquiver->Render();
+		if (UIManager::Get()->GetInvenUI()->GetWeaponName() == "ironbow")
+		{
+			ironarrow->Render();
+			ironbow->Render();
+			ironquiver->Render();
+		}
 	}
 	//bladeSword->Render();
 	//shield->Render();
@@ -445,7 +459,7 @@ void Player_Dragon::GUIRender()
 {
 	//Armor
 	//Shield
-	//dragonshield->GUIRender();
+	dragonshield->GUIRender();
 	//ironshield->GUIRender();
 
 	// Weapon
@@ -455,7 +469,7 @@ void Player_Dragon::GUIRender()
 	//ebonybattleaxe->GUIRender();
 	//ebonyclaymore->GUIRender();
 	//ebonydagger->GUIRender();
-	//ebonylongsword->GUIRender();
+	ebonylongsword->GUIRender();
 	//ebonymace->GUIRender();
 	//ebonywaraxe->GUIRender();
 	//ebonywarhammer->GUIRender();
@@ -466,7 +480,7 @@ void Player_Dragon::GUIRender()
 	//ironclaymore->GUIRender();
 	//irondagger->GUIRender();
 	//ironlongsword->GUIRender();
-	//ironmace->GUIRender();
+	ironmace->GUIRender();
 	//ironwarhammer->GUIRender();
 
 
@@ -492,8 +506,8 @@ void Player_Dragon::Control()
 	Move();
 	Attack();
 	Block();
-	WeaponChange();	
-	
+	WeaponChange();
+
 	//if (is1hm)
 	//{
 	//	ironmace->SetActive(true);
@@ -512,7 +526,7 @@ void Player_Dragon::Control()
 	//	ironbow->SetActive(false);
 	//	ironquiver->SetActive(false);
 	//}
-	//if (isunarmed)
+	//if (isbow)
 	//{
 	//	ironmace->SetActive(false);
 	//	dragonshield->SetActive(false);
@@ -541,7 +555,7 @@ void Player_Dragon::Move()
 	bool isMoveZ = false;
 	bool isMoveX = false;
 
-	if (KEY_PRESS(VK_SHIFT)) //달리기
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn) //달리기
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -581,7 +595,7 @@ void Player_Dragon::Move()
 		}
 	}
 
-	else if (KEY_PRESS(VK_CONTROL)) //앉아서 이동
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn) //앉아서 이동
 	{
 		if (KEY_PRESS('W'))
 		{
@@ -660,14 +674,14 @@ void Player_Dragon::Move()
 			velocity.x = 0.0f;
 		}
 	}
-		
+
 
 	//방향을 구하고 정규화
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
 		if (velocity.Length() > status.speed * 1.0f) velocity = velocity.GetNormalized() * 5.0f;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
 		if (velocity.Length() > status.speed * 0.5f) velocity = velocity.GetNormalized() * 2.5f;
 	}
@@ -686,11 +700,11 @@ void Player_Dragon::Move()
 
 	Vector3 direction = XMVector3TransformCoord(velocity, rotY);
 
-	if (KEY_PRESS(VK_SHIFT))
+	if (KEY_PRESS(VK_SHIFT) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 1.0f * DELTA * -1;
 	}
-	else if (KEY_PRESS(VK_CONTROL))
+	else if (KEY_PRESS(VK_CONTROL) && !isbowdrawn)
 	{
 		Pos() += direction * status.speed * 0.5f * DELTA * -1;
 	}
@@ -700,17 +714,16 @@ void Player_Dragon::Move()
 	}
 }
 
-
 void Player_Dragon::Rotate()
-{	
+{
 	Vector3 delta = mousePos - prevMousePos; // 가장 최근 마우스 위치에서 현재까지 움직인 마우스의 변화량 구하기
 	prevMousePos = mousePos;
-	
+
 	Rot().y += delta.x * rotSpeed * DELTA; // 캐릭터 좌우회전 (추적 중이라 카메라도 따라갈 것)
-	
+
 	CAM->Rot().x -= delta.y * rotSpeed * DELTA;
-	
-	
+
+
 	if (KEY_DOWN(VK_MBUTTON))
 	{
 		CAM->Rot().x = 0;
@@ -719,8 +732,8 @@ void Player_Dragon::Rotate()
 
 void Player_Dragon::Attack()
 {
-	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P || 
-		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P || 
+	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
+		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
 		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
 		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
 		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == OHM_CATK_R ||
@@ -733,11 +746,10 @@ void Player_Dragon::Attack()
 		return;
 	if (isBlock) return;
 	if (isHit) return;
-	if (isunarmed) return;
 
 	if (is1hm)
 	{
-		if (velocity.z < -0.1f && velocity.x < -0.1f || 
+		if (velocity.z < -0.1f && velocity.x < -0.1f ||
 			velocity.z > 0.1f && velocity.x > 0.1f || velocity.z > 0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
@@ -752,7 +764,7 @@ void Player_Dragon::Attack()
 					attackCharge = 1.0f;
 				}
 			}
-			else 
+			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
@@ -766,7 +778,7 @@ void Player_Dragon::Attack()
 			}
 		}
 
-		else if (velocity.z < -0.1f && velocity.x < -0.1f || 
+		else if (velocity.z < -0.1f && velocity.x < -0.1f ||
 			velocity.z < -0.1f && velocity.x > 0.1f || velocity.z < -0.1f && !KEY_PRESS(VK_CONTROL))
 		{
 			if (KEY_PRESS(VK_SHIFT))
@@ -835,7 +847,7 @@ void Player_Dragon::Attack()
 					attackCharge = 1.0f;
 				}
 			}
-			else 
+			else
 			{
 				if (KEY_PRESS(VK_LBUTTON))
 				{
@@ -849,7 +861,7 @@ void Player_Dragon::Attack()
 			}
 		}
 
-		else 
+		else
 		{
 			if (KEY_PRESS(VK_LBUTTON))
 			{
@@ -864,17 +876,17 @@ void Player_Dragon::Attack()
 
 			if (KEY_UP(VK_LBUTTON) && KEY_PRESS(VK_CONTROL) && !isPAttack)
 			{
-				if (!isCombo)				
-				{				
-					SetAction(OHM_CATK_R);				
-					isCombo = true;			
-				}			
-				else				
-				{			
-					SetAction(OHM_CATK_L);			
-					isCombo = false;			
-				}		
-				attackCharge = 1.0f;		
+				if (!isCombo)
+				{
+					SetAction(OHM_CATK_R);
+					isCombo = true;
+				}
+				else
+				{
+					SetAction(OHM_CATK_L);
+					isCombo = false;
+				}
+				attackCharge = 1.0f;
 			}
 
 			if (attackCharge <= 0.0f && !KEY_PRESS(VK_CONTROL) && !isPAttack)
@@ -895,7 +907,7 @@ void Player_Dragon::Attack()
 					SetAction(OHM_ATK_L);
 					isCombo = false;
 				}
-				
+
 				attackCharge = 1.0f;
 			}
 			if (KEY_UP(VK_LBUTTON) && isPAttack)
@@ -904,7 +916,7 @@ void Player_Dragon::Attack()
 				isPAttack = false;
 			}
 
-		}		
+		}
 	}
 
 	if (is2hm && !KEY_PRESS(VK_CONTROL))
@@ -1035,7 +1047,7 @@ void Player_Dragon::Attack()
 			}
 
 			if (KEY_UP(VK_LBUTTON) && !isPAttack)
-			{						 
+			{
 				if (!isCombo)
 				{
 					SetAction(THM_ATK_R);
@@ -1045,7 +1057,7 @@ void Player_Dragon::Attack()
 				{
 					SetAction(THM_ATK_L);
 					isCombo = false;
-				}			
+				}
 				attackCharge = 1.0f;
 			}
 
@@ -1058,13 +1070,40 @@ void Player_Dragon::Attack()
 		}
 	}
 
-			
+	if (isbow)
+	{
+		if (KEY_DOWN(VK_LBUTTON) && !KEY_PRESS(VK_CONTROL))
+		{
+			SetAction(BOW_DRAW_INTRO);
+		}
+		if (KEY_PRESS(VK_LBUTTON))
+		{
+			attackCharge -= DELTA;
+			if (attackCharge < 0.0f)
+			{
+				isbowdrawn = true;
+			}
+		}
+		if (KEY_UP(VK_LBUTTON))
+		{
+			if (attackCharge < 0.0f)
+			{
+				SetAction(BOW_RELEASE);
+			}
+			else
+			{
+				SetAction(BOW_IDLE);
+			}
+			isbowdrawn = false;
+			attackCharge = 1.0f;
+		}
+	}
 }
 
 void Player_Dragon::Block()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P) return;
-	if (isunarmed) return;
+	if (isbow) return;
 	if (isHit) return;
 
 	if (is1hm)
@@ -1101,17 +1140,17 @@ void Player_Dragon::GetHit()
 {
 	if (!isHit) return;
 	if (isInvincible) return;
-	if (isunarmed) return;
+	if (isbow) return;
 
 	if (is1hm)
 	{
 		if (isBlock)
-		{			
-				SetAction(OHM_HIT_BLOCK);
+		{
+			SetAction(OHM_HIT_BLOCK);
 		}
 		else
 		{
-				SetAction(OHM_HIT_LIGHT);
+			SetAction(OHM_HIT_LIGHT);
 		}
 	}
 
@@ -1119,14 +1158,14 @@ void Player_Dragon::GetHit()
 	{
 		if (isBlock)
 		{
-				SetAction(THM_HIT_BLOCK);
+			SetAction(THM_HIT_BLOCK);
 		}
 		else
 		{
-				SetAction(THM_HIT_LIGHT);
+			SetAction(THM_HIT_LIGHT);
 		}
 	}
-	
+
 }
 
 void Player_Dragon::WeaponChange()
@@ -1139,73 +1178,82 @@ void Player_Dragon::WeaponChange()
 
 	if (is1hm)
 	{
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change2hm, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ebonylongsword");
 			is1hm = false;
 			is2hm = true;
 			//SetAction(OHM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(OHM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Changebow, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironbow");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironarrow");
 			is1hm = false;
-			isunarmed = true;
+			isbow = true;
 			//SetAction(OHM_UNEQUIP);
 		}
 	}
 
 	if (is2hm)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change1hm, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "dragonshield");
 			is2hm = false;
 			is1hm = true;
 			//SetAction(THM_UNEQUIP);
 		}
-		if (KEY_DOWN('C'))
+		if (KEY_DOWN('3'))
 		{
 			//GetClip(THM_UNEQUIP)->SetEvent(bind(&Player_Dragon::Changebow, this), 0.7f, true);
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironbow");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironarrow");
 			is2hm = false;
-			isunarmed = true;
+			isbow = true;
 			//SetAction(THM_UNEQUIP);
 		}
 	}
 
-	if (isunarmed)
+	if (isbow)
 	{
-		if (KEY_DOWN('Z'))
+		if (KEY_DOWN('1'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change1hm, this), 0.7f, true);
-			isunarmed = false;
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ironmace");
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "dragonshield");
+			isbow = false;
 			is1hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
-		if (KEY_DOWN('X'))
+		if (KEY_DOWN('2'))
 		{
 			//GetClip(BOW_UNEQUIP)->SetEvent(bind(&Player_Dragon::Change2hm, this), 0.7f, true);
-			isunarmed = false;
+			//UIManager::Get()->GetInvenUI()->UseItem(this, "ebonylongsword");
+			isbow = false;
 			is2hm = true;
 			//SetAction(BOW_UNEQUIP);
 		}
 	}
-
 }
 
 void Player_Dragon::SetAnimation()
 {
 	if (curAction == OHM_ATK_R || curAction == OHM_ATK_L || curAction == OHM_ATK_P ||
 		curAction == OHM_BLOCK || curAction == OHM_HIT_LIGHT || curAction == OHM_HIT_MEDIUM ||
-		curAction == OHM_HIT_LARGE || curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK || 
+		curAction == OHM_HIT_LARGE || curAction == OHM_HIT_LARGEST || curAction == OHM_HIT_BLOCK ||
 		curAction == THM_ATK_R || curAction == THM_ATK_L || curAction == THM_ATK_P ||
 		curAction == THM_BLOCK || curAction == THM_HIT_LIGHT || curAction == THM_HIT_MEDIUM ||
-		curAction == THM_HIT_LARGE || curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK||
+		curAction == THM_HIT_LARGE || curAction == THM_HIT_LARGEST || curAction == THM_HIT_BLOCK ||
 		curAction == OHM_WALK_FW_ATK || curAction == OHM_WALK_BW_ATK || curAction == OHM_WALK_L_ATK ||
 		curAction == OHM_WALK_R_ATK || curAction == OHM_RUN_FW_ATK || curAction == OHM_RUN_BW_ATK ||
 		curAction == OHM_RUN_L_ATK || curAction == OHM_RUN_R_ATK || curAction == THM_WALK_FW_ATK ||
 		curAction == OHM_CATK_R || curAction == OHM_CATK_L || curAction == OHM_CATK_P ||
-		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK||
+		curAction == THM_WALK_BW_ATK || curAction == THM_WALK_L_ATK || curAction == THM_WALK_R_ATK ||
 		curAction == THM_RUN_FW_ATK || curAction == THM_RUN_BW_ATK || curAction == THM_RUN_L_ATK ||
 		curAction == THM_RUN_R_ATK || curAction == BOW_DRAW_INTRO || curAction == BOW_RELEASE)
 		return;
@@ -1337,7 +1385,7 @@ void Player_Dragon::SetAnimation()
 		else SetAction(THM_IDLE);
 	}
 
-	if (isunarmed)
+	if (isbow && !isbowdrawn)
 	{
 		if (velocity.z < -0.1f && velocity.x < -0.1f)
 		{
@@ -1399,6 +1447,51 @@ void Player_Dragon::SetAnimation()
 
 		else SetAction(BOW_IDLE);
 	}
+
+	if (isbow && isbowdrawn)
+	{
+		if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FL);
+		}
+
+		else if (velocity.z > 0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_FR);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BL);
+		}
+
+		else if (velocity.z < -0.1f && velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_BR);
+		}
+
+		else if (velocity.z > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_F);
+		}
+
+		else if (velocity.z < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_B);
+		}
+
+		else if (velocity.x < -0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_L);
+		}
+
+		else if (velocity.x > 0.1f)
+		{
+			SetAction(BOW_DRAWN_WALK_R);
+		}
+		else SetAction(BOW_DRAW_IDLE);
+	}
+
 }
 
 void Player_Dragon::SetAction(ACTION action)
@@ -1481,7 +1574,7 @@ void Player_Dragon::EndBlockHit()
 }
 
 void Player_Dragon::SetBowDrawn()
-{	
+{
 	SetAction(BOW_DRAW_IDLE);
 }
 
@@ -1498,7 +1591,7 @@ void Player_Dragon::EndBowDrawn()
 
 void Player_Dragon::SetInvincible()
 {
-	isInvincible = true;	
+	isInvincible = true;
 }
 
 void Player_Dragon::EndInvincible()

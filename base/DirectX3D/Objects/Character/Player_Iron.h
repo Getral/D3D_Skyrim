@@ -5,7 +5,7 @@ class Player_Iron : public ModelAnimator
 public:
 	struct Status
 	{
-		float curHp = 100;
+		float curHp = 10;
 		float maxHp = 100;
 		float curstamina = 10;
 		float maxstamina = 100;
@@ -20,23 +20,23 @@ public:
 		OHM_WALK_F, OHM_WALK_FL, OHM_WALK_FR, OHM_WALK_B, OHM_WALK_BL, OHM_WALK_BR, OHM_WALK_L, OHM_WALK_R,
 		OHM_RUN_F, OHM_RUN_FL, OHM_RUN_FR, OHM_RUN_B, OHM_RUN_BL, OHM_RUN_BR, OHM_RUN_L, OHM_RUN_R,
 		CIDLE, CMOVE_F, CMOVE_FL, CMOVE_FR, CMOVE_B, CMOVE_BL, CMOVE_BR, CMOVE_L, CMOVE_R,
-		OHM_CATK_R, OHM_CATK_L, OHM_CATK_P, 
+		OHM_CATK_R, OHM_CATK_L, OHM_CATK_P,
 		OHM_ATK_R, OHM_ATK_L, OHM_ATK_P,
 		OHM_BLOCK,
-		OHM_WALK_FW_ATK, OHM_WALK_BW_ATK, OHM_WALK_L_ATK, OHM_WALK_R_ATK, 
+		OHM_WALK_FW_ATK, OHM_WALK_BW_ATK, OHM_WALK_L_ATK, OHM_WALK_R_ATK,
 		OHM_RUN_FW_ATK, OHM_RUN_BW_ATK, OHM_RUN_L_ATK, OHM_RUN_R_ATK,
 
 		THM_IDLE, THM_BLOCK, THM_ATK_L, THM_ATK_R, THM_ATK_P,
 		THM_HIT_LIGHT, THM_HIT_MEDIUM, THM_HIT_LARGE, THM_HIT_LARGEST, THM_HIT_BLOCK,
 		THM_WALK_F, THM_WALK_FL, THM_WALK_FR, THM_WALK_B, THM_WALK_BL, THM_WALK_BR, THM_WALK_L, THM_WALK_R,
-		THM_RUN_F, THM_RUN_FL, THM_RUN_FR, THM_RUN_B, THM_RUN_BL, THM_RUN_BR, THM_RUN_L, THM_RUN_R, 
-		THM_WALK_FW_ATK, THM_WALK_BW_ATK, THM_WALK_L_ATK, THM_WALK_R_ATK, 
-		THM_RUN_FW_ATK, THM_RUN_BW_ATK, THM_RUN_L_ATK, THM_RUN_R_ATK, 
+		THM_RUN_F, THM_RUN_FL, THM_RUN_FR, THM_RUN_B, THM_RUN_BL, THM_RUN_BR, THM_RUN_L, THM_RUN_R,
+		THM_WALK_FW_ATK, THM_WALK_BW_ATK, THM_WALK_L_ATK, THM_WALK_R_ATK,
+		THM_RUN_FW_ATK, THM_RUN_BW_ATK, THM_RUN_L_ATK, THM_RUN_R_ATK,
 
 		BOW_IDLE, BOW_DRAW_INTRO, BOW_DRAW_IDLE, BOW_RELEASE,
 		BOW_WALK_F, BOW_WALK_FL, BOW_WALK_FR, BOW_WALK_B, BOW_WALK_BL, BOW_WALK_BR, BOW_WALK_L, BOW_WALK_R,
 		BOW_RUN_F, BOW_RUN_FL, BOW_RUN_FR, BOW_RUN_B, BOW_RUN_BL, BOW_RUN_BR, BOW_RUN_L, BOW_RUN_R,
-		BOW_DRAWN_WALK_F, BOW_DRAWN_WALK_FL, BOW_DRAWN_WALK_FR, BOW_DRAWN_WALK_B, 
+		BOW_DRAWN_WALK_F, BOW_DRAWN_WALK_FL, BOW_DRAWN_WALK_FR, BOW_DRAWN_WALK_B,
 		BOW_DRAWN_WALK_BL, BOW_DRAWN_WALK_BR, BOW_DRAWN_WALK_L, BOW_DRAWN_WALK_R,
 
 		OHM_EQUIP, OHM_UNEQUIP, THM_EQUIP, THM_UNEQUIP, BOW_EQUIP, BOW_UNEQUIP
@@ -69,6 +69,10 @@ public:
 	void SetIsInvincible(bool value) { isInvincible = value; }
 	bool& SetisCollRend() { return isCollRender; }
 
+	bool& Getis1hm() { return is1hm; }
+	bool& Getis2hm() { return is2hm; }
+	bool& Getisbow() { return isbow; }
+
 private:
 	void Control();
 	void Move();
@@ -99,11 +103,10 @@ private:
 	void Set1hmIdle();
 	void Set2hmIdle();
 	void SetbowIdle();
-	
+
 	void DoNothing();
 
 protected:
-
 	BladeSword* bladeSword;
 	Shield* shield;
 
@@ -182,9 +185,7 @@ protected:
 
 	bool is1hm = true;
 	bool is2hm = false;
-	bool isunarmed = true;
-
-
+	bool isbow = false;
 
 	bool isbowdrawn = false;
 	bool isCollRender = true;

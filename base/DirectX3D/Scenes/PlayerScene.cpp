@@ -32,12 +32,21 @@ void PlayerScene::Update()
 	if (!UIManager::Get()->IsIntro())
 	{
 		player->Update();
+
 		player_dragon->Pos() = player->Pos();
+		player_dragon->Getis1hm() = player->Getis1hm();
+		player_dragon->Getis2hm() = player->Getis2hm();
+		player_dragon->Getisbow() = player->Getisbow();
 		player_dragon->Update();
 
 		player_iron->Pos() = player->Pos();
+		player_iron->Getis1hm() = player->Getis1hm();
+		player_iron->Getis2hm() = player->Getis2hm();
+		player_iron->Getisbow() = player->Getisbow();
 		player_iron->Update();
+
 		aldu->Update();
+
 		ObjectManager::Get()->Update(player);
 		if (KEY_DOWN('T'))
 		{
