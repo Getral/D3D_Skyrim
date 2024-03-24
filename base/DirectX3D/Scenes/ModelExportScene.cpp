@@ -29,8 +29,9 @@ ModelExportScene::ModelExportScene()
         "chest", "hp_potion", "sp_potion", "coin",
         
         //monster
-        "alduin"
+        "alduin",
         //, "Wolf", "Bear"
+        "sign"
     };
     
     vector<wstring> textures =
@@ -65,7 +66,9 @@ ModelExportScene::ModelExportScene()
 
 
         //monster
-        L"Model/alduin/alduin"
+        L"Model/alduin/alduin",
+
+        L"Model/Sign/signbraidwoodinn01"
     };
     
     

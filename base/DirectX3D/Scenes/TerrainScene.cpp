@@ -19,6 +19,8 @@ TerrainScene::TerrainScene()
 	ObjectManager::Get()->Create({ 252.5,0	,272.5	}, XM_PIDIV4 / 2, "chest_armor_dragon");
 	ObjectManager::Get()->Create({ 250	,0	,275	}, XM_PIDIV4, "chest_armor_iron");
 
+	ObjectManager::Get()->Create({ 240, 0, 280 }, 0, "sign");
+
 	for (int i = 290; i <= 400; i += 10)
 		ObjectManager::Get()->Create({ (float)i,0,400 }, 0, "rock_large4");
 	

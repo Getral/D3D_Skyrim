@@ -644,11 +644,8 @@ void alduin::Dead()
 {
 	ModelAnimator::SetActive(false);
 	transform->SetActive(false);
-
+	UIManager::Get()->EndQuest();
 }
-
-
-
 
 void alduin::SetState(State state,float Scale)
 {

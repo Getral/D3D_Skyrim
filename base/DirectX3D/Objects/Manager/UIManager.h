@@ -13,6 +13,8 @@ public:
 	
 	InvenUI* GetInvenUI() { return invenUI; }
 	bool IsIntro() { return isIntro; }
+	bool IsQuestStarted() { return isQuest; }
+	bool IsQuestFinished() { return isQuestFinished; }
 
 	void TargetCompassEnemy(Player* player, vector<EnemySpawn*> enemies, alduin* alduin);
 
@@ -20,6 +22,8 @@ public:
 	//float GetEnemyDegree() { return final_angle; }
 
 	void StartOuttro();
+	void StartQuest();
+	void EndQuest();
 
 private:
 	Quad* compass;
@@ -58,7 +62,17 @@ private:
 
 	int monsterCount = 0;
 
-	bool isQuest = true;
+	Quad* journal_frame;
+	Quad* journal_frame_bar;
+	Quad* journal_frame_bar2;
+	Quad* journal_quest_select_icon;
+	Quad* journal_quest_bar;
+	Quad* quest_icon_finished;
+	Quad* quest_icon_unfinished;
+	bool isQuest = false;
+	bool isQuestFinished = false;
+	bool isOpenQuest = false;
+	float questTextTime = 0.0f;
 	
 	InvenUI* invenUI;
 	bool isInven = false;
