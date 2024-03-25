@@ -248,6 +248,11 @@ void ObjectManager::PostRender(Player* player)
 
 void ObjectManager::GUIRender()
 {
+	for (Structure* structure : world_structures)
+	{
+		structure->GUIRender();
+	}
+
 
 }
 

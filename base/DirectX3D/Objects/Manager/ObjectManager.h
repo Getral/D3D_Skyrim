@@ -31,6 +31,6 @@ private:
 	vector<BoxCollider*> items_col;
 	vector<BoxCollider*> signs_col;
 
-	bool isColRender = true;
+	bool isColRender = false;
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#define MAX_GROUND_ATK 76
+#define MAX_GROUND_ATK 60
 
 class alduin : public ModelAnimator
 { 
@@ -48,7 +48,8 @@ public:
 	void Render();
 	void GUIRender();
 
-	void SetTarget(Player* target);
+	void SetTarget(Player_Dragon* target);
+	void SetTarget2(Player* target);
 	float GetHP() { return curHp; }
 	float GetMaxHP() { return maxHp; }
 	Transform* GetTransform() { return transform; }
@@ -111,7 +112,8 @@ private:
 
 	Transform* transform;
 	Transform* FireAttackTransform;
-	Player* target;
+	Player_Dragon* target;
+	Player* target2;
 	Vector3 tempPos;
 	Vector3 tempRot;
 	ParticleSystem* DeathParticle;
@@ -135,7 +137,7 @@ private:
 	bool isFireAttack = false;
 	bool isMoving = false;
 	bool isSleeping = true;
-	bool isColliderRend = true;
+	bool isColliderRend = false;
 
 
 	Vector3 velocity;
@@ -143,8 +145,8 @@ private:
 	vector<map<float, Event>> totalEvent;
 	vector<map<float, Event>::iterator> eventIters;
 
-	float maxHp = 300.0f;
-	float curHp = 300.0f;
+	float maxHp = 500.0f;
+	float curHp = 500.0f;
 
 	
 

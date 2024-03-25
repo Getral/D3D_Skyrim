@@ -1,9 +1,9 @@
 <Material Name="MaleHeadIMF.Mat">
-    <Shader Vertex="" Pixel=""/>
+    <Shader Vertex="" Pixel="Shaders/Model/ModelAnimation.hlsl"/>
     <Texture Diffuse="Textures/Model/male_normal/malehead.png" Specular="Textures/Color/White.png" Normal="Textures/Color/White.png"/>
     <Property Shininess="36" HasNormalMap="0">
-        <Diffuse R="0.44259104" G="0.76146096" B="0.80007058" A="1"/>
-        <Specular R="0.44259104" G="0.76146096" B="0.80007058" A="1"/>
+        <Diffuse R="1" G="1" B="1" A="1"/>
+        <Specular R="1" G="1" B="1" A="1"/>
         <Ambient R="0" G="0" B="0" A="1"/>
         <Emissive R="0" G="0" B="0" A="1"/>
     </Property>

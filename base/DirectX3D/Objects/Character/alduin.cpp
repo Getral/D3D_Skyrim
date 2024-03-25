@@ -229,37 +229,43 @@ void alduin::Update()
 	BreathParticle->Update();
 	DeathParticle->Update();
 
-	
-	if (Acollider_F->Active() && Acollider_F->IsCapsuleCollision(target->GetCollier()))
+	if (HitDelay <= 0.1f)
 	{
-		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= (150.0f - target->GetStatus().def);
-	}
+		if (Acollider_F->Active() && Acollider_F->IsCapsuleCollision(target->GetCollier()))
+		{
+			target->SetAction(Player_Dragon::ACTION::OHM_HIT_MEDIUM);
+			target2->GetStatus().curHp -= (70.0f - target->GetStatus().def);
+			HitDelay = 1.0f;
+		}
 
-	else if (Acollider_R->Active() && Acollider_R->IsCapsuleCollision(target->GetCollier()))
-	{
-		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= (142.0f - target->GetStatus().def);
-	}
+		else if (Acollider_R->Active() && Acollider_R->IsCapsuleCollision(target->GetCollier()))
+		{
+			target->SetAction(Player_Dragon::ACTION::OHM_HIT_MEDIUM);
+			target2->GetStatus().curHp -= (50.0f - target->GetStatus().def);
+			HitDelay = 1.0f;
+		}
 
-	else if (Acollider_L->Active() && Acollider_L->IsCapsuleCollision(target->GetCollier()))
-	{
-		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= (142.0f - target->GetStatus().def);
-	}
+		else if (Acollider_L->Active() && Acollider_L->IsCapsuleCollision(target->GetCollier()))
+		{
+			target->SetAction(Player_Dragon::ACTION::OHM_HIT_MEDIUM);
+			target2->GetStatus().curHp -= (50.0f - target->GetStatus().def);
+			HitDelay = 1.0f;
+		}
 
-	else if (Acollider_B->Active() && Acollider_B->IsCapsuleCollision(target->GetCollier()))
-	{
-		target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-		target->GetStatus().curHp -= (170.0f - target->GetStatus().def);
+		else if (Acollider_B->Active() && Acollider_B->IsCapsuleCollision(target->GetCollier()))
+		{
+			target->SetAction(Player_Dragon::ACTION::OHM_HIT_MEDIUM);
+			target2->GetStatus().curHp -= (85.0f - target->GetStatus().def);
+			HitDelay = 1.0f;
+		}
 	}
-
+	else HitDelay -= DELTA;
 
 	if (breathCollider->Active() && breathCollider->IsCapsuleCollision(target->GetCollier()))
 	{
 		if (breathDelay <= 0.1f)
 		{
-			target->GetStatus().curHp -= (14.0f - target->GetStatus().def);
+			target2->GetStatus().curHp -= (59.0f - target->GetStatus().def);
 			breathDelay = 0.4f;
 		}
 		else breathDelay -= DELTA;
@@ -271,8 +277,8 @@ void alduin::Update()
 
 		if (HitDelay <= 0.1f)
 		{
-			target->SetAction(Player::ACTION::OHM_HIT_MEDIUM);
-			target->GetStatus().curHp -= (18.0f - target->GetStatus().def);
+			target->SetAction(Player_Dragon::ACTION::OHM_HIT_MEDIUM);
+			target2->GetStatus().curHp -= (90.0f - target->GetStatus().def);
 			HitDelay = 1.0f;
 		}
 		else HitDelay -= DELTA;
@@ -295,7 +301,7 @@ void alduin::Update()
 	{
 		altitude -= 70 * DELTA;
 
-		if (Pos().y < 0.0f)
+		if (Pos().y < 1.0f)
 		{
 			isDescending = false;
 			SetState(LANDING_HARD);
@@ -406,10 +412,16 @@ void alduin::GUIRender()
 
 }
 
-void alduin::SetTarget(Player* target)
+void alduin::SetTarget(Player_Dragon* target)
 {
 	this->target = target;
 }
+
+void alduin::SetTarget2(Player* target)
+{
+	this->target2 = target;
+}
+
 
 void alduin::Move()
 {
@@ -426,7 +438,7 @@ void alduin::Move()
 		return;
 	}
 
-	if (velocity.Length() > MAX_GROUND_ATK && Pos().y < 1)
+	if (velocity.Length() > MAX_GROUND_ATK && Pos().y < 1.0f)
 	{
 		SetState(TAKEOFF);
 		isMoving = false;
@@ -448,19 +460,20 @@ void alduin::Move()
 	{
 		Rot().y += rotSpeed * DELTA;
 		transform->Rot().y += rotSpeed * DELTA;
-		if (Pos().y < 1.0f && velocity.Length() < MAX_GROUND_ATK)
+		if (Pos().y < 1.0f && curState != DIVE)
 		{
 			SetState(TURN_R);
 			isMoving = true;
 			moveSpeed = 0.0f;
 		}
+		
 			
 	}
 	else if (cross.y > 10 && !isAttacking) //반대의 경우
 	{
 		Rot().y -= rotSpeed * DELTA;
 		transform->Rot().y -= rotSpeed * DELTA;
-		if (Pos().y < 1.0f && velocity.Length() < MAX_GROUND_ATK)
+		if (Pos().y < 1.0f && curState != DIVE)
 		{
 			SetState(TURN_L);
 			isMoving = true;
@@ -471,7 +484,7 @@ void alduin::Move()
 	else if (cross.y >= -10 && cross.y <= 10 && !isAttacking) //반대의 경우
 	{
 
-		if (Pos().y < 1.0f && velocity.Length() < MAX_GROUND_ATK)
+		if (Pos().y < 1.0f && curState != DIVE)
 		{
 			SetState(FORWARD);
 			isMoving = true;
@@ -588,9 +601,9 @@ void alduin::EndAction()
 	Acollider_L->SetActive(false);
 	Acollider_B->SetActive(false);
 
-	if (target->GetAction() == Player::ACTION::OHM_HIT_MEDIUM)
+	if (target->GetAction() == Player_Dragon::ACTION::OHM_HIT_MEDIUM)
 	{
-		target->SetAction(Player::ACTION::OHM_IDLE);
+		target->SetAction(Player_Dragon::ACTION::OHM_IDLE);
 	}
 	
 	

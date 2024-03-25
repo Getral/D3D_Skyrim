@@ -8,7 +8,8 @@ PlayerScene::PlayerScene()
 	player_iron = new Player_Iron();
 
 	aldu = new alduin();
-	aldu->SetTarget(player);
+	aldu->SetTarget(player_dragon);
+	aldu->SetTarget2(player);
 	aldu->Pos() = { 244,0,150 };
 	aldu->GetTransform()->Pos() = {244, 0, 150};
 	
@@ -100,7 +101,8 @@ void PlayerScene::GUIRender()
 	//player_dragon->GUIRender();
 	player_iron->GUIRender();
 	//aldu->GUIRender();
-	UIManager::Get()->GUIRender();	
+	//UIManager::Get()->GUIRender();	
+	//ObjectManager::Get()->GUIRender();
 
 	//ImGui::Text("bool : %d", ObjectManager::Get()->GetIsColRender());
 

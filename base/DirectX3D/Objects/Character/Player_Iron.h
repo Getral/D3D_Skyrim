@@ -5,13 +5,13 @@ class Player_Iron : public ModelAnimator
 public:
 	struct Status
 	{
-		float curHp = 10;
+		float curHp = 100;
 		float maxHp = 100;
 		float curstamina = 10;
 		float maxstamina = 100;
 		float atk = 10;
 		float def = 10;
-		float speed = 5.0f;
+		float speed = 1.5f;
 	};
 
 	enum ACTION
@@ -188,7 +188,7 @@ protected:
 	bool isbow = false;
 
 	bool isbowdrawn = false;
-	bool isCollRender = true;
+	bool isCollRender = false;
 
 	int weight;
 	int value;
